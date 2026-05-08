@@ -103,7 +103,7 @@ export default function Contact() {
                     aria-label={label}
                     className="p-3 rounded-xl border border-border bg-card text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors duration-200"
                   >
-                    <Icon size={20} />
+                    <Icon />
                   </a>
                 ))}
               </div>
