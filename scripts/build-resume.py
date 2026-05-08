@@ -97,7 +97,7 @@ def main(out_path: str) -> None:
 
     story = []
 
-    story.append(Paragraph("TONY YU", name_style))
+    story.append(Paragraph("TO YIN YU", name_style))
     story.append(
         Paragraph(
             "Lynnwood, WA &nbsp;·&nbsp; +1 (206) 712-5144 &nbsp;·&nbsp; "
