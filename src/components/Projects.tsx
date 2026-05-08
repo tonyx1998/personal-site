@@ -43,7 +43,7 @@ const projects = [
       "This site — a modern portfolio built with Next.js 15, TypeScript, Tailwind CSS v4, and Framer Motion. Features dark/light mode, smooth scroll animations, and a downloadable resume.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/tonyx1998/personal-site",
-    live: null,
+    live: "https://personal-site-liart-beta.vercel.app",
     featured: false,
   },
   {
