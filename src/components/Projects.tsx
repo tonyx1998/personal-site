@@ -40,7 +40,7 @@ const projects = [
   {
     title: "Personal Portfolio",
     description:
-      "This site — a modern portfolio built with Next.js 15, TypeScript, Tailwind CSS v4, and Framer Motion. Features dark/light mode, smooth scroll animations, and a downloadable resume.",
+      "This site — a modern portfolio built with Next.js, TypeScript, Tailwind CSS v4, and Framer Motion. Features dark/light mode, smooth scroll animations, and a downloadable resume.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: null,
     live: "https://personal-site-liart-beta.vercel.app",
