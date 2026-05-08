@@ -77,25 +77,33 @@ export default function Projects() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, i) => (
-            <motion.article
+            <motion.a
               key={project.title}
+              href={project.live ?? project.github ?? "#"}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               whileHover={{ y: -4 }}
-              className="group p-6 rounded-xl border border-border bg-card flex flex-col gap-4 hover:border-accent/50 transition-colors duration-300"
+              className="group p-6 rounded-xl border border-border bg-card flex flex-col gap-4 hover:border-accent/50 transition-colors duration-300 cursor-pointer"
             >
               <div className="flex items-start justify-between">
                 <div className="p-2 rounded-lg bg-muted">
                   <FolderOpen size={18} className="text-accent" />
                 </div>
-                {project.featured && (
-                  <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
-                    <Star size={12} fill="currentColor" />
-                    featured
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {project.featured && (
+                    <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
+                      <Star size={12} fill="currentColor" />
+                      featured
+                    </span>
+                  )}
+                  {project.live
+                    ? <ExternalLink size={15} className="text-muted-foreground group-hover:text-accent transition-colors" />
+                    : <GithubIcon />}
+                </div>
               </div>
 
               <div>
@@ -117,32 +125,7 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-
-              <div className="flex items-center gap-4 pt-3 border-t border-border">
-                {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <GithubIcon />
-                  Code
-                </a>
-                )}
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <ExternalLink size={15} />
-                    Live
-                  </a>
-                )}
-              </div>
-            </motion.article>
+            </motion.a>
           ))}
         </div>
       </div>
