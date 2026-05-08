@@ -119,6 +119,7 @@ export default function Projects() {
               </div>
 
               <div className="flex items-center gap-4 pt-3 border-t border-border">
+                {project.github && (
                 <a
                   href={project.github}
                   target="_blank"
@@ -128,6 +129,7 @@ export default function Projects() {
                   <GithubIcon />
                   Code
                 </a>
+                )}
                 {project.live && (
                   <a
                     href={project.live}
