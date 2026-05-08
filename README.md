@@ -78,6 +78,10 @@ scripts/
 └── build-resume.py       # ATS-friendly PDF generator (reportlab)
 ```
 
+## Stack walkthrough
+
+For a guided tour of every framework and pattern used here — what each library does, why it was chosen, and what skill it signals — see **[docs/STACK.md](docs/STACK.md)**.
+
 ## Notable design decisions
 
 - **Cookie-based theming.** The root layout reads a `theme` cookie and sets the `dark` class on `<html>` server-side, eliminating the FOUC-prevention `<script>` (which React 19 warns about). Pages render dynamically as a result, but stay fast on Vercel.
