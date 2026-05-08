@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
+import { Spotlight } from "./ui/Spotlight";
 
 const roles = [
   "Software Developer",
@@ -42,13 +43,24 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
+      <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="var(--accent)"
+      />
+      <Spotlight
+        className="top-10 right-0 md:top-32 md:-right-20 rotate-180"
+        fill="#a855f7"
+      />
       <div
         className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
           backgroundImage:
             "radial-gradient(circle, var(--border) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
         }}
       />
 
@@ -108,8 +120,8 @@ export default function Hero() {
             Get in touch
           </a>
           <a
-            href="/resume.docx"
-            download="Tony_Yu_Resume.docx"
+            href="/resume.pdf"
+            download="Tony_Yu_Resume.pdf"
             className="px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition-colors duration-200"
           >
             Download Resume
