@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send } from "lucide-react";
+import { useState } from "react";
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
@@ -15,21 +16,35 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-const XIcon = () => (
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-import { useState } from "react";
+const WEB3FORMS_KEY = "37dab554-63a7-4f57-842d-1f1acc2892d4";
 
 export default function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1500));
-    setStatus("sent");
+
+    const form = e.currentTarget;
+    const data = {
+      access_key: WEB3FORMS_KEY,
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      setStatus(json.success ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -174,22 +189,13 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              disabled={status !== "idle"}
+              disabled={status === "sending" || status === "sent"}
               className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-white font-medium hover:opacity-90 disabled:opacity-60 transition-opacity duration-200"
             >
-              {status === "idle" && (
-                <>
-                  <Send size={16} />
-                  Send Message
-                </>
-              )}
-              {status === "sending" && (
-                <>
-                  <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                  Sending...
-                </>
-              )}
-              {status === "sent" && "Message sent!"}
+              {status === "idle" && (<><Send size={16} />Send Message</>)}
+              {status === "sending" && (<><span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />Sending...</>)}
+              {status === "sent" && "Message sent! ✓"}
+              {status === "error" && "Something went wrong — try again"}
             </button>
           </motion.form>
         </div>
