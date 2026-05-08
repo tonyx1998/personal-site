@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRef, type MouseEvent } from "react";
 import { ExternalLink, Star, FolderOpen } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
@@ -9,7 +11,17 @@ const GithubIcon = () => (
   </svg>
 );
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  github: string | null;
+  live: string | null;
+  featured: boolean;
+  className: string;
+};
+
+const projects: Project[] = [
   {
     title: "SmartUrl",
     description:
@@ -18,6 +30,7 @@ const projects = [
     github: "https://github.com/tonyx1998/SmartUrlServices",
     live: null,
     featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
   },
   {
     title: "United Front Roofing",
@@ -27,6 +40,7 @@ const projects = [
     github: null,
     live: "https://united-front-roofing.netlify.app",
     featured: false,
+    className: "lg:col-span-1",
   },
   {
     title: "Obesity Data Analysis",
@@ -36,6 +50,7 @@ const projects = [
     github: null,
     live: "https://tonyx1998.github.io",
     featured: false,
+    className: "lg:col-span-1",
   },
   {
     title: "Personal Portfolio",
@@ -45,6 +60,7 @@ const projects = [
     github: null,
     live: "https://personal-site-liart-beta.vercel.app",
     featured: false,
+    className: "lg:col-span-2",
   },
   {
     title: "Schedule Creator",
@@ -54,8 +70,91 @@ const projects = [
     github: "https://github.com/tonyx1998/Schedule-Creator",
     live: null,
     featured: false,
+    className: "lg:col-span-1",
   },
 ];
+
+function BentoCard({ project, index }: { project: Project; index: number }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--y", `${e.clientY - rect.top}px`);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={project.live ?? project.github ?? "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseMove={handleMouseMove}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className={cn(
+        "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300 cursor-pointer",
+        "hover:border-accent/50",
+        project.className,
+      )}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background:
+            "radial-gradient(600px circle at var(--x) var(--y), color-mix(in srgb, var(--accent) 14%, transparent), transparent 40%)",
+        }}
+      />
+
+      <div className="relative flex items-start justify-between">
+        <div className="p-2 rounded-lg bg-muted">
+          <FolderOpen size={18} className="text-accent" />
+        </div>
+        <div className="flex items-center gap-2">
+          {project.featured && (
+            <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
+              <Star size={12} fill="currentColor" />
+              featured
+            </span>
+          )}
+          {project.live ? (
+            <ExternalLink
+              size={15}
+              className="text-muted-foreground group-hover:text-accent transition-colors"
+            />
+          ) : (
+            <GithubIcon />
+          )}
+        </div>
+      </div>
+
+      <div className="relative">
+        <h3 className="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          {project.description}
+        </p>
+      </div>
+
+      <div className="relative flex flex-wrap gap-1.5 mt-auto">
+        {project.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-0.5 text-xs rounded font-mono bg-muted text-muted-foreground"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.a>
+  );
+}
 
 export default function Projects() {
   return (
@@ -75,57 +174,9 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(220px,auto)] gap-6">
           {projects.map((project, i) => (
-            <motion.a
-              key={project.title}
-              href={project.live ?? project.github ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              whileHover={{ y: -4 }}
-              className="group p-6 rounded-xl border border-border bg-card flex flex-col gap-4 hover:border-accent/50 transition-colors duration-300 cursor-pointer"
-            >
-              <div className="flex items-start justify-between">
-                <div className="p-2 rounded-lg bg-muted">
-                  <FolderOpen size={18} className="text-accent" />
-                </div>
-                <div className="flex items-center gap-2">
-                  {project.featured && (
-                    <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
-                      <Star size={12} fill="currentColor" />
-                      featured
-                    </span>
-                  )}
-                  {project.live
-                    ? <ExternalLink size={15} className="text-muted-foreground group-hover:text-accent transition-colors" />
-                    : <GithubIcon />}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 mt-auto">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs rounded font-mono bg-muted text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.a>
+            <BentoCard key={project.title} project={project} index={i} />
           ))}
         </div>
       </div>

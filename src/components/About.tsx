@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Code2, Coffee, GraduationCap, Rocket } from "lucide-react";
 
@@ -33,8 +34,15 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="relative"
           >
-            <div className="aspect-square max-w-sm mx-auto rounded-2xl bg-muted border border-border flex items-center justify-center text-8xl">
-              👤
+            <div className="relative aspect-square max-w-sm mx-auto rounded-2xl overflow-hidden border border-border bg-muted">
+              <Image
+                src="/profile.png"
+                alt="Tony Yu"
+                fill
+                priority
+                sizes="(min-width: 1024px) 24rem, 80vw"
+                className="object-cover"
+              />
             </div>
             <div className="absolute -bottom-3 -right-3 w-full max-w-sm h-full rounded-2xl border-2 border-accent/30 -z-10 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto" />
           </motion.div>
