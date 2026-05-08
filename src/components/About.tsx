@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Code2, Coffee, GraduationCap, Rocket } from "lucide-react";
 
@@ -34,16 +33,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="relative"
           >
-            <div className="relative aspect-square max-w-sm mx-auto rounded-2xl overflow-hidden border border-border bg-muted">
-              <Image
-                src="/profile.png"
-                alt="Tony Yu"
-                fill
-                priority
-                sizes="(min-width: 1024px) 24rem, 80vw"
-                className="object-cover"
-              />
-            </div>
+            <CodeCard />
             <div className="absolute -bottom-3 -right-3 w-full max-w-sm h-full rounded-2xl border-2 border-accent/30 -z-10 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto" />
           </motion.div>
 
@@ -88,5 +78,37 @@ export default function About() {
         </div>
       </div>
     </section>
+  );
+}
+
+function CodeCard() {
+  const kw = "text-violet-400";
+  const id = "text-sky-400";
+  const prop = "text-rose-400";
+  const str = "text-emerald-400";
+  return (
+    <div className="relative aspect-square max-w-sm mx-auto rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
+      <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border bg-muted/40">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+        <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+        <span className="ml-3 text-xs text-muted-foreground font-mono">tony.ts</span>
+      </div>
+      <pre className="font-mono text-[12.5px] sm:text-[13px] leading-[22px] p-5 text-foreground/85 whitespace-pre overflow-hidden">
+        <code>
+          <span className={kw}>const</span> <span className={id}>tony</span> = {"{\n"}
+          {"  "}<span className={prop}>name</span>: <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
+          {"  "}<span className={prop}>role</span>: <span className={str}>{"'Software Developer'"}</span>,{"\n"}
+          {"  "}<span className={prop}>edu</span>: <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}
+          {"  "}<span className={prop}>stack</span>: [{"\n"}
+          {"    "}<span className={str}>{"'Next.js'"}</span>, <span className={str}>{"'FastAPI'"}</span>,{"\n"}
+          {"    "}<span className={str}>{"'TensorFlow'"}</span>, <span className={str}>{"'Python'"}</span>,{"\n"}
+          {"  "}],{"\n"}
+          {"  "}<span className={prop}>status</span>: <span className={str}>{"'open to work'"}</span>,{"\n"}
+          {"};"}
+          <span className="inline-block w-1.5 h-4 align-middle ml-1 bg-accent animate-pulse" />
+        </code>
+      </pre>
+    </div>
   );
 }
