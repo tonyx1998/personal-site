@@ -27,8 +27,8 @@ const projects: Project[] = [
     description:
       "Unified platform for short URLs, QR codes, and barcodes — with click/scan analytics, Redis-backed caching and rate limiting, automatic page-title extraction, and a tabbed React frontend.",
     tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "Vite"],
-    github: "https://github.com/tonyx1998/all-in-one-URL",
-    live: null,
+    github: null,
+    live: "https://all-in-one-url.vercel.app",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
   },
