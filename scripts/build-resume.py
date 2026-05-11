@@ -154,11 +154,12 @@ def main(out_path: str) -> None:
     projects = [
         {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
-            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React 19, TypeScript, Vite, Tailwind CSS 4",
+            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, PyJWT, bcrypt, React 19, TypeScript, Vite, Tailwind CSS 4",
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
                 "Built a unified platform for short URLs, QR codes, and barcodes with per-resource click/scan analytics and BeautifulSoup-based automatic page-title extraction.",
                 "Implemented SlowAPI tiered rate limiting (10 / 60 / unlimited req/min) and Redis-backed response caching plus counter batching to reduce hot-path database writes.",
+                "Added optional JWT-based authentication (HS256 PyJWT + bcrypt-hashed passwords) with a non-destructive nullable user_id FK on existing resources, fail-fast startup checks for missing secrets, and a React Context + portaled modal auth UI.",
                 "Containerized backend services with Docker Compose for local development, then deployed to Render (web service) with Neon (serverless Postgres) and Upstash (serverless Redis).",
                 "Shipped a tabbed React 19 + Vite + TypeScript + Tailwind CSS 4 frontend with TanStack Query and shadcn-style components, deployed on Vercel.",
             ],
