@@ -25,10 +25,10 @@ const projects: Project[] = [
   {
     title: "all-in-one-URL",
     description:
-      "Unified platform for short URLs, QR codes, and barcodes — with click/scan analytics, Redis-backed caching and rate limiting, automatic page-title extraction, and a tabbed React frontend.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "Vite"],
-    github: "https://github.com/tonyx1998/all-in-one-URL",
-    live: null,
+      "Unified platform for short URLs, QR codes, and barcodes — per-resource click/scan analytics, automatic page-title extraction, Redis-backed caching with counter batching, and tiered SlowAPI rate limiting. Tabbed React 19 frontend with TanStack Query; backend on Render + Neon + Upstash.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "TypeScript", "Tailwind"],
+    github: null,
+    live: "https://all-in-one-url.vercel.app",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
   },
