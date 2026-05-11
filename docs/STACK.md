@@ -206,7 +206,7 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 **What it gives us:** GitHub auto-deploy, edge CDN, image optimization, ISR/SSG support, deployment previews per branch.
 
-**Project URL:** [personal-site-liart-beta.vercel.app](https://personal-site-liart-beta.vercel.app)
+**Project URL:** [toyinyu.vercel.app](https://toyinyu.vercel.app)
 
 ### Turbopack
 **What it is:** The Rust-based bundler that replaced Webpack in Next 16 by default. Significantly faster builds and HMR.
