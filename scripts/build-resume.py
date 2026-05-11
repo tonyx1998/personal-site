@@ -155,7 +155,7 @@ def main(out_path: str) -> None:
         {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
             "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Vite",
-            "links": '<a href="https://github.com/tonyx1998/all-in-one-URL" color="#4f46e5">github.com/tonyx1998/all-in-one-URL</a>',
+            "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
                 "Built a unified platform for short URLs, QR codes, and barcodes with click/scan analytics and automatic page-title extraction.",
                 "Implemented Redis-backed three-tier rate limiting (10 / 60 / unlimited req/min) and response caching to cut hot-path latency.",
