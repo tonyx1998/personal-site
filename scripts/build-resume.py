@@ -154,13 +154,13 @@ def main(out_path: str) -> None:
     projects = [
         {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
-            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Vite",
-            "links": '<a href="https://github.com/tonyx1998/all-in-one-URL" color="#4f46e5">github.com/tonyx1998/all-in-one-URL</a>',
+            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React 19, TypeScript, Vite, Tailwind CSS 4",
+            "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
-                "Built a unified platform for short URLs, QR codes, and barcodes with click/scan analytics and automatic page-title extraction.",
-                "Implemented Redis-backed three-tier rate limiting (10 / 60 / unlimited req/min) and response caching to cut hot-path latency.",
-                "Containerized every service with Docker Compose for reproducible local development and production deployments.",
-                "Shipped a tabbed React 19 + Vite + TypeScript + Tailwind CSS 4 frontend with TanStack Query and shadcn-style components.",
+                "Built a unified platform for short URLs, QR codes, and barcodes with per-resource click/scan analytics and BeautifulSoup-based automatic page-title extraction.",
+                "Implemented SlowAPI tiered rate limiting (10 / 60 / unlimited req/min) and Redis-backed response caching plus counter batching to reduce hot-path database writes.",
+                "Containerized backend services with Docker Compose for local development, then deployed to Render (web service) with Neon (serverless Postgres) and Upstash (serverless Redis).",
+                "Shipped a tabbed React 19 + Vite + TypeScript + Tailwind CSS 4 frontend with TanStack Query and shadcn-style components, deployed on Vercel.",
             ],
         },
         {
