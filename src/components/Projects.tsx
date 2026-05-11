@@ -23,11 +23,11 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "SmartUrl",
+    title: "all-in-one-URL",
     description:
-      "URL shortening platform with QR code & barcode generation, click/scan analytics, Redis-based caching and rate limiting, and automatic page title extraction.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker"],
-    github: "https://github.com/tonyx1998/SmartUrlServices",
+      "Unified platform for short URLs, QR codes, and barcodes — with click/scan analytics, Redis-backed caching and rate limiting, automatic page-title extraction, and a tabbed React frontend.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "Vite"],
+    github: "https://github.com/tonyx1998/all-in-one-URL",
     live: null,
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",

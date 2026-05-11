@@ -153,13 +153,14 @@ def main(out_path: str) -> None:
 
     projects = [
         {
-            "title": "SmartUrl — URL Shortening Platform",
-            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker",
-            "links": '<a href="https://github.com/tonyx1998/SmartUrlServices" color="#4f46e5">github.com/tonyx1998/SmartUrlServices</a>',
+            "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
+            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Vite",
+            "links": '<a href="https://github.com/tonyx1998/all-in-one-URL" color="#4f46e5">github.com/tonyx1998/all-in-one-URL</a>',
             "bullets": [
-                "Built a full-stack URL shortener with QR and barcode generation, click and scan analytics, and automatic page-title extraction.",
+                "Built a unified platform for short URLs, QR codes, and barcodes with click/scan analytics and automatic page-title extraction.",
                 "Implemented Redis-backed three-tier rate limiting (10 / 60 / unlimited req/min) and response caching to cut hot-path latency.",
                 "Containerized every service with Docker Compose for reproducible local development and production deployments.",
+                "Shipped a tabbed React 19 + Vite + TypeScript + Tailwind CSS 4 frontend with TanStack Query and shadcn-style components.",
             ],
         },
         {
