@@ -190,14 +190,6 @@ def main(out_path: str) -> None:
                 "Built and validated predictive models with scikit-learn and statsmodels to identify statistically significant risk factors.",
             ],
         },
-        {
-            "title": "Schedule Creator",
-            "stack": "Java",
-            "links": '<a href="https://github.com/tonyx1998/Schedule-Creator" color="#4f46e5">github.com/tonyx1998/Schedule-Creator</a>',
-            "bullets": [
-                "Built a Java desktop application that generates conflict-free class schedules by modeling courses, time slots, and scheduling constraints.",
-            ],
-        },
     ]
 
     for p in projects:
