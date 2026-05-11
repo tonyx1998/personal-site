@@ -176,7 +176,7 @@ def main(out_path: str) -> None:
         {
             "title": "Personal Portfolio",
             "stack": "Next.js 16, TypeScript, Tailwind CSS v4, Framer Motion",
-            "links": '<a href="https://personal-site-liart-beta.vercel.app" color="#4f46e5">personal-site-liart-beta.vercel.app</a>',
+            "links": '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a>',
             "bullets": [
                 "Built a responsive portfolio with dark/light theming, scroll-driven animations, a bento-grid project layout, and cursor-tracked spotlight cards.",
                 "Implemented an in-house, React-19-clean theme provider with FOUC-prevention via a <i>beforeInteractive</i> inline script and a working accessible Contact form backed by Web3Forms.",

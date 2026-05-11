@@ -1,10 +1,10 @@
 # personal-site
 
-[![Live](https://img.shields.io/badge/live-personal--site--liart--beta.vercel.app-6366f1)](https://personal-site-liart-beta.vercel.app)
+[![Live](https://img.shields.io/badge/live-toyinyu.vercel.app-6366f1)](https://toyinyu.vercel.app)
 
 Personal portfolio for **Tony Yu (To Yin Yu)** — software developer & ML researcher. A single-page Next.js site with a hero spotlight animation, a bento-grid project layout with cursor-tracked spotlight cards, dark/light theming, and a working contact form.
 
-Live at **[personal-site-liart-beta.vercel.app](https://personal-site-liart-beta.vercel.app)**.
+Live at **[toyinyu.vercel.app](https://toyinyu.vercel.app)**.
 
 ## Stack
 
@@ -97,7 +97,7 @@ Connected to Vercel — pushes to `master` auto-deploy to production. Manual dep
 vercel --prod
 ```
 
-Production URL alias: `personal-site-liart-beta.vercel.app`. Override via `src/lib/site.ts` if you swap to a custom domain — `metadataBase`, `sitemap.xml`, and `robots.txt` all read from there.
+Production URL alias: `toyinyu.vercel.app`. Override via `src/lib/site.ts` if you swap to a custom domain — `metadataBase`, `sitemap.xml`, and `robots.txt` all read from there.
 
 ## License
 
