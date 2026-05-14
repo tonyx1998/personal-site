@@ -35,12 +35,12 @@ const projects: Project[] = [
   {
     title: "United Front Roofing",
     description:
-      "Full marketing site for a local roofing business — AI chatbot, multi-step quote estimator, booking calendar, and SEO landing pages. Deployed on Netlify.",
-    tags: ["Astro", "Tailwind CSS", "Netlify", "JavaScript"],
+      "Marketing site for a local roofing business with an embedded AI voice agent that answers questions, triages emergencies, and books real inspections end-to-end. ElevenLabs Conversational AI handles the live conversation; webhook tools call the Cal.com v2 API for real-time availability and authenticated bookings. System prompt and knowledge base versioned as markdown with a repeatable Node setup script that patches the live agent in seconds.",
+    tags: ["Astro", "TypeScript", "Tailwind CSS", "ElevenLabs", "Conversational AI", "Cal.com API", "Netlify"],
     github: null,
     live: "https://united-front-roofing.netlify.app",
     featured: false,
-    className: "lg:col-span-1",
+    className: "lg:col-span-2",
   },
   {
     title: "Obesity Data Analysis",

@@ -165,12 +165,14 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "United Front Roofing — Marketing Site",
-            "stack": "Astro, Tailwind CSS, JavaScript, Netlify",
+            "title": "United Front Roofing — Marketing Site &amp; AI Voice Agent",
+            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs Conversational AI, Cal.com API, Node.js, Netlify",
             "links": '<a href="https://united-front-roofing.netlify.app" color="#4f46e5">united-front-roofing.netlify.app</a>',
             "bullets": [
-                "Designed and shipped a complete marketing site for a local roofing business — landing pages, project gallery, and SEO-optimized routing.",
-                "Built a rule-based AI chat assistant (no third-party API), a multi-step quote estimator, and a booking calendar.",
+                "Designed and shipped a complete Astro + Tailwind marketing site for a local roofing business — landing pages, project gallery, SEO routing, a rule-based text chat assistant, and a multi-step quote estimator.",
+                "Built an AI voice agent on ElevenLabs Conversational AI that answers FAQs, triages emergency calls (active-leak routing), qualifies leads, and books inspections end-to-end; configured webhook tools that call the Cal.com v2 API for real-time slot availability and authenticated booking creation directly from the live conversation.",
+                "Versioned the agent's system prompt and knowledge base as markdown with a repeatable Node setup script that injects the current date into the prompt and patches the live agent in seconds — diagnosed a stale-year tool-call bug by inspecting ElevenLabs conversation transcripts via the API.",
+                "Embedded the agent widget site-wide through a single Astro layout, coexisting with the existing text chatbot; locked the agent to the production domain via ElevenLabs allowlist.",
             ],
         },
         {
