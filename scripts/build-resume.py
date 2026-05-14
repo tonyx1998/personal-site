@@ -48,7 +48,7 @@ def main(out_path: str) -> None:
         fontSize=9.5,
         leading=12,
         textColor=MUTED,
-        spaceAfter=10,
+        spaceAfter=6,
     )
     section_style = ParagraphStyle(
         "Section",
@@ -56,7 +56,7 @@ def main(out_path: str) -> None:
         fontSize=11,
         leading=14,
         textColor=ACCENT,
-        spaceBefore=10,
+        spaceBefore=6,
         spaceAfter=4,
     )
     role_style = ParagraphStyle(
@@ -65,7 +65,7 @@ def main(out_path: str) -> None:
         fontSize=10.5,
         leading=13,
         textColor=DARK,
-        spaceBefore=4,
+        spaceBefore=3,
         spaceAfter=0,
     )
     role_meta_style = ParagraphStyle(
@@ -88,11 +88,11 @@ def main(out_path: str) -> None:
         "Bullet",
         fontName="Helvetica",
         fontSize=10,
-        leading=13,
+        leading=12,
         textColor=DARK,
         leftIndent=12,
         bulletIndent=2,
-        spaceAfter=2,
+        spaceAfter=1,
     )
 
     story = []
@@ -166,13 +166,11 @@ def main(out_path: str) -> None:
         },
         {
             "title": "United Front Roofing — Marketing Site &amp; AI Voice Agent",
-            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs Conversational AI, Cal.com API, Node.js, Netlify",
+            "stack": "Astro, TypeScript, Tailwind, ElevenLabs Conversational AI, Cal.com API, Netlify",
             "links": '<a href="https://united-front-roofing.netlify.app" color="#4f46e5">united-front-roofing.netlify.app</a>',
             "bullets": [
-                "Designed and shipped a complete Astro + Tailwind marketing site for a local roofing business — landing pages, project gallery, SEO routing, a rule-based text chat assistant, and a multi-step quote estimator.",
-                "Built an AI voice agent on ElevenLabs Conversational AI that answers FAQs, triages emergency calls (active-leak routing), qualifies leads, and books inspections end-to-end; configured webhook tools that call the Cal.com v2 API for real-time slot availability and authenticated booking creation directly from the live conversation.",
-                "Versioned the agent's system prompt and knowledge base as markdown with a repeatable Node setup script that injects the current date into the prompt and patches the live agent in seconds — diagnosed a stale-year tool-call bug by inspecting ElevenLabs conversation transcripts via the API.",
-                "Embedded the agent widget site-wide through a single Astro layout, coexisting with the existing text chatbot; locked the agent to the production domain via ElevenLabs allowlist.",
+                "Shipped a complete Astro + Tailwind marketing site with a rule-based text chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
+                "Added an ElevenLabs voice agent that answers FAQs, triages emergencies, and books real inspections via webhook tools calling the Cal.com v2 API; prompt + knowledge base versioned as markdown with a repeatable Node setup script.",
             ],
         },
         {
