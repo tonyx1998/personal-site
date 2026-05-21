@@ -36,7 +36,7 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <a href="#hero" className="font-mono text-lg font-bold text-accent tracking-tight">
-          &lt;TonyYu /&gt;
+          &lt;ToYinYu /&gt;
         </a>
 
         <ul className="hidden md:flex items-center gap-8">

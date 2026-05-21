@@ -162,7 +162,7 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 **What we set:**
 - `metadataBase` — required for absolute URL resolution
-- `title.default` + `title.template` — `%s · Tony Yu` for nested routes
+- `title.default` + `title.template` — `%s · To Yin Yu` for nested routes
 - `description` — search engine snippet
 - `openGraph` — Facebook, LinkedIn, Slack rich previews
 - `twitter` — X/Twitter card preview

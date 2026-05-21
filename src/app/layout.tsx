@@ -18,14 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Tony Yu — Software Developer",
-    template: "%s · Tony Yu",
+    default: "To Yin Yu — Software Developer",
+    template: "%s · To Yin Yu",
   },
   description:
-    "Tony Yu — full-stack developer and ML researcher. Building fast, accessible web apps with Next.js, FastAPI, and TensorFlow.",
-  applicationName: "Tony Yu",
+    "To Yin Yu — full-stack developer and ML researcher. Building fast, accessible web apps with Next.js, FastAPI, and TensorFlow.",
+  applicationName: "To Yin Yu",
   keywords: [
-    "Tony Yu",
+    "To Yin Yu",
     "Software Developer",
     "ML Researcher",
     "Next.js",
@@ -33,19 +33,19 @@ export const metadata: Metadata = {
     "TensorFlow",
     "Portfolio",
   ],
-  authors: [{ name: "Tony Yu" }],
-  creator: "Tony Yu",
+  authors: [{ name: "To Yin Yu" }],
+  creator: "To Yin Yu",
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Tony Yu — Software Developer",
+    title: "To Yin Yu — Software Developer",
     description:
       "Full-stack developer and ML researcher. Next.js, FastAPI, TensorFlow.",
-    siteName: "Tony Yu",
+    siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tony Yu — Software Developer",
+    title: "To Yin Yu — Software Developer",
     description:
       "Full-stack developer and ML researcher. Next.js, FastAPI, TensorFlow.",
   },
