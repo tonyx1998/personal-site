@@ -1,4 +1,4 @@
-"""Generate Tony Yu's resume as an ATS-friendly PDF.
+"""Generate To Yin Yu's resume as an ATS-friendly PDF.
 
 Single-column, standard fonts, semantic structure — designed to parse cleanly
 through any applicant tracking system while still looking polished in a viewer.
@@ -30,8 +30,8 @@ def main(out_path: str) -> None:
         rightMargin=0.6 * inch,
         topMargin=0.5 * inch,
         bottomMargin=0.5 * inch,
-        title="Tony Yu — Resume",
-        author="Tony Yu",
+        title="To Yin Yu — Resume",
+        author="To Yin Yu",
     )
 
     name_style = ParagraphStyle(

@@ -45,7 +45,7 @@ export default function About() {
             className="space-y-4 text-muted-foreground leading-relaxed"
           >
             <p>
-              I&apos;m Tony Yu — a software developer with a B.S. in Computer Science from
+              I&apos;m To Yin Yu — a software developer with a B.S. in Computer Science from
               the University of Maryland, College Park.
             </p>
             <p>
@@ -92,11 +92,11 @@ function CodeCard() {
         <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-        <span className="ml-3 text-xs text-muted-foreground font-mono">tony.ts</span>
+        <span className="ml-3 text-xs text-muted-foreground font-mono">to-yin-yu.ts</span>
       </div>
       <pre className="font-mono text-[12.5px] sm:text-[13px] leading-[22px] p-5 text-foreground/85 whitespace-pre overflow-hidden">
         <code>
-          <span className={kw}>const</span> <span className={id}>tony</span> = {"{\n"}
+          <span className={kw}>const</span> <span className={id}>toYinYu</span> = {"{\n"}
           {"  "}<span className={prop}>name</span>: <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
           {"  "}<span className={prop}>role</span>: <span className={str}>{"'Software Developer'"}</span>,{"\n"}
           {"  "}<span className={prop}>edu</span>: <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}

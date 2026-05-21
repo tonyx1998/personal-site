@@ -83,7 +83,7 @@ export default function Hero() {
         >
           Hi, I&apos;m{" "}
           <span className="bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">
-            Tony Yu
+            To Yin Yu
           </span>
         </motion.h1>
 
@@ -122,7 +122,7 @@ export default function Hero() {
           </a>
           <a
             href="/resume.pdf"
-            download="Tony_Yu_Resume.pdf"
+            download="To_Yin_Yu_Resume.pdf"
             className="px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition-colors duration-200"
           >
             Download Resume
