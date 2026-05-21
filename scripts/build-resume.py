@@ -15,6 +15,7 @@ from reportlab.platypus import (
     HRFlowable,
 )
 from reportlab.lib.enums import TA_LEFT
+from pypdf import PdfReader
 
 
 ACCENT = HexColor("#4f46e5")
@@ -26,10 +27,10 @@ def main(out_path: str) -> None:
     doc = SimpleDocTemplate(
         out_path,
         pagesize=LETTER,
-        leftMargin=0.6 * inch,
-        rightMargin=0.6 * inch,
-        topMargin=0.5 * inch,
-        bottomMargin=0.5 * inch,
+        leftMargin=0.55 * inch,
+        rightMargin=0.55 * inch,
+        topMargin=0.4 * inch,
+        bottomMargin=0.4 * inch,
         title="To Yin Yu — Resume",
         author="To Yin Yu",
     )
@@ -53,55 +54,55 @@ def main(out_path: str) -> None:
     section_style = ParagraphStyle(
         "Section",
         fontName="Helvetica-Bold",
-        fontSize=11,
-        leading=14,
+        fontSize=10.5,
+        leading=13,
         textColor=ACCENT,
-        spaceBefore=6,
-        spaceAfter=4,
+        spaceBefore=4,
+        spaceAfter=2,
     )
     role_style = ParagraphStyle(
         "Role",
         fontName="Helvetica-Bold",
-        fontSize=10.5,
-        leading=13,
+        fontSize=10,
+        leading=12.5,
         textColor=DARK,
-        spaceBefore=3,
+        spaceBefore=2,
         spaceAfter=0,
     )
     role_meta_style = ParagraphStyle(
         "RoleMeta",
         fontName="Helvetica",
-        fontSize=9.5,
-        leading=12,
+        fontSize=9,
+        leading=11,
         textColor=MUTED,
-        spaceAfter=2,
+        spaceAfter=1,
     )
     body_style = ParagraphStyle(
         "Body",
         fontName="Helvetica",
-        fontSize=10,
-        leading=13,
+        fontSize=9.5,
+        leading=12,
         textColor=DARK,
-        spaceAfter=2,
+        spaceAfter=1,
     )
     bullet_style = ParagraphStyle(
         "Bullet",
         fontName="Helvetica",
-        fontSize=10,
-        leading=12,
+        fontSize=9.5,
+        leading=11.5,
         textColor=DARK,
         leftIndent=12,
         bulletIndent=2,
-        spaceAfter=1,
+        spaceAfter=0,
     )
 
     summary_style = ParagraphStyle(
         "Summary",
         fontName="Helvetica",
-        fontSize=10,
-        leading=13,
+        fontSize=9.5,
+        leading=12,
         textColor=DARK,
-        spaceAfter=4,
+        spaceAfter=2,
     )
 
     story = []
@@ -233,6 +234,13 @@ def main(out_path: str) -> None:
     )
 
     doc.build(story)
+
+    page_count = len(PdfReader(out_path).pages)
+    if page_count != 1:
+        raise RuntimeError(
+            f"Resume must fit on one page; produced {page_count}. "
+            "Trim content or tighten layout in build-resume.py."
+        )
 
 
 if __name__ == "__main__":
