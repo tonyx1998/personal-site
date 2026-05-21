@@ -103,8 +103,9 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          B.S. in Computer Science from the University of Maryland. I build across the
-          stack — full-stack web apps, ML pipelines in TensorFlow, and data science with Python.
+          I&apos;m a software developer focused on Python and TypeScript, building deployed
+          full-stack applications, backend APIs, and AI-powered workflows. Recent work includes
+          a URL/QR analytics platform and a business website with an AI voice booking agent.
         </motion.p>
 
         <motion.div

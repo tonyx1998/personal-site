@@ -45,17 +45,17 @@ export default function About() {
             className="space-y-4 text-muted-foreground leading-relaxed"
           >
             <p>
-              I&apos;m Tony Yu (To Yin Yu) — a software developer with a B.S. in Computer
-              Science from the University of Maryland, College Park (Dec 2022).
+              I&apos;m Tony Yu — a software developer with a B.S. in Computer Science from
+              the University of Maryland, College Park.
             </p>
             <p>
-              I work across the full stack and into machine learning — building FastAPI
-              services with Redis and Docker, training deep learning models in TensorFlow,
-              and visualizing data with Python.
+              I build practical software that turns ideas into working products: FastAPI
+              backends, React and Next.js frontends, PostgreSQL data models, Redis-backed
+              performance improvements, and AI integrations.
             </p>
             <p>
-              I&apos;m actively looking for software engineering or data science roles where
-              I can bring both my engineering and research background to real problems.
+              I&apos;m currently looking for software engineering roles where I can
+              contribute across backend, frontend, and applied AI systems.
             </p>
           </motion.div>
         </div>
