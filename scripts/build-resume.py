@@ -179,6 +179,15 @@ def main(out_path: str) -> None:
             ],
         },
         {
+            "title": "Modern Web Dev Guide — 2026 Web Development Reference",
+            "stack": "Docusaurus, TypeScript, React, MDX, Mermaid",
+            "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">tonyx1998.github.io/modern-web-dev-guide</a>',
+            "bullets": [
+                "Authored a ~9,000-line beginner-to-intermediate guide across 11 chapters covering web foundations, project lifecycle, the modern tech stack, AI integration, and career paths.",
+                "Built the site with Docusaurus, MDX, and Mermaid diagrams, with full-text local search, dark-mode theming, and a GitHub Actions deploy pipeline to GitHub Pages.",
+            ],
+        },
+        {
             "title": "Obesity Data Analysis",
             "stack": "Python, Pandas, NumPy, scikit-learn, matplotlib, seaborn",
             "links": '<a href="https://tonyx1998.github.io" color="#4f46e5">tonyx1998.github.io</a>',
