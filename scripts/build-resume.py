@@ -1,4 +1,4 @@
-"""Generate Tony Yu's resume as an ATS-friendly PDF.
+"""Generate To Yin Yu's resume as an ATS-friendly PDF.
 
 Single-column, standard fonts, semantic structure — designed to parse cleanly
 through any applicant tracking system while still looking polished in a viewer.
@@ -30,8 +30,8 @@ def main(out_path: str) -> None:
         rightMargin=0.6 * inch,
         topMargin=0.5 * inch,
         bottomMargin=0.5 * inch,
-        title="Tony Yu — Resume",
-        author="Tony Yu",
+        title="To Yin Yu — Resume",
+        author="To Yin Yu",
     )
 
     name_style = ParagraphStyle(
@@ -95,6 +95,15 @@ def main(out_path: str) -> None:
         spaceAfter=1,
     )
 
+    summary_style = ParagraphStyle(
+        "Summary",
+        fontName="Helvetica",
+        fontSize=10,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=4,
+    )
+
     story = []
 
     story.append(Paragraph("TO YIN YU", name_style))
@@ -111,27 +120,16 @@ def main(out_path: str) -> None:
     )
     story.append(HRFlowable(width="100%", thickness=0.6, color=HexColor("#d4d4d8"), spaceAfter=4))
 
-    # EDUCATION
-    story.append(Paragraph("EDUCATION", section_style))
+    # SUMMARY
+    story.append(Paragraph("SUMMARY", section_style))
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     story.append(
         Paragraph(
-            "<b>University of Maryland, College Park</b> &nbsp;—&nbsp; College Park, MD",
-            role_style,
-        )
-    )
-    story.append(
-        Paragraph(
-            "Bachelor of Science, Computer Science &nbsp;·&nbsp; December 2022",
-            role_meta_style,
-        )
-    )
-    story.append(
-        Paragraph(
-            "<b>Relevant coursework:</b> Advanced Data Structures, Artificial Intelligence, "
-            "Data Science, Computer Architecture, Object-Oriented Programming, "
-            "Functional Programming, Web Development, Computer Systems, Programming Handheld Systems.",
-            body_style,
+            "Software developer with a B.S. in Computer Science from UMD and hands-on experience "
+            "building deployed full-stack applications with Python, FastAPI, React, TypeScript, "
+            "PostgreSQL, Redis, and Docker. Interested in backend, full-stack, and applied AI "
+            "engineering roles.",
+            summary_style,
         )
     )
 
@@ -140,46 +138,44 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     skill_rows = [
         ("Languages", "Python, JavaScript/TypeScript, Java, Swift, C, Rust, OCaml, Ruby, SQL"),
-        ("ML &amp; Data", "TensorFlow, Keras, scikit-learn, Pandas, NumPy, matplotlib, seaborn, SAS, Minitab"),
         ("Web &amp; Backend", "React, Next.js, Astro, FastAPI, Tailwind CSS, PostgreSQL, Redis"),
+        ("ML &amp; Data", "TensorFlow, Keras, scikit-learn, Pandas, NumPy, matplotlib, seaborn"),
         ("Tools", "Docker, Git, Linux/Unix, Vercel, Netlify, Jupyter"),
     ]
     for label, items in skill_rows:
         story.append(Paragraph(f"<b>{label}:</b> {items}", body_style))
 
     # PROJECTS
-    story.append(Paragraph("PROJECTS", section_style))
+    story.append(Paragraph("SELECTED PROJECTS", section_style))
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
 
     projects = [
         {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
-            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, PyJWT, bcrypt, React 19, TypeScript, Vite, Tailwind CSS 4",
+            "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Tailwind CSS",
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
-                "Built a unified platform for short URLs, QR codes, and barcodes with per-resource click/scan analytics and BeautifulSoup-based automatic page-title extraction.",
-                "Implemented SlowAPI tiered rate limiting (10 / 60 / unlimited req/min) and Redis-backed response caching plus counter batching to reduce hot-path database writes.",
-                "Added optional JWT-based authentication (HS256 PyJWT + bcrypt-hashed passwords) with a non-destructive nullable user_id FK on existing resources, fail-fast startup checks for missing secrets, and a React Context + portaled modal auth UI.",
-                "Containerized backend services with Docker Compose for local development, then deployed to Render (web service) with Neon (serverless Postgres) and Upstash (serverless Redis).",
-                "Shipped a tabbed React 19 + Vite + TypeScript + Tailwind CSS 4 frontend with TanStack Query and shadcn-style components, deployed on Vercel.",
+                "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource analytics, Redis-backed caching and counter batching, and tiered SlowAPI rate limiting.",
+                "Implemented JWT authentication with bcrypt password hashing and per-resource ownership while preserving existing anonymous resources.",
+                "Containerized backend with Docker Compose and deployed full stack on Vercel, Render, Neon (Postgres), and Upstash (Redis).",
             ],
         },
         {
             "title": "United Front Roofing — Marketing Site &amp; AI Voice Agent",
-            "stack": "Astro, TypeScript, Tailwind, ElevenLabs Conversational AI, Cal.com API, Netlify",
+            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs, Cal.com API, Netlify",
             "links": '<a href="https://united-front-roofing.netlify.app" color="#4f46e5">united-front-roofing.netlify.app</a>',
             "bullets": [
-                "Shipped a complete Astro + Tailwind marketing site with a rule-based text chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
-                "Added an ElevenLabs voice agent that answers FAQs, triages emergencies, and books real inspections via webhook tools calling the Cal.com v2 API; prompt + knowledge base versioned as markdown with a repeatable Node setup script.",
+                "Shipped an Astro + Tailwind marketing site with a rule-based chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
+                "Integrated an ElevenLabs voice agent with Cal.com API webhooks to answer roofing FAQs, triage emergency requests, and book real inspection appointments end-to-end.",
+                "Versioned the system prompt and knowledge base as markdown with a repeatable Node setup script that patches the live agent in seconds.",
             ],
         },
         {
             "title": "Personal Portfolio",
-            "stack": "Next.js 16, TypeScript, Tailwind CSS v4, Framer Motion",
+            "stack": "Next.js, TypeScript, Tailwind CSS, Framer Motion",
             "links": '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a>',
             "bullets": [
-                "Built a responsive portfolio with dark/light theming, scroll-driven animations, a bento-grid project layout, and cursor-tracked spotlight cards.",
-                "Implemented an in-house, React-19-clean theme provider with FOUC-prevention via a <i>beforeInteractive</i> inline script and a working accessible Contact form backed by Web3Forms.",
+                "Built a responsive portfolio with dark/light theming, scroll-driven animations, a bento-grid project layout, and a working accessible contact form.",
             ],
         },
         {
@@ -203,6 +199,29 @@ def main(out_path: str) -> None:
         story.append(Paragraph(p["links"], role_meta_style))
         for b in p["bullets"]:
             story.append(Paragraph(f"•&nbsp;&nbsp;{b}", bullet_style))
+
+    # EDUCATION
+    story.append(Paragraph("EDUCATION", section_style))
+    story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
+    story.append(
+        Paragraph(
+            "<b>University of Maryland, College Park</b> &nbsp;—&nbsp; College Park, MD",
+            role_style,
+        )
+    )
+    story.append(
+        Paragraph(
+            "Bachelor of Science, Computer Science &nbsp;·&nbsp; December 2022",
+            role_meta_style,
+        )
+    )
+    story.append(
+        Paragraph(
+            "<b>Relevant coursework:</b> Data Structures, Artificial Intelligence, "
+            "Data Science, Computer Systems, Web Development.",
+            body_style,
+        )
+    )
 
     doc.build(story)
 

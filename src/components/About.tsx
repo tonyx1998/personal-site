@@ -45,17 +45,17 @@ export default function About() {
             className="space-y-4 text-muted-foreground leading-relaxed"
           >
             <p>
-              I&apos;m Tony Yu (To Yin Yu) — a software developer with a B.S. in Computer
-              Science from the University of Maryland, College Park (Dec 2022).
+              I&apos;m To Yin Yu — a software developer with a B.S. in Computer Science from
+              the University of Maryland, College Park.
             </p>
             <p>
-              I work across the full stack and into machine learning — building FastAPI
-              services with Redis and Docker, training deep learning models in TensorFlow,
-              and visualizing data with Python.
+              I build practical software that turns ideas into working products: FastAPI
+              backends, React and Next.js frontends, PostgreSQL data models, Redis-backed
+              performance improvements, and AI integrations.
             </p>
             <p>
-              I&apos;m actively looking for software engineering or data science roles where
-              I can bring both my engineering and research background to real problems.
+              I&apos;m currently looking for software engineering roles where I can
+              contribute across backend, frontend, and applied AI systems.
             </p>
           </motion.div>
         </div>
@@ -92,11 +92,11 @@ function CodeCard() {
         <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-        <span className="ml-3 text-xs text-muted-foreground font-mono">tony.ts</span>
+        <span className="ml-3 text-xs text-muted-foreground font-mono">to-yin-yu.ts</span>
       </div>
       <pre className="font-mono text-[12.5px] sm:text-[13px] leading-[22px] p-5 text-foreground/85 whitespace-pre overflow-hidden">
         <code>
-          <span className={kw}>const</span> <span className={id}>tony</span> = {"{\n"}
+          <span className={kw}>const</span> <span className={id}>toYinYu</span> = {"{\n"}
           {"  "}<span className={prop}>name</span>: <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
           {"  "}<span className={prop}>role</span>: <span className={str}>{"'Software Developer'"}</span>,{"\n"}
           {"  "}<span className={prop}>edu</span>: <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}
