@@ -49,7 +49,7 @@ const projects: Project[] = [
     github: null,
     live: "https://united-front-roofing.netlify.app",
     featured: false,
-    className: "lg:col-span-2",
+    className: "lg:col-span-1",
   },
   {
     title: "Obesity Data Analysis",
