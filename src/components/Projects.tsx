@@ -69,7 +69,17 @@ const projects: Project[] = [
     github: null,
     live: "https://toyinyu.vercel.app",
     featured: false,
-    className: "lg:col-span-2",
+    className: "lg:col-span-1",
+  },
+  {
+    title: "Modern Web Dev Guide",
+    description:
+      "A ~9,000-line 2026 guide to how websites are actually built — 11 chapters spanning foundations, lifecycle, tech stack, AI integration, and career paths.",
+    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
+    github: "https://github.com/tonyx1998/modern-web-dev-guide",
+    live: "https://tonyx1998.github.io/modern-web-dev-guide/",
+    featured: false,
+    className: "lg:col-span-1",
   },
   {
     title: "Schedule Creator",
