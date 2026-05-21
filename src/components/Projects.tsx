@@ -14,6 +14,7 @@ const GithubIcon = () => (
 type Project = {
   title: string;
   description: string;
+  highlights?: string[];
   tags: string[];
   github: string | null;
   live: string | null;
@@ -24,9 +25,13 @@ type Project = {
 const projects: Project[] = [
   {
     title: "all-in-one-URL",
-    description:
-      "Unified platform for short URLs, QR codes, and barcodes — per-resource click/scan analytics, automatic page-title extraction, Redis-backed caching with counter batching, and tiered SlowAPI rate limiting. Optional JWT sign-in with bcrypt-hashed passwords for per-resource ownership. Tabbed React 19 frontend with TanStack Query; backend on Render + Neon + Upstash.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "TypeScript", "Tailwind"],
+    description: "Short links, QR codes, barcodes, and analytics platform.",
+    highlights: [
+      "Built FastAPI backend with PostgreSQL, Redis caching, and tiered rate limiting",
+      "Added JWT auth and per-resource ownership while preserving anonymous resources",
+      "Deployed full stack on Vercel, Render, Neon, and Upstash",
+    ],
+    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "TypeScript"],
     github: null,
     live: "https://all-in-one-url.vercel.app",
     featured: true,
@@ -34,9 +39,13 @@ const projects: Project[] = [
   },
   {
     title: "United Front Roofing",
-    description:
-      "Marketing site for a local roofing business with an embedded AI voice agent. ElevenLabs Conversational AI handles live conversations; webhook tools call the Cal.com v2 API to check availability and book real inspections end-to-end.",
-    tags: ["Astro", "TypeScript", "Tailwind CSS", "ElevenLabs", "Conversational AI", "Cal.com API", "Netlify"],
+    description: "Marketing site for a roofing business with an embedded AI voice booking agent.",
+    highlights: [
+      "Shipped Astro + Tailwind site with quote estimator and project gallery",
+      "Integrated ElevenLabs voice agent to answer FAQs and triage emergency requests",
+      "Wired webhook tools to Cal.com API to book real inspection appointments end-to-end",
+    ],
+    tags: ["Astro", "TypeScript", "Tailwind CSS", "ElevenLabs", "Cal.com API", "Netlify"],
     github: null,
     live: "https://united-front-roofing.netlify.app",
     featured: false,
@@ -45,7 +54,7 @@ const projects: Project[] = [
   {
     title: "Obesity Data Analysis",
     description:
-      "Data science project analyzing obesity patterns using Python. Visualized trends with matplotlib and seaborn, and built predictive models with sklearn and statsmodels.",
+      "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
     tags: ["Python", "Pandas", "NumPy", "sklearn", "matplotlib"],
     github: null,
     live: "https://tonyx1998.github.io",
@@ -55,7 +64,7 @@ const projects: Project[] = [
   {
     title: "Personal Portfolio",
     description:
-      "This site — a modern portfolio built with Next.js, TypeScript, Tailwind CSS v4, and Framer Motion. Features dark/light mode, smooth scroll animations, and a downloadable resume.",
+      "This site — a Next.js portfolio with dark mode, scroll animations, and a downloadable resume.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: null,
     live: "https://toyinyu.vercel.app",
@@ -65,7 +74,7 @@ const projects: Project[] = [
   {
     title: "Schedule Creator",
     description:
-      "Java desktop application that helps students build conflict-free class schedules by modelling courses, time slots, and constraints.",
+      "Java desktop app that helps students build conflict-free class schedules from courses, time slots, and constraints.",
     tags: ["Java"],
     github: "https://github.com/tonyx1998/Schedule-Creator",
     live: null,
@@ -140,6 +149,21 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
         <p className="text-sm text-muted-foreground leading-relaxed">
           {project.description}
         </p>
+        {project.highlights && project.highlights.length > 0 && (
+          <>
+            <p className="mt-3 text-xs font-mono uppercase tracking-wide text-accent">
+              Highlights
+            </p>
+            <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground leading-relaxed">
+              {project.highlights.map((h) => (
+                <li key={h} className="flex gap-2">
+                  <span aria-hidden="true" className="text-accent mt-0.5">▹</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
 
       <div className="relative flex flex-wrap gap-1.5 mt-auto">

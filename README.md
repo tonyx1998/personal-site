@@ -2,7 +2,7 @@
 
 [![Live](https://img.shields.io/badge/live-toyinyu.vercel.app-6366f1)](https://toyinyu.vercel.app)
 
-Personal portfolio for **Tony Yu (To Yin Yu)** — software developer & ML researcher. A single-page Next.js site with a hero spotlight animation, a bento-grid project layout with cursor-tracked spotlight cards, dark/light theming, and a working contact form.
+Personal portfolio for **To Yin Yu** — software developer & ML researcher. A single-page Next.js site with a hero spotlight animation, a bento-grid project layout with cursor-tracked spotlight cards, dark/light theming, and a working contact form.
 
 Live at **[toyinyu.vercel.app](https://toyinyu.vercel.app)**.
 
@@ -57,7 +57,7 @@ src/
 │   └── sitemap.ts        # serves /sitemap.xml
 ├── components/
 │   ├── Hero.tsx          # animated typewriter + Spotlight backgrounds
-│   ├── About.tsx         # bio + tony.ts code-card mockup + stats
+│   ├── About.tsx         # bio + to-yin-yu.ts code-card mockup + stats
 │   ├── Skills.tsx        # tech stack chips
 │   ├── Projects.tsx      # bento-grid w/ cursor-spotlight cards
 │   ├── Experience.tsx    # education timeline
@@ -101,4 +101,4 @@ Production URL alias: `toyinyu.vercel.app`. Override via `src/lib/site.ts` if yo
 
 ## License
 
-All rights reserved. © Tony Yu.
+All rights reserved. © To Yin Yu.

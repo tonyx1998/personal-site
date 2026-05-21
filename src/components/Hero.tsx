@@ -83,7 +83,7 @@ export default function Hero() {
         >
           Hi, I&apos;m{" "}
           <span className="bg-gradient-to-r from-accent to-violet-500 bg-clip-text text-transparent">
-            Tony Yu
+            To Yin Yu
           </span>
         </motion.h1>
 
@@ -103,8 +103,9 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          B.S. in Computer Science from the University of Maryland. I build across the
-          stack — full-stack web apps, ML pipelines in TensorFlow, and data science with Python.
+          I&apos;m a software developer focused on Python and TypeScript, building deployed
+          full-stack applications, backend APIs, and AI-powered workflows. Recent work includes
+          a URL/QR analytics platform and a business website with an AI voice booking agent.
         </motion.p>
 
         <motion.div
@@ -121,7 +122,7 @@ export default function Hero() {
           </a>
           <a
             href="/resume.pdf"
-            download="Tony_Yu_Resume.pdf"
+            download="To_Yin_Yu_Resume.pdf"
             className="px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition-colors duration-200"
           >
             Download Resume
