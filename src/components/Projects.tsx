@@ -79,7 +79,9 @@ const projects: Project[] = [
     github: "https://github.com/tonyx1998/modern-web-dev-guide",
     live: "https://tonyx1998.github.io/modern-web-dev-guide/",
     featured: true,
-    className: "lg:col-span-2 lg:row-span-2",
+    // Tall narrow card (1 col x 2 rows) — keeps highlights visible while
+    // letting the grid tile cleanly with the two 2x2 cards on the left.
+    className: "lg:col-span-1 lg:row-span-2",
   },
   {
     title: "Obesity Data Analysis",
@@ -212,7 +214,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(220px,auto)] gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row-dense auto-rows-[minmax(220px,auto)] gap-6">
           {projects.map((project, i) => (
             <BentoCard key={project.title} project={project} index={i} />
           ))}
