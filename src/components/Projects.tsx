@@ -74,12 +74,17 @@ const projects: Project[] = [
   {
     title: "Modern Web Dev Guide",
     description:
-      "A ~9,000-line 2026 guide to how websites are actually built — 11 chapters spanning foundations, lifecycle, tech stack, AI integration, and career paths.",
+      "A 2026 web dev guide turned into an interactive course — ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
+    highlights: [
+      "Built a sampled-quiz engine with a ~700-question bank, per-session seeded shuffling, and localStorage state",
+      "Wired progressive sidebar locking so each chapter unlocks only after its prereq quiz passes",
+      "Authored 11 chapters across foundations, lifecycle, tech stack, scale workflows, AI, and career",
+    ],
     tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     github: "https://github.com/tonyx1998/modern-web-dev-guide",
     live: "https://tonyx1998.github.io/modern-web-dev-guide/",
-    featured: false,
-    className: "lg:col-span-1",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
   },
   {
     title: "Schedule Creator",
@@ -104,12 +109,16 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
     el.style.setProperty("--y", `${e.clientY - rect.top}px`);
   };
 
+  const linkHref = project.live ?? project.github ?? "#";
+  const linkKind = project.live ? "live site" : project.github ? "GitHub repo" : "details";
+
   return (
     <motion.a
       ref={ref}
-      href={project.live ?? project.github ?? "#"}
+      href={linkHref}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={`Open ${project.title} ${linkKind}`}
       onMouseMove={handleMouseMove}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
