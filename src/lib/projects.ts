@@ -69,6 +69,36 @@ export const projects: Project[] = [
     className: "lg:col-span-2 lg:row-span-2",
   },
   {
+    title: "SWE Interview Guide",
+    description:
+      "Zero-to-hero interview prep — an 8-step study loop, Big-O reference, and pattern-by-pattern playbook (hash map, two pointers, sliding window, binary search, heaps, and more).",
+    highlights: [
+      "Codified the repeatable study loop and per-pattern templates I rerun on every new problem",
+      "Single-file interactive HTML with quiz-gated lessons, code templates, and a mock timer",
+      "Deployed on Vercel as a static asset — instant load, no build pipeline",
+    ],
+    tags: ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
+    github: "https://github.com/tonyx1998/swe-interview-guide",
+    live: "https://swe-interview-guide.vercel.app",
+    featured: false,
+    className: "lg:col-span-1",
+  },
+  {
+    title: "2026 Skills Roadmap",
+    description:
+      "Single-page roadmap from zero to a working 2026 web-dev stack — 12 stages across JS, HTML/CSS, browser JS, Git, TypeScript, React, Tailwind, and the modern toolchain.",
+    highlights: [
+      "Authored 12 sequential learning stages with time budgets, references, and concrete deliverables",
+      "Single self-contained HTML file with sticky sidebar nav and dark-mode design tokens",
+      "Published via GitHub Pages — zero build step, instant edit-and-push iteration",
+    ],
+    tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+    github: "https://github.com/tonyx1998/skills-roadmap",
+    live: "https://tonyx1998.github.io/skills-roadmap/",
+    featured: false,
+    className: "lg:col-span-1",
+  },
+  {
     title: "Obesity Data Analysis",
     description:
       "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
