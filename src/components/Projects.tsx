@@ -1,200 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { useRef, type MouseEvent } from "react";
-import { ExternalLink, Star, FolderOpen } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const GithubIcon = () => (
-  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-  </svg>
-);
-
-type Project = {
-  title: string;
-  description: string;
-  highlights?: string[];
-  tags: string[];
-  github: string | null;
-  live: string | null;
-  featured: boolean;
-  className: string;
-};
-
-const projects: Project[] = [
-  {
-    title: "SoloMock",
-    description:
-      "Verbal mock-interview app — talk through coding problems out loud with an AI interviewer over realtime voice, get instant feedback.",
-    highlights: [
-      "Built the realtime voice loop on OpenAI's GA Realtime API over WebRTC; debounced code-editor snapshots stream into the model so the AI reacts to what you type, not just what you say",
-      "Authored 15 structured per-problem 'interviewer briefs' (solution tree, 4-rung Socratic hint ladder, follow-ups, edge cases) that drive interviewer behavior via the system prompt",
-      "Layered cost protection: per-IP rate limit, 15-min session cap, ephemeral key TTL, and a Discord-webhook extended-access request flow with manual-whitelist approval",
-    ],
-    tags: ["Next.js", "TypeScript", "OpenAI Realtime API", "WebRTC", "Monaco", "Tailwind CSS"],
-    github: null,
-    live: "https://solomock.vercel.app",
-    featured: true,
-    className: "lg:col-span-2 lg:row-span-2",
-  },
-  {
-    title: "all-in-one-URL",
-    description: "Short links, QR codes, barcodes, and analytics platform.",
-    highlights: [
-      "Built FastAPI backend with PostgreSQL, Redis caching, and tiered rate limiting",
-      "Added JWT auth and per-resource ownership while preserving anonymous resources",
-      "Deployed full stack on Vercel, Render, Neon, and Upstash",
-    ],
-    tags: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "TypeScript"],
-    github: null,
-    live: "https://all-in-one-url.vercel.app",
-    featured: true,
-    className: "lg:col-span-2 lg:row-span-2",
-  },
-  {
-    title: "United Front Roofing",
-    description: "Marketing site for a roofing business with an embedded AI voice booking agent.",
-    highlights: [
-      "Shipped Astro + Tailwind site with quote estimator and project gallery",
-      "Integrated ElevenLabs voice agent to answer FAQs and triage emergency requests",
-      "Wired webhook tools to Cal.com API to book real inspection appointments end-to-end",
-    ],
-    tags: ["Astro", "TypeScript", "Tailwind CSS", "ElevenLabs", "Cal.com API", "Netlify"],
-    github: null,
-    live: "https://united-front-roofing.netlify.app",
-    featured: false,
-    className: "lg:col-span-1",
-  },
-  {
-    title: "Modern Web Dev Guide",
-    description:
-      "A 2026 web dev guide turned into an interactive course — ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
-    highlights: [
-      "Built a sampled-quiz engine with a ~700-question bank, per-session seeded shuffling, and localStorage state",
-      "Wired progressive sidebar locking so each chapter unlocks only after its prereq quiz passes",
-      "Authored 11 chapters across foundations, lifecycle, tech stack, scale workflows, AI, and career",
-    ],
-    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
-    github: "https://github.com/tonyx1998/modern-web-dev-guide",
-    live: "https://tonyx1998.github.io/modern-web-dev-guide/",
-    featured: true,
-    className: "lg:col-span-2 lg:row-span-2",
-  },
-  {
-    title: "Obesity Data Analysis",
-    description:
-      "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
-    tags: ["Python", "Pandas", "NumPy", "sklearn", "matplotlib"],
-    github: null,
-    live: "https://tonyx1998.github.io",
-    featured: false,
-    className: "lg:col-span-1",
-  },
-];
-
-function BentoCard({ project, index }: { project: Project; index: number }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty("--x", `${e.clientX - rect.left}px`);
-    el.style.setProperty("--y", `${e.clientY - rect.top}px`);
-  };
-
-  const linkHref = project.live ?? project.github ?? "#";
-  const linkKind = project.live ? "live site" : project.github ? "GitHub repo" : "details";
-
-  return (
-    <motion.a
-      ref={ref}
-      href={linkHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Open ${project.title} ${linkKind}`}
-      onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className={cn(
-        "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300 cursor-pointer",
-        "hover:border-accent/50",
-        project.className,
-      )}
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background:
-            "radial-gradient(600px circle at var(--x) var(--y), color-mix(in srgb, var(--accent) 14%, transparent), transparent 40%)",
-        }}
-      />
-
-      <div className="relative flex items-start justify-between">
-        <div className="p-2 rounded-lg bg-muted">
-          <FolderOpen size={18} className="text-accent" />
-        </div>
-        <div className="flex items-center gap-2">
-          {project.featured && (
-            <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
-              <Star size={12} fill="currentColor" />
-              featured
-            </span>
-          )}
-          {project.live ? (
-            <ExternalLink
-              size={15}
-              className="text-muted-foreground group-hover:text-accent transition-colors"
-            />
-          ) : (
-            <GithubIcon />
-          )}
-        </div>
-      </div>
-
-      <div className="relative">
-        <h3 className="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {project.description}
-        </p>
-        {project.highlights && project.highlights.length > 0 && (
-          <>
-            <p className="mt-3 text-xs font-mono uppercase tracking-wide text-accent">
-              Highlights
-            </p>
-            <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground leading-relaxed">
-              {project.highlights.map((h) => (
-                <li key={h} className="flex gap-2">
-                  <span aria-hidden="true" className="text-accent mt-0.5">▹</span>
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-
-      <div className="relative flex flex-wrap gap-1.5 mt-auto">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-2 py-0.5 text-xs rounded font-mono bg-muted text-muted-foreground"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.a>
-  );
-}
+import { ArrowRight } from "lucide-react";
+import { projects } from "@/lib/projects";
+import ProjectCard from "./ProjectCard";
 
 export default function Projects() {
+  const featured = projects.filter((p) => p.featured).slice(0, 4);
+
   return (
     <section id="projects" className="py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
@@ -208,15 +22,39 @@ export default function Projects() {
           <p className="text-accent font-mono text-sm mb-2">03. projects</p>
           <h2 className="text-3xl sm:text-4xl font-bold">Things I&apos;ve Built</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            A selection of projects I&apos;m proud of
+            A few featured projects — see them all on the projects page.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(220px,auto)] gap-6">
-          {projects.map((project, i) => (
-            <BentoCard key={project.title} project={project} index={i} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-[minmax(220px,auto)] gap-6">
+          {featured.map((project, i) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={i}
+              className="lg:col-span-1"
+            />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 flex justify-center"
+        >
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-border text-sm font-mono text-foreground hover:border-accent hover:text-accent transition-colors"
+          >
+            See all projects
+            <ArrowRight
+              size={16}
+              className="transition-transform group-hover:translate-x-0.5"
+            />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
