@@ -20,6 +20,12 @@ export default function ContactForm() {
       message: formData.get("message") as string,
     };
 
+    if (!data.access_key) {
+      console.error("Contact form: NEXT_PUBLIC_WEB3FORMS_KEY is not set");
+      setStatus("error");
+      return;
+    }
+
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 10_000);
@@ -31,8 +37,12 @@ export default function ContactForm() {
       });
       clearTimeout(timeout);
       const json = await res.json();
+      if (!json.success) {
+        console.error("Contact form: Web3Forms returned failure", json);
+      }
       setStatus(json.success ? "sent" : "error");
-    } catch {
+    } catch (err) {
+      console.error("Contact form: request failed", err);
       setStatus("error");
     }
   };
@@ -103,13 +113,24 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending" || status === "sent"}
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-white font-medium hover:opacity-90 disabled:opacity-60 transition-opacity duration-200"
+        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 transition-opacity duration-200"
       >
         {status === "idle" && (<><Send size={16} />Send Message</>)}
-        {status === "sending" && (<><span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />Sending...</>)}
+        {status === "sending" && (<><span className="w-4 h-4 rounded-full border-2 border-current/30 border-t-current animate-spin" />Sending...</>)}
         {status === "sent" && "Message sent! ✓"}
         {status === "error" && "Something went wrong — try again"}
       </button>
+      {status === "error" && (
+        <p className="text-sm text-muted-foreground text-center">
+          Form not working? Email me directly at{" "}
+          <a
+            href="mailto:tonyx1998@gmail.com"
+            className="text-accent underline underline-offset-2 hover:opacity-80"
+          >
+            tonyx1998@gmail.com
+          </a>
+        </p>
+      )}
     </motion.form>
   );
 }

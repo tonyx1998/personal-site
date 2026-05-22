@@ -22,15 +22,16 @@ export const metadata: Metadata = {
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu — full-stack developer and ML researcher. Building fast, accessible web apps with Next.js, FastAPI, and TensorFlow.",
+    "To Yin Yu — software developer building full-stack apps and applied AI workflows with Python, TypeScript, Next.js, and FastAPI.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
     "Software Developer",
-    "ML Researcher",
+    "Applied AI",
     "Next.js",
     "FastAPI",
-    "TensorFlow",
+    "Python",
+    "TypeScript",
     "Portfolio",
   ],
   authors: [{ name: "To Yin Yu" }],
@@ -40,14 +41,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu — Software Developer",
     description:
-      "Full-stack developer and ML researcher. Next.js, FastAPI, TensorFlow.",
+      "Software developer building full-stack apps and applied AI workflows. Python, TypeScript, Next.js, FastAPI.",
     siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
     title: "To Yin Yu — Software Developer",
     description:
-      "Full-stack developer and ML researcher. Next.js, FastAPI, TensorFlow.",
+      "Software developer building full-stack apps and applied AI workflows. Python, TypeScript, Next.js, FastAPI.",
   },
   robots: {
     index: true,
@@ -79,10 +80,10 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""} overflow-x-hidden`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased bg-background text-foreground">
+      <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
         <Providers initialTheme={isDark ? "dark" : "light"}>{children}</Providers>
       </body>
     </html>
