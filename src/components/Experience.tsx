@@ -30,8 +30,8 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <p className="text-accent font-mono text-sm mb-2">04. experience</p>
-          <h2 className="text-3xl sm:text-4xl font-bold">Work &amp; Education</h2>
+          <p className="text-accent font-mono text-sm mb-2">04. education</p>
+          <h2 className="text-3xl sm:text-4xl font-bold">Education</h2>
         </motion.div>
 
         <div className="relative">
@@ -51,9 +51,9 @@ export default function Experience() {
               >
                 <div className="absolute left-3 md:left-1/2 md:-translate-x-1/2 z-10 w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0 mt-5">
                   {exp.type === "work" ? (
-                    <Briefcase size={12} className="text-white" />
+                    <Briefcase size={12} className="text-accent-foreground" />
                   ) : (
-                    <GraduationCap size={12} className="text-white" />
+                    <GraduationCap size={12} className="text-accent-foreground" />
                   )}
                 </div>
 

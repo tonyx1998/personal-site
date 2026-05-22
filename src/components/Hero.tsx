@@ -8,9 +8,7 @@ import { Spotlight } from "./ui/Spotlight";
 
 const roles = [
   "Software Developer",
-  "ML Researcher",
-  "Data Scientist",
-  "Problem Solver",
+  "Applied AI Builder",
 ];
 
 export default function Hero() {
@@ -116,7 +114,7 @@ export default function Hero() {
         >
           <a
             href="#contact"
-            className="px-6 py-3 rounded-lg bg-accent text-white font-medium hover:opacity-90 transition-opacity duration-200"
+            className="px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity duration-200"
           >
             Get in touch
           </a>
@@ -136,9 +134,9 @@ export default function Hero() {
           className="flex items-center justify-center gap-3"
         >
           {[
-            { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "GitHub", external: true },
-            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu", label: "LinkedIn", external: true },
-            { icon: Mail, href: "mailto:tonyx1998@gmail.com", label: "Email", external: false },
+            { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "Visit GitHub profile (tonyx1998)", external: true },
+            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu", label: "Visit LinkedIn profile (To Yin Yu)", external: true },
+            { icon: Mail, href: "mailto:tonyx1998@gmail.com", label: "Email tonyx1998@gmail.com", external: false },
           ].map(({ icon: Icon, href, label, external }) => (
             <a
               key={label}
