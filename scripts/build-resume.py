@@ -192,11 +192,11 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "Obesity Data Analysis",
-            "stack": "Python, Pandas, NumPy, scikit-learn, matplotlib, seaborn",
-            "links": '<a href="https://tonyx1998.github.io" color="#4f46e5">tonyx1998.github.io</a>',
+            "title": "Personal Portfolio Site",
+            "stack": "Next.js 16, React 19, TypeScript, Tailwind v4, Framer Motion, Vercel",
+            "links": '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a>',
             "bullets": [
-                "Analyzed obesity patterns from public-health datasets with matplotlib/seaborn; built and validated scikit-learn / statsmodels predictive models to identify statistically significant risk factors.",
+                "Single-page portfolio on Next.js 16 / React 19 / Tailwind v4 with cookie-based SSR theming, a cursor-spotlight bento project grid, Framer Motion animations, and a Web3Forms-backed contact form.",
             ],
         },
     ]
