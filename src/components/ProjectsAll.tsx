@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { projects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
+import SwingingCard from "./SwingingCard";
 
 export default function ProjectsAll() {
   return (
@@ -34,14 +35,15 @@ export default function ProjectsAll() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
           {projects.map((project, i) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              index={i}
-              className="lg:col-span-1"
-            />
+            <SwingingCard key={project.title} index={i}>
+              <ProjectCard
+                project={project}
+                index={i}
+                className="lg:col-span-1"
+              />
+            </SwingingCard>
           ))}
         </div>
       </div>
