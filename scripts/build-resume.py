@@ -113,6 +113,8 @@ def main(out_path: str) -> None:
             "Lynnwood, WA &nbsp;·&nbsp; +1 (206) 712-5144 &nbsp;·&nbsp; "
             '<a href="mailto:tonyx1998@gmail.com" color="#4f46e5">tonyx1998@gmail.com</a> '
             "&nbsp;·&nbsp; "
+            '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a> '
+            "&nbsp;·&nbsp; "
             '<a href="https://linkedin.com/in/to-yin-yu" color="#4f46e5">linkedin.com/in/to-yin-yu</a> '
             "&nbsp;·&nbsp; "
             '<a href="https://github.com/tonyx1998" color="#4f46e5">github.com/tonyx1998</a>',
