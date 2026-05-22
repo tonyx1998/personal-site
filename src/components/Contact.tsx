@@ -85,8 +85,8 @@ export default function Contact() {
               <p className="text-sm text-muted-foreground mb-3">Find me on</p>
               <div className="flex gap-3">
                 {[
-                  { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "GitHub" },
-                  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu/", label: "LinkedIn" },
+                  { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "Visit GitHub profile (tonyx1998)" },
+                  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu/", label: "Visit LinkedIn profile (To Yin Yu)" },
                 ].map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}
