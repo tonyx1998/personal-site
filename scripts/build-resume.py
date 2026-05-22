@@ -180,12 +180,12 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "Modern Web Dev Guide — 2026 Web Development Reference",
+            "title": "Modern Web Dev Guide — Interactive 2026 Web Dev Course",
             "stack": "Docusaurus, TypeScript, React, MDX, Mermaid",
             "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">tonyx1998.github.io/modern-web-dev-guide</a>',
             "bullets": [
-                "Authored a ~9,000-line beginner-to-intermediate guide across 11 chapters covering web foundations, project lifecycle, the modern tech stack, AI integration, and career paths.",
-                "Built the site with Docusaurus, MDX, and Mermaid diagrams, with full-text local search, dark-mode theming, and a GitHub Actions deploy pipeline to GitHub Pages.",
+                "Built an interactive React + TypeScript quiz engine on top of the guide — a ~700-question bank with per-session seeded sampling, mandatory checkpoints, and progressive sidebar locking that gates each chapter behind prereq quiz passes.",
+                "Authored 11 chapters spanning web foundations, project lifecycle, the modern tech stack, AI integration, and career paths; deployed via Docusaurus + MDX + Mermaid on GitHub Pages with a GitHub Actions pipeline.",
             ],
         },
         {
