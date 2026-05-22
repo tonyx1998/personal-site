@@ -152,6 +152,16 @@ def main(out_path: str) -> None:
 
     projects = [
         {
+            "title": "SoloMock — AI Voice Mock Interviewer",
+            "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
+            "links": '<a href="https://solomock.vercel.app" color="#4f46e5">solomock.vercel.app</a>',
+            "bullets": [
+                "Built a realtime voice mock-interview app: the candidate speaks through coding problems while the AI interviewer probes complexity, gives Socratic hints, and reads code via debounced editor snapshots streamed over a WebRTC data channel.",
+                "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, edge cases) driving interviewer behavior via the system prompt; Monaco editor across 9 languages.",
+                "Layered cost protection on the realtime API: per-IP rate limit, 15-min session duration cap, short-lived ephemeral keys, and a Discord-webhook extended-access flow with manual email-whitelist approval.",
+            ],
+        },
+        {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
             "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Tailwind CSS",
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
@@ -168,15 +178,6 @@ def main(out_path: str) -> None:
             "bullets": [
                 "Shipped an Astro + Tailwind marketing site with a rule-based chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
                 "Integrated an ElevenLabs voice agent with Cal.com API webhooks to answer roofing FAQs, triage emergency requests, and book real inspection appointments end-to-end.",
-                "Versioned the system prompt and knowledge base as markdown with a repeatable Node setup script that patches the live agent in seconds.",
-            ],
-        },
-        {
-            "title": "Personal Portfolio",
-            "stack": "Next.js, TypeScript, Tailwind CSS, Framer Motion",
-            "links": '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a>',
-            "bullets": [
-                "Built a responsive portfolio with dark/light theming, scroll-driven animations, a bento-grid project layout, and a working accessible contact form.",
             ],
         },
         {
@@ -193,8 +194,7 @@ def main(out_path: str) -> None:
             "stack": "Python, Pandas, NumPy, scikit-learn, matplotlib, seaborn",
             "links": '<a href="https://tonyx1998.github.io" color="#4f46e5">tonyx1998.github.io</a>',
             "bullets": [
-                "Analyzed obesity patterns from public-health datasets, surfacing demographic and lifestyle trends with matplotlib/seaborn visualizations.",
-                "Built and validated predictive models with scikit-learn and statsmodels to identify statistically significant risk factors.",
+                "Analyzed obesity patterns from public-health datasets with matplotlib/seaborn; built and validated scikit-learn / statsmodels predictive models to identify statistically significant risk factors.",
             ],
         },
     ]
