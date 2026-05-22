@@ -24,6 +24,21 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "SoloMock",
+    description:
+      "Verbal mock-interview app — talk through coding problems out loud with an AI interviewer over realtime voice, get instant feedback.",
+    highlights: [
+      "Built the realtime voice loop on OpenAI's GA Realtime API over WebRTC; debounced code-editor snapshots stream into the model so the AI reacts to what you type, not just what you say",
+      "Authored 15 structured per-problem 'interviewer briefs' (solution tree, 4-rung Socratic hint ladder, follow-ups, edge cases) that drive interviewer behavior via the system prompt",
+      "Layered cost protection: per-IP rate limit, 15-min session cap, ephemeral key TTL, and a Discord-webhook extended-access request flow with manual-whitelist approval",
+    ],
+    tags: ["Next.js", "TypeScript", "OpenAI Realtime API", "WebRTC", "Monaco", "Tailwind CSS"],
+    github: null,
+    live: "https://solomock.vercel.app",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+  },
+  {
     title: "all-in-one-URL",
     description: "Short links, QR codes, barcodes, and analytics platform.",
     highlights: [
@@ -52,26 +67,6 @@ const projects: Project[] = [
     className: "lg:col-span-1",
   },
   {
-    title: "Obesity Data Analysis",
-    description:
-      "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
-    tags: ["Python", "Pandas", "NumPy", "sklearn", "matplotlib"],
-    github: null,
-    live: "https://tonyx1998.github.io",
-    featured: false,
-    className: "lg:col-span-1",
-  },
-  {
-    title: "Personal Portfolio",
-    description:
-      "This site — a Next.js portfolio with dark mode, scroll animations, and a downloadable resume.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    github: null,
-    live: "https://toyinyu.vercel.app",
-    featured: false,
-    className: "lg:col-span-1",
-  },
-  {
     title: "Modern Web Dev Guide",
     description:
       "A 2026 web dev guide turned into an interactive course — ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
@@ -87,12 +82,12 @@ const projects: Project[] = [
     className: "lg:col-span-2 lg:row-span-2",
   },
   {
-    title: "Schedule Creator",
+    title: "Obesity Data Analysis",
     description:
-      "Java desktop app that helps students build conflict-free class schedules from courses, time slots, and constraints.",
-    tags: ["Java"],
-    github: "https://github.com/tonyx1998/Schedule-Creator",
-    live: null,
+      "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
+    tags: ["Python", "Pandas", "NumPy", "sklearn", "matplotlib"],
+    github: null,
+    live: "https://tonyx1998.github.io",
     featured: false,
     className: "lg:col-span-1",
   },
