@@ -21,7 +21,7 @@ export const projects: Project[] = [
     ],
     tags: ["Next.js", "TypeScript", "OpenAI Realtime API", "WebRTC", "Monaco", "Tailwind CSS"],
     github: null,
-    live: "https://solomock.vercel.app",
+    live: "https://solomock.com",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
   },
