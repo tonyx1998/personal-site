@@ -78,7 +78,7 @@ export default function Image() {
             color: "#71717a",
           }}
         >
-          <span>toyinyu.vercel.app</span>
+          <span>toyinyu.com</span>
         </div>
       </div>
     ),
