@@ -55,6 +55,11 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  verification: {
+    other: {
+      "msvalidate.01": "E09D7AAAC28BE85A4F39DF45D23AD785",
+    },
+  },
 };
 
 export const viewport: Viewport = {
