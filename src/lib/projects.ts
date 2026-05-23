@@ -11,6 +11,21 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "SoloYap",
+    description:
+      "Realtime voice English tutor — practice spoken English with an AI partner over scenarios like ordering coffee, doctor visits, and salary negotiation, with grammar corrections after every turn.",
+    highlights: [
+      "Built the realtime voice loop on OpenAI's Realtime API over WebRTC; instant grammar corrections and better-phrasing suggestions stream back after every learner turn",
+      "Authored 13 CEFR-graded scenarios (A2–C1) plus free-chat and custom-topic modes, with optional Mandarin/Cantonese native-language hints to lower the floor for beginners",
+      "Shipped as an installable PWA with manifest + apple-touch icons; layered cost protection via per-IP rate limits, session caps, and an email-allowlist request-access flow",
+    ],
+    tags: ["Next.js", "React 19", "TypeScript", "OpenAI Realtime API", "WebRTC", "Tailwind CSS", "PWA"],
+    github: null,
+    live: "https://soloyap.com",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+  },
+  {
     title: "SoloMock",
     description:
       "Verbal mock-interview app — talk through coding problems out loud with an AI interviewer over realtime voice, get instant feedback.",
