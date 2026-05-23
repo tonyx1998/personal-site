@@ -154,13 +154,21 @@ def main(out_path: str) -> None:
 
     projects = [
         {
+            "title": "SoloYap — Realtime Voice English Tutor",
+            "stack": "Next.js, React 19, TypeScript, OpenAI Realtime API, WebRTC, Tailwind CSS, PWA",
+            "links": '<a href="https://soloyap.com" color="#4f46e5">soloyap.com</a>',
+            "bullets": [
+                "Built a realtime voice English-practice app on OpenAI's Realtime API over WebRTC: learners speak through 13 CEFR-graded scenarios (A2–C1) or a free-chat mode and get instant grammar corrections and better-phrasing suggestions after every turn.",
+                "Shipped as an installable PWA with optional Mandarin/Cantonese hints; cost-protected with per-IP rate limits, session caps, and an email-allowlist flow.",
+            ],
+        },
+        {
             "title": "SoloMock — AI Voice Mock Interviewer",
             "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
             "links": '<a href="https://solomock.com" color="#4f46e5">solomock.com</a>',
             "bullets": [
-                "Built a realtime voice mock-interview app: the candidate speaks through coding problems while the AI interviewer probes complexity, gives Socratic hints, and reads code via debounced editor snapshots streamed over a WebRTC data channel.",
-                "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, edge cases) driving interviewer behavior via the system prompt; Monaco editor across 9 languages.",
-                "Layered cost protection on the realtime API: per-IP rate limit, 15-min session duration cap, short-lived ephemeral keys, and a Discord-webhook extended-access flow with manual email-whitelist approval.",
+                "Built a realtime voice mock-interview app: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel (9 languages).",
+                "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, edge cases) driving interviewer behavior via the system prompt; layered cost protection with per-IP rate limits, session caps, and ephemeral keys.",
             ],
         },
         {
@@ -169,8 +177,7 @@ def main(out_path: str) -> None:
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
                 "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource analytics, Redis-backed caching and counter batching, and tiered SlowAPI rate limiting.",
-                "Implemented JWT authentication with bcrypt password hashing and per-resource ownership while preserving existing anonymous resources.",
-                "Containerized backend with Docker Compose and deployed full stack on Vercel, Render, Neon (Postgres), and Upstash (Redis).",
+                "Implemented JWT auth with bcrypt hashing and per-resource ownership (preserving anonymous resources); containerized with Docker Compose and deployed across Vercel, Render, Neon (Postgres), and Upstash (Redis).",
             ],
         },
         {
@@ -187,16 +194,8 @@ def main(out_path: str) -> None:
             "stack": "Docusaurus, TypeScript, React, MDX, Mermaid",
             "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">tonyx1998.github.io/modern-web-dev-guide</a>',
             "bullets": [
-                "Built an interactive React + TypeScript quiz engine on top of the guide — a ~700-question bank with per-session seeded sampling, mandatory checkpoints, and progressive sidebar locking that gates each chapter behind prereq quiz passes.",
-                "Authored 11 chapters spanning web foundations, project lifecycle, the modern tech stack, AI integration, and career paths; deployed via Docusaurus + MDX + Mermaid on GitHub Pages with a GitHub Actions pipeline.",
-            ],
-        },
-        {
-            "title": "Personal Portfolio Site",
-            "stack": "Next.js 16, React 19, TypeScript, Tailwind v4, Framer Motion, Vercel",
-            "links": '<a href="https://toyinyu.com" color="#4f46e5">toyinyu.com</a>',
-            "bullets": [
-                "Single-page portfolio on Next.js 16 / React 19 / Tailwind v4 with cookie-based SSR theming, a cursor-spotlight bento project grid, Framer Motion animations, and a Web3Forms-backed contact form.",
+                "Built an interactive quiz engine on top of the guide — a ~700-question bank with per-session seeded sampling, mandatory checkpoints, and progressive sidebar locking that gates each chapter behind prereq quiz passes.",
+                "Authored 11 chapters spanning web foundations, project lifecycle, the modern tech stack, AI integration, and career paths; deployed via Docusaurus + MDX + Mermaid on GitHub Pages.",
             ],
         },
     ]
