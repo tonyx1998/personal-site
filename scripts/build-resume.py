@@ -113,7 +113,7 @@ def main(out_path: str) -> None:
             "Lynnwood, WA &nbsp;·&nbsp; +1 (206) 712-5144 &nbsp;·&nbsp; "
             '<a href="mailto:tonyx1998@gmail.com" color="#4f46e5">tonyx1998@gmail.com</a> '
             "&nbsp;·&nbsp; "
-            '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a> '
+            '<a href="https://toyinyu.com" color="#4f46e5">toyinyu.com</a> '
             "&nbsp;·&nbsp; "
             '<a href="https://linkedin.com/in/to-yin-yu" color="#4f46e5">linkedin.com/in/to-yin-yu</a> '
             "&nbsp;·&nbsp; "
@@ -156,7 +156,7 @@ def main(out_path: str) -> None:
         {
             "title": "SoloMock — AI Voice Mock Interviewer",
             "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
-            "links": '<a href="https://solomock.vercel.app" color="#4f46e5">solomock.vercel.app</a>',
+            "links": '<a href="https://solomock.com" color="#4f46e5">solomock.com</a>',
             "bullets": [
                 "Built a realtime voice mock-interview app: the candidate speaks through coding problems while the AI interviewer probes complexity, gives Socratic hints, and reads code via debounced editor snapshots streamed over a WebRTC data channel.",
                 "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, edge cases) driving interviewer behavior via the system prompt; Monaco editor across 9 languages.",
@@ -194,7 +194,7 @@ def main(out_path: str) -> None:
         {
             "title": "Personal Portfolio Site",
             "stack": "Next.js 16, React 19, TypeScript, Tailwind v4, Framer Motion, Vercel",
-            "links": '<a href="https://toyinyu.vercel.app" color="#4f46e5">toyinyu.vercel.app</a>',
+            "links": '<a href="https://toyinyu.com" color="#4f46e5">toyinyu.com</a>',
             "bullets": [
                 "Single-page portfolio on Next.js 16 / React 19 / Tailwind v4 with cookie-based SSR theming, a cursor-spotlight bento project grid, Framer Motion animations, and a Web3Forms-backed contact form.",
             ],
