@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useRef, type MouseEvent } from "react";
 import { ExternalLink, Star, FolderOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,46 +11,9 @@ const GithubIcon = () => (
   </svg>
 );
 
-export default function ProjectCard({
-  project,
-  index,
-  className,
-}: {
-  project: Project;
-  index: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty("--x", `${e.clientX - rect.left}px`);
-    el.style.setProperty("--y", `${e.clientY - rect.top}px`);
-  };
-
-  const linkHref = project.live ?? project.github ?? "#";
-  const linkKind = project.live ? "live site" : project.github ? "GitHub repo" : "details";
-
+function CardBody({ project }: { project: Project }) {
   return (
-    <motion.a
-      ref={ref}
-      href={linkHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Open ${project.title} ${linkKind}`}
-      onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className={cn(
-        "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300 cursor-pointer",
-        "hover:border-accent/50",
-        className,
-      )}
-    >
+    <>
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -77,9 +39,9 @@ export default function ProjectCard({
               size={15}
               className="text-muted-foreground group-hover:text-accent transition-colors"
             />
-          ) : (
+          ) : project.github ? (
             <GithubIcon />
-          )}
+          ) : null}
         </div>
       </div>
 
@@ -117,6 +79,62 @@ export default function ProjectCard({
           </span>
         ))}
       </div>
-    </motion.a>
+    </>
+  );
+}
+
+export default function ProjectCard({
+  project,
+  index,
+  className,
+}: {
+  project: Project;
+  index: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement>(null);
+
+  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--y", `${e.clientY - rect.top}px`);
+  };
+
+  const linkHref = project.live ?? project.github;
+  const linkKind = project.live ? "live site" : project.github ? "GitHub repo" : null;
+
+  const sharedClassName = cn(
+    "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300",
+    linkHref &&
+      "cursor-pointer hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    className,
+  );
+
+  if (linkHref) {
+    return (
+      <a
+        ref={ref as React.RefObject<HTMLAnchorElement>}
+        href={linkHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Open ${project.title} ${linkKind}`}
+        onMouseMove={handleMouseMove}
+        className={sharedClassName}
+      >
+        <CardBody project={project} />
+      </a>
+    );
+  }
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      onMouseMove={handleMouseMove}
+      className={sharedClassName}
+    >
+      <CardBody project={project} />
+    </div>
   );
 }

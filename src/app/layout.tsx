@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "To Yin Yu" }],
   creator: "To Yin Yu",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     url: SITE_URL,
