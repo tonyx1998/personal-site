@@ -11,7 +11,8 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus("sending");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
       access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "",
       name: formData.get("name") as string,
@@ -40,7 +41,12 @@ export default function ContactForm() {
       if (!json.success) {
         console.error("Contact form: Web3Forms returned failure", json);
       }
-      setStatus(json.success ? "sent" : "error");
+      if (json.success) {
+        form.reset();
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
     } catch (err) {
       console.error("Contact form: request failed", err);
       setStatus("error");
@@ -54,6 +60,9 @@ export default function ContactForm() {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.1 }}
       onSubmit={handleSubmit}
+      onInput={() => {
+        if (status === "sent" || status === "error") setStatus("idle");
+      }}
       className="space-y-4"
     >
       <div className="grid sm:grid-cols-2 gap-4">
@@ -112,12 +121,15 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        disabled={status === "sending" || status === "sent"}
+        disabled={status === "sending"}
+        onClick={() => {
+          if (status === "sent" || status === "error") setStatus("idle");
+        }}
         className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 transition-opacity duration-200"
       >
         {status === "idle" && (<><Send size={16} />Send Message</>)}
         {status === "sending" && (<><span className="w-4 h-4 rounded-full border-2 border-current/30 border-t-current animate-spin" />Sending...</>)}
-        {status === "sent" && "Message sent! ✓"}
+        {status === "sent" && "Message sent! ✓ Send another"}
         {status === "error" && "Something went wrong — try again"}
       </button>
       {status === "error" && (

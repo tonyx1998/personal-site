@@ -18,7 +18,7 @@ const experiences = [
 export default function Experience() {
   return (
     <section
-      id="experience"
+      id="education"
       className="py-24 px-4 sm:px-6"
       style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}
     >

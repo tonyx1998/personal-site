@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/#about", label: "About" },
   { href: "/#skills", label: "Skills" },
   { href: "/#projects", label: "Projects" },
-  { href: "/#experience", label: "Education" },
+  { href: "/#education", label: "Education" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -36,7 +36,10 @@ export default function Navbar() {
       )}
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <Link href="/" className="font-mono text-lg font-bold text-accent tracking-tight">
+        <Link
+          href="/"
+          className="font-mono text-lg font-bold text-accent tracking-tight rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
           &lt;ToYinYu /&gt;
         </Link>
 
@@ -45,7 +48,7 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {link.label}
               </Link>
@@ -56,7 +59,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground"
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -79,7 +82,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
+                    className="block text-sm text-muted-foreground hover:text-foreground transition-colors py-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
                     {link.label}
                   </Link>
