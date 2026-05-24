@@ -64,8 +64,8 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-muted text-muted-foreground text-sm mb-6"
         >
@@ -74,8 +74,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-5xl sm:text-7xl font-bold tracking-tight mb-4"
         >
@@ -86,8 +86,8 @@ export default function Hero() {
         </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-2xl sm:text-3xl text-muted-foreground font-mono mb-6 h-10"
         >
@@ -96,8 +96,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
@@ -107,8 +107,8 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-wrap items-center justify-center gap-3 mb-12"
         >
@@ -128,14 +128,14 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex items-center justify-center gap-3"
         >
           {[
             { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "Visit GitHub profile (tonyx1998)", external: true },
-            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu", label: "Visit LinkedIn profile (To Yin Yu)", external: true },
+            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu/", label: "Visit LinkedIn profile (To Yin Yu)", external: true },
             { icon: Mail, href: "mailto:tonyx1998@gmail.com", label: "Email tonyx1998@gmail.com", external: false },
           ].map(({ icon: Icon, href, label, external }) => (
             <a
@@ -153,7 +153,7 @@ export default function Hero() {
 
       <motion.a
         href="#about"
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
