@@ -7,6 +7,8 @@ export type Project = {
   live: string | null;
   featured: boolean;
   className: string;
+  datePublished?: string;
+  dateModified?: string;
 };
 
 export const projects: Project[] = [
