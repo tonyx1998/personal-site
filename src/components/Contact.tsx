@@ -76,7 +76,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">Location</p>
-                  <p className="text-foreground">Remote — Open to opportunities</p>
+                  <p className="text-foreground">Lynnwood, WA · Remote-friendly</p>
                 </div>
               </div>
             </div>
