@@ -5,6 +5,15 @@ import { Briefcase, GraduationCap } from "lucide-react";
 
 const experiences = [
   {
+    type: "work",
+    title: "Independent Software Projects",
+    company: "Self-directed · Full-stack & Applied AI",
+    period: "2025 – Present",
+    description:
+      "Designed, built, and deployed full-stack and applied AI products end-to-end — realtime voice tutors and mock-interview agents on the OpenAI Realtime API over WebRTC, a URL/QR analytics platform with FastAPI + Postgres + Redis, a roofing business site with an embedded ElevenLabs voice booking agent, and learning resources on Docusaurus/GitHub Pages. Owned auth, rate limiting, cost protection, and deploys across Vercel, Render, Neon, Upstash, and Netlify.",
+    tags: ["Next.js", "FastAPI", "OpenAI Realtime", "WebRTC", "PostgreSQL", "Redis", "Docker"],
+  },
+  {
     type: "education",
     title: "B.S. Computer Science",
     company: "University of Maryland, College Park",
@@ -18,7 +27,7 @@ const experiences = [
 export default function Experience() {
   return (
     <section
-      id="education"
+      id="experience"
       className="py-24 px-4 sm:px-6"
       style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}
     >
@@ -30,8 +39,8 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <p className="text-accent font-mono text-sm mb-2">04. education</p>
-          <h2 className="text-3xl sm:text-4xl font-bold">Education</h2>
+          <p className="text-accent font-mono text-sm mb-2">04. experience</p>
+          <h2 className="text-3xl sm:text-4xl font-bold">Experience &amp; Education</h2>
         </motion.div>
 
         <div className="relative">

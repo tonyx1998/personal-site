@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "To Yin Yu — Software Developer";
+export const alt = "To Yin Yu — Full-Stack Engineer & Applied AI Builder";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -54,7 +54,7 @@ export default function Image() {
               display: "flex",
             }}
           >
-            Software Developer · Applied AI Builder
+            Full-Stack Engineer · Applied AI Builder
           </div>
           <div
             style={{
@@ -64,8 +64,8 @@ export default function Image() {
               display: "flex",
             }}
           >
-            Building full-stack apps and AI-powered workflows with Python,
-            TypeScript, Next.js, and FastAPI.
+            Shipping applied AI products with Next.js, FastAPI, WebRTC, and the
+            OpenAI Realtime API.
           </div>
         </div>
 

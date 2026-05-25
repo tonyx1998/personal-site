@@ -7,8 +7,9 @@ import { GithubIcon, LinkedinIcon } from "./Icons";
 import { Spotlight } from "./ui/Spotlight";
 
 const roles = [
-  "Software Developer",
+  "Full-Stack Engineer",
   "Applied AI Builder",
+  "Realtime Voice Apps",
 ];
 
 export default function Hero() {
@@ -101,9 +102,10 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          I&apos;m a software developer focused on Python and TypeScript, building deployed
-          full-stack applications, backend APIs, and AI-powered workflows. Recent work includes
-          a URL/QR analytics platform and a business website with an AI voice booking agent.
+          Entry-level full-stack engineer building applied AI products with TypeScript,
+          Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API. Recent work includes
+          realtime voice tutors and mock-interview agents, plus a deployed analytics
+          platform with auth, rate limiting, and Postgres.
         </motion.p>
 
         <motion.div
