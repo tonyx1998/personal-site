@@ -26,6 +26,7 @@ export const projects: Project[] = [
     live: "https://soloyap.com",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2025",
   },
   {
     title: "SoloMock",
@@ -41,6 +42,7 @@ export const projects: Project[] = [
     live: "https://solomock.com",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2025",
   },
   {
     title: "all-in-one-URL",
@@ -55,6 +57,7 @@ export const projects: Project[] = [
     live: "https://all-in-one-url.vercel.app",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2024",
   },
   {
     title: "United Front Roofing",
@@ -69,6 +72,7 @@ export const projects: Project[] = [
     live: "https://united-front-roofing.netlify.app",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2025",
   },
   {
     title: "Modern Web Dev Guide",
@@ -84,6 +88,7 @@ export const projects: Project[] = [
     live: "https://tonyx1998.github.io/modern-web-dev-guide/",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
   },
   {
     title: "Modern AI Engineer Guide",
@@ -99,6 +104,7 @@ export const projects: Project[] = [
     live: "https://tonyx1998.github.io/modern-ai-engineer-guide/",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
   },
   {
     title: "SWE Interview Guide",
@@ -114,6 +120,7 @@ export const projects: Project[] = [
     live: "https://swe-interview-guide.vercel.app",
     featured: false,
     className: "lg:col-span-1",
+    datePublished: "2026",
   },
   {
     title: "2026 Skills Roadmap",
@@ -129,5 +136,6 @@ export const projects: Project[] = [
     live: "https://tonyx1998.github.io/skills-roadmap/",
     featured: false,
     className: "lg:col-span-1",
+    datePublished: "2026",
   },
 ];

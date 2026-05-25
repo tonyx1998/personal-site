@@ -128,10 +128,10 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     story.append(
         Paragraph(
-            "Software developer with a B.S. in Computer Science from UMD and hands-on experience "
-            "building deployed full-stack applications with Python, FastAPI, React, TypeScript, "
-            "PostgreSQL, Redis, and Docker. Interested in backend, full-stack, and applied AI "
-            "engineering roles.",
+            "Entry-level full-stack software engineer (B.S. CS, UMD) shipping applied AI "
+            "products end-to-end — realtime voice AI on OpenAI's Realtime API over WebRTC, "
+            "FastAPI backends with Postgres + Redis, and production deployments across "
+            "Vercel, Render, Neon, Upstash, and Netlify. Open to junior SWE roles.",
             summary_style,
         )
     )
@@ -140,21 +140,28 @@ def main(out_path: str) -> None:
     story.append(Paragraph("TECHNICAL SKILLS", section_style))
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     skill_rows = [
-        ("Languages", "Python, JavaScript/TypeScript, Java, Swift, C, Rust, OCaml, Ruby, SQL"),
-        ("Web &amp; Backend", "React, Next.js, Astro, FastAPI, Tailwind CSS, PostgreSQL, Redis"),
-        ("ML &amp; Data", "TensorFlow, Keras, scikit-learn, Pandas, NumPy, matplotlib, seaborn"),
-        ("Tools", "Docker, Git, Linux/Unix, Vercel, Netlify, Jupyter"),
+        ("Languages", "TypeScript, Python, JavaScript, SQL"),
+        ("Web &amp; Backend", "Next.js, React, FastAPI, Tailwind CSS, PostgreSQL, Redis"),
+        ("Applied AI &amp; Realtime", "OpenAI Realtime API, WebRTC, ElevenLabs, LLM tool use, TensorFlow, Keras"),
+        ("Infra &amp; Deploys", "Docker, Git, Linux/Unix, Vercel, Render, Neon, Upstash, Netlify"),
     ]
     for label, items in skill_rows:
         story.append(Paragraph(f"<b>{label}:</b> {items}", body_style))
 
-    # PROJECTS
-    story.append(Paragraph("SELECTED PROJECTS", section_style))
+    # PROJECT EXPERIENCE
+    story.append(
+        Paragraph(
+            "PROJECT EXPERIENCE &nbsp;·&nbsp; "
+            "<font color='#0a0a0a'>Independent Software Projects, 2024 – Present</font>",
+            section_style,
+        )
+    )
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
 
     projects = [
         {
             "title": "SoloYap — Realtime Voice English Tutor",
+            "date": "2025",
             "stack": "Next.js, React 19, TypeScript, OpenAI Realtime API, WebRTC, Tailwind CSS, PWA",
             "links": '<a href="https://soloyap.com" color="#4f46e5">soloyap.com</a>',
             "bullets": [
@@ -164,6 +171,7 @@ def main(out_path: str) -> None:
         },
         {
             "title": "SoloMock — AI Voice Mock Interviewer",
+            "date": "2025",
             "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
             "links": '<a href="https://solomock.com" color="#4f46e5">solomock.com</a>',
             "bullets": [
@@ -173,6 +181,7 @@ def main(out_path: str) -> None:
         },
         {
             "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
+            "date": "2024",
             "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Tailwind CSS",
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
@@ -182,6 +191,7 @@ def main(out_path: str) -> None:
         },
         {
             "title": "United Front Roofing — Marketing Site &amp; AI Voice Agent",
+            "date": "2025",
             "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs, Cal.com API, Netlify",
             "links": '<a href="https://united-front-roofing.netlify.app" color="#4f46e5">united-front-roofing.netlify.app</a>',
             "bullets": [
@@ -191,6 +201,7 @@ def main(out_path: str) -> None:
         },
         {
             "title": "Modern Web Dev Guide — Interactive 2026 Web Dev Course",
+            "date": "2026",
             "stack": "Docusaurus, TypeScript, React, MDX, Mermaid",
             "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">tonyx1998.github.io/modern-web-dev-guide</a>',
             "bullets": [
@@ -207,9 +218,14 @@ def main(out_path: str) -> None:
                 role_style,
             )
         )
-        story.append(Paragraph(p["links"], role_meta_style))
+        story.append(
+            Paragraph(
+                f"{p['links']} &nbsp;·&nbsp; <font color='#525252'>{p['date']}</font>",
+                role_meta_style,
+            )
+        )
         for b in p["bullets"]:
-            story.append(Paragraph(f"•&nbsp;&nbsp;{b}", bullet_style))
+            story.append(Paragraph(f"- {b}", bullet_style))
 
     # EDUCATION
     story.append(Paragraph("EDUCATION", section_style))

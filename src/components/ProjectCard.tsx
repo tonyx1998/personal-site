@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type MouseEvent } from "react";
-import { ExternalLink, Star, FolderOpen } from "lucide-react";
+import { ExternalLink, Lock, Star, FolderOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/projects";
 
@@ -28,6 +28,11 @@ function CardBody({ project }: { project: Project }) {
           <FolderOpen size={18} className="text-accent" />
         </div>
         <div className="flex items-center gap-2">
+          {project.datePublished && (
+            <span className="text-xs text-muted-foreground font-mono">
+              {project.datePublished}
+            </span>
+          )}
           {project.featured && (
             <span className="flex items-center gap-1 text-xs text-amber-500 font-mono">
               <Star size={12} fill="currentColor" />
@@ -79,6 +84,13 @@ function CardBody({ project }: { project: Project }) {
           </span>
         ))}
       </div>
+
+      {!project.github && project.live && (
+        <div className="relative flex items-center gap-1.5 text-xs text-muted-foreground/80 font-mono">
+          <Lock size={11} aria-hidden="true" />
+          <span>Private repo · code available on request</span>
+        </div>
+      )}
     </>
   );
 }
