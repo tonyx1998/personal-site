@@ -15,6 +15,7 @@ export const personJsonLd = {
   description:
     "Software developer building full-stack apps and applied AI workflows with Python, TypeScript, Next.js, and FastAPI.",
   email: "mailto:tonyx1998@gmail.com",
+  image: `${SITE_URL}/opengraph-image`,
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "University of Maryland, College Park",
@@ -74,6 +75,8 @@ export const projectsCollectionJsonLd = {
         author: { "@id": PERSON_ID },
         ...(p.live ? { url: p.live } : {}),
         ...(p.github ? { codeRepository: p.github } : {}),
+        ...(p.datePublished ? { datePublished: p.datePublished } : {}),
+        ...(p.dateModified ? { dateModified: p.dateModified } : {}),
       },
     })),
   },
