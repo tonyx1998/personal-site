@@ -5,20 +5,34 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["Python", "JavaScript", "Java", "Swift", "C", "Rust", "OCaml", "Ruby", "SQL"],
-  },
-  {
-    title: "ML & Data Science",
-    skills: ["TensorFlow", "Keras", "Pandas", "NumPy", "sklearn", "matplotlib", "seaborn", "SAS"],
+    skills: ["TypeScript", "Python", "JavaScript", "SQL"],
   },
   {
     title: "Web & Backend",
-    skills: ["React", "Next.js", "Astro", "FastAPI", "HTML/CSS", "Tailwind CSS", "PostgreSQL", "Redis"],
+    skills: ["Next.js", "React", "FastAPI", "Tailwind CSS", "PostgreSQL", "Redis"],
   },
   {
-    title: "Tools & Platforms",
-    skills: ["Docker", "Git", "Linux/Unix", "Netlify", "Vercel", "Jupyter"],
+    title: "Applied AI & Realtime",
+    skills: ["OpenAI Realtime API", "WebRTC", "ElevenLabs", "LLM Tool Use", "TensorFlow", "Keras"],
   },
+  {
+    title: "Infra & Deploys",
+    skills: ["Docker", "Git", "Linux/Unix", "Vercel", "Render", "Neon", "Upstash", "Netlify"],
+  },
+];
+
+const familiarWith = [
+  "Rust",
+  "OCaml",
+  "Ruby",
+  "Swift",
+  "Java",
+  "C",
+  "Astro",
+  "Pandas",
+  "NumPy",
+  "sklearn",
+  "SAS",
 ];
 
 export default function Skills() {
@@ -72,6 +86,19 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 text-sm text-muted-foreground text-center"
+        >
+          <span className="font-mono text-xs uppercase tracking-widest text-accent mr-2">
+            Familiar
+          </span>
+          {familiarWith.join(" · ")}
+        </motion.div>
       </div>
     </section>
   );

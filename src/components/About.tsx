@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Coffee, GraduationCap, Rocket } from "lucide-react";
+import { GraduationCap, Mic, Rocket, ShieldCheck } from "lucide-react";
 
 const stats = [
   { icon: GraduationCap, value: "B.S.", label: "CS @ UMD" },
-  { icon: Code2, value: "12+", label: "Languages Known" },
-  { icon: Rocket, value: "5+", label: "Projects Built" },
-  { icon: Coffee, value: "∞", label: "Coffees Consumed" },
+  { icon: Rocket, value: "8", label: "Deployed Projects" },
+  { icon: Mic, value: "3", label: "Realtime Voice AI Apps" },
+  { icon: ShieldCheck, value: "Prod", label: "Auth · APIs · Deploys" },
 ];
 
 export default function About() {
@@ -45,17 +45,19 @@ export default function About() {
             className="space-y-4 text-muted-foreground leading-relaxed"
           >
             <p>
-              I&apos;m To Yin Yu — a software developer with a B.S. in Computer Science from
-              the University of Maryland, College Park.
+              I&apos;m To Yin Yu — an entry-level full-stack engineer focused on
+              applied AI products, with a B.S. in Computer Science from the
+              University of Maryland, College Park.
             </p>
             <p>
-              I build practical software that turns ideas into working products: FastAPI
-              backends, React and Next.js frontends, PostgreSQL data models, Redis-backed
-              performance improvements, and AI integrations.
+              I ship end-to-end products: Next.js and React frontends, FastAPI and
+              Python backends, PostgreSQL data models, Redis caching and rate
+              limiting, and realtime voice agents built on the OpenAI Realtime
+              API over WebRTC.
             </p>
             <p>
-              I&apos;m currently looking for software engineering roles where I can
-              contribute across backend, frontend, and applied AI systems.
+              I&apos;m looking for junior software engineering roles where I can
+              keep shipping at this pace — full-stack, with a strong applied AI lean.
             </p>
           </motion.div>
         </div>
@@ -98,11 +100,12 @@ function CodeCard() {
         <code>
           <span className={kw}>const</span> <span className={id}>toYinYu</span> = {"{\n"}
           {"  "}<span className={prop}>name</span>: <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
-          {"  "}<span className={prop}>role</span>: <span className={str}>{"'Software Developer'"}</span>,{"\n"}
+          {"  "}<span className={prop}>role</span>: <span className={str}>{"'Full-Stack Engineer'"}</span>,{"\n"}
+          {"  "}<span className={prop}>focus</span>: <span className={str}>{"'Applied AI · Realtime'"}</span>,{"\n"}
           {"  "}<span className={prop}>edu</span>: <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}
           {"  "}<span className={prop}>stack</span>: [{"\n"}
           {"    "}<span className={str}>{"'Next.js'"}</span>, <span className={str}>{"'FastAPI'"}</span>,{"\n"}
-          {"    "}<span className={str}>{"'TensorFlow'"}</span>, <span className={str}>{"'Python'"}</span>,{"\n"}
+          {"    "}<span className={str}>{"'WebRTC'"}</span>, <span className={str}>{"'OpenAI'"}</span>,{"\n"}
           {"  "}],{"\n"}
           {"  "}<span className={prop}>status</span>: <span className={str}>{"'open to work'"}</span>,{"\n"}
           {"};"}

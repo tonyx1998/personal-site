@@ -18,20 +18,23 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "To Yin Yu — Software Developer",
+    default: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu — software developer building full-stack apps and applied AI workflows with Python, TypeScript, Next.js, and FastAPI.",
+    "To Yin Yu — entry-level full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
-    "Software Developer",
+    "Full-Stack Engineer",
+    "Software Engineer",
     "Applied AI",
     "Next.js",
     "FastAPI",
     "Python",
     "TypeScript",
+    "WebRTC",
+    "OpenAI Realtime API",
     "Portfolio",
   ],
   authors: [{ name: "To Yin Yu" }],
@@ -42,16 +45,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "To Yin Yu — Software Developer",
+    title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
     description:
-      "Software developer building full-stack apps and applied AI workflows. Python, TypeScript, Next.js, FastAPI.",
+      "Entry-level full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
     siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
-    title: "To Yin Yu — Software Developer",
+    title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
     description:
-      "Software developer building full-stack apps and applied AI workflows. Python, TypeScript, Next.js, FastAPI.",
+      "Entry-level full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   },
   robots: {
     index: true,
