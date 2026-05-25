@@ -84,16 +84,31 @@ export const projects: Project[] = [
     className: "lg:col-span-2 lg:row-span-2",
   },
   {
+    title: "Modern AI Engineer Guide",
+    description:
+      "A 2026 AI engineering guide — 12 chapters from how LLM systems actually work to shipping evaluated production AI, with interactive checkpoint quizzes per chapter.",
+    highlights: [
+      "Authored 12 chapters spanning LLM foundations, project lifecycle, the modern AI tech stack, solo/startup/enterprise workflows, decision frameworks, production patterns, and career paths",
+      "Built an interactive Quiz React component with per-chapter checkpoint quizzes that verify understanding before progressing",
+      "Deployed via Docusaurus + MDX + Mermaid on GitHub Pages — beginner-readable but still useful for working engineers",
+    ],
+    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
+    github: "https://github.com/tonyx1998/modern-ai-engineer-guide",
+    live: "https://tonyx1998.github.io/modern-ai-engineer-guide/",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+  },
+  {
     title: "SWE Interview Guide",
     description:
-      "Zero-to-hero interview prep — an 8-step study loop, Big-O reference, and pattern-by-pattern playbook (hash map, two pointers, sliding window, binary search, heaps, and more).",
+      "Zero-to-hero interview prep — 69 lessons across 16 phases, including AI-era interview rounds (AI-assisted coding, FDE decomposition, RAG, agent and eval design). Companion to SoloMock.",
     highlights: [
-      "Codified the repeatable study loop and per-pattern templates I rerun on every new problem",
-      "Single-file interactive HTML with quiz-gated lessons, code templates, and a mock timer",
-      "Deployed on Vercel as a static asset — instant load, no build pipeline",
+      "Authored 69 lessons across 16 phases from foundations through DP, system design, AI-era interview rounds (2024–2026 formats), AI-product engineering, frontend, and behavioral",
+      "Built quiz-gated progression with star ratings, a mock interview timer with phase coaching, and a problem tracker that persists to localStorage",
+      "Single-file HTML + JS + Tailwind (CDN), hash-based router, no build step — deployed on Vercel as a static asset",
     ],
     tags: ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
-    github: null,
+    github: "https://github.com/tonyx1998/swe-interview-guide",
     live: "https://swe-interview-guide.vercel.app",
     featured: false,
     className: "lg:col-span-1",
@@ -110,16 +125,6 @@ export const projects: Project[] = [
     tags: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
     github: "https://github.com/tonyx1998/skills-roadmap",
     live: "https://tonyx1998.github.io/skills-roadmap/",
-    featured: false,
-    className: "lg:col-span-1",
-  },
-  {
-    title: "Obesity Data Analysis",
-    description:
-      "Data science project analyzing obesity patterns with matplotlib/seaborn visualizations and sklearn predictive models.",
-    tags: ["Python", "Pandas", "NumPy", "sklearn", "matplotlib"],
-    github: null,
-    live: null,
     featured: false,
     className: "lg:col-span-1",
   },
