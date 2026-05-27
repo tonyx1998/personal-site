@@ -190,13 +190,13 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "United Front Roofing — Marketing Site &amp; AI Voice Agent",
+            "title": "Roofing Site &amp; AI Voice Booking Agent",
             "date": "2025",
-            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs, Cal.com API, Netlify",
-            "links": '<a href="https://united-front-roofing.netlify.app" color="#4f46e5">united-front-roofing.netlify.app</a>',
+            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs, Cal.com API, Vercel",
+            "links": '<a href="https://premier-roofing-co.vercel.app" color="#4f46e5">premier-roofing-co.vercel.app</a>',
             "bullets": [
-                "Shipped an Astro + Tailwind marketing site with a rule-based chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
-                "Integrated an ElevenLabs voice agent with Cal.com API webhooks to answer roofing FAQs, triage emergency requests, and book real inspection appointments end-to-end.",
+                "Shipped an Astro + Tailwind marketing site for a local roofing business with a rule-based chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
+                "Integrated an ElevenLabs voice agent with Cal.com API webhooks to answer roofing FAQs, triage emergency requests, and book real inspection appointments end-to-end without human handoff.",
             ],
         },
         {

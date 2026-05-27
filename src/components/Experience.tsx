@@ -8,7 +8,7 @@ const experiences = [
     type: "work",
     title: "Independent Software Projects",
     company: "Self-directed · Full-stack & Applied AI",
-    period: "2025 – Present",
+    period: "2024 – Present",
     description:
       "Designed, built, and deployed full-stack and applied AI products end-to-end — realtime voice tutors and mock-interview agents on the OpenAI Realtime API over WebRTC, a URL/QR analytics platform with FastAPI + Postgres + Redis, a roofing business site with an embedded ElevenLabs voice booking agent, and learning resources on Docusaurus/GitHub Pages. Owned auth, rate limiting, cost protection, and deploys across Vercel, Render, Neon, Upstash, and Netlify.",
     tags: ["Next.js", "FastAPI", "OpenAI Realtime", "WebRTC", "PostgreSQL", "Redis", "Docker"],
