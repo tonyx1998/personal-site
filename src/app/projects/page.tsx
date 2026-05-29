@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Every project To Yin Yu has shipped — full-stack apps, AI voice agents, data tools, and learning resources.",
+  alternates: {
+    canonical: "/projects",
+  },
   openGraph: {
     title: "Projects · To Yin Yu",
     description:
