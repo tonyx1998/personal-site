@@ -63,7 +63,7 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 ### `clsx` + `tailwind-merge` (via `cn()`)
 **What it is:** Two tiny libraries that compose class names safely. `clsx` joins conditionals; `tailwind-merge` resolves conflicting Tailwind classes (`p-2 p-4` → `p-4`).
 
-**Where in the code:** [src/lib/utils.ts](../src/lib/utils.ts), used in [Spotlight.tsx](../src/components/ui/Spotlight.tsx) and [Projects.tsx](../src/components/Projects.tsx).
+**Where in the code:** [src/lib/utils.ts](../src/lib/utils.ts), used in [ProjectCard.tsx](../src/components/ProjectCard.tsx), [Navbar.tsx](../src/components/Navbar.tsx), and [Spotlight.tsx](../src/components/ui/Spotlight.tsx).
 
 **Why it matters:** This pattern is the de-facto standard in the shadcn/ui ecosystem. If you've seen `cn()` in any modern React codebase, this is what it is.
 
@@ -106,7 +106,7 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 ### Cursor-tracking spotlight (mousemove + CSS variables)
 **What it is:** Listen to `mousemove`, write `--x` and `--y` CSS variables to the element, then a `radial-gradient(at var(--x) var(--y), ...)` follows the cursor.
 
-**Where:** [src/components/Projects.tsx](../src/components/Projects.tsx) — the `BentoCard` component.
+**Where:** [src/components/ProjectCard.tsx](../src/components/ProjectCard.tsx) — the `handleMouseMove` handler writes `--x`/`--y` on each card, and the radial gradient is applied in `CardBody`.
 
 **Why it matters:** This is the trick used by Aceternity UI, Magic UI, and countless landing pages. Lightweight, GPU-accelerated, no JS animation loop required.
 
@@ -181,6 +181,13 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 **Why it matters:** Search engines need a sitemap to discover and index your pages efficiently. `robots.txt` tells crawlers what to skip and where the sitemap lives.
 
+### Dynamic Open Graph & icon images
+**What it is:** Social-share cards and favicons generated from JSX via `ImageResponse` (from `next/og`) instead of hand-made PNGs.
+
+**Where:** [src/app/opengraph-image.tsx](../src/app/opengraph-image.tsx) (re-exported by [twitter-image.tsx](../src/app/twitter-image.tsx)), plus [icon.tsx](../src/app/icon.tsx) and [apple-icon.tsx](../src/app/apple-icon.tsx) — Next's file-convention metadata image routes, auto-wired by filename (no manual `<meta>` tags).
+
+**Why it matters:** One JSX source of truth for every link preview and icon — edit the markup and the cards regenerate, no design-tool round-trip. They appear as prerendered (`○`) routes in the build output: `/opengraph-image`, `/icon`, `/apple-icon`, `/twitter-image`.
+
 ---
 
 ## 7. Theming (the interesting part)
@@ -206,7 +213,7 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 **What it gives us:** GitHub auto-deploy, edge CDN, image optimization, ISR/SSG support, deployment previews per branch.
 
-**Project URL:** [toyinyu.com](https://toyinyu.com)
+**Project URL:** [www.toyinyu.com](https://www.toyinyu.com)
 
 ### Turbopack
 **What it is:** The Rust-based bundler that replaced Webpack in Next 16 by default. Significantly faster builds and HMR.
@@ -285,4 +292,4 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 ---
 
-*Last updated: 2026-05. Tracks the state of the codebase as of the docs PR.*
+*Last updated: 2026-05. Tracks the state of the codebase on the `master` branch.*
