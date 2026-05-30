@@ -188,6 +188,13 @@ A teaching-oriented tour of every framework, library, and pattern used to build 
 
 **Why it matters:** One JSX source of truth for every link preview and icon — edit the markup and the cards regenerate, no design-tool round-trip. They appear as prerendered (`○`) routes in the build output: `/opengraph-image`, `/icon`, `/apple-icon`, `/twitter-image`.
 
+### JSON-LD structured data
+**What it is:** Machine-readable [schema.org](https://schema.org) descriptions of the site, emitted as `<script type="application/ld+json">` — a `Person` and `WebSite` on the home page, and a `CollectionPage` + `ItemList` of projects on `/projects`.
+
+**Where:** [src/lib/structured-data.ts](../src/lib/structured-data.ts) defines the objects and a `jsonLdScriptProps()` helper (which escapes `<` to `<`); they're rendered from [src/app/page.tsx](../src/app/page.tsx) and [src/app/projects/page.tsx](../src/app/projects/page.tsx). The project list is derived from `projects.ts`, so it stays in sync automatically.
+
+**Why it matters:** Helps search engines and AI crawlers understand who the site is about and what it links to, making the pages eligible for richer results.
+
 ---
 
 ## 7. Theming (the interesting part)

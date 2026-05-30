@@ -18,7 +18,7 @@ The personal portfolio of **To Yin Yu** — a full-stack software engineer focus
 - **Bento-grid project gallery** — asymmetric featured/standard cards with a cursor-tracking radial-gradient spotlight on hover.
 - **Motion** — entrance and scroll-triggered animations via Framer Motion, with full `prefers-reduced-motion` fallbacks.
 - **Serverless contact form** — posts to Web3Forms with an `AbortController` timeout; no backend to run.
-- **SEO-ready** — Metadata API, dynamic Open Graph / Twitter images, and generated `sitemap.xml` / `robots.txt`.
+- **SEO-ready** — Metadata API, dynamic Open Graph / Twitter images, schema.org JSON-LD structured data, and generated `sitemap.xml` / `robots.txt`.
 - **Generated résumé** — an ATS-friendly PDF built from a single Python source of truth.
 
 ## Tech stack
