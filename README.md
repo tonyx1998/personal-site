@@ -1,103 +1,113 @@
 # personal-site
 
-[![Live](https://img.shields.io/badge/live-toyinyu.com-6366f1)](https://toyinyu.com)
+[![Live](https://img.shields.io/badge/live-toyinyu.com-6366f1?style=flat-square)](https://www.toyinyu.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
 
-Personal portfolio for **To Yin Yu** — software developer & ML researcher. A single-page Next.js site with a hero spotlight animation, a bento-grid project layout with cursor-tracked spotlight cards, dark/light theming, and a working contact form.
+The personal portfolio of **To Yin Yu** — a full-stack software engineer focused on applied AI. A single-page Next.js site with a hero spotlight, a bento-grid project showcase with cursor-tracked spotlight cards, server-rendered dark/light theming, and a serverless contact form.
 
-Live at **[toyinyu.com](https://toyinyu.com)**.
+**Live:** [www.toyinyu.com](https://www.toyinyu.com)
 
-## Stack
+---
 
-- **Next.js 16** (App Router, Turbopack) on **React 19**
-- **TypeScript 5**
-- **Tailwind CSS v4** with class-based dark mode
-- **Framer Motion** for entrance and scroll animations
-- **lucide-react** + custom SVG icons
-- **Web3Forms** as the contact form backend (no server required)
-- Deployed on **Vercel**
+## Features
 
-## Quick start
+- **Server-rendered theming** — dark/light mode resolved from a cookie in the root layout, so there's no flash of unstyled content and no theme `<script>` tag.
+- **Bento-grid project gallery** — asymmetric featured/standard cards with a cursor-tracking radial-gradient spotlight on hover.
+- **Motion** — entrance and scroll-triggered animations via Framer Motion, with full `prefers-reduced-motion` fallbacks.
+- **Serverless contact form** — posts to Web3Forms with an `AbortController` timeout; no backend to run.
+- **SEO-ready** — Metadata API, dynamic Open Graph / Twitter images, JSON-LD structured data, and generated `sitemap.xml` / `robots.txt`.
+- **Generated résumé** — an ATS-friendly PDF built from a single Python source of truth.
+
+## Tech stack
+
+| Layer | Choice |
+| --- | --- |
+| Framework | Next.js 16 (App Router, Turbopack) |
+| UI | React 19, TypeScript 5 |
+| Styling | Tailwind CSS v4 (class-based dark mode) |
+| Animation | Framer Motion |
+| Icons | lucide-react + hand-rolled SVGs |
+| Forms | Web3Forms (no server) |
+| Hosting | Vercel |
+
+A deeper, teaching-oriented tour of every library and pattern lives in **[docs/STACK.md](docs/STACK.md)**.
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Setup
 
 ```bash
+git clone https://github.com/tonyx1998/personal-site.git
+cd personal-site
 npm install
-cp .env.example .env.local   # then fill in your Web3Forms key
+cp .env.example .env.local   # add your Web3Forms key
 npm run dev
 ```
 
-Open http://localhost:3000.
+The dev server runs at [http://localhost:3000](http://localhost:3000).
 
-## Environment variables
+### Environment variables
 
-| Name | Required | Description |
+| Variable | Required | Description |
 | --- | --- | --- |
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | yes | Access key from [web3forms.com](https://web3forms.com). Used by the Contact form. Without it, submissions return "Something went wrong". |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Yes | Access key from [web3forms.com](https://web3forms.com), used by the contact form. Without it, submissions report an error. |
 
 See [`.env.example`](.env.example).
 
 ## Scripts
 
-| Script | What it does |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Dev server on port 3000 |
+| `npm run dev` | Start the dev server (port 3000) |
 | `npm run build` | Production build |
-| `npm run start` | Run the production build locally |
-| `npm run lint` | ESLint |
-| `python3 scripts/build-resume.py public/resume.pdf` | Regenerate the downloadable resume PDF (requires `reportlab`: `pip install reportlab`) |
+| `npm run start` | Serve the production build locally |
+| `npm run lint` | Run ESLint |
+| `python3 scripts/build-resume.py public/resume.pdf` | Regenerate the résumé PDF (`pip install reportlab pypdf`) |
 
-## Project layout
+## Project structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx        # root layout, metadata, cookie-based theming
-│   ├── page.tsx          # composes all the section components
-│   ├── providers.tsx     # in-house theme context (no next-themes)
-│   ├── globals.css       # Tailwind v4 + theme tokens + a11y rules
-│   ├── robots.ts         # serves /robots.txt
-│   └── sitemap.ts        # serves /sitemap.xml
-├── components/
-│   ├── Hero.tsx          # animated typewriter + Spotlight backgrounds
-│   ├── About.tsx         # bio + to-yin-yu.ts code-card mockup + stats
-│   ├── Skills.tsx        # tech stack chips
-│   ├── Projects.tsx      # bento-grid w/ cursor-spotlight cards
-│   ├── Experience.tsx    # education timeline
-│   ├── Contact.tsx       # contact info; lazy-loads ContactForm
-│   ├── ContactForm.tsx   # client-only form (avoids extension hydration mismatches)
-│   ├── Navbar.tsx        # sticky nav w/ mobile menu + theme toggle
-│   ├── Footer.tsx
-│   ├── ThemeToggle.tsx
-│   ├── Icons.tsx         # GitHub & LinkedIn SVGs
-│   └── ui/Spotlight.tsx  # animated SVG blob primitive
-├── lib/
-│   ├── site.ts           # SITE_URL constant (used by metadata, sitemap, robots)
-│   └── utils.ts          # cn() helper (clsx + tailwind-merge)
-public/
-├── resume.pdf            # generated by scripts/build-resume.py
-└── *.svg                 # decorative
-scripts/
-└── build-resume.py       # ATS-friendly PDF generator (reportlab)
+│   ├── layout.tsx            # root layout, metadata, cookie-based theming
+│   ├── page.tsx              # home page — composes all sections
+│   ├── projects/page.tsx     # full project listing
+│   ├── providers.tsx         # in-house theme context (no next-themes)
+│   ├── globals.css           # Tailwind v4 tokens + a11y rules
+│   ├── sitemap.ts / robots.ts
+│   └── icon / apple-icon / opengraph-image / twitter-image   # generated assets
+├── components/               # Hero, About, Skills, Projects, Experience, Contact, …
+└── lib/
+    ├── projects.ts           # project data (single source of truth)
+    ├── site.ts               # SITE_URL — used by metadata, sitemap, robots
+    ├── structured-data.ts    # JSON-LD
+    └── utils.ts              # cn() helper
+public/                       # resume.pdf + static assets
+scripts/build-resume.py       # ATS-friendly résumé PDF generator
+docs/STACK.md                 # stack & skills walkthrough
 ```
 
-## Stack walkthrough
+## Architecture notes
 
-For a guided tour of every framework and pattern used here — what each library does, why it was chosen, and what skill it signals — see **[docs/STACK.md](docs/STACK.md)**.
-
-## Notable design decisions
-
-- **Cookie-based theming.** The root layout reads a `theme` cookie and sets the `dark` class on `<html>` server-side, eliminating the FOUC-prevention `<script>` (which React 19 warns about). Pages render dynamically as a result, but stay fast on Vercel.
-- **ContactForm lazy-loaded with `ssr: false`.** Some browser extensions (form-fill, password managers) inject DOM nodes into form inputs before React hydrates, causing recoverable hydration errors. Loading the form client-only sidesteps that — the SSR HTML contains zero inputs for extensions to target.
-- **Bento grid for projects.** Asymmetric layout (1×2 featured + 1×1 cards) with a cursor-tracking radial gradient on hover — feels more premium than a uniform 3-column grid.
-- **No external icon library bloat.** Uses tree-shakable lucide-react plus two hand-rolled SVGs for GitHub/LinkedIn.
+- **Cookie-based theming.** The root layout reads a `theme` cookie and sets `class="dark"` on `<html>` server-side — no FOUC, no hydration-warning `<script>`. `src/lib/site.ts` is the single source of truth for the canonical URL used by `metadataBase`, the sitemap, and robots.
+- **Client-only contact form.** `ContactForm` is loaded with `ssr: false` so browser extensions that mutate form inputs before hydration can't trigger mismatches — the SSR HTML ships zero inputs.
+- **Data-driven projects.** Everything in the gallery comes from `src/lib/projects.ts`; cards link to a live URL when one is public and show a "private repo" badge otherwise.
 
 ## Deployment
 
-Connected to Vercel — pushes to `master` auto-deploy to production. Manual deploy:
+Hosted on Vercel; pushes to `master` deploy to production. Manual deploy:
 
 ```bash
 vercel --prod
 ```
-
-Production domain: `toyinyu.com` (custom domain pointed at Vercel). `src/lib/site.ts` is the single source of truth — `metadataBase`, `sitemap.xml`, and `robots.txt` all read `SITE_URL` from there.
 
 ## License
 
