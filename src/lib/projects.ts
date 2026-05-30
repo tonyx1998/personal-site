@@ -107,7 +107,7 @@ export const projects: Project[] = [
     datePublished: "2026",
   },
   {
-    title: "Signal.AI",
+    title: "Reachspan",
     description:
       "Landing site for an AI-infused digital marketing service — listens across Reddit, IG, FB, and Nextdoor, scores buying signals in real time, and engages warm leads. Performance-priced, no retainer.",
     highlights: [
@@ -117,7 +117,7 @@ export const projects: Project[] = [
     ],
     tags: ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     github: null,
-    live: "https://signalai-co.vercel.app",
+    live: "https://reachspan.ai",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
     datePublished: "2026",
@@ -125,14 +125,14 @@ export const projects: Project[] = [
   {
     title: "SWE Interview Guide",
     description:
-      "Zero-to-hero interview prep — 69 lessons across 16 phases, including AI-era interview rounds (AI-assisted coding, FDE decomposition, RAG, agent and eval design). Companion to SoloMock.",
+      "Zero-to-hero interview prep — 86 lessons across 16 phases, including AI-era interview rounds (AI-assisted coding, FDE decomposition, RAG, agent and eval design). Companion to SoloMock.",
     highlights: [
-      "Authored 69 lessons across 16 phases from foundations through DP, system design, AI-era interview rounds (2024–2026 formats), AI-product engineering, frontend, and behavioral",
+      "Authored 86 lessons across 16 phases from foundations through DP, system design, AI-era interview rounds (2024–2026 formats), AI-product engineering, frontend, and behavioral",
       "Built quiz-gated progression with star ratings, a mock interview timer with phase coaching, and a problem tracker that persists to localStorage",
       "Single-file HTML + JS + Tailwind (CDN), hash-based router, no build step — deployed on Vercel as a static asset",
     ],
     tags: ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
-    github: "https://github.com/tonyx1998/swe-interview-guide",
+    github: null,
     live: "https://swe-interview-guide.vercel.app",
     featured: false,
     className: "lg:col-span-1",
