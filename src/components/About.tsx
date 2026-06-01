@@ -5,7 +5,7 @@ import { GraduationCap, Mic, Rocket, ShieldCheck } from "lucide-react";
 
 const stats = [
   { icon: GraduationCap, value: "B.S.", label: "CS @ UMD" },
-  { icon: Rocket, value: "8", label: "Deployed Projects" },
+  { icon: Rocket, value: "10", label: "Deployed Projects" },
   { icon: Mic, value: "3", label: "Realtime Voice AI Apps" },
   { icon: ShieldCheck, value: "Prod", label: "Auth · APIs · Deploys" },
 ];
