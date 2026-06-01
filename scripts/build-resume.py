@@ -131,7 +131,7 @@ def main(out_path: str) -> None:
             "Entry-level full-stack software engineer (B.S. CS, UMD) shipping applied AI "
             "products end-to-end — realtime voice AI on OpenAI's Realtime API over WebRTC, "
             "FastAPI backends with Postgres + Redis, and production deployments across "
-            "Vercel, Render, Neon, Upstash, and Netlify. Open to junior SWE roles.",
+            "Vercel, Render, Neon, and Upstash. Open to junior SWE roles.",
             summary_style,
         )
     )
@@ -160,16 +160,6 @@ def main(out_path: str) -> None:
 
     projects = [
         {
-            "title": "SoloYap — Realtime Voice English Tutor",
-            "date": "2025",
-            "stack": "Next.js, React 19, TypeScript, OpenAI Realtime API, WebRTC, Tailwind CSS, PWA",
-            "links": '<a href="https://soloyap.com" color="#4f46e5">soloyap.com</a>',
-            "bullets": [
-                "Built a realtime voice English-practice app on OpenAI's Realtime API over WebRTC: learners speak through 13 CEFR-graded scenarios (A2–C1) or a free-chat mode and get instant grammar corrections and better-phrasing suggestions after every turn.",
-                "Shipped as an installable PWA with optional Mandarin/Cantonese hints; cost-protected with per-IP rate limits, session caps, and an email-allowlist flow.",
-            ],
-        },
-        {
             "title": "SoloMock — AI Voice Mock Interviewer",
             "date": "2025",
             "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
@@ -177,6 +167,16 @@ def main(out_path: str) -> None:
             "bullets": [
                 "Built a realtime voice mock-interview app: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel (9 languages).",
                 "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, edge cases) driving interviewer behavior via the system prompt; layered cost protection with per-IP rate limits, session caps, and ephemeral keys.",
+            ],
+        },
+        {
+            "title": "Reachspan — AI Lead-Gen via Social Listening",
+            "date": "2026",
+            "stack": "Python, FastAPI, Claude / LLM Tool Use, Vercel Serverless, Cal.com API, Tailwind CSS",
+            "links": '<a href="https://reachspan.ai" color="#4f46e5">reachspan.ai</a>',
+            "bullets": [
+                "Built an AI social-listening engine (Python + FastAPI + Claude) that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review before outreach.",
+                "Shipped the marketing site with Vercel serverless functions wired to the Cal.com API so prospects book audit calls end-to-end with auto-confirmation; built around a performance-based pricing model.",
             ],
         },
         {
@@ -190,23 +190,13 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "Roofing Site &amp; AI Voice Booking Agent",
-            "date": "2025",
-            "stack": "Astro, TypeScript, Tailwind CSS, ElevenLabs, Cal.com API, Vercel",
-            "links": '<a href="https://premier-roofing-co.vercel.app" color="#4f46e5">premier-roofing-co.vercel.app</a>',
-            "bullets": [
-                "Shipped an Astro + Tailwind marketing site for a local roofing business with a rule-based chat assistant, multi-step quote estimator, project gallery, and SEO-optimized routing.",
-                "Integrated an ElevenLabs voice agent with Cal.com API webhooks to answer roofing FAQs, triage emergency requests, and book real inspection appointments end-to-end without human handoff.",
-            ],
-        },
-        {
-            "title": "Modern Web Dev Guide — Interactive 2026 Web Dev Course",
+            "title": "Gasolytics — US Gas Price Map",
             "date": "2026",
-            "stack": "Docusaurus, TypeScript, React, MDX, Mermaid",
-            "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">tonyx1998.github.io/modern-web-dev-guide</a>',
+            "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel",
+            "links": '<a href="https://www.gasolytics.com/" color="#4f46e5">gasolytics.com</a>',
             "bullets": [
-                "Built an interactive quiz engine on top of the guide — a ~700-question bank with per-session seeded sampling, mandatory checkpoints, and progressive sidebar locking that gates each chapter behind prereq quiz passes.",
-                "Authored 11 chapters spanning web foundations, project lifecycle, the modern tech stack, AI integration, and career paths; deployed via Docusaurus + MDX + Mermaid on GitHub Pages.",
+                "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
+                "Scrapes AAA's daily state and metro averages server-side for all 50 states + DC across 4 fuel grades, with in-memory caching and a daily Vercel cron job accruing price-history snapshots.",
             ],
         },
     ]

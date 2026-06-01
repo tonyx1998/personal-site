@@ -60,6 +60,22 @@ export const projects: Project[] = [
     datePublished: "2024",
   },
   {
+    title: "Gasolytics — US Gas Price Map",
+    description:
+      "Live US gas-price tracker — an interactive map of all 50 states + DC with daily AAA averages, per-state metro breakdowns, and price trends.",
+    highlights: [
+      "Built an interactive d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), with metro price pins, hover tooltips, wheel-zoom/drag-pan, and a per-state detail panel",
+      "Scrapes AAA's state-averages page server-side for all 50 states + DC across 4 fuel grades, caching in memory and accruing daily per-state and per-metro price-history snapshots",
+      "Shipped on Next.js 16 (Turbopack) + React 19; deployed to Vercel with a daily cron snapshot route",
+    ],
+    tags: ["Next.js", "React 19", "TypeScript", "d3-geo", "Web Scraping", "Vercel"],
+    github: null,
+    live: "https://www.gasolytics.com/",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
+  },
+  {
     title: "Roofing Site + AI Voice Booking Agent",
     description: "Marketing site for a local roofing business with an embedded AI voice agent that answers FAQs, triages emergency requests, and books real inspection appointments.",
     highlights: [
