@@ -79,10 +79,11 @@ export const viewport: Viewport = {
 
 type ThemePref = "light" | "dark" | "auto";
 
-// Runs before first paint to apply `auto` (and correct any cookie/localStorage
-// drift) using the visitor's local clock, which the server cannot know.
+// Runs before first paint: applies the saved theme, resolving the default
+// (auto — anything that isn't an explicit light/dark) against the visitor's
+// local clock, which the server can't know. Prevents a flash.
 // Keep the 7pm–7am window in sync with timeBasedTheme() in providers.tsx.
-const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');if(p!=='light'&&p!=='dark'&&p!=='auto')return;var r=p;if(p==='auto'){var h=new Date().getHours();r=(h>=19||h<7)?'dark':'light';}document.documentElement.classList.toggle('dark',r==='dark');}catch(e){}})();`;
+const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');var r;if(p==='light'||p==='dark'){r=p;}else{var h=new Date().getHours();r=(h>=19||h<7)?'dark':'light';}document.documentElement.classList.toggle('dark',r==='dark');}catch(e){}})();`;
 
 export default async function RootLayout({
   children,
@@ -91,7 +92,7 @@ export default async function RootLayout({
 }) {
   const cookie = (await cookies()).get("theme")?.value;
   const pref: ThemePref =
-    cookie === "light" || cookie === "dark" || cookie === "auto" ? cookie : "dark";
+    cookie === "light" || cookie === "dark" || cookie === "auto" ? cookie : "auto";
   // SSR best-guess class; the inline script corrects `auto` against the clock.
   const isDark = pref !== "light";
 

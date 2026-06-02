@@ -6,13 +6,10 @@ export type ThemePref = "light" | "dark" | "auto";
 type Resolved = "light" | "dark";
 
 type ThemeContextValue = {
-  /** The user's stored preference: light, dark, or auto (time-based). */
-  pref: ThemePref;
-  /** The theme actually applied right now (auto resolved against the clock). */
-  resolved: Resolved;
-  setPref: (p: ThemePref) => void;
-  /** Cycle light → dark → auto → light. */
-  cycle: () => void;
+  /** The theme currently applied (auto resolved against the local clock). */
+  theme: Resolved;
+  /** Flip to the opposite of the current theme, as an explicit override. */
+  toggle: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -37,10 +34,12 @@ export function Providers({
   children: React.ReactNode;
   initialPref: ThemePref;
 }) {
-  const [pref, setPrefState] = useState<ThemePref>(initialPref);
+  // Preference is light/dark/auto; the default is auto, which follows the clock
+  // until the visitor picks a theme with the toggle.
+  const [pref, setPref] = useState<ThemePref>(initialPref);
   const [resolved, setResolved] = useState<Resolved>(() => resolve(initialPref));
 
-  // Persist the preference and apply the resolved theme whenever pref changes.
+  // Apply + persist whenever the preference changes.
   useEffect(() => {
     const next = resolve(pref);
     setResolved(next);
@@ -64,11 +63,9 @@ export function Providers({
   }, [pref]);
 
   const value: ThemeContextValue = {
-    pref,
-    resolved,
-    setPref: setPrefState,
-    cycle: () =>
-      setPrefState((p) => (p === "light" ? "dark" : p === "dark" ? "auto" : "light")),
+    theme: resolved,
+    // Picking a theme exits auto and locks to the chosen one.
+    toggle: () => setPref(resolved === "dark" ? "light" : "dark"),
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
@@ -77,12 +74,7 @@ export function Providers({
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
-    return {
-      pref: "dark" as ThemePref,
-      resolved: "dark" as Resolved,
-      setPref: () => {},
-      cycle: () => {},
-    };
+    return { theme: "dark" as Resolved, toggle: () => {} };
   }
   return ctx;
 }
