@@ -77,13 +77,23 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+type ThemePref = "light" | "dark" | "auto";
+
+// Runs before first paint to apply `auto` (and correct any cookie/localStorage
+// drift) using the visitor's local clock, which the server cannot know.
+// Keep the 7pm–7am window in sync with timeBasedTheme() in providers.tsx.
+const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');if(p!=='light'&&p!=='dark'&&p!=='auto')return;var r=p;if(p==='auto'){var h=new Date().getHours();r=(h>=19||h<7)?'dark':'light';}document.documentElement.classList.toggle('dark',r==='dark');}catch(e){}})();`;
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const theme = (await cookies()).get("theme")?.value;
-  const isDark = theme !== "light";
+  const cookie = (await cookies()).get("theme")?.value;
+  const pref: ThemePref =
+    cookie === "light" || cookie === "dark" || cookie === "auto" ? cookie : "dark";
+  // SSR best-guess class; the inline script corrects `auto` against the clock.
+  const isDark = pref !== "light";
 
   return (
     <html
@@ -92,7 +102,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
-        <Providers initialTheme={isDark ? "dark" : "light"}>{children}</Providers>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <Providers initialPref={pref}>{children}</Providers>
       </body>
     </html>
   );
