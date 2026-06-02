@@ -1,11 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Clock, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/app/providers";
 
+const LABEL = {
+  light: "Light",
+  dark: "Dark",
+  auto: "Auto · matches time of day",
+} as const;
+
 export default function ThemeToggle() {
-  const { theme, toggle } = useTheme();
+  const { pref, cycle } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -13,14 +19,17 @@ export default function ThemeToggle() {
     setMounted(true);
   }, []);
 
+  const Icon = pref === "auto" ? Clock : pref === "dark" ? Moon : Sun;
+
   return (
     <button
-      onClick={toggle}
+      onClick={cycle}
       className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 inline-flex items-center justify-center w-9 h-9"
-      aria-label="Toggle theme"
+      aria-label={mounted ? `Theme: ${LABEL[pref]}. Click to change.` : "Toggle theme"}
+      title={mounted ? LABEL[pref] : undefined}
       suppressHydrationWarning
     >
-      {mounted ? (theme === "dark" ? <Sun size={18} /> : <Moon size={18} />) : null}
+      {mounted ? <Icon size={18} /> : null}
     </button>
   );
 }
