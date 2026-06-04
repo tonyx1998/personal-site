@@ -27,10 +27,10 @@ def main(out_path: str) -> None:
     doc = SimpleDocTemplate(
         out_path,
         pagesize=LETTER,
-        leftMargin=0.55 * inch,
-        rightMargin=0.55 * inch,
-        topMargin=0.4 * inch,
-        bottomMargin=0.4 * inch,
+        leftMargin=0.5 * inch,
+        rightMargin=0.5 * inch,
+        topMargin=0.33 * inch,
+        bottomMargin=0.33 * inch,
         title="To Yin Yu — Resume",
         author="To Yin Yu",
     )
@@ -57,7 +57,7 @@ def main(out_path: str) -> None:
         fontSize=10.5,
         leading=13,
         textColor=ACCENT,
-        spaceBefore=4,
+        spaceBefore=3,
         spaceAfter=2,
     )
     role_style = ParagraphStyle(
@@ -66,7 +66,7 @@ def main(out_path: str) -> None:
         fontSize=10,
         leading=12.5,
         textColor=DARK,
-        spaceBefore=2,
+        spaceBefore=1.5,
         spaceAfter=0,
     )
     role_meta_style = ParagraphStyle(
@@ -89,7 +89,7 @@ def main(out_path: str) -> None:
         "Bullet",
         fontName="Helvetica",
         fontSize=9.5,
-        leading=11.5,
+        leading=11.0,
         textColor=DARK,
         leftIndent=12,
         bulletIndent=2,
@@ -130,8 +130,8 @@ def main(out_path: str) -> None:
         Paragraph(
             "Entry-level full-stack software engineer (B.S. CS, UMD) shipping applied AI "
             "products end-to-end — realtime voice AI on OpenAI's Realtime API over WebRTC, "
-            "FastAPI backends with Postgres + Redis, and production deployments across "
-            "Vercel, Render, Neon, and Upstash. Open to junior SWE roles.",
+            "FastAPI backends with Postgres + Redis, and production deploys on Vercel, "
+            "Render, Neon, and Upstash. Open to junior SWE roles.",
             summary_style,
         )
     )
@@ -165,7 +165,7 @@ def main(out_path: str) -> None:
             "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
             "links": '<a href="https://solomock.com" color="#4f46e5">solomock.com</a>',
             "bullets": [
-                "Built a realtime voice mock-interview app on OpenAI's Realtime API over WebRTC: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel (9 languages).",
+                "Built a realtime voice mock-interview app on OpenAI's Realtime API over WebRTC: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel.",
                 "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, and edge cases) that drive interviewer behavior through the system prompt.",
                 "Hardened sessions against cost and abuse: server-minted ephemeral API keys so the browser never holds the long-lived secret, per-IP rate limits, a 15-minute session cap, and a Discord-webhook request-access flow with manual allowlisting.",
             ],
@@ -176,7 +176,7 @@ def main(out_path: str) -> None:
             "stack": "Python, FastAPI, Claude / LLM Tool Use, Vercel Serverless, Cal.com API, Tailwind CSS",
             "links": '<a href="https://reachspan.ai" color="#4f46e5">reachspan.ai</a>',
             "bullets": [
-                "Founded and built Reachspan, an AI lead-gen service: a Python + FastAPI + Claude engine that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review before outreach.",
+                "Founded and built Reachspan, an AI lead-gen service: a Python + FastAPI + Claude engine that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review.",
                 "Built the marketing site with Vercel serverless functions wired to the Cal.com API so prospects book audit calls end-to-end with auto-confirmation.",
                 "Designed the classification and human-in-the-loop pipeline (YAML-defined criteria, scored leads persisted to SQLite) to keep automated outreach on-brand.",
             ],
@@ -188,8 +188,7 @@ def main(out_path: str) -> None:
             "links": '<a href="https://all-in-one-url.vercel.app" color="#4f46e5">all-in-one-url.vercel.app</a>',
             "bullets": [
                 "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource click/scan analytics, Redis-backed caching and counter batching, and tiered SlowAPI rate limiting.",
-                "Implemented JWT auth with bcrypt hashing and per-resource ownership while preserving anonymous resources.",
-                "Containerized the two-tier app with Docker Compose (Postgres + Redis) and deployed across Vercel, Render, Neon (Postgres), and Upstash (Redis).",
+                "Implemented JWT auth with bcrypt hashing and per-resource ownership (preserving anonymous resources); containerized the two-tier app with Docker Compose and deployed across Vercel, Render, Neon (Postgres), and Upstash (Redis).",
             ],
         },
         {
@@ -200,7 +199,17 @@ def main(out_path: str) -> None:
             "bullets": [
                 "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
                 "Scrapes AAA's daily state and metro averages server-side for all 50 states + DC across 4 fuel grades, with a 30-minute in-memory cache and a daily Vercel cron job accruing price-history snapshots.",
-                "Fixed a serverless deploy bug by switching a runtime filesystem read to a static import of the TopoJSON atlas — Next's file tracing wasn't bundling it, causing ENOENT on Vercel.",
+            ],
+        },
+        {
+            "title": "Technical Guides — Web Dev, AI Engineer &amp; Security Engineer",
+            "date": "2026",
+            "stack": "Docusaurus, React, TypeScript, MDX",
+            "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">web-dev</a> &nbsp;·&nbsp; '
+            '<a href="https://tonyx1998.github.io/modern-ai-engineer-guide/" color="#4f46e5">ai-engineer</a> &nbsp;·&nbsp; '
+            '<a href="https://tonyx1998.github.io/modern-security-engineer-guide/" color="#4f46e5">security-engineer</a>',
+            "bullets": [
+                "Authored three published 2026 engineering guides (37 chapters) — interactive Docusaurus courses with checkpoint quizzes, code challenges, and Mermaid diagrams, live on GitHub Pages.",
             ],
         },
     ]

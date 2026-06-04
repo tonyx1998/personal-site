@@ -123,6 +123,22 @@ export const projects: Project[] = [
     datePublished: "2026",
   },
   {
+    title: "Modern Security Engineer Guide",
+    description:
+      "A 2026 security engineering guide — 14 chapters of offensive and defensive security, from the attacker's mindset to a job-ready security engineer, with interactive checkpoint quizzes and hands-on code challenges.",
+    highlights: [
+      "Authored 14 chapters across 7 parts — cryptography, application security (OWASP Top 10), secure SDLC, offensive testing, detection & response, incident forensics, cloud/identity, governance, and the new AI attack surface (prompt injection, LLM Top 10, AI red-teaming)",
+      "Built interactive Quiz and CodeChallenge React components with per-chapter checkpoints that gate progress until concepts are demonstrated, plus an in-page feedback widget",
+      "Deployed via Docusaurus + MDX + Mermaid on GitHub Pages — first-principles for absolute beginners but sharp enough as a 2026 refresh for working engineers; pairs with the Web Dev and AI Engineer guides",
+    ],
+    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
+    github: "https://github.com/tonyx1998/modern-security-engineer-guide",
+    live: "https://tonyx1998.github.io/modern-security-engineer-guide/",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
+  },
+  {
     title: "Reachspan",
     description:
       "Landing site for an AI-infused digital marketing service — listens across Reddit, IG, FB, and Nextdoor, scores buying signals in real time, and engages warm leads. Performance-priced, no retainer.",
