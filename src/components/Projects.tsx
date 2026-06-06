@@ -20,18 +20,19 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <p className="text-accent font-mono text-sm mb-2">03. projects</p>
-          <h2 className="text-3xl sm:text-4xl font-bold">Things I&apos;ve Built</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">
+            Things I&apos;ve Built
+          </h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
             A few featured projects — see them all on the projects page.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 auto-rows-[minmax(220px,auto)] gap-6">
-          {featured.map((project, i) => (
+          {featured.map((project) => (
             <ProjectCard
               key={project.title}
               project={project}
-              index={i}
               className="lg:col-span-1"
             />
           ))}

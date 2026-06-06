@@ -5,7 +5,9 @@ import { Send } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +34,10 @@ export default function ContactForm() {
       const timeout = setTimeout(() => controller.abort(), 10_000);
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(data),
         signal: controller.signal,
       });
@@ -127,8 +132,18 @@ export default function ContactForm() {
         }}
         className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 disabled:opacity-60 transition-opacity duration-200"
       >
-        {status === "idle" && (<><Send size={16} />Send Message</>)}
-        {status === "sending" && (<><span className="w-4 h-4 rounded-full border-2 border-current/30 border-t-current animate-spin" />Sending...</>)}
+        {status === "idle" && (
+          <>
+            <Send size={16} />
+            Send Message
+          </>
+        )}
+        {status === "sending" && (
+          <>
+            <span className="w-4 h-4 rounded-full border-2 border-current/30 border-t-current animate-spin" />
+            Sending...
+          </>
+        )}
         {status === "sent" && "Message sent! ✓ Send another"}
         {status === "error" && "Something went wrong — try again"}
       </button>

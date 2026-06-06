@@ -92,7 +92,9 @@ export default async function RootLayout({
 }) {
   const cookie = (await cookies()).get("theme")?.value;
   const pref: ThemePref =
-    cookie === "light" || cookie === "dark" || cookie === "auto" ? cookie : "auto";
+    cookie === "light" || cookie === "dark" || cookie === "auto"
+      ? cookie
+      : "auto";
   // SSR best-guess class; the inline script corrects `auto` against the clock.
   const isDark = pref !== "light";
 

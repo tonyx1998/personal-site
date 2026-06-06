@@ -9,15 +9,38 @@ const skillCategories = [
   },
   {
     title: "Web & Backend",
-    skills: ["Next.js", "React", "FastAPI", "Tailwind CSS", "PostgreSQL", "Redis"],
+    skills: [
+      "Next.js",
+      "React",
+      "FastAPI",
+      "Tailwind CSS",
+      "PostgreSQL",
+      "Redis",
+    ],
   },
   {
     title: "Applied AI & Realtime",
-    skills: ["OpenAI Realtime API", "WebRTC", "ElevenLabs", "LLM Tool Use", "TensorFlow", "Keras"],
+    skills: [
+      "OpenAI Realtime API",
+      "WebRTC",
+      "ElevenLabs",
+      "LLM Tool Use",
+      "TensorFlow",
+      "Keras",
+    ],
   },
   {
     title: "Infra & Deploys",
-    skills: ["Docker", "Git", "Linux/Unix", "Vercel", "Render", "Neon", "Upstash", "Netlify"],
+    skills: [
+      "Docker",
+      "Git",
+      "Linux/Unix",
+      "Vercel",
+      "Render",
+      "Neon",
+      "Upstash",
+      "Netlify",
+    ],
   },
 ];
 
@@ -37,7 +60,13 @@ const familiarWith = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6" style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}>
+    <section
+      id="skills"
+      className="py-24 px-4 sm:px-6"
+      style={{
+        backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)",
+      }}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

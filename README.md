@@ -23,15 +23,15 @@ The personal portfolio of **To Yin Yu** — a full-stack software engineer focus
 
 ## Tech stack
 
-| Layer | Choice |
-| --- | --- |
-| Framework | Next.js 16 (App Router, Turbopack) |
-| UI | React 19, TypeScript 5 |
-| Styling | Tailwind CSS v4 (class-based dark mode) |
-| Animation | Framer Motion |
-| Icons | lucide-react + hand-rolled SVGs |
-| Forms | Web3Forms (no server) |
-| Hosting | Vercel |
+| Layer     | Choice                                  |
+| --------- | --------------------------------------- |
+| Framework | Next.js 16 (App Router, Turbopack)      |
+| UI        | React 19, TypeScript 5                  |
+| Styling   | Tailwind CSS v4 (class-based dark mode) |
+| Animation | Framer Motion                           |
+| Icons     | lucide-react + hand-rolled SVGs         |
+| Forms     | Web3Forms (no server)                   |
+| Hosting   | Vercel                                  |
 
 A deeper, teaching-oriented tour of every library and pattern lives in **[docs/STACK.md](docs/STACK.md)**.
 
@@ -56,20 +56,20 @@ The dev server runs at [http://localhost:3000](http://localhost:3000).
 
 ### Environment variables
 
-| Variable | Required | Description |
-| --- | --- | --- |
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | Yes | Access key from [web3forms.com](https://web3forms.com), used by the contact form. Without it, submissions report an error. |
+| Variable                    | Required | Description                                                                                                                |
+| --------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Yes      | Access key from [web3forms.com](https://web3forms.com), used by the contact form. Without it, submissions report an error. |
 
 See [`.env.example`](.env.example).
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the dev server (port 3000) |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build locally |
-| `npm run lint` | Run ESLint |
+| Command                                             | Description                                               |
+| --------------------------------------------------- | --------------------------------------------------------- |
+| `npm run dev`                                       | Start the dev server (port 3000)                          |
+| `npm run build`                                     | Production build                                          |
+| `npm run start`                                     | Serve the production build locally                        |
+| `npm run lint`                                      | Run ESLint                                                |
 | `python3 scripts/build-resume.py public/resume.pdf` | Regenerate the résumé PDF (`pip install reportlab pypdf`) |
 
 ## Project structure

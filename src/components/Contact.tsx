@@ -29,7 +29,9 @@ export default function Contact() {
     <section
       id="contact"
       className="py-24 px-4 sm:px-6"
-      style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}
+      style={{
+        backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)",
+      }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -42,8 +44,8 @@ export default function Contact() {
           <p className="text-accent font-mono text-sm mb-2">05. contact</p>
           <h2 className="text-3xl sm:text-4xl font-bold">Get In Touch</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            Whether you have a project in mind, a job opportunity, or just want to
-            chat — my inbox is always open.
+            Whether you have a project in mind, a job opportunity, or just want
+            to chat — my inbox is always open.
           </p>
         </motion.div>
 
@@ -75,8 +77,12 @@ export default function Contact() {
                   <MapPin size={20} className="text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground mb-0.5">Location</p>
-                  <p className="text-foreground">Lynnwood, WA · Remote-friendly</p>
+                  <p className="text-xs text-muted-foreground mb-0.5">
+                    Location
+                  </p>
+                  <p className="text-foreground">
+                    Lynnwood, WA · Remote-friendly
+                  </p>
                 </div>
               </div>
             </div>
@@ -85,8 +91,16 @@ export default function Contact() {
               <p className="text-sm text-muted-foreground mb-3">Find me on</p>
               <div className="flex gap-3">
                 {[
-                  { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "Visit GitHub profile (tonyx1998)" },
-                  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu/", label: "Visit LinkedIn profile (To Yin Yu)" },
+                  {
+                    icon: GithubIcon,
+                    href: "https://github.com/tonyx1998",
+                    label: "Visit GitHub profile (tonyx1998)",
+                  },
+                  {
+                    icon: LinkedinIcon,
+                    href: "https://www.linkedin.com/in/to-yin-yu/",
+                    label: "Visit LinkedIn profile (To Yin Yu)",
+                  },
                 ].map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}

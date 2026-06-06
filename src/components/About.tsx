@@ -50,14 +50,15 @@ export default function About() {
               University of Maryland, College Park.
             </p>
             <p>
-              I ship end-to-end products: Next.js and React frontends, FastAPI and
-              Python backends, PostgreSQL data models, Redis caching and rate
-              limiting, and realtime voice agents built on the OpenAI Realtime
-              API over WebRTC.
+              I ship end-to-end products: Next.js and React frontends, FastAPI
+              and Python backends, PostgreSQL data models, Redis caching and
+              rate limiting, and realtime voice agents built on the OpenAI
+              Realtime API over WebRTC.
             </p>
             <p>
               I&apos;m looking for junior software engineering roles where I can
-              keep shipping at this pace — full-stack, with a strong applied AI lean.
+              keep shipping at this pace — full-stack, with a strong applied AI
+              lean.
             </p>
           </motion.div>
         </div>
@@ -94,20 +95,38 @@ function CodeCard() {
         <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
         <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-        <span className="ml-3 text-xs text-muted-foreground font-mono">to-yin-yu.ts</span>
+        <span className="ml-3 text-xs text-muted-foreground font-mono">
+          to-yin-yu.ts
+        </span>
       </div>
       <pre className="font-mono text-[12.5px] sm:text-[13px] leading-[22px] p-5 text-foreground/85 whitespace-pre overflow-hidden">
         <code>
-          <span className={kw}>const</span> <span className={id}>toYinYu</span> = {"{\n"}
-          {"  "}<span className={prop}>name</span>: <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
-          {"  "}<span className={prop}>role</span>: <span className={str}>{"'Full-Stack Engineer'"}</span>,{"\n"}
-          {"  "}<span className={prop}>focus</span>: <span className={str}>{"'Applied AI · Realtime'"}</span>,{"\n"}
-          {"  "}<span className={prop}>edu</span>: <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}
-          {"  "}<span className={prop}>stack</span>: [{"\n"}
-          {"    "}<span className={str}>{"'Next.js'"}</span>, <span className={str}>{"'FastAPI'"}</span>,{"\n"}
-          {"    "}<span className={str}>{"'WebRTC'"}</span>, <span className={str}>{"'OpenAI'"}</span>,{"\n"}
+          <span className={kw}>const</span> <span className={id}>toYinYu</span>{" "}
+          = {"{\n"}
+          {"  "}
+          <span className={prop}>name</span>:{" "}
+          <span className={str}>{"'To Yin Yu'"}</span>,{"\n"}
+          {"  "}
+          <span className={prop}>role</span>:{" "}
+          <span className={str}>{"'Full-Stack Engineer'"}</span>,{"\n"}
+          {"  "}
+          <span className={prop}>focus</span>:{" "}
+          <span className={str}>{"'Applied AI · Realtime'"}</span>,{"\n"}
+          {"  "}
+          <span className={prop}>edu</span>:{" "}
+          <span className={str}>{"'B.S. CS, UMD'"}</span>,{"\n"}
+          {"  "}
+          <span className={prop}>stack</span>: [{"\n"}
+          {"    "}
+          <span className={str}>{"'Next.js'"}</span>,{" "}
+          <span className={str}>{"'FastAPI'"}</span>,{"\n"}
+          {"    "}
+          <span className={str}>{"'WebRTC'"}</span>,{" "}
+          <span className={str}>{"'OpenAI'"}</span>,{"\n"}
           {"  "}],{"\n"}
-          {"  "}<span className={prop}>status</span>: <span className={str}>{"'open to work'"}</span>,{"\n"}
+          {"  "}
+          <span className={prop}>status</span>:{" "}
+          <span className={str}>{"'open to work'"}</span>,{"\n"}
           {"};"}
           <span className="inline-block w-1.5 h-4 align-middle ml-1 bg-accent animate-pulse" />
         </code>

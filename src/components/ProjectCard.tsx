@@ -65,7 +65,9 @@ function CardBody({ project }: { project: Project }) {
             <ul className="mt-1.5 space-y-1 text-sm text-muted-foreground leading-relaxed">
               {project.highlights.map((h) => (
                 <li key={h} className="flex gap-2">
-                  <span aria-hidden="true" className="text-accent mt-0.5">▹</span>
+                  <span aria-hidden="true" className="text-accent mt-0.5">
+                    ▹
+                  </span>
                   <span>{h}</span>
                 </li>
               ))}
@@ -97,11 +99,9 @@ function CardBody({ project }: { project: Project }) {
 
 export default function ProjectCard({
   project,
-  index,
   className,
 }: {
   project: Project;
-  index: number;
   className?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
@@ -115,13 +115,17 @@ export default function ProjectCard({
   };
 
   const linkHref = project.live ?? project.github;
-  const linkKind = project.live ? "live site" : project.github ? "GitHub repo" : null;
+  const linkKind = project.live
+    ? "live site"
+    : project.github
+      ? "GitHub repo"
+      : null;
 
   const sharedClassName = cn(
     "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300",
     linkHref &&
       "cursor-pointer hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-    className,
+    className
   );
 
   if (linkHref) {

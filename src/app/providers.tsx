@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 export type ThemePref = "light" | "dark" | "auto";
 type Resolved = "light" | "dark";
@@ -23,10 +23,6 @@ export function timeBasedTheme(d = new Date()): Resolved {
   return h >= 19 || h < 7 ? "dark" : "light";
 }
 
-function resolve(pref: ThemePref): Resolved {
-  return pref === "auto" ? timeBasedTheme() : pref;
-}
-
 export function Providers({
   children,
   initialPref,
@@ -37,28 +33,25 @@ export function Providers({
   // Preference is light/dark/auto; the default is auto, which follows the clock
   // until the visitor picks a theme with the toggle.
   const [pref, setPref] = useState<ThemePref>(initialPref);
-  const [resolved, setResolved] = useState<Resolved>(() => resolve(initialPref));
+  const [autoTick, setAutoTick] = useState(0);
 
-  // Apply + persist whenever the preference changes.
+  const resolved = useMemo((): Resolved => {
+    if (pref !== "auto") return pref;
+    void autoTick;
+    return timeBasedTheme();
+  }, [pref, autoTick]);
+
   useEffect(() => {
-    const next = resolve(pref);
-    setResolved(next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.classList.toggle("dark", resolved === "dark");
     document.cookie = `theme=${pref}; path=/; max-age=${COOKIE_MAX_AGE}; samesite=lax`;
     try {
       localStorage.setItem("theme", pref);
     } catch {}
-  }, [pref]);
+  }, [pref, resolved]);
 
-  // In auto mode, re-check the clock every minute so the theme flips at the
-  // 7am / 7pm boundary while the tab stays open.
   useEffect(() => {
     if (pref !== "auto") return;
-    const id = setInterval(() => {
-      const next = timeBasedTheme();
-      setResolved(next);
-      document.documentElement.classList.toggle("dark", next === "dark");
-    }, 60_000);
+    const id = setInterval(() => setAutoTick((n) => n + 1), 60_000);
     return () => clearInterval(id);
   }, [pref]);
 
@@ -68,7 +61,9 @@ export function Providers({
     toggle: () => setPref(resolved === "dark" ? "light" : "dark"),
   };
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {

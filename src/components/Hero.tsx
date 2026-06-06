@@ -22,7 +22,10 @@ export default function Hero() {
     let timeout: ReturnType<typeof setTimeout>;
 
     if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 80);
+      timeout = setTimeout(
+        () => setDisplayed(current.slice(0, displayed.length + 1)),
+        80
+      );
     } else if (!isDeleting && displayed.length === current.length) {
       timeout = setTimeout(() => setIsDeleting(true), 2000);
     } else if (isDeleting && displayed.length > 0) {
@@ -102,10 +105,11 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          Entry-level full-stack engineer building applied AI products with TypeScript,
-          Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API. Recent work includes
-          realtime voice tutors and mock-interview agents, plus a deployed analytics
-          platform with auth, rate limiting, and Postgres.
+          Entry-level full-stack engineer building applied AI products with
+          TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime
+          API. Recent work includes realtime voice tutors and mock-interview
+          agents, plus a deployed analytics platform with auth, rate limiting,
+          and Postgres.
         </motion.p>
 
         <motion.div
@@ -136,14 +140,31 @@ export default function Hero() {
           className="flex items-center justify-center gap-3"
         >
           {[
-            { icon: GithubIcon, href: "https://github.com/tonyx1998", label: "Visit GitHub profile (tonyx1998)", external: true },
-            { icon: LinkedinIcon, href: "https://www.linkedin.com/in/to-yin-yu/", label: "Visit LinkedIn profile (To Yin Yu)", external: true },
-            { icon: Mail, href: "mailto:tonyx1998@gmail.com", label: "Email tonyx1998@gmail.com", external: false },
+            {
+              icon: GithubIcon,
+              href: "https://github.com/tonyx1998",
+              label: "Visit GitHub profile (tonyx1998)",
+              external: true,
+            },
+            {
+              icon: LinkedinIcon,
+              href: "https://www.linkedin.com/in/to-yin-yu/",
+              label: "Visit LinkedIn profile (To Yin Yu)",
+              external: true,
+            },
+            {
+              icon: Mail,
+              href: "mailto:tonyx1998@gmail.com",
+              label: "Email tonyx1998@gmail.com",
+              external: false,
+            },
           ].map(({ icon: Icon, href, label, external }) => (
             <a
               key={label}
               href={href}
-              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               aria-label={label}
               className="p-2.5 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200"
             >
@@ -160,7 +181,10 @@ export default function Hero() {
         transition={{ duration: 0.5, delay: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors"
       >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
           <ArrowDown size={24} />
         </motion.div>
       </motion.a>

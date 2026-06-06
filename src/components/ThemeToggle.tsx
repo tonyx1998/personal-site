@@ -20,7 +20,13 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       suppressHydrationWarning
     >
-      {mounted ? (theme === "dark" ? <Sun size={18} /> : <Moon size={18} />) : null}
+      {mounted ? (
+        theme === "dark" ? (
+          <Sun size={18} />
+        ) : (
+          <Moon size={18} />
+        )
+      ) : null}
     </button>
   );
 }

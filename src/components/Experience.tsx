@@ -11,7 +11,15 @@ const experiences = [
     period: "2024 – Present",
     description:
       "Designed, built, and deployed full-stack and applied AI products end-to-end — realtime voice tutors and mock-interview agents on the OpenAI Realtime API over WebRTC, a URL/QR analytics platform with FastAPI + Postgres + Redis, a roofing business site with an embedded ElevenLabs voice booking agent, and learning resources on Docusaurus/GitHub Pages. Owned auth, rate limiting, cost protection, and deploys across Vercel, Render, Neon, Upstash, and Netlify.",
-    tags: ["Next.js", "FastAPI", "OpenAI Realtime", "WebRTC", "PostgreSQL", "Redis", "Docker"],
+    tags: [
+      "Next.js",
+      "FastAPI",
+      "OpenAI Realtime",
+      "WebRTC",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+    ],
   },
   {
     type: "education",
@@ -29,7 +37,9 @@ export default function Experience() {
     <section
       id="experience"
       className="py-24 px-4 sm:px-6"
-      style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}
+      style={{
+        backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)",
+      }}
     >
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -40,7 +50,9 @@ export default function Experience() {
           className="text-center mb-16"
         >
           <p className="text-accent font-mono text-sm mb-2">04. experience</p>
-          <h2 className="text-3xl sm:text-4xl font-bold">Experience &amp; Education</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold">
+            Experience &amp; Education
+          </h2>
         </motion.div>
 
         <div className="relative">
@@ -62,7 +74,10 @@ export default function Experience() {
                   {exp.type === "work" ? (
                     <Briefcase size={12} className="text-accent-foreground" />
                   ) : (
-                    <GraduationCap size={12} className="text-accent-foreground" />
+                    <GraduationCap
+                      size={12}
+                      className="text-accent-foreground"
+                    />
                   )}
                 </div>
 
@@ -73,7 +88,9 @@ export default function Experience() {
                       {exp.period}
                     </span>
                   </div>
-                  <p className="text-accent text-sm font-medium mb-3">{exp.company}</p>
+                  <p className="text-accent text-sm font-medium mb-3">
+                    {exp.company}
+                  </p>
                   <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                     {exp.description}
                   </p>
