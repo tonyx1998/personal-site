@@ -89,7 +89,12 @@ export default function AuroraBackground({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const intensityRef = useRef(intensity);
-  intensityRef.current = intensity;
+
+  // Keep the latest intensity available to the render loop without re-running
+  // the WebGL setup effect (updating a ref during render is disallowed).
+  useEffect(() => {
+    intensityRef.current = intensity;
+  }, [intensity]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
