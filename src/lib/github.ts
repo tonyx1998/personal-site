@@ -58,7 +58,7 @@ export async function getGitHubActivity(): Promise<GitHubActivity | null> {
       }),
       fetch(
         `https://api.github.com/users/${GITHUB_USER}/repos?type=owner&sort=pushed&direction=desc&per_page=100`,
-        { headers, next: { revalidate: REVALIDATE_SECONDS } },
+        { headers, next: { revalidate: REVALIDATE_SECONDS } }
       ),
     ]);
 
@@ -69,7 +69,10 @@ export async function getGitHubActivity(): Promise<GitHubActivity | null> {
     if (!Array.isArray(allRepos)) return null;
 
     const owned = allRepos.filter((r) => !r.fork && !r.private);
-    const totalStars = owned.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+    const totalStars = owned.reduce(
+      (sum, r) => sum + (r.stargazers_count || 0),
+      0
+    );
 
     const repos: RepoSummary[] = owned.slice(0, 6).map((r) => ({
       name: r.name,

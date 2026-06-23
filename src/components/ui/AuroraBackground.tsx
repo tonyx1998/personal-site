@@ -129,7 +129,7 @@ export default function AuroraBackground({
     gl.bufferData(
       gl.ARRAY_BUFFER,
       new Float32Array([-1, -1, 3, -1, -1, 3]),
-      gl.STATIC_DRAW,
+      gl.STATIC_DRAW
     );
     const aPos = gl.getAttribLocation(program, "a_pos");
     gl.enableVertexAttribArray(aPos);
@@ -160,7 +160,7 @@ export default function AuroraBackground({
     resize();
 
     const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
+      "(prefers-reduced-motion: reduce)"
     ).matches;
 
     let raf = 0;

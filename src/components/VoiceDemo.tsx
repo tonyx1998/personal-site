@@ -19,7 +19,7 @@ type TurnstileApi = {
       "expired-callback"?: () => void;
       "error-callback"?: () => void;
       theme?: "auto" | "light" | "dark";
-    },
+    }
   ) => string;
 };
 
@@ -112,7 +112,7 @@ export default function VoiceDemo() {
               ? "Demo limit reached — please try again later. (It's a live, paid API, so usage is capped.)"
               : sessionRes.status === 403
                 ? "Verification failed. Please refresh and try again."
-                : "Couldn't start a session. Please try again.",
+                : "Couldn't start a session. Please try again."
         );
         setStatus("error");
         return;
@@ -147,7 +147,8 @@ export default function VoiceDemo() {
           ) {
             setTranscript((prev) => prev + msg.delta);
           }
-          if (msg.type === "response.done") setTranscript((prev) => prev + "\n");
+          if (msg.type === "response.done")
+            setTranscript((prev) => prev + "\n");
         } catch {
           /* ignore non-JSON frames */
         }
@@ -189,7 +190,7 @@ export default function VoiceDemo() {
       setErrorMsg(
         err instanceof DOMException && err.name === "NotAllowedError"
           ? "Microphone permission was denied."
-          : "Something went wrong starting the demo.",
+          : "Something went wrong starting the demo."
       );
       setStatus("error");
       cleanup();
@@ -202,7 +203,9 @@ export default function VoiceDemo() {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-lg font-semibold">Talk to my realtime voice agent</h3>
+          <h3 className="text-lg font-semibold">
+            Talk to my realtime voice agent
+          </h3>
           <p className="text-sm text-muted-foreground mt-1 max-w-md">
             A live, in-browser demo of the OpenAI Realtime API over WebRTC — the
             same stack behind my voice-tutor work. Click, allow your mic, and

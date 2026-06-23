@@ -15,8 +15,8 @@ export default function VoiceDemoSection() {
             See it, don&apos;t just read it
           </h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            A working slice of my realtime-voice work, running right here in your
-            browser.
+            A working slice of my realtime-voice work, running right here in
+            your browser.
           </p>
         </div>
         <VoiceDemo />

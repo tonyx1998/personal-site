@@ -49,7 +49,9 @@ const MEM_WINDOW_MS = 60 * 60 * 1000;
 
 function memAllow(key: string): boolean {
   const now = Date.now();
-  const recent = (memHits.get(key) ?? []).filter((t) => now - t < MEM_WINDOW_MS);
+  const recent = (memHits.get(key) ?? []).filter(
+    (t) => now - t < MEM_WINDOW_MS
+  );
   if (recent.length >= PER_IP_LIMIT) {
     memHits.set(key, recent);
     return false;

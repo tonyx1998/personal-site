@@ -24,7 +24,7 @@ function clientIp(req: Request): string {
 // skipped (returns true), so the demo works with or without Turnstile set up.
 async function verifyTurnstile(
   token: string | undefined,
-  ip: string,
+  ip: string
 ): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) return true; // not configured → skip
@@ -36,7 +36,7 @@ async function verifyTurnstile(
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ secret, response: token, remoteip: ip }),
-      },
+      }
     );
     const data = (await res.json()) as { success?: boolean };
     return data.success === true;
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
         error: "rate_limited",
         reason: rate.reason,
       },
-      { status: 429, headers: { "Retry-After": "3600" } },
+      { status: 429, headers: { "Retry-After": "3600" } }
     );
   }
 
@@ -78,27 +78,30 @@ export async function POST(req: Request) {
   }
 
   try {
-    const res = await fetch("https://api.openai.com/v1/realtime/client_secrets", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "OpenAI-Safety-Identifier": "toyinyu-portfolio-demo",
-      },
-      body: JSON.stringify({
-        session: {
-          type: "realtime",
-          model: MODEL,
-          instructions:
-            "You are To Yin Yu's friendly portfolio assistant. To Yin Yu is a " +
-            "full-stack and applied-AI engineer who builds with TypeScript, " +
-            "Python, Next.js, FastAPI, WebRTC and the OpenAI Realtime API. Keep " +
-            "replies short, warm and conversational. If asked who built you, say " +
-            "To Yin Yu did, as a live demo on his portfolio.",
-          audio: { output: { voice: "marin" } },
+    const res = await fetch(
+      "https://api.openai.com/v1/realtime/client_secrets",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "OpenAI-Safety-Identifier": "toyinyu-portfolio-demo",
         },
-      }),
-    });
+        body: JSON.stringify({
+          session: {
+            type: "realtime",
+            model: MODEL,
+            instructions:
+              "You are To Yin Yu's friendly portfolio assistant. To Yin Yu is a " +
+              "full-stack and applied-AI engineer who builds with TypeScript, " +
+              "Python, Next.js, FastAPI, WebRTC and the OpenAI Realtime API. Keep " +
+              "replies short, warm and conversational. If asked who built you, say " +
+              "To Yin Yu did, as a live demo on his portfolio.",
+            audio: { output: { voice: "marin" } },
+          },
+        }),
+      }
+    );
 
     if (!res.ok) {
       return Response.json({ error: "upstream_error" }, { status: 502 });
