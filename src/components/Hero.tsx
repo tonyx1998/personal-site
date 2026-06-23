@@ -1,58 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
-import { Spotlight } from "./ui/Spotlight";
+import AuroraBackground from "./ui/AuroraBackground";
+import { useTheme } from "@/app/providers";
 
-const roles = [
-  "Full-Stack Engineer",
-  "Applied AI Builder",
-  "Realtime Voice Apps",
-];
+const roles = ["Full-Stack Engineer", "Applied AI Builder"];
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout: ReturnType<typeof setTimeout>;
-
-    if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length + 1)),
-        80
-      );
-    } else if (!isDeleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
-    } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
-    } else {
-      timeout = setTimeout(() => {
-        setIsDeleting(false);
-        setRoleIndex((i) => (i + 1) % roles.length);
-      }, 400);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, roleIndex]);
+  const { theme } = useTheme();
 
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <Spotlight
-        className="-top-40 left-0 md:-top-20 md:left-60"
-        fill="var(--accent)"
-      />
-      <Spotlight
-        className="top-10 right-0 md:top-32 md:-right-20 rotate-180"
-        fill="#a855f7"
-      />
+      <AuroraBackground intensity={theme === "dark" ? 1 : 0.6} />
       <div
         className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
@@ -89,15 +53,24 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        <motion.div
-          initial={{ y: 20 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-2xl sm:text-3xl text-muted-foreground font-mono mb-6 h-10"
-        >
-          <span>{displayed}</span>
-          <span className="animate-pulse ml-0.5">|</span>
-        </motion.div>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xl sm:text-2xl font-mono mb-6">
+          {roles.map((role, i) => (
+            <motion.span
+              key={role}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
+              className="flex items-center gap-x-3"
+            >
+              {i > 0 && (
+                <span aria-hidden="true" className="text-border select-none">
+                  /
+                </span>
+              )}
+              <span className="role-shimmer">{role}</span>
+            </motion.span>
+          ))}
+        </div>
 
         <motion.p
           initial={{ y: 20 }}

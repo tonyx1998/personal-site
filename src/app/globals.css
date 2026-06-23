@@ -74,3 +74,29 @@ body {
   opacity: 0;
   will-change: opacity;
 }
+
+/* Subtle sheen sweeping across the role line — replaces the typewriter. */
+@keyframes role-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.role-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--muted-foreground) 0%,
+    var(--foreground) 25%,
+    var(--muted-foreground) 50%,
+    var(--foreground) 75%,
+    var(--muted-foreground) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: role-sheen 7s linear infinite;
+}
