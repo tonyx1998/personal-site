@@ -202,14 +202,15 @@ def main(out_path: str) -> None:
             ],
         },
         {
-            "title": "Technical Guides — Web Dev, AI Engineer &amp; Security Engineer",
+            "title": "Throughline — Technical Learning Ecosystem",
             "date": "2026",
-            "stack": "Docusaurus, React, TypeScript, MDX",
-            "links": '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">web-dev</a> &nbsp;·&nbsp; '
-            '<a href="https://tonyx1998.github.io/modern-ai-engineer-guide/" color="#4f46e5">ai-engineer</a> &nbsp;·&nbsp; '
-            '<a href="https://tonyx1998.github.io/modern-security-engineer-guide/" color="#4f46e5">security-engineer</a>',
+            "stack": "Docusaurus, Astro, React, TypeScript, MDX",
+            "links": '<a href="https://throughline-ashen.vercel.app" color="#4f46e5">hub</a> &nbsp;·&nbsp; '
+            '<a href="https://tonyx1998.github.io/modern-web-dev-guide/" color="#4f46e5">web-dev</a> &nbsp;·&nbsp; '
+            '<a href="https://tonyx1998.github.io/modern-ai-guide/" color="#4f46e5">ai</a> &nbsp;·&nbsp; '
+            '<a href="https://tonyx1998.github.io/modern-security-engineer-guide/" color="#4f46e5">security</a>',
             "bullets": [
-                "Authored three published 2026 engineering guides (37 chapters) — interactive Docusaurus courses with checkpoint quizzes, code challenges, and Mermaid diagrams, live on GitHub Pages.",
+                "Built Throughline, a connected source-available learning ecosystem: five first-principles guides (web dev, AI, security, cloud, programming basics) on one shared design system, an Astro hub, and Shipyard &mdash; a build-a-project-and-AI-grade-it platform (Claude-as-judge).",
             ],
         },
     ]

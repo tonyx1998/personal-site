@@ -129,13 +129,45 @@ export const projects: Project[] = [
     datePublished: "2025",
   },
   {
+    title: "Throughline — Technical Learning Ecosystem",
+    description:
+      "The hub for a connected set of first-principles technical learning guides — a 5-act ladder (Code → Specialize → Build → Prep → Practice) linking every guide plus SoloMock and Shipyard into one path from absolute beginner to job-ready.",
+    highlights: [
+      "Designed and shipped a static Astro hub that maps the whole ecosystem as a 5-act learning ladder, routing readers from a programming on-ramp through specialization guides into building and interview practice",
+      "Unified every guide on one house design system (`@throughline/guide-kit`) and a single pedagogical standard — readers enter knowing nothing and leave job-ready, read top-to-bottom",
+      "Source-available across the ecosystem (© 2026 To Yin Yu, All Rights Reserved), with in-browser interactive code and checkpoint quizzes throughout",
+    ],
+    tags: ["Astro", "TypeScript", "Design System", "Vercel"],
+    github: null,
+    live: "https://throughline-ashen.vercel.app",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
+  },
+  {
+    title: "Programming Basics",
+    description:
+      "A zero-to-programming foundational on-ramp guide — the prerequisite track the other Throughline guides link to, taking absolute beginners from nothing to ready-to-specialize.",
+    highlights: [
+      "Authored a first-principles, read-top-to-bottom introduction to programming for readers with no prior experience, serving as the shared entry point for the specialization guides",
+      "Built as an interactive Docusaurus course with in-browser code and checkpoint quizzes, on the shared `@throughline/guide-kit` design system",
+      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel",
+    ],
+    tags: ["Docusaurus", "TypeScript", "React", "MDX"],
+    github: null,
+    live: "https://programming-basics-three.vercel.app",
+    featured: false,
+    className: "lg:col-span-1",
+    datePublished: "2026",
+  },
+  {
     title: "Modern Web Dev Guide",
     description:
-      "A 2026 web dev guide turned into an interactive course — ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
+      "A 2026 web dev guide turned into an interactive course — 17 chapters plus a capstone, ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
     highlights: [
       "Built a sampled-quiz engine with a ~700-question bank, per-session seeded shuffling, and localStorage state",
       "Wired progressive sidebar locking so each chapter unlocks only after its prereq quiz passes",
-      "Authored 11 chapters across foundations, lifecycle, tech stack, scale workflows, AI, and career",
+      "Authored 17 chapters plus a capstone across foundations, lifecycle, tech stack, scale workflows, AI, and career — refreshed for 2026 currency",
     ],
     tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     github: "https://github.com/tonyx1998/modern-web-dev-guide",
@@ -145,17 +177,17 @@ export const projects: Project[] = [
     datePublished: "2026",
   },
   {
-    title: "Modern AI Engineer Guide",
+    title: "Modern AI Guide",
     description:
-      "A 2026 AI engineering guide — 12 chapters from how LLM systems actually work to shipping evaluated production AI, with interactive checkpoint quizzes per chapter.",
+      "A 2026 AI engineering guide — 18 chapters from how LLM systems actually work to shipping evaluated production AI, with interactive checkpoint quizzes and runnable in-browser Python challenges.",
     highlights: [
-      "Authored 12 chapters spanning LLM foundations, project lifecycle, the modern AI tech stack, solo/startup/enterprise workflows, decision frameworks, production patterns, and career paths",
+      "Authored 18 chapters spanning LLM foundations, project lifecycle, the modern AI tech stack, solo/startup/enterprise workflows, decision frameworks, production patterns, and career paths",
       "Built an interactive Quiz React component with per-chapter checkpoint quizzes that verify understanding before progressing",
       "Deployed via Docusaurus + MDX + Mermaid on GitHub Pages — beginner-readable but still useful for working engineers",
     ],
     tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
-    github: "https://github.com/tonyx1998/modern-ai-engineer-guide",
-    live: "https://tonyx1998.github.io/modern-ai-engineer-guide/",
+    github: "https://github.com/tonyx1998/modern-ai-guide",
+    live: "https://tonyx1998.github.io/modern-ai-guide/",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
     datePublished: "2026",
@@ -174,6 +206,38 @@ export const projects: Project[] = [
     live: "https://tonyx1998.github.io/modern-security-engineer-guide/",
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
+  },
+  {
+    title: "Modern Cloud Engineer Guide",
+    description:
+      "A 2026 first-principles cloud engineering guide — from cloud foundations and core services through Infrastructure-as-Code, Kubernetes, CI/CD, SRE, and platform engineering.",
+    highlights: [
+      "Structured an 11-chapter path from cloud foundations and core services to Infrastructure-as-Code, Kubernetes, CI/CD, SRE, and platform engineering (Ch 1–4 fully authored, 5–11 outlined)",
+      "Built as an interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams, on the shared `@throughline/guide-kit` design system",
+      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel as part of the Throughline ecosystem",
+    ],
+    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
+    github: null,
+    live: "https://modern-cloud-engineer-guide.vercel.app",
+    featured: false,
+    className: "lg:col-span-1",
+    datePublished: "2026",
+  },
+  {
+    title: "Shipyard",
+    description:
+      "A guided platform where you build a portfolio-grade project and get it AI-graded (Claude-as-judge) — the 'Build' act of Throughline, with a teaching-first coaching loop instead of a pass/fail gate.",
+    highlights: [
+      "Designed a guided build-and-grade flow that walks a learner through shipping a real, portfolio-grade project, then grades the result with an LLM-as-judge rubric (Claude-as-judge)",
+      "Built a teaching-first coaching loop that explains gaps and next steps rather than just scoring, closing the loop from learning into proving you can ship",
+      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel as the 'Prove you can ship' act of the Throughline ladder",
+    ],
+    tags: ["TypeScript", "React", "Claude / LLM-as-Judge", "Vercel"],
+    github: null,
+    live: "https://shipyard.vercel.app",
+    featured: false,
+    className: "lg:col-span-1",
     datePublished: "2026",
   },
   {
