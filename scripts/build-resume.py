@@ -210,7 +210,7 @@ def main(out_path: str) -> None:
             '<a href="https://tonyx1998.github.io/modern-ai-guide/" color="#4f46e5">ai</a> &nbsp;·&nbsp; '
             '<a href="https://tonyx1998.github.io/modern-security-engineer-guide/" color="#4f46e5">security</a>',
             "bullets": [
-                "Built Throughline, a connected source-available learning ecosystem: five first-principles guides (web dev, AI, security, cloud, programming basics) on one shared design system, an Astro hub, and Shipyard &mdash; a build-a-project-and-AI-grade-it platform (Claude-as-judge).",
+                "Built Throughline, a connected source-available learning ecosystem: six first-principles guides (web dev, AI, security, cloud, data engineering, programming basics) on one shared design system, an Astro hub, and Shipyard &mdash; a build-a-project-and-AI-grade-it platform (Claude-as-judge).",
             ],
         },
     ]

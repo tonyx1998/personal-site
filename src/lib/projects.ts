@@ -213,13 +213,29 @@ export const projects: Project[] = [
     description:
       "A 2026 first-principles cloud engineering guide — from cloud foundations and core services through Infrastructure-as-Code, Kubernetes, CI/CD, SRE, and platform engineering.",
     highlights: [
-      "Structured an 11-chapter path from cloud foundations and core services to Infrastructure-as-Code, Kubernetes, CI/CD, SRE, and platform engineering (Ch 1–4 fully authored, 5–11 outlined)",
+      "Authored all 11 chapters — cloud foundations, core services, Infrastructure-as-Code, Kubernetes, CI/CD & GitOps, observability & SRE, platform engineering, cloud security, FinOps, MLOps/LLMOps, and scale/career",
       "Built as an interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams, on the shared `@throughline/guide-kit` design system",
       "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel as part of the Throughline ecosystem",
     ],
     tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     github: null,
     live: "https://modern-cloud-engineer-guide.vercel.app",
+    featured: false,
+    className: "lg:col-span-1",
+    datePublished: "2026",
+  },
+  {
+    title: "Modern Data Engineering Guide",
+    description:
+      "A 2026 first-principles data engineering guide — how data moves from raw source to trusted, query-ready tables: storage & file formats, SQL & query engines, modeling & warehousing, Spark, ingestion/CDC, dbt, orchestration, streaming, and the lakehouse.",
+    highlights: [
+      "Authored all 12 chapters — foundations, storage & formats, SQL & query engines, modeling & warehousing, Spark, ingestion & CDC, dbt, orchestration, streaming (Kafka), the lakehouse, data quality & governance, and career",
+      "Curriculum mined from real 2026 data-engineering job postings and gap-checked by a completeness critic; authored concept-first (columnar storage, desired-state pipelines, exactly-once) then mapped to today's tools (Snowflake/BigQuery, dbt, Airflow, Kafka, Iceberg/Delta)",
+      "Built on the shared `@throughline/guide-kit` design system with checkpoint quizzes; source-available (© 2026 To Yin Yu, All Rights Reserved), deployed on Vercel",
+    ],
+    tags: ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
+    github: null,
+    live: "https://modern-data-engineering-guide.vercel.app",
     featured: false,
     className: "lg:col-span-1",
     datePublished: "2026",
