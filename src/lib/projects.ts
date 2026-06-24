@@ -13,6 +13,22 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Throughline — Technical Learning Ecosystem",
+    description:
+      "The hub for a connected set of first-principles technical learning guides — a 5-act ladder (Code → Specialize → Build → Prep → Practice) linking every guide plus SoloMock and Shipyard into one path from absolute beginner to job-ready.",
+    highlights: [
+      "Designed and shipped a static Astro hub that maps the whole ecosystem as a 5-act learning ladder, routing readers from a programming on-ramp through specialization guides into building and interview practice",
+      "Unified every guide on one house design system (`@throughline/guide-kit`) and a single pedagogical standard — readers enter knowing nothing and leave job-ready, read top-to-bottom",
+      "Source-available across the ecosystem (© 2026 To Yin Yu, All Rights Reserved), with in-browser interactive code and checkpoint quizzes throughout",
+    ],
+    tags: ["Astro", "TypeScript", "Design System", "Vercel"],
+    github: null,
+    live: "https://throughline-ashen.vercel.app",
+    featured: true,
+    className: "lg:col-span-2 lg:row-span-2",
+    datePublished: "2026",
+  },
+  {
     title: "SoloYap",
     description:
       "Realtime voice English tutor — practice spoken English with an AI partner over scenarios like ordering coffee, doctor visits, and salary negotiation, with grammar corrections after every turn.",
@@ -127,22 +143,6 @@ export const projects: Project[] = [
     featured: true,
     className: "lg:col-span-2 lg:row-span-2",
     datePublished: "2025",
-  },
-  {
-    title: "Throughline — Technical Learning Ecosystem",
-    description:
-      "The hub for a connected set of first-principles technical learning guides — a 5-act ladder (Code → Specialize → Build → Prep → Practice) linking every guide plus SoloMock and Shipyard into one path from absolute beginner to job-ready.",
-    highlights: [
-      "Designed and shipped a static Astro hub that maps the whole ecosystem as a 5-act learning ladder, routing readers from a programming on-ramp through specialization guides into building and interview practice",
-      "Unified every guide on one house design system (`@throughline/guide-kit`) and a single pedagogical standard — readers enter knowing nothing and leave job-ready, read top-to-bottom",
-      "Source-available across the ecosystem (© 2026 To Yin Yu, All Rights Reserved), with in-browser interactive code and checkpoint quizzes throughout",
-    ],
-    tags: ["Astro", "TypeScript", "Design System", "Vercel"],
-    github: null,
-    live: "https://throughline-ashen.vercel.app",
-    featured: true,
-    className: "lg:col-span-2 lg:row-span-2",
-    datePublished: "2026",
   },
   {
     title: "Programming Basics",
