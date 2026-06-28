@@ -1,5 +1,5 @@
 import { SITE_URL } from "./site";
-import { projects } from "./projects";
+import { projects, projectSlug } from "./projects";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -76,7 +76,8 @@ export const projectsCollectionJsonLd = {
         description: p.description,
         keywords: p.tags.join(", "),
         author: { "@id": PERSON_ID },
-        ...(p.live ? { url: p.live } : {}),
+        url: `${SITE_URL}/projects/${projectSlug(p)}`,
+        ...(p.live ? { sameAs: p.live } : {}),
         ...(p.github ? { codeRepository: p.github } : {}),
         ...(p.datePublished ? { datePublished: p.datePublished } : {}),
         ...(p.dateModified ? { dateModified: p.dateModified } : {}),

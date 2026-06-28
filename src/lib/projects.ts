@@ -11,6 +11,17 @@ export type Project = {
   dateModified?: string;
 };
 
+// URL slug derived from the title (no slug field in the data) — used by the
+// per-project detail pages /projects/<slug>, the cards, the sitemap and JSON-LD.
+export const projectSlug = (p: Project) =>
+  p.title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+export const projectBySlug = (slug: string): Project | null =>
+  projects.find((p) => projectSlug(p) === slug) ?? null;
+
 export const projects: Project[] = [
   {
     title: "Throughline — Technical Learning Ecosystem",

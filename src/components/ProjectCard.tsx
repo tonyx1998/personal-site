@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, type MouseEvent } from "react";
+import Link from "next/link";
 import { ExternalLink, Lock, Star, FolderOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Project } from "@/lib/projects";
+import { projectSlug, type Project } from "@/lib/projects";
 
 const GithubIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
@@ -114,43 +115,25 @@ export default function ProjectCard({
     el.style.setProperty("--y", `${e.clientY - rect.top}px`);
   };
 
-  const linkHref = project.live ?? project.github;
-  const linkKind = project.live
-    ? "live site"
-    : project.github
-      ? "GitHub repo"
-      : null;
+  // Every project now has a detail page — the card links there (internal), and the
+  // live/GitHub links live on the detail page. Better internal linking + engagement.
+  const detailHref = `/projects/${projectSlug(project)}`;
 
   const sharedClassName = cn(
     "group relative overflow-hidden p-6 rounded-xl border border-border bg-card flex flex-col gap-4 transition-colors duration-300",
-    linkHref &&
-      "cursor-pointer hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "cursor-pointer hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     className
   );
 
-  if (linkHref) {
-    return (
-      <a
-        ref={ref as React.RefObject<HTMLAnchorElement>}
-        href={linkHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Open ${project.title} ${linkKind}`}
-        onMouseMove={handleMouseMove}
-        className={sharedClassName}
-      >
-        <CardBody project={project} />
-      </a>
-    );
-  }
-
   return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
+    <Link
+      ref={ref as React.RefObject<HTMLAnchorElement>}
+      href={detailHref}
+      aria-label={`View ${project.title} details`}
       onMouseMove={handleMouseMove}
       className={sharedClassName}
     >
       <CardBody project={project} />
-    </div>
+    </Link>
   );
 }
