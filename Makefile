@@ -1,4 +1,4 @@
-.PHONY: setup dev build test lint verify
+.PHONY: setup dev build test lint verify resume
 
 setup:
 	mise install 2>/dev/null || true
@@ -23,3 +23,7 @@ verify:
 	@command -v node >/dev/null
 	npm run lint
 	npm run format:check
+
+# Regenerate public/resume.pdf from the shared source (src/lib/projects.data.json).
+resume:
+	python scripts/build-resume.py public/resume.pdf
