@@ -9,7 +9,7 @@
     ],
     "tags": ["Astro", "TypeScript", "Design System", "Vercel"],
     "github": null,
-    "live": "https://throughline-ashen.vercel.app",
+    "live": "https://throughline.guide",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
@@ -18,7 +18,7 @@
       "title": "Throughline — Technical Learning Ecosystem",
       "stack": "Docusaurus, Astro, React, TypeScript, MDX",
       "date": "2026",
-      "linksOverride": "<a href=\"https://throughline-ashen.vercel.app\" color=\"#4f46e5\">hub</a> &nbsp;·&nbsp; <a href=\"https://tonyx1998.github.io/modern-web-dev-guide/\" color=\"#4f46e5\">web-dev</a> &nbsp;·&nbsp; <a href=\"https://tonyx1998.github.io/modern-ai-guide/\" color=\"#4f46e5\">ai</a> &nbsp;·&nbsp; <a href=\"https://tonyx1998.github.io/modern-security-engineer-guide/\" color=\"#4f46e5\">security</a>",
+      "linksOverride": "<a href=\"https://throughline.guide\" color=\"#4f46e5\">hub</a> &nbsp;·&nbsp; <a href=\"https://modernwebdevguide.com/\" color=\"#4f46e5\">web-dev</a> &nbsp;·&nbsp; <a href=\"https://modernaiguide.dev/\" color=\"#4f46e5\">ai</a> &nbsp;·&nbsp; <a href=\"https://modernsecurityengineer.com/\" color=\"#4f46e5\">security</a>",
       "bullets": [
         "Built Throughline, a connected source-available learning ecosystem: six first-principles guides (web dev, AI, security, cloud, data engineering, programming basics) on one shared design system, an Astro hub, and Shipyard &mdash; a build-a-project-and-AI-grade-it platform (Claude-as-judge)."
       ]
@@ -140,7 +140,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX"],
     "github": null,
-    "live": "https://programming-basics-three.vercel.app",
+    "live": "https://programmingbasics.dev",
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026"
@@ -155,7 +155,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-web-dev-guide",
-    "live": "https://tonyx1998.github.io/modern-web-dev-guide/",
+    "live": "https://modernwebdevguide.com/",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
@@ -170,7 +170,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-ai-guide",
-    "live": "https://tonyx1998.github.io/modern-ai-guide/",
+    "live": "https://modernaiguide.dev/",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
@@ -185,7 +185,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-security-engineer-guide",
-    "live": "https://tonyx1998.github.io/modern-security-engineer-guide/",
+    "live": "https://modernsecurityengineer.com/",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
@@ -200,7 +200,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
-    "live": "https://modern-cloud-engineer-guide.vercel.app",
+    "live": "https://moderncloudengineer.com",
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026"
@@ -215,7 +215,7 @@
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
-    "live": "https://modern-data-engineering-guide.vercel.app",
+    "live": "https://moderndataengineering.dev",
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026"
@@ -271,7 +271,7 @@
     ],
     "tags": ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
     "github": null,
-    "live": "https://swe-interview-guide.vercel.app",
+    "live": "https://sweinterviewguide.com",
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026"
