@@ -163,9 +163,24 @@ export default function AuroraBackground({
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    // Without GPU acceleration (headless Chrome, VMs, remote desktop) WebGL
+    // falls back to a software rasterizer and this shader burns 60-100ms of
+    // main-thread time per frame. Render a single static frame there instead.
+    const dbgInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    const rendererName = String(
+      gl.getParameter(dbgInfo ? dbgInfo.UNMASKED_RENDERER_WEBGL : gl.RENDERER)
+    );
+    const softwareGL = /swiftshader|llvmpipe|softpipe|software/i.test(
+      rendererName
+    );
+
+    const staticOnly = reduceMotion || softwareGL;
+
     let raf = 0;
-    let running = true;
-    const start = performance.now();
+    let running = false;
+    let inView = true;
+    // Offset so the animation continues seamlessly from the t=8 initial frame.
+    const start = performance.now() - 8000;
 
     const frame = (now: number) => {
       resize();
@@ -173,34 +188,44 @@ export default function AuroraBackground({
       if (running) raf = requestAnimationFrame(frame);
     };
 
+    // Animate only while the hero is on screen and the tab is visible.
+    const updateRunning = () => {
+      const shouldRun = !staticOnly && inView && !document.hidden;
+      if (shouldRun && !running) {
+        running = true;
+        raf = requestAnimationFrame(frame);
+      } else if (!shouldRun && running) {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+    };
+
     const ro = new ResizeObserver(() => {
       resize();
-      if (reduceMotion) draw(8.0);
+      if (!running) draw(8.0);
     });
     ro.observe(canvas);
 
-    if (reduceMotion) {
-      draw(8.0); // one settled static frame
-    } else {
-      raf = requestAnimationFrame(frame);
-    }
+    const io = new IntersectionObserver((entries) => {
+      // Records are oldest-first; only the newest reflects current state.
+      inView = entries[entries.length - 1].isIntersecting;
+      updateRunning();
+    });
+    io.observe(canvas);
 
-    const onVisibility = () => {
-      if (document.hidden) {
-        running = false;
-        cancelAnimationFrame(raf);
-      } else if (!reduceMotion && !running) {
-        running = true;
-        raf = requestAnimationFrame(frame);
-      }
-    };
-    document.addEventListener("visibilitychange", onVisibility);
+    // Always paint one settled frame immediately — the loop below only runs
+    // while visible, and a hidden/background mount must not stay blank.
+    draw(8.0);
+    if (!staticOnly) updateRunning();
+
+    document.addEventListener("visibilitychange", updateRunning);
 
     return () => {
       running = false;
       cancelAnimationFrame(raf);
       ro.disconnect();
-      document.removeEventListener("visibilitychange", onVisibility);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", updateRunning);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, []);

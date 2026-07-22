@@ -149,6 +149,7 @@ export default function Hero() {
 
       <motion.a
         href="#about"
+        aria-label="Scroll to About section"
         initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1 }}
