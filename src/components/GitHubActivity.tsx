@@ -101,7 +101,7 @@ export default async function GitHubActivity() {
                 ) : (
                   <span />
                 )}
-                <span className="text-muted-foreground/70">
+                <span className="text-muted-foreground">
                   {relativeTime(repo.pushedAt)}
                 </span>
               </div>
