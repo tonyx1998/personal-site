@@ -181,10 +181,10 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     story.append(
         Paragraph(
-            "Entry-level full-stack software engineer (B.S. CS, UMD) shipping applied AI "
+            "Full-stack software engineer (B.S. CS, UMD) shipping applied AI "
             "products end-to-end — realtime voice AI on OpenAI's Realtime API over WebRTC, "
             "FastAPI backends with Postgres + Redis, and production deploys on Vercel, "
-            "Render, Neon, and Upstash. Open to junior SWE roles.",
+            "Render, Neon, and Upstash. Open to SWE roles.",
             summary_style,
         )
     )

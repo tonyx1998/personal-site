@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu — entry-level full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "To Yin Yu — full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
@@ -47,14 +47,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
     description:
-      "Entry-level full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+      "Full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
     siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
     title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
     description:
-      "Entry-level full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+      "Full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   },
   robots: {
     index: true,

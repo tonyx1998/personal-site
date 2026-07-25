@@ -6,11 +6,27 @@ import { Briefcase, GraduationCap } from "lucide-react";
 const experiences = [
   {
     type: "work",
+    title: "Co-founder",
+    company: "Reachspan AI LLC",
+    period: "2026 – Present",
+    description:
+      "Co-founded an AI marketing venture doing performance-priced lead generation for local contractors. Ship production client sites end-to-end — multilingual contractor sites with local-SEO city pages, AI chat and voice agents, instant roof-measurement estimates via the Google Solar API, and booking flows wired to Google Calendar with real-time crew alerts.",
+    tags: [
+      "Applied AI",
+      "Vercel Serverless",
+      "Google Calendar API",
+      "Google Solar API",
+      "Tailwind CSS",
+      "Local SEO",
+    ],
+  },
+  {
+    type: "work",
     title: "Independent Software Projects",
     company: "Self-directed · Full-stack & Applied AI",
     period: "2024 – Present",
     description:
-      "Designed, built, and deployed full-stack and applied AI products end-to-end — realtime voice tutors and mock-interview agents on the OpenAI Realtime API over WebRTC, a URL/QR analytics platform with FastAPI + Postgres + Redis, a roofing business site with an embedded ElevenLabs voice booking agent, and learning resources on Docusaurus/GitHub Pages. Owned auth, rate limiting, cost protection, and deploys across Vercel, Render, Neon, Upstash, and Netlify.",
+      "Designed, built, and deployed full-stack and applied AI products end-to-end — realtime voice tutors and mock-interview agents on the OpenAI Realtime API over WebRTC, a URL/QR analytics platform with FastAPI + Postgres + Redis, and learning resources on Docusaurus/GitHub Pages. Owned auth, rate limiting, cost protection, and deploys across Vercel, Render, Neon, and Upstash.",
     tags: [
       "Next.js",
       "FastAPI",

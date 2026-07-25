@@ -78,7 +78,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          Entry-level full-stack engineer building applied AI products with
+          Full-stack engineer building applied AI products with
           TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime
           API. Recent work includes realtime voice tutors and mock-interview
           agents, plus a deployed analytics platform with auth, rate limiting,

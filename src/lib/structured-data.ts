@@ -13,7 +13,7 @@ export const personJsonLd = {
   url: SITE_URL,
   jobTitle: "Full-Stack Software Engineer",
   description:
-    "Entry-level full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "Full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   email: "mailto:tonyx1998@gmail.com",
   image: `${SITE_URL}/opengraph-image`,
   alumniOf: {
@@ -48,7 +48,7 @@ export const websiteJsonLd = {
   url: SITE_URL,
   name: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
   description:
-    "Portfolio of To Yin Yu — entry-level full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "Portfolio of To Yin Yu — full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },

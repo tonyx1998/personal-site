@@ -45,7 +45,7 @@ export default function About() {
             className="space-y-4 text-muted-foreground leading-relaxed"
           >
             <p>
-              I&apos;m To Yin Yu — an entry-level full-stack engineer focused on
+              I&apos;m To Yin Yu — a full-stack engineer focused on
               applied AI products, with a B.S. in Computer Science from the
               University of Maryland, College Park.
             </p>
@@ -54,11 +54,6 @@ export default function About() {
               and Python backends, PostgreSQL data models, Redis caching and
               rate limiting, and realtime voice agents built on the OpenAI
               Realtime API over WebRTC.
-            </p>
-            <p>
-              I&apos;m looking for junior software engineering roles where I can
-              keep shipping at this pace — full-stack, with a strong applied AI
-              lean.
             </p>
           </motion.div>
         </div>

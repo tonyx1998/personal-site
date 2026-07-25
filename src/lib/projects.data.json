@@ -116,19 +116,19 @@
     }
   },
   {
-    "title": "Roofing Site + AI Voice Booking Agent",
-    "description": "Marketing site for a local roofing business with an embedded AI voice agent that answers FAQs, triages emergency requests, and books real inspection appointments.",
+    "title": "Amex Roofing — Site + AI Booking Agent",
+    "description": "Production site for a Bay Area roofing contractor (Reachspan AI client) — English/中文/Español, 22 local-SEO city pages, instant roof-measurement estimates, and an AI chat agent that hands off to a real booking calendar.",
     "highlights": [
-      "Shipped Astro + Tailwind site with a multi-step quote estimator, project gallery, FAQ chatbot, and SEO-optimized routing",
-      "Integrated an ElevenLabs voice agent to answer roofing FAQs and triage emergency vs. routine requests in natural conversation",
-      "Wired the agent's webhook tools to the Cal.com API so callers book real inspection appointments end-to-end without human handoff"
+      "Shipped a buildless HTML + Tailwind site with English/中文/Español homepage twins and 22 city landing pages (11 cities × EN/中文) kept in sync by build scripts — every URL indexed by Google",
+      "Built instant ballpark estimates from Google Solar API roof measurements feeding a 3-step mobile booking flow, with Vercel serverless routes booking directly onto the crew's Google Calendar and firing Discord alerts",
+      "Added an hours-aware contact layer — crew phone during work hours, bilingual AI chat agent after hours — plus SEO articles and a daily analytics digest to Discord"
     ],
-    "tags": ["Astro", "TypeScript", "Tailwind CSS", "ElevenLabs", "Cal.com API", "Vercel"],
+    "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Google Calendar API", "Google Solar API"],
     "github": null,
-    "live": "https://premier-roofing-co.vercel.app",
+    "live": "https://amex-roofing.com",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2025"
+    "datePublished": "2026"
   },
   {
     "title": "Programming Basics",
@@ -255,7 +255,7 @@
       "stack": "Python, FastAPI, Claude / LLM Tool Use, Vercel Serverless, Cal.com API, Tailwind CSS",
       "date": "2026",
       "bullets": [
-        "Founded and built Reachspan, an AI lead-gen service: a Python + FastAPI + Claude engine that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review.",
+        "Co-founded Reachspan AI LLC and built its AI lead-gen engine: a Python + FastAPI + Claude engine that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review.",
         "Built the marketing site with Vercel serverless functions wired to the Cal.com API so prospects book audit calls end-to-end with auto-confirmation.",
         "Designed the classification and human-in-the-loop pipeline (YAML-defined criteria, scored leads persisted to SQLite) to keep automated outreach on-brand."
       ]
