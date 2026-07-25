@@ -10,15 +10,8 @@ const experiences = [
     company: "Reachspan AI LLC",
     period: "2026 – Present",
     description:
-      "Co-founded an AI marketing venture doing performance-priced lead generation for local contractors. Ship production client sites end-to-end — multilingual contractor sites with local-SEO city pages, AI chat and voice agents, instant roof-measurement estimates via the Google Solar API, and booking flows wired to Google Calendar with real-time crew alerts.",
-    tags: [
-      "Applied AI",
-      "Vercel Serverless",
-      "Google Calendar API",
-      "Google Solar API",
-      "Tailwind CSS",
-      "Local SEO",
-    ],
+      "Co-founded an AI marketing venture doing performance-priced lead generation for local contractors. Build and run production client sites end-to-end — AI booking agents, instant estimates, and local SEO.",
+    tags: ["Applied AI", "Vercel Serverless", "Local SEO"],
   },
   {
     type: "work",
