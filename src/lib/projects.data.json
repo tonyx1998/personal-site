@@ -61,7 +61,7 @@
       "bullets": [
         "Built a realtime voice mock-interview app on OpenAI's Realtime API over WebRTC: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel.",
         "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, and edge cases) that drive interviewer behavior through the system prompt.",
-        "Hardened sessions against cost and abuse: server-minted ephemeral API keys so the browser never holds the long-lived secret, per-IP rate limits, a 15-minute session cap, and a Discord-webhook request-access flow with manual allowlisting."
+        "Hardened sessions against cost and abuse: server-minted ephemeral API keys so the browser never holds the secret, Upstash sliding-window rate limits, a 15-minute session cap, and a Discord-webhook request flow with manual allowlisting."
       ]
     }
   },
@@ -92,11 +92,11 @@
   },
   {
     "title": "Gasolytics — US Gas Price Map",
-    "description": "Live US gas-price tracker — an interactive map of all 50 states + DC with daily AAA averages, per-state metro breakdowns, and price trends.",
+    "description": "Live US fuel-economics site — an interactive map of all 50 states + DC with daily AAA averages, plus a full toolkit of state and metro pages, a trip cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses.",
     "highlights": [
       "Built an interactive d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), with metro price pins, hover tooltips, wheel-zoom/drag-pan, and a per-state detail panel",
-      "Reads daily AAA averages for all 50 states + DC across 4 fuel grades from a separate data pipeline's Vercel Blob snapshot feed, with an in-process cache so client polling never hits the CDN directly",
-      "Shipped on Next.js 16 (Turbopack) + React 19 on Vercel, with an AAA-official national-average trend graph and a hover-to-read price sparkline"
+      "Grew it into a national toolkit: 51 state pages plus metro pages, cheapest-gas-near-me, a trip gas calculator, an EV suite (EV-vs-gas with per-state registration fees and break-even miles, charging costs and stations), and gas-tax, border-gap, and affordability analyses",
+      "Reads daily AAA averages (50 states + DC, 4 fuel grades) from a separate pipeline's Vercel Blob snapshot feed through an in-process cache; mobile app-shell UX with a global tab bar and drag-sheet map expansion, on Next.js 16 + React 19"
     ],
     "tags": ["Next.js", "React 19", "TypeScript", "d3-geo", "Vercel Blob", "Vercel"],
     "github": null,
@@ -111,7 +111,7 @@
       "date": "2026",
       "bullets": [
         "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
-        "Reads daily AAA averages (50 states + DC, 4 fuel grades) from a separate pipeline's Vercel Blob snapshot feed through an in-process cache, plus an AAA-official national-average trend graph with a hover-to-read sparkline."
+        "Expanded it into a national fuel-economics toolkit &mdash; 51 state and metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax / border-gap / affordability analyses &mdash; all fed by daily AAA snapshots from a separate data pipeline."
       ]
     }
   },
