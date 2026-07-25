@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -107,6 +108,7 @@ export default async function RootLayout({
       <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <Providers initialPref={pref}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
