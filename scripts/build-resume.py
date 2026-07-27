@@ -181,10 +181,11 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     story.append(
         Paragraph(
-            "Full-stack software engineer (B.S. CS, UMD) shipping applied AI "
-            "products end-to-end — realtime voice AI on OpenAI's Realtime API over WebRTC, "
-            "FastAPI backends with Postgres + Redis, and production deploys on Vercel, "
-            "Render, Neon, and Upstash. Open to SWE roles.",
+            "Full-stack software developer with a B.S. in Computer Science from the "
+            "University of Maryland. Builds and operates web products across frontend, "
+            "APIs, data pipelines, databases, and deployment, with recent work in "
+            "realtime voice, public-data tools, and developer education. Open to "
+            "software engineering roles.",
             summary_style,
         )
     )
@@ -194,9 +195,9 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     skill_rows = [
         ("Languages", "TypeScript, Python, JavaScript, SQL"),
-        ("Web &amp; Backend", "Next.js, React, FastAPI, Tailwind CSS, PostgreSQL, Redis"),
-        ("Applied AI &amp; Realtime", "OpenAI Realtime API, WebRTC, ElevenLabs, LLM tool use, TensorFlow, Keras"),
-        ("Infra &amp; Deploys", "Docker, Git, Linux/Unix, Vercel, Render, Neon, Upstash, Netlify"),
+        ("Frontend", "Next.js, React, Tailwind CSS, Docusaurus, Astro"),
+        ("Backend &amp; Data", "FastAPI, PostgreSQL, Redis, REST APIs, d3-geo"),
+        ("Infrastructure", "Docker, Git, Linux, Vercel, Render, Neon, Upstash"),
     ]
     for label, items in skill_rows:
         story.append(Paragraph(f"<b>{label}:</b> {items}", body_style))
@@ -204,8 +205,8 @@ def main(out_path: str) -> None:
     # PROJECT EXPERIENCE
     story.append(
         Paragraph(
-            "PROJECT EXPERIENCE &nbsp;·&nbsp; "
-            "<font color='#0a0a0a'>Independent Software Projects, 2024 – Present</font>",
+            "INDEPENDENT SOFTWARE DEVELOPMENT &nbsp;·&nbsp; "
+            "<font color='#0a0a0a'>2024 - Present</font>",
             section_style,
         )
     )

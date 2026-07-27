@@ -19,17 +19,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
+    default: "To Yin Yu — Full-Stack Engineer & Product Builder",
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu — full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "To Yin Yu builds realtime voice tools, public-data products, and dependable full-stack systems.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
     "Full-Stack Engineer",
     "Software Engineer",
-    "Applied AI",
+    "Product Engineer",
     "Next.js",
     "FastAPI",
     "Python",
@@ -46,16 +46,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
+    title: "To Yin Yu — Full-Stack Engineer & Product Builder",
     description:
-      "Full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+      "Realtime voice tools, public-data products, and dependable full-stack systems.",
     siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
-    title: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
+    title: "To Yin Yu — Full-Stack Engineer & Product Builder",
     description:
-      "Full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+      "Realtime voice tools, public-data products, and dependable full-stack systems.",
   },
   robots: {
     index: true,
