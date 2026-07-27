@@ -14,13 +14,14 @@
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
     "resume": {
-      "order": 5,
-      "title": "Throughline — Technical Learning Ecosystem",
+      "order": 4,
+      "title": "Throughline - Technical Learning Platform",
       "stack": "Docusaurus, Astro, React, TypeScript, MDX",
       "date": "2026",
-      "linksOverride": "<a href=\"https://throughline.guide\" color=\"#4f46e5\">hub</a> &nbsp;·&nbsp; <a href=\"https://modernwebdevguide.com/\" color=\"#4f46e5\">web-dev</a> &nbsp;·&nbsp; <a href=\"https://modernaiguide.dev/\" color=\"#4f46e5\">ai</a> &nbsp;·&nbsp; <a href=\"https://modernsecurityengineer.com/\" color=\"#4f46e5\">security</a>",
+      "linksOverride": "<a href=\"https://throughline.guide\" color=\"#4f46e5\">throughline.guide</a>",
       "bullets": [
-        "Built Throughline, a connected source-available learning ecosystem: six first-principles guides (web dev, AI, security, cloud, data engineering, programming basics) on one shared design system, an Astro hub, and Shipyard &mdash; a build-a-project-and-AI-grade-it platform (Claude-as-judge)."
+        "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path from fundamentals to hands-on projects and interview practice.",
+        "Created a shared React and TypeScript design system with navigation, quizzes, code exercises, and consistent content patterns across the guide sites."
       ]
     }
   },
@@ -55,13 +56,13 @@
     "datePublished": "2025",
     "resume": {
       "order": 1,
-      "title": "SoloMock — AI Voice Mock Interviewer",
+      "title": "SoloMock - Realtime Voice Mock Interviewer",
       "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
       "date": "2025",
       "bullets": [
-        "Built a realtime voice mock-interview app on OpenAI's Realtime API over WebRTC: the candidate speaks through coding problems while the AI probes complexity, gives Socratic hints, and reads code via debounced Monaco-editor snapshots streamed over a WebRTC data channel.",
-        "Authored 15 structured per-problem &quot;interviewer briefs&quot; (solution tree, 4-rung hint ladder, follow-ups, and edge cases) that drive interviewer behavior through the system prompt.",
-        "Hardened sessions against cost and abuse: server-minted ephemeral API keys so the browser never holds the secret, Upstash sliding-window rate limits, a 15-minute session cap, and a Discord-webhook request flow with manual allowlisting."
+        "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and structured coding problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
+        "Created 15 interviewer guides with solution paths, staged hints, follow-up questions, and edge cases to keep sessions consistent across problems.",
+        "Protected sessions with server-minted ephemeral keys, sliding-window rate limits, a 15-minute session cap, and a manual extended-access workflow."
       ]
     }
   },
@@ -81,7 +82,7 @@
     "datePublished": "2024",
     "resume": {
       "order": 3,
-      "title": "all-in-one-URL — Short URLs, QR Codes &amp; Barcodes",
+      "title": "all-in-one-URL - Short URLs, QR Codes &amp; Barcodes",
       "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Tailwind CSS",
       "date": "2024",
       "bullets": [
@@ -105,13 +106,13 @@
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
     "resume": {
-      "order": 4,
-      "title": "Gasolytics — US Gas Price Map",
+      "order": 2,
+      "title": "Gasolytics - US Gas Price Map",
       "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
       "date": "2026",
       "bullets": [
         "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
-        "Expanded it into a national fuel-economics toolkit &mdash; 51 state and metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax / border-gap / affordability analyses &mdash; all fed by daily AAA snapshots from a separate data pipeline."
+        "Expanded it into a national fuel-economics toolkit with 51 state and metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
       ]
     }
   },
@@ -248,18 +249,7 @@
     "live": "https://reachspan.ai",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026",
-    "resume": {
-      "order": 2,
-      "title": "Reachspan — AI Lead-Gen via Social Listening",
-      "stack": "Python, FastAPI, Claude / LLM Tool Use, Vercel Serverless, Cal.com API, Tailwind CSS",
-      "date": "2026",
-      "bullets": [
-        "Co-founded Reachspan AI LLC and built its AI lead-gen engine: a Python + FastAPI + Claude engine that monitors Reddit and other channels, classifies buying intent against a configurable ruleset, and drafts brand-safe replies queued for human review.",
-        "Built the marketing site with Vercel serverless functions wired to the Cal.com API so prospects book audit calls end-to-end with auto-confirmation.",
-        "Designed the classification and human-in-the-loop pipeline (YAML-defined criteria, scored leads persisted to SQLite) to keep automated outreach on-brand."
-      ]
-    }
+    "datePublished": "2026"
   },
   {
     "title": "SWE Interview Guide",
