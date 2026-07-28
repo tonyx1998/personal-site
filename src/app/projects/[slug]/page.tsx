@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Lock, Star } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { ArrowLeft, ArrowUpRight, Lock } from "lucide-react";
+import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
+import portfolioStyles from "@/components/PortfolioHome.module.css";
 import { projects, projectSlug, projectBySlug } from "@/lib/projects";
+import { projectVisuals } from "@/lib/project-visuals";
 import { jsonLdScriptProps } from "@/lib/structured-data";
 import { SITE_URL } from "@/lib/site";
+import styles from "./ProjectDetail.module.css";
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: projectSlug(p) }));
+  return projects.map((project) => ({ slug: projectSlug(project) }));
 }
 
 export async function generateMetadata({
@@ -21,6 +24,7 @@ export async function generateMetadata({
   const project = projectBySlug(slug);
   if (!project) return {};
   const url = `/projects/${slug}`;
+
   return {
     title: project.title,
     description: project.description,
@@ -32,7 +36,11 @@ export async function generateMetadata({
       url,
       type: "article",
     },
-    twitter: { card: "summary_large_image", title: project.title, description: project.description },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+    },
   };
 }
 
@@ -45,7 +53,14 @@ export default async function ProjectDetailPage({
   const project = projectBySlug(slug);
   if (!project) notFound();
 
-  const PERSON_ID = `${SITE_URL}/#person`;
+  const index = projects.findIndex(
+    (candidate) => projectSlug(candidate) === slug
+  );
+  const previousProject = index > 0 ? projects[index - 1] : null;
+  const nextProject = index < projects.length - 1 ? projects[index + 1] : null;
+  const visual = projectVisuals[slug];
+
+  const personId = `${SITE_URL}/#person`;
   const url = `${SITE_URL}/projects/${slug}`;
   const creativeWork = {
     "@context": "https://schema.org",
@@ -54,7 +69,7 @@ export default async function ProjectDetailPage({
     description: project.description,
     url,
     keywords: project.tags.join(", "),
-    author: { "@id": PERSON_ID },
+    author: { "@id": personId },
     ...(project.github ? { codeRepository: project.github } : {}),
     ...(project.live ? { sameAs: project.live } : {}),
     ...(project.datePublished ? { datePublished: project.datePublished } : {}),
@@ -64,8 +79,18 @@ export default async function ProjectDetailPage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Projects", item: `${SITE_URL}/projects` },
-      { "@type": "ListItem", position: 2, name: project.title, item: url },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Projects",
+        item: `${SITE_URL}/projects`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: project.title,
+        item: url,
+      },
     ],
   };
 
@@ -73,95 +98,160 @@ export default async function ProjectDetailPage({
     <>
       <script {...jsonLdScriptProps(creativeWork)} />
       <script {...jsonLdScriptProps(breadcrumb)} />
-      <Navbar />
-      <main className="pt-24 pb-20 px-4">
-        <article className="max-w-2xl mx-auto">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent transition-colors mb-8"
-          >
-            <ArrowLeft size={15} />
-            All projects
-          </Link>
 
-          <div className="flex items-center gap-3 mb-3 text-xs font-mono text-muted-foreground">
-            {project.datePublished && <span>{project.datePublished}</span>}
-            {project.featured && (
-              <span className="flex items-center gap-1 text-amber-500">
-                <Star size={12} fill="currentColor" />
-                featured
-              </span>
-            )}
-          </div>
+      <div className={portfolioStyles.page}>
+        <PortfolioHeader />
 
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            {project.title}
-          </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            {project.description}
-          </p>
+        <main className={styles.main}>
+          <article className={styles.container}>
+            <Link href="/projects" className={styles.backLink}>
+              <ArrowLeft size={14} />
+              Project archive
+            </Link>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 text-xs rounded font-mono bg-muted text-muted-foreground"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+            <header className={styles.hero}>
+              <p className={styles.projectIndex}>
+                Project {String(index + 1).padStart(2, "0")} /{" "}
+                {String(projects.length).padStart(2, "0")}
+              </p>
 
-          <div className="flex flex-wrap items-center gap-3 mb-10">
-            {project.live && (
+              <div className={styles.heroCopy}>
+                <h1>{project.title}</h1>
+                <p>{project.description}</p>
+
+                <div className={styles.actions}>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.primaryLink}
+                    >
+                      Open live site <ArrowUpRight size={15} />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View source <ArrowUpRight size={15} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </header>
+
+            {visual && project.live && (
               <a
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-background font-medium text-sm hover:opacity-90 transition-opacity"
+                className={styles.heroImage}
+                aria-label={`Open the live ${project.title} site`}
               >
-                Visit live site
-                <ExternalLink size={15} />
+                <Image
+                  src={visual.src}
+                  alt={visual.alt}
+                  fill
+                  priority
+                  sizes="(max-width: 1320px) calc(100vw - 48px), 1280px"
+                />
               </a>
             )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border font-medium text-sm hover:border-accent/50 transition-colors"
-              >
-                View source
-              </a>
-            )}
-            {!project.github && project.live && (
-              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/80 font-mono">
-                <Lock size={11} aria-hidden="true" />
-                Private repo · code available on request
-              </span>
-            )}
-          </div>
 
-          {project.highlights && project.highlights.length > 0 && (
-            <section>
-              <h2 className="text-xs font-mono uppercase tracking-wide text-accent mb-3">
-                Highlights
-              </h2>
-              <ul className="space-y-3 text-muted-foreground leading-relaxed">
-                {project.highlights.map((h) => (
-                  <li key={h} className="flex gap-3">
-                    <span aria-hidden="true" className="text-accent mt-1">
-                      ▹
-                    </span>
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </article>
-      </main>
-      <Footer />
+            <div className={styles.bodyGrid}>
+              <section className={styles.buildSection}>
+                <p className={styles.sectionLabel}>What I built</p>
+                {project.highlights && project.highlights.length > 0 ? (
+                  <ol>
+                    {project.highlights.map((highlight, highlightIndex) => (
+                      <li key={highlight}>
+                        <span>
+                          {String(highlightIndex + 1).padStart(2, "0")}
+                        </span>
+                        <p>{highlight}</p>
+                      </li>
+                    ))}
+                  </ol>
+                ) : (
+                  <p className={styles.emptyNote}>
+                    Designed, built, and shipped as an independent software
+                    project.
+                  </p>
+                )}
+              </section>
+
+              <aside className={styles.facts} aria-label="Project details">
+                <p className={styles.sectionLabel}>Project details</p>
+                <dl>
+                  <div>
+                    <dt>Year</dt>
+                    <dd>{project.datePublished ?? "Ongoing"}</dd>
+                  </div>
+                  <div>
+                    <dt>Status</dt>
+                    <dd>{project.live ? "Live" : "Archived"}</dd>
+                  </div>
+                  <div>
+                    <dt>Source</dt>
+                    <dd>
+                      {project.github ? (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Public repository
+                        </a>
+                      ) : (
+                        <span>
+                          <Lock size={11} aria-hidden="true" />
+                          Private
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className={styles.stack}>
+                  <p>Stack</p>
+                  <div>
+                    {project.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            <nav className={styles.projectNav} aria-label="More projects">
+              {previousProject ? (
+                <Link href={`/projects/${projectSlug(previousProject)}`}>
+                  <span>Previous</span>
+                  {previousProject.title}
+                </Link>
+              ) : (
+                <span />
+              )}
+              {nextProject ? (
+                <Link href={`/projects/${projectSlug(nextProject)}`}>
+                  <span>Next</span>
+                  {nextProject.title}
+                </Link>
+              ) : (
+                <Link href="/projects">
+                  <span>Next</span>
+                  Project archive
+                </Link>
+              )}
+            </nav>
+          </article>
+        </main>
+
+        <PortfolioFooter />
+      </div>
     </>
   );
 }

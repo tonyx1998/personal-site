@@ -58,9 +58,12 @@
   transition: color 180ms ease;
 }
 
-.navLink:first-child,
 .navLink:hover,
 .navLink:focus-visible {
+  color: var(--portfolio-accent);
+}
+
+.navLinkActive {
   color: var(--portfolio-accent);
 }
 

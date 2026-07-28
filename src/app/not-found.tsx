@@ -1,38 +1,30 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
+import portfolioStyles from "@/components/PortfolioHome.module.css";
+import styles from "./not-found.module.css";
 
 export default function NotFound() {
   return (
-    <>
-      <Navbar />
-      <main className="pt-16 min-h-screen flex items-center justify-center px-4 sm:px-6">
-        <div className="max-w-xl mx-auto text-center py-24">
-          <p className="text-accent font-mono text-sm mb-4">404</p>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            Page not found
-          </h1>
-          <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-            The page you&apos;re looking for doesn&apos;t exist or has been
-            moved.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/"
-              className="px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity duration-200"
-            >
+    <div className={portfolioStyles.page}>
+      <PortfolioHeader />
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <p>404 / Not found</p>
+          <h1>This route doesn’t lead anywhere useful.</h1>
+          <div className={styles.links}>
+            <Link href="/">
+              <ArrowLeft size={15} />
               Back home
             </Link>
-            <Link
-              href="/projects"
-              className="px-6 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-muted transition-colors duration-200"
-            >
-              See projects
+            <Link href="/projects">
+              Browse projects
+              <ArrowUpRight size={15} />
             </Link>
           </div>
         </div>
       </main>
-      <Footer />
-    </>
+      <PortfolioFooter />
+    </div>
   );
 }

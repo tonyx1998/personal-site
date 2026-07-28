@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
 import ProjectsAll from "@/components/ProjectsAll";
+import portfolioStyles from "@/components/PortfolioHome.module.css";
 import {
   projectsCollectionJsonLd,
   jsonLdScriptProps,
@@ -10,14 +10,14 @@ import {
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Every project To Yin Yu has shipped — full-stack apps, AI voice agents, data tools, and learning resources.",
+    "A complete archive of full-stack products, public-data tools, realtime voice work, and technical learning projects by To Yin Yu.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
     title: "Projects · To Yin Yu",
     description:
-      "Every project To Yin Yu has shipped — full-stack apps, AI voice agents, data tools, and learning resources.",
+      "Full-stack products, public-data tools, realtime voice work, and technical learning projects by To Yin Yu.",
     url: "/projects",
     type: "website",
   },
@@ -27,11 +27,13 @@ export default function ProjectsPage() {
   return (
     <>
       <script {...jsonLdScriptProps(projectsCollectionJsonLd)} />
-      <Navbar />
-      <main className="pt-16">
-        <ProjectsAll />
-      </main>
-      <Footer />
+      <div className={portfolioStyles.page}>
+        <PortfolioHeader />
+        <main>
+          <ProjectsAll />
+        </main>
+        <PortfolioFooter />
+      </div>
     </>
   );
 }

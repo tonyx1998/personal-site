@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { PortfolioFooter, PortfolioHeader } from "./PortfolioChrome";
 import styles from "./PortfolioHome.module.css";
 
 type PortfolioProject = {
@@ -16,6 +17,7 @@ type PortfolioProject = {
   problem: string;
   build: string;
   href: string;
+  live: string;
 };
 
 const projects: PortfolioProject[] = [
@@ -29,6 +31,7 @@ const projects: PortfolioProject[] = [
     build:
       "Daily AAA pipeline with server-rendered D3 maps, state trends, affordability, and trip cost.",
     href: "/projects/gasolytics-us-gas-price-map",
+    live: "https://www.gasolytics.com/",
   },
   {
     name: "SoloMock",
@@ -40,6 +43,7 @@ const projects: PortfolioProject[] = [
     build:
       "WebSocket audio streaming with transcript, code capture, and a Socratic AI interviewer.",
     href: "/projects/solomock",
+    live: "https://solomock.com",
   },
   {
     name: "SoloYap",
@@ -51,6 +55,7 @@ const projects: PortfolioProject[] = [
     build:
       "Realtime voice practice with instant corrections, guided scenarios, and CEFR-graded difficulty.",
     href: "/projects/soloyap",
+    live: "https://soloyap.com",
   },
   {
     name: "Throughline",
@@ -62,22 +67,15 @@ const projects: PortfolioProject[] = [
     build:
       "A five-act learning system that connects guides, hands-on building, interview prep, and practice.",
     href: "/projects/throughline-technical-learning-ecosystem",
+    live: "https://throughline.guide",
   },
 ];
 
 const reelProjects = [projects[1], projects[2], projects[0], projects[3]];
 
-const navItems = [
-  { label: "Work", href: "#work" },
-  { label: "All projects", href: "/projects" },
-  { label: "About", href: "#about" },
-  { label: "Resume", href: "/resume.pdf" },
-];
-
 export default function PortfolioHome() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const reduceMotion = useReducedMotion();
   const activeProject = reelProjects[activeIndex];
 
@@ -93,72 +91,7 @@ export default function PortfolioHome() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <nav className={styles.nav} aria-label="Main navigation">
-          <Link
-            className={styles.wordmark}
-            href="/"
-            aria-label="To Yin Yu home"
-          >
-            To Yin Yu
-          </Link>
-
-          <div className={styles.desktopNav}>
-            {navItems.map((item) =>
-              item.href.startsWith("/") && item.href !== "/resume.pdf" ? (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={styles.navLink}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a key={item.label} href={item.href} className={styles.navLink}>
-                  {item.label}
-                </a>
-              )
-            )}
-          </div>
-
-          <button
-            type="button"
-            className={styles.menuButton}
-            aria-expanded={mobileOpen}
-            aria-controls="portfolio-mobile-menu"
-            aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
-            onClick={() => setMobileOpen((open) => !open)}
-          >
-            {mobileOpen ? <X size={19} /> : <Menu size={19} />}
-          </button>
-
-          {mobileOpen && (
-            <div id="portfolio-mobile-menu" className={styles.mobileMenu}>
-              {navItems.map((item) =>
-                item.href.startsWith("/") && item.href !== "/resume.pdf" ? (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={styles.mobileNavLink}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className={styles.mobileNavLink}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                )
-              )}
-            </div>
-          )}
-        </nav>
-      </header>
+      <PortfolioHeader />
 
       <main>
         <section className={`${styles.container} ${styles.hero}`} id="top">
@@ -194,9 +127,13 @@ export default function PortfolioHome() {
           >
             <div className={styles.reelStage}>
               <AnimatePresence initial={false}>
-                <motion.div
+                <motion.a
                   key={activeProject.name}
                   className={styles.reelImage}
+                  href={activeProject.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open the live ${activeProject.name} site`}
                   initial={reduceMotion ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={reduceMotion ? undefined : { opacity: 0 }}
@@ -209,7 +146,7 @@ export default function PortfolioHome() {
                     loading="eager"
                     sizes="(max-width: 900px) 100vw, 68vw"
                   />
-                </motion.div>
+                </motion.a>
               </AnimatePresence>
             </div>
 
@@ -314,10 +251,12 @@ export default function PortfolioHome() {
                   </Link>
                 </div>
 
-                <Link
-                  href={project.href}
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
                   className={styles.projectImage}
-                  aria-label={`View ${project.name} project`}
+                  aria-label={`Open the live ${project.name} site`}
                 >
                   <Image
                     src={project.image}
@@ -325,7 +264,7 @@ export default function PortfolioHome() {
                     fill
                     sizes="(max-width: 820px) 100vw, 68vw"
                   />
-                </Link>
+                </a>
               </motion.article>
             ))}
           </div>
@@ -401,26 +340,7 @@ export default function PortfolioHome() {
         </section>
       </main>
 
-      <footer className={`${styles.container} ${styles.footer}`} id="contact">
-        <p>Have a useful problem?</p>
-        <div className={styles.footerLinks}>
-          <a href="mailto:tonyx1998@gmail.com">tonyx1998@gmail.com</a>
-          <a
-            href="https://github.com/tonyx1998"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub <ArrowUpRight size={14} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/to-yin-yu/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn <ArrowUpRight size={14} />
-          </a>
-        </div>
-      </footer>
+      <PortfolioFooter />
     </div>
   );
 }
