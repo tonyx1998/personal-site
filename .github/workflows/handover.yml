@@ -1,0 +1,137 @@
+# Cross-agent handover check.
+#
+# Source-touching pull requests must also update HANDOVER.md, so the record of
+# where the work stands travels in the same commit as the work itself.
+#
+# This file is the master copy, kept in sts2/context/. It is deployed to each
+# repo as .github/workflows/handover.yml. The validation below is deliberately
+# self-contained: these repos do not have sts2 checked out, so it cannot call
+# context/handover.mjs and must re-implement the same two checks in shell.
+#
+# What it CANNOT do: force any agent to READ the file, or judge whether the prose
+# is any good. "Next action: continue the work" passes. It only forces the file to
+# be updated. It also gates nothing until branch protection marks it required,
+# which is a per-repo GitHub setting a human has to apply.
+
+name: handover
+
+on:
+  pull_request:
+    # labeled/unlabeled so adding `no-handover` re-runs and clears a red check.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  handover:
+    name: HANDOVER.md is current
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-handover') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+
+          # Three dots, not two. `git diff A B` reports every difference between
+          # the two commits, including commits that landed on the base branch
+          # after this PR forked - so in a repo that commits on a schedule the
+          # check eventually demands a HANDOVER.md update for work the PR never
+          # touched. The three-dot form diffs against the merge base instead.
+          changed=$(git diff --name-only "$BASE_SHA...$HEAD_SHA")
+          if [ -z "$changed" ]; then
+            echo "No files changed. Nothing to check."
+            exit 0
+          fi
+
+          echo "Changed files:"
+          echo "$changed" | sed 's/^/  /'
+          echo
+
+          # Classify by what is NOT source, rather than by naming source
+          # directories. An earlier version matched ^(src|app|lib|scripts)/, which
+          # is wrong in most of the repos this ships to: the static site keeps its
+          # code at the root, one project uses skill/ and webapp/, another uses
+          # reachspan/ and server/. In those repos the gate matched nothing, so it
+          # sat green forever while the PR body advertised enforcement - worse than
+          # having no check, because it looks like one.
+          #
+          # Anything not on this list counts as source, so a new directory is
+          # covered the day it appears instead of being silently exempt.
+          not_source='(^|/)[^/]+\.md$|^docs/|^\.github/|^LICENSE$|^\.gitignore$|^\.gitattributes$|^\.editorconfig$|^(package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml|uv\.lock|poetry\.lock|requirements[a-z-]*\.txt|Pipfile(\.lock)?|go\.(mod|sum)|Cargo\.lock)$'
+
+          source_changed=$(echo "$changed" | grep -vE "$not_source" || true)
+
+          if [ -z "$source_changed" ]; then
+            echo "Docs, config and dependency changes only. Skipping."
+            exit 0
+          fi
+
+          echo "Source changed:"
+          echo "$source_changed" | sed 's/^/  /'
+          echo
+
+          if ! echo "$changed" | grep -qx 'HANDOVER.md'; then
+            {
+              echo "FAIL: this PR changes source but does not update HANDOVER.md."
+              echo
+              echo "Whoever picks this up next - another agent, another model, another"
+              echo "machine - reads HANDOVER.md to learn where things stand. Left stale,"
+              echo "it confidently describes a state that no longer exists."
+              echo
+              echo "The generator lives in the sts2 repo, NOT in this one. From an sts2"
+              echo "checkout, pointing -C at this repo:"
+              echo
+              echo "  node context/handover.mjs -C <path-to-this-repo> --write"
+              echo
+              echo "then rewrite the human zone. Regenerating the block alone updates"
+              echo "nothing a reader actually needs. Without an sts2 checkout, edit"
+              echo "HANDOVER.md by hand and leave the machine block alone."
+              echo
+              echo "Genuinely not applicable? Add the 'no-handover' label to this PR."
+            } >&2
+            exit 1
+          fi
+
+          # --- the machine block must be intact and describe THIS history -------
+
+          if [ ! -f HANDOVER.md ]; then
+            echo "FAIL: HANDOVER.md is in the diff but not present at HEAD." >&2
+            exit 1
+          fi
+
+          if ! grep -q 'BEGIN:machine' HANDOVER.md || ! grep -q 'END:machine' HANDOVER.md; then
+            echo "FAIL: HANDOVER.md has no machine block (BEGIN:machine / END:machine)." >&2
+            echo "Regenerate it with: node context/handover.mjs --write" >&2
+            exit 1
+          fi
+
+          recorded=$(sed -n 's/^Commit:[[:space:]]*\([^[:space:]]*\).*/\1/p' HANDOVER.md | head -1)
+          if [ -z "$recorded" ]; then
+            echo "FAIL: the machine block records no commit." >&2
+            exit 1
+          fi
+
+          if ! git cat-file -e "${recorded}^{commit}" 2>/dev/null; then
+            echo "FAIL: the machine block records commit $recorded, which is not in this repo." >&2
+            echo "That block was almost certainly hand-edited. Regenerate it." >&2
+            exit 1
+          fi
+
+          # The recorded commit must be reachable from the PR head. If it is not,
+          # the block was generated on unrelated history and its facts describe a
+          # different branch.
+          if ! git merge-base --is-ancestor "$recorded" "$HEAD_SHA"; then
+            echo "FAIL: recorded commit $recorded is not an ancestor of this PR's head." >&2
+            echo "The machine block describes history this branch does not contain." >&2
+            exit 1
+          fi
+
+          echo "OK: HANDOVER.md updated, machine block valid, records $recorded."
