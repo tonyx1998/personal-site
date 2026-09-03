@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
-import styles from "./PortfolioHome.module.css";
+import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "@/app/providers";
+import styles from "./Chrome.module.css";
 
 const navItems = [
   { label: "Work", href: "/#work", section: "home" },
@@ -12,6 +13,22 @@ const navItems = [
   { label: "About", href: "/#about", section: "home" },
   { label: "Resume", href: "/resume.pdf", section: "resume" },
 ];
+
+function ThemeButton({ className }: { className?: string }) {
+  const { toggle } = useTheme();
+  return (
+    <button
+      type="button"
+      className={className ?? styles.themeButton}
+      onClick={toggle}
+      aria-label="Switch between light and dark theme"
+      title="Switch theme"
+    >
+      <Sun size={16} className={styles.sun} aria-hidden="true" />
+      <Moon size={16} className={styles.moon} aria-hidden="true" />
+    </button>
+  );
+}
 
 export function PortfolioHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,8 +38,13 @@ export function PortfolioHeader() {
     (label === "Work" && pathname === "/") ||
     (section === "projects" && pathname.startsWith("/projects"));
 
+  const linkClass = (label: string, section: string) =>
+    isActive(label, section)
+      ? `${styles.navLink} ${styles.navLinkActive}`
+      : styles.navLink;
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.container} ${styles.header}`}>
       <nav className={styles.nav} aria-label="Main navigation">
         <Link className={styles.wordmark} href="/" aria-label="To Yin Yu home">
           To Yin Yu
@@ -34,11 +56,7 @@ export function PortfolioHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                className={
-                  isActive(item.label, item.section)
-                    ? `${styles.navLink} ${styles.navLinkActive}`
-                    : styles.navLink
-                }
+                className={linkClass(item.label, item.section)}
               >
                 {item.label}
               </Link>
@@ -46,16 +64,13 @@ export function PortfolioHeader() {
               <a
                 key={item.label}
                 href={item.href}
-                className={
-                  isActive(item.label, item.section)
-                    ? `${styles.navLink} ${styles.navLinkActive}`
-                    : styles.navLink
-                }
+                className={linkClass(item.label, item.section)}
               >
                 {item.label}
               </a>
             )
           )}
+          <ThemeButton />
         </div>
 
         <button
@@ -92,6 +107,10 @@ export function PortfolioHeader() {
                 </a>
               )
             )}
+            <div className={styles.mobileTheme}>
+              <ThemeButton />
+              <span>Light or dark</span>
+            </div>
           </div>
         )}
       </nav>
@@ -102,10 +121,7 @@ export function PortfolioHeader() {
 export function PortfolioFooter() {
   return (
     <footer className={`${styles.container} ${styles.footer}`} id="contact">
-      <p>
-        Looking for a first full-time software engineering role, Seattle area or
-        remote.
-      </p>
+      <p>If you are hiring a developer who ships, let’s talk.</p>
       <div className={styles.footerLinks}>
         <a href="mailto:tonyx1998@gmail.com">tonyx1998@gmail.com</a>
         <a
@@ -122,6 +138,7 @@ export function PortfolioFooter() {
         >
           LinkedIn <ArrowUpRight size={14} />
         </a>
+        <a href="/resume.pdf">Resume (PDF)</a>
       </div>
     </footer>
   );

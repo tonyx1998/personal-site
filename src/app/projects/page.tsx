@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
 import ProjectsAll from "@/components/ProjectsAll";
-import portfolioStyles from "@/components/PortfolioHome.module.css";
+import chrome from "@/components/Chrome.module.css";
 import {
   projectsCollectionJsonLd,
   jsonLdScriptProps,
@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Every project To Yin Yu has shipped: Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Throughline, client work, and technical courses.",
+    "Every project To Yin Yu has shipped: How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, Throughline, and technical courses.",
   alternates: {
     canonical: "/projects",
   },
@@ -27,7 +27,7 @@ export default function ProjectsPage() {
   return (
     <>
       <script {...jsonLdScriptProps(projectsCollectionJsonLd)} />
-      <div className={portfolioStyles.page}>
+      <div className={chrome.page}>
         <PortfolioHeader />
         <main>
           <ProjectsAll />

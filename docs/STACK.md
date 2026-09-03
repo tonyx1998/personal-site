@@ -4,11 +4,11 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Framework and rendering
 
-**Next.js 16, App Router.** Every route is a Server Component except the small client pieces that need state: the theme store in `src/app/providers.tsx`, the project reel and the mobile menu.
+**Next.js 16, App Router.** Every route is a Server Component except the small client pieces that need state: the theme store in `src/app/providers.tsx` and the header with its mobile menu and theme toggle.
 
 **Static rendering.** Nothing on the site reads request data, so every page can be prerendered at build time and served from the Vercel CDN. The project pages use `generateStaticParams` over the JSON roster. Do not add `cookies()` or `headers()` to the root layout; that would turn every route dynamic again.
 
-**Theme without a flash.** `layout.tsx` renders `<html class="dark">` and a `beforeInteractive` script reads `localStorage.theme` before first paint. `providers.tsx` exposes the same value to React through `useSyncExternalStore`.
+**Theme without a flash.** Light is the default. A `beforeInteractive` script in `layout.tsx` applies a saved choice from `localStorage.theme`, or else `prefers-color-scheme`, before first paint. `providers.tsx` exposes the same value to React through `useSyncExternalStore` and listens for system changes.
 
 ## Data
 
@@ -18,11 +18,11 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Styling and motion
 
-**Tailwind CSS v4** for utilities, with CSS Modules (`PortfolioHome.module.css`, `ProjectsAll.module.css`, `ProjectDetail.module.css`) for the page layouts. Design tokens live in `globals.css`.
+**Tailwind CSS v4** for the few body utilities, with CSS Modules (`Chrome.module.css`, `PortfolioHome.module.css`, `ProjectsAll.module.css`, `ProjectDetail.module.css`, `not-found.module.css`) for the layouts. Design tokens (ground, frame, ink, line, accent) live in `globals.css` with a `.dark` override set.
 
-**Framer Motion** is used only in `PortfolioHome.tsx`, for the project reel crossfade and the row reveal. Every animation checks `useReducedMotion` and `globals.css` zeroes animation durations under `prefers-reduced-motion: reduce`.
+**No animation library.** The only motion is a hover reveal on screenshot links. Everything is visible at rest, so the page reads the same with JavaScript off. `globals.css` zeroes transitions under `prefers-reduced-motion: reduce`.
 
-**Geist and Geist Mono** are loaded through `next/font`.
+**Newsreader** (headings, variable weight with optical sizing) and **Public Sans** (text) are loaded through `next/font`.
 
 ## SEO
 

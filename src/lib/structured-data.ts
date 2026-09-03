@@ -13,7 +13,7 @@ export const personJsonLd = {
   url: SITE_URL,
   jobTitle: "Software Developer",
   description:
-    "Software developer near Seattle who builds and runs his own products: Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline.",
+    "Software developer near Seattle who builds and runs his own products: How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline.",
   homeLocation: {
     "@type": "Place",
     address: {

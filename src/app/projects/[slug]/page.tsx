@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Lock } from "lucide-react";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
-import portfolioStyles from "@/components/PortfolioHome.module.css";
-import { projects, projectSlug, projectBySlug } from "@/lib/projects";
+import chrome from "@/components/Chrome.module.css";
+import {
+  displayUrl,
+  projects,
+  projectSlug,
+  projectBySlug,
+  shortTitle,
+} from "@/lib/projects";
 import { projectVisuals } from "@/lib/project-visuals";
 import { jsonLdScriptProps } from "@/lib/structured-data";
-import { SITE_URL } from "@/lib/site";
+import { formatDate, LINKS_CHECKED_ON, SITE_URL } from "@/lib/site";
 import styles from "./ProjectDetail.module.css";
 
 export function generateStaticParams() {
@@ -63,11 +68,12 @@ export default async function ProjectDetailPage({
   const project = projectBySlug(slug);
   if (!project) notFound();
 
-  const index = projects.findIndex(
-    (candidate) => projectSlug(candidate) === slug
-  );
-  const previousProject = index > 0 ? projects[index - 1] : null;
-  const nextProject = index < projects.length - 1 ? projects[index + 1] : null;
+  // Previous and next stay inside the same tier, so a product never pages
+  // into the supporting list and back.
+  const tier = projects.filter((p) => p.featured === project.featured);
+  const index = tier.findIndex((candidate) => projectSlug(candidate) === slug);
+  const previousProject = index > 0 ? tier[index - 1] : null;
+  const nextProject = index < tier.length - 1 ? tier[index + 1] : null;
   const visual = projectVisuals[slug];
 
   const personId = `${SITE_URL}/#person`;
@@ -89,18 +95,14 @@ export default async function ProjectDetailPage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Projects",
-        item: `${SITE_URL}/projects`,
-      },
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       {
         "@type": "ListItem",
         position: 2,
-        name: project.title,
-        item: url,
+        name: "Projects",
+        item: `${SITE_URL}/projects`,
       },
+      { "@type": "ListItem", position: 3, name: project.title, item: url },
     ],
   };
 
@@ -109,47 +111,37 @@ export default async function ProjectDetailPage({
       <script {...jsonLdScriptProps(creativeWork)} />
       <script {...jsonLdScriptProps(breadcrumb)} />
 
-      <div className={portfolioStyles.page}>
+      <div className={chrome.page}>
         <PortfolioHeader />
 
-        <main className={styles.main}>
-          <article className={styles.container}>
-            <Link href="/projects" className={styles.backLink}>
-              <ArrowLeft size={14} />
-              Project archive
+        <main className={`${chrome.container} ${styles.main}`}>
+          <article>
+            <Link href="/projects" className={styles.back}>
+              ← All projects
             </Link>
 
             <header className={styles.hero}>
-              <p className={styles.projectIndex}>
-                Project {String(index + 1).padStart(2, "0")} /{" "}
-                {String(projects.length).padStart(2, "0")}
-              </p>
-
-              <div className={styles.heroCopy}>
-                <h1>{project.title}</h1>
-                <p>{project.description}</p>
-
-                <div className={styles.actions}>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.primaryLink}
-                    >
-                      Open live site <ArrowUpRight size={15} />
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View source <ArrowUpRight size={15} />
-                    </a>
-                  )}
-                </div>
+              <h1>{project.title}</h1>
+              <p>{project.description}</p>
+              <div className={styles.actions}>
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open {displayUrl(project.live)}
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Source on GitHub
+                  </a>
+                )}
               </div>
             </header>
 
@@ -158,51 +150,52 @@ export default async function ProjectDetailPage({
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.heroImage}
-                aria-label={`Open the live ${project.title} site`}
+                className={styles.screen}
+                aria-label={`Open ${shortTitle(project)} in a new tab`}
               >
                 <Image
                   src={visual.src}
                   alt={visual.alt}
-                  fill
+                  width={1280}
+                  height={720}
                   priority
-                  sizes="(max-width: 1320px) calc(100vw - 48px), 1280px"
+                  sizes="(max-width: 1240px) 100vw, 1140px"
                 />
               </a>
             )}
 
-            <div className={styles.bodyGrid}>
-              <section className={styles.buildSection}>
-                <p className={styles.sectionLabel}>What I built</p>
+            <div className={styles.body}>
+              <section aria-labelledby="built-heading">
+                <h2 id="built-heading" className={styles.label}>
+                  What I built
+                </h2>
                 {project.highlights && project.highlights.length > 0 ? (
-                  <ol>
-                    {project.highlights.map((highlight, highlightIndex) => (
-                      <li key={highlight}>
-                        <span>
-                          {String(highlightIndex + 1).padStart(2, "0")}
-                        </span>
-                        <p>{highlight}</p>
-                      </li>
+                  <ul className={styles.built}>
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
                     ))}
-                  </ol>
+                  </ul>
                 ) : (
-                  <p className={styles.emptyNote}>
-                    Designed, built, and shipped as an independent software
-                    project.
-                  </p>
+                  <p>Designed, built, and shipped as an independent project.</p>
                 )}
               </section>
 
-              <aside className={styles.facts} aria-label="Project details">
-                <p className={styles.sectionLabel}>Project details</p>
-                <dl>
+              <aside aria-labelledby="details-heading">
+                <h2 id="details-heading" className={styles.label}>
+                  Details
+                </h2>
+                <dl className={styles.facts}>
                   <div>
                     <dt>Year</dt>
                     <dd>{project.datePublished ?? "Ongoing"}</dd>
                   </div>
                   <div>
                     <dt>Status</dt>
-                    <dd>{project.live ? "Live" : "Archived"}</dd>
+                    <dd>
+                      {project.live
+                        ? `Live, checked ${formatDate(LINKS_CHECKED_ON)}`
+                        : "Archived"}
+                    </dd>
                   </div>
                   <div>
                     <dt>Source</dt>
@@ -216,44 +209,40 @@ export default async function ProjectDetailPage({
                           Public repository
                         </a>
                       ) : (
-                        <span>
-                          <Lock size={11} aria-hidden="true" />
-                          Private
-                        </span>
+                        "Private repository"
                       )}
                     </dd>
                   </div>
                 </dl>
-
-                <div className={styles.stack}>
-                  <p>Stack</p>
-                  <div>
-                    {project.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
+                <ul className={styles.tags} aria-label="Stack">
+                  {project.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               </aside>
             </div>
 
-            <nav className={styles.projectNav} aria-label="More projects">
+            <nav className={styles.pager} aria-label="More projects">
               {previousProject ? (
                 <Link href={`/projects/${projectSlug(previousProject)}`}>
                   <span>Previous</span>
-                  {previousProject.title}
+                  <b>{previousProject.title}</b>
                 </Link>
               ) : (
                 <span />
               )}
               {nextProject ? (
-                <Link href={`/projects/${projectSlug(nextProject)}`}>
+                <Link
+                  href={`/projects/${projectSlug(nextProject)}`}
+                  className={styles.pagerNext}
+                >
                   <span>Next</span>
-                  {nextProject.title}
+                  <b>{nextProject.title}</b>
                 </Link>
               ) : (
-                <Link href="/projects">
+                <Link href="/projects" className={styles.pagerNext}>
                   <span>Next</span>
-                  Project archive
+                  <b>All projects</b>
                 </Link>
               )}
             </nav>

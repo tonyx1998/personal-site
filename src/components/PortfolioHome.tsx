@@ -1,383 +1,212 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { PortfolioFooter, PortfolioHeader } from "./PortfolioChrome";
+import {
+  displayUrl,
+  projectSlug,
+  selectedProjects,
+  shortTitle,
+  supportingProjects,
+} from "@/lib/projects";
+import { projectVisuals } from "@/lib/project-visuals";
+import { formatDate, LINKS_CHECKED_ON } from "@/lib/site";
+import chrome from "./Chrome.module.css";
 import styles from "./PortfolioHome.module.css";
 
-type PortfolioProject = {
-  name: string;
-  category: string;
-  year: string;
-  image: string;
-  alt: string;
-  problem: string;
-  build: string;
-  href: string;
-  live: string;
-};
-
-const projects: PortfolioProject[] = [
-  {
-    name: "Plugrade",
-    category: "Trust index",
-    year: "2026",
-    image: "/projects/plugrade.png",
-    alt: "Plugrade home page explaining trust grades for Claude Code plugins",
-    problem:
-      "Claude Code plugins are pinned to a commit, but the code that runs is often fetched at launch.",
-    build:
-      "Line-by-line audits with file-and-line evidence, and a daily snapshot of 300+ plugins' install counts since July 2026.",
-    href: "/projects/plugrade",
-    live: "https://plugrade.dev",
-  },
-  {
-    name: "How's My Job Fit?",
-    category: "Job-fit reports",
-    year: "2026",
-    image: "/projects/howsmyjobfit.png",
-    alt: "How's My Job Fit? workbench with a resume drop zone and report panel",
-    problem:
-      "Keyword match scores tell a candidate nothing about which requirements actually matter.",
-    build:
-      "Resumes parsed in the browser, a deterministic weighted fit model, and a report that separates eligibility from skills.",
-    href: "/projects/hows-my-job-fit",
-    live: "https://howsmyjobfit.com",
-  },
-  {
-    name: "Gasolytics",
-    category: "Data platform",
-    year: "2026",
-    image: "/projects/gasolytics.png",
-    alt: "Gasolytics dashboard showing a United States fuel price map",
-    problem: "U.S. fuel-price data is noisy, scattered, and hard to explore.",
-    build:
-      "Daily AAA averages from a snapshot feed, server-rendered d3-geo maps, state and metro pages, a trip calculator, and an EV comparison.",
-    href: "/projects/gasolytics-us-gas-price-map",
-    live: "https://www.gasolytics.com/",
-  },
-  {
-    name: "SoloMock",
-    category: "Developer tool",
-    year: "2025",
-    image: "/projects/solomock.png",
-    alt: "SoloMock voice coding interview workspace",
-    problem: "Practicing interviews alone lacks realism and structure.",
-    build:
-      "Realtime voice over WebRTC, editor snapshots streamed to the model, and 15 interviewer briefs with staged hints.",
-    href: "/projects/solomock",
-    live: "https://solomock.com",
-  },
-  {
-    name: "SoloYap",
-    category: "Voice tutor",
-    year: "2025",
-    image: "/projects/soloyap.png",
-    alt: "SoloYap realtime English speaking tutor",
-    problem: "Speaking practice without feedback is slow and unstructured.",
-    build:
-      "Realtime voice practice with instant corrections, guided scenarios, and CEFR-graded difficulty.",
-    href: "/projects/soloyap",
-    live: "https://soloyap.com",
-  },
-  {
-    name: "Throughline",
-    category: "Learning platform",
-    year: "2026",
-    image: "/projects/throughline.png",
-    alt: "Throughline technical learning platform home page",
-    problem: "Engineers jump between tutorials without a coherent path.",
-    build:
-      "A five-act learning system that connects guides, hands-on building, interview prep, and practice.",
-    href: "/projects/throughline-technical-learning-ecosystem",
-    live: "https://throughline.guide",
-  },
-];
-
-const reelProjects = [
-  projects[0],
-  projects[1],
-  projects[3],
-  projects[4],
-  projects[2],
-  projects[5],
-];
-
 export default function PortfolioHome() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const reduceMotion = useReducedMotion();
-  const activeProject = reelProjects[activeIndex];
-
-  useEffect(() => {
-    if (reduceMotion || isPaused) return;
-
-    const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % reelProjects.length);
-    }, 6000);
-
-    return () => window.clearInterval(interval);
-  }, [isPaused, reduceMotion]);
+  const checked = formatDate(LINKS_CHECKED_ON);
 
   return (
-    <div className={styles.page}>
+    <div className={chrome.page}>
       <PortfolioHeader />
 
       <main>
-        <section className={`${styles.container} ${styles.hero}`} id="top">
-          <motion.div
-            className={styles.intro}
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-          >
-            <p className={styles.eyebrow}>Software developer · Lynnwood, WA</p>
-            <h1>I build products on my own and keep them running.</h1>
-            <p className={styles.introCopy}>
-              A plugin trust index, a job-fit checker, two realtime voice apps,
-              a gas-price map, and a set of technical courses. All of them are
-              live.
-            </p>
-            <p className={styles.introMeta}>
-              Looking for my first full-time software engineering role. Seattle
-              area or remote. US citizen. B.S. Computer Science, University of
-              Maryland.
-            </p>
-          </motion.div>
-
-          <div
-            className={styles.reel}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onFocusCapture={() => setIsPaused(true)}
-            onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) {
-                setIsPaused(false);
-              }
-            }}
-          >
-            <div className={styles.reelStage}>
-              <AnimatePresence initial={false}>
-                <motion.a
-                  key={activeProject.name}
-                  className={styles.reelImage}
-                  href={activeProject.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open the live ${activeProject.name} site`}
-                  initial={reduceMotion ? false : { opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={reduceMotion ? undefined : { opacity: 0 }}
-                  transition={{ duration: 0.65, ease: "easeInOut" }}
-                >
-                  <Image
-                    src={activeProject.image}
-                    alt={activeProject.alt}
-                    fill
-                    loading="eager"
-                    sizes="(max-width: 900px) 100vw, 68vw"
-                  />
-                </motion.a>
-              </AnimatePresence>
-            </div>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={`${activeProject.name}-copy`}
-                className={styles.reelSummary}
-                initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-              >
-                <div>
-                  <p className={styles.counter}>
-                    {String(activeIndex + 1).padStart(2, "0")} / 04
-                  </p>
-                  <h2>{activeProject.name}</h2>
-                </div>
-                <div className={styles.reelDescription}>
-                  <p>{activeProject.problem}</p>
-                  <p className={styles.buildDetail}>{activeProject.build}</p>
-                  <Link href={activeProject.href} className={styles.textLink}>
-                    View case study <ArrowUpRight size={15} />
-                  </Link>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className={styles.reelControls} aria-label="Choose a project">
-              <div className={styles.progressTrack} aria-hidden="true">
-                <span
-                  key={`${activeIndex}-${isPaused}`}
-                  className={styles.progressFill}
-                  style={{
-                    animationPlayState: isPaused ? "paused" : "running",
-                    animationDuration: reduceMotion ? "0s" : "6s",
-                  }}
-                />
-              </div>
-              <div className={styles.reelTabs}>
-                {reelProjects.map((project, index) => (
-                  <button
-                    key={project.name}
-                    type="button"
-                    aria-pressed={activeIndex === index}
-                    className={
-                      activeIndex === index
-                        ? `${styles.reelTab} ${styles.reelTabActive}`
-                        : styles.reelTab
-                    }
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    {project.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <p className={styles.srOnly} aria-live="polite">
-              Showing {activeProject.name}
-            </p>
-          </div>
+        <section className={`${chrome.container} ${styles.hero}`} id="top">
+          <h1>I build software products on my own and keep them running.</h1>
+          <p className={styles.lead}>
+            Seven of them are live right now: a job-fit checker, two realtime
+            voice apps, a gas-price map, two business sites with real booking
+            flows, and a set of technical courses. Every screenshot below opens
+            the real thing.
+          </p>
+          <ul className={styles.ask} aria-label="What I am looking for">
+            <li className={styles.askMain}>
+              Looking for my first full-time software engineering role
+            </li>
+            <li>Seattle area or remote</li>
+            <li>US citizen</li>
+            <li>B.S. Computer Science, University of Maryland</li>
+          </ul>
         </section>
 
-        <section className={`${styles.container} ${styles.work}`} id="work">
-          <div className={styles.sectionHeading}>
-            <p className={styles.sectionIndex}>01 / Work</p>
-            <h2>Selected work</h2>
-          </div>
+        <section
+          className={`${chrome.container} ${styles.products}`}
+          id="work"
+          aria-label="Selected products"
+        >
+          {selectedProjects.map((project, index) => {
+            const slug = projectSlug(project);
+            const visual = projectVisuals[slug];
+            const name = shortTitle(project);
 
-          <div className={styles.projectList}>
-            {projects.map((project, index) => (
-              <motion.article
-                key={project.name}
-                className={
-                  index % 2 === 1
-                    ? `${styles.projectRow} ${styles.projectRowReverse}`
-                    : styles.projectRow
-                }
-                initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.18 }}
-                transition={{ duration: 0.55, ease: "easeOut" }}
-              >
-                <div className={styles.projectCopy}>
-                  <p className={styles.projectNumber}>
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3>{project.name}</h3>
-                  <p className={styles.projectMeta}>
-                    {project.category} · {project.year}
-                  </p>
-                  <p className={styles.projectProblem}>
-                    <span>Problem.</span> {project.problem}
-                  </p>
-                  <p className={styles.projectBuild}>
-                    <span>Built.</span> {project.build}
-                  </p>
-                  <Link href={project.href} className={styles.textLink}>
-                    View project <ArrowUpRight size={15} />
-                  </Link>
+            return (
+              <article key={project.title} className={styles.product}>
+                {visual && project.live && (
+                  <div className={styles.screen}>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${name} in a new tab`}
+                    >
+                      <Image
+                        src={visual.src}
+                        alt={visual.alt}
+                        width={1280}
+                        height={720}
+                        priority={index === 0}
+                        sizes="(max-width: 1240px) 100vw, 1140px"
+                      />
+                      <span className={styles.open} aria-hidden="true">
+                        Open {displayUrl(project.live)}
+                      </span>
+                    </a>
+                  </div>
+                )}
+
+                <div className={styles.spec}>
+                  <div>
+                    <h2>
+                      <Link href={`/projects/${slug}`}>{name}</Link>
+                    </h2>
+                    <p className={styles.what}>{project.description}</p>
+                    <div className={styles.links}>
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {displayUrl(project.live)}
+                        </a>
+                      )}
+                      <Link href={`/projects/${slug}`}>Project notes</Link>
+                    </div>
+                    <p className={styles.meta}>
+                      {project.live && (
+                        <span className={styles.live}>
+                          Live, checked {checked}
+                        </span>
+                      )}
+                      <span>{project.datePublished}</span>
+                      <span>{project.tags.slice(0, 5).join(" · ")}</span>
+                    </p>
+                  </div>
+                  {project.highlights && (
+                    <ul className={styles.facts}>
+                      {project.highlights.map((fact) => (
+                        <li key={fact}>{fact}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.projectImage}
-                  aria-label={`Open the live ${project.name} site`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.alt}
-                    fill
-                    sizes="(max-width: 820px) 100vw, 68vw"
-                  />
-                </a>
-              </motion.article>
-            ))}
-          </div>
-
-          <Link href="/projects" className={styles.allProjectsLink}>
-            Browse the full project archive <ArrowUpRight size={16} />
-          </Link>
+              </article>
+            );
+          })}
         </section>
 
-        <section className={`${styles.container} ${styles.about}`} id="about">
-          <div className={styles.aboutHeading}>
-            <p className={styles.sectionIndex}>02 / About</p>
-            <h2>Who I am / How I work.</h2>
-          </div>
+        <section className={`${chrome.container} ${styles.more}`} id="more">
+          <h2>Smaller builds and courses</h2>
+          <p className={styles.moreLead}>
+            Client work, tools, and the guides that make up Throughline. All
+            live.{" "}
+            <Link href="/projects" className={styles.moreLink}>
+              See the full list with notes
+            </Link>
+          </p>
+          <ul className={styles.list}>
+            {supportingProjects.map((project) => {
+              const slug = projectSlug(project);
+              return (
+                <li key={project.title}>
+                  <Link href={`/projects/${slug}`} className={styles.listTitle}>
+                    {shortTitle(project)}
+                  </Link>
+                  <span className={styles.listYear}>
+                    {project.datePublished}
+                  </span>
+                  <span className={styles.listDesc}>{project.description}</span>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.listLink}
+                    >
+                      {displayUrl(project.live)}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
 
-          <div className={styles.aboutGrid}>
-            <div className={styles.aboutColumn}>
-              <p className={styles.aboutLabel}>Who I am</p>
-              <p className={styles.aboutLead}>
-                I’m To Yin Yu, a software developer in Lynnwood, Washington. I
-                finished my computer science degree at the University of
-                Maryland in December 2022 and have been building and shipping my
-                own products since 2024.
+        <section className={`${chrome.container} ${styles.about}`} id="about">
+          <div>
+            <h2>About</h2>
+            <p>
+              I’m To Yin Yu, a software developer in Lynnwood, Washington. I
+              finished my computer science degree at the University of Maryland
+              in December 2022 and have been building and shipping my own
+              products since 2024.
+            </p>
+            <p>
+              I do the whole job: the product decision, the frontend, the
+              backend, deployment, and the part after launch where things break.
+              Most of my recent work puts language models in production, so I
+              spend a lot of time on cost limits, evaluation, and failure
+              handling.
+            </p>
+            <div className={styles.habits}>
+              <h3>Three habits, with the project each came from</h3>
+              <p>
+                <b>Bound the cost before launch.</b> SoloMock and SoloYap mint
+                short-lived keys, cap sessions at 15 minutes, and rate-limit by
+                IP, so an open voice app cannot run up the OpenAI bill.
               </p>
-              <p className={styles.aboutBody}>
-                I do the whole job: the product decision, the frontend, the
-                backend, deployment, and the part after launch where things
-                break. Most of my recent work puts language models in
-                production, so I spend a lot of time on cost limits, evaluation,
-                and failure handling.
+              <p>
+                <b>Fail loudly, not quietly.</b> Amex Roofing’s booking route
+                refuses requests from unknown origins before it touches the
+                calendar, and its calendar sync raises an alarm instead of
+                dropping a booking.
               </p>
-              <div className={styles.timeline}>
-                <p>
-                  <span>2024—Now</span> Independent software developer
-                </p>
-                <p>
-                  <span>2022</span> B.S. CS, University of Maryland
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.principles}>
-              <p className={styles.aboutLabel}>How I work</p>
-              <ol>
-                <li>
-                  <span>01</span>
-                  <div>
-                    <h3>Bound the cost before launch</h3>
-                    <p>
-                      SoloMock and SoloYap mint short-lived keys, cap sessions
-                      at 15 minutes, and rate-limit by IP, so an open voice app
-                      cannot run up the OpenAI bill.
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <span>02</span>
-                  <div>
-                    <h3>Refuse bad data</h3>
-                    <p>
-                      Plugrade’s daily scrape only commits when row counts,
-                      coverage, and day-over-day changes pass sanity gates. A
-                      failed gate keeps yesterday’s snapshot and opens an issue.
-                    </p>
-                  </div>
-                </li>
-                <li>
-                  <span>03</span>
-                  <div>
-                    <h3>Keep private data in the browser</h3>
-                    <p>
-                      How’s My Job Fit? parses resumes on the user’s machine and
-                      stores nothing. The report never leaves the page.
-                    </p>
-                  </div>
-                </li>
-              </ol>
+              <p>
+                <b>Keep private data in the browser.</b> How’s My Job Fit?
+                parses resumes on the user’s machine and stores nothing.
+              </p>
             </div>
           </div>
+          <dl className={styles.timeline}>
+            <div>
+              <dt>2024 to now</dt>
+              <dd>Independent software developer, seven live products</dd>
+            </div>
+            <div>
+              <dt>Dec 2022</dt>
+              <dd>B.S. Computer Science, University of Maryland</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>
+                Lynnwood, WA (Seattle area). US citizen. Open to relocation.
+              </dd>
+            </div>
+            <div>
+              <dt>Languages</dt>
+              <dd>English, Mandarin, Cantonese</dd>
+            </div>
+          </dl>
         </section>
       </main>
 

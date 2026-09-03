@@ -183,8 +183,8 @@ def main(out_path: str) -> None:
         Paragraph(
             "Software developer with a B.S. in Computer Science from the University of "
             "Maryland. Since 2024 I have designed, built, and run my own web products, "
-            "most recently a trust index for Claude Code plugins, a job-fit analysis "
-            "tool, and two realtime voice apps on the OpenAI Realtime API. US citizen "
+            "most recently a job-fit analysis tool, two realtime voice apps on the "
+            "OpenAI Realtime API, and a bilingual client site with an AI booking agent. US citizen "
             "based near Seattle, open to relocation. Seeking a first full-time software "
             "engineering role.",
             summary_style,
