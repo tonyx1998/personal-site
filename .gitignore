@@ -45,3 +45,8 @@ next-env.d.ts
 .claude/
 
 .vercel
+
+# scratch output from local QA runs
+/tmp/
+__pycache__/
+design-qa.md
