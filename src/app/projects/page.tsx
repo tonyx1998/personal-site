@@ -10,14 +10,14 @@ import {
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "A complete archive of full-stack products, public-data tools, realtime voice work, and technical learning projects by To Yin Yu.",
+    "Every project To Yin Yu has shipped: Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Throughline, client work, and technical courses.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
     title: "Projects · To Yin Yu",
     description:
-      "Full-stack products, public-data tools, realtime voice work, and technical learning projects by To Yin Yu.",
+      "Every project To Yin Yu has shipped, from AI products to technical courses.",
     url: "/projects",
     type: "website",
   },

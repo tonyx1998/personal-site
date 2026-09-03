@@ -19,23 +19,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "To Yin Yu — Full-Stack Engineer & Product Builder",
+    default: "To Yin Yu · Software Developer",
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu builds realtime voice tools, public-data products, and dependable full-stack systems.",
+    "To Yin Yu, software developer near Seattle. Live products include Plugrade, How's My Job Fit?, SoloMock, and Gasolytics. Open to a first full-time role.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
-    "Full-Stack Engineer",
+    "Software Developer",
     "Software Engineer",
-    "Product Engineer",
+    "Seattle",
     "Next.js",
-    "FastAPI",
-    "Python",
     "TypeScript",
-    "WebRTC",
+    "Python",
     "OpenAI Realtime API",
+    "Claude Code plugins",
     "Portfolio",
   ],
   authors: [{ name: "To Yin Yu" }],
@@ -46,16 +45,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "To Yin Yu — Full-Stack Engineer & Product Builder",
+    title: "To Yin Yu · Software Developer",
     description:
-      "Realtime voice tools, public-data products, and dependable full-stack systems.",
+      "Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline. All live, all built and run by one person.",
     siteName: "To Yin Yu",
   },
   twitter: {
     card: "summary_large_image",
-    title: "To Yin Yu — Full-Stack Engineer & Product Builder",
+    title: "To Yin Yu · Software Developer",
     description:
-      "Realtime voice tools, public-data products, and dependable full-stack systems.",
+      "Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline. All live, all built and run by one person.",
   },
   robots: {
     index: true,

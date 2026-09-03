@@ -22,6 +22,32 @@ type PortfolioProject = {
 
 const projects: PortfolioProject[] = [
   {
+    name: "Plugrade",
+    category: "Trust index",
+    year: "2026",
+    image: "/projects/plugrade.png",
+    alt: "Plugrade home page explaining trust grades for Claude Code plugins",
+    problem:
+      "Claude Code plugins are pinned to a commit, but the code that runs is often fetched at launch.",
+    build:
+      "Line-by-line audits with file-and-line evidence, and a daily snapshot of 300+ plugins' install counts since July 2026.",
+    href: "/projects/plugrade",
+    live: "https://plugrade.dev",
+  },
+  {
+    name: "How's My Job Fit?",
+    category: "Job-fit reports",
+    year: "2026",
+    image: "/projects/howsmyjobfit.png",
+    alt: "How's My Job Fit? workbench with a resume drop zone and report panel",
+    problem:
+      "Keyword match scores tell a candidate nothing about which requirements actually matter.",
+    build:
+      "Resumes parsed in the browser, a deterministic weighted fit model, and a report that separates eligibility from skills.",
+    href: "/projects/hows-my-job-fit",
+    live: "https://howsmyjobfit.com",
+  },
+  {
     name: "Gasolytics",
     category: "Data platform",
     year: "2026",
@@ -29,7 +55,7 @@ const projects: PortfolioProject[] = [
     alt: "Gasolytics dashboard showing a United States fuel price map",
     problem: "U.S. fuel-price data is noisy, scattered, and hard to explore.",
     build:
-      "Daily AAA pipeline with server-rendered D3 maps, state trends, affordability, and trip cost.",
+      "Daily AAA averages from a snapshot feed, server-rendered d3-geo maps, state and metro pages, a trip calculator, and an EV comparison.",
     href: "/projects/gasolytics-us-gas-price-map",
     live: "https://www.gasolytics.com/",
   },
@@ -41,7 +67,7 @@ const projects: PortfolioProject[] = [
     alt: "SoloMock voice coding interview workspace",
     problem: "Practicing interviews alone lacks realism and structure.",
     build:
-      "WebSocket audio streaming with transcript, code capture, and a Socratic AI interviewer.",
+      "Realtime voice over WebRTC, editor snapshots streamed to the model, and 15 interviewer briefs with staged hints.",
     href: "/projects/solomock",
     live: "https://solomock.com",
   },
@@ -71,7 +97,14 @@ const projects: PortfolioProject[] = [
   },
 ];
 
-const reelProjects = [projects[1], projects[2], projects[0], projects[3]];
+const reelProjects = [
+  projects[0],
+  projects[1],
+  projects[3],
+  projects[4],
+  projects[2],
+  projects[5],
+];
 
 export default function PortfolioHome() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -101,16 +134,17 @@ export default function PortfolioHome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
           >
-            <p className={styles.eyebrow}>
-              Independent developer · Engineer · Product builder
-            </p>
-            <h1>I build useful software from messy systems.</h1>
+            <p className={styles.eyebrow}>Software developer · Lynnwood, WA</p>
+            <h1>I build products on my own and keep them running.</h1>
             <p className={styles.introCopy}>
-              I build realtime voice tools, public-data products, and the
-              systems that keep them dependable.
+              A plugin trust index, a job-fit checker, two realtime voice apps,
+              a gas-price map, and a set of technical courses. All of them are
+              live.
             </p>
             <p className={styles.introMeta}>
-              B.S. Computer Science — University of Maryland
+              Looking for my first full-time software engineering role. Seattle
+              area or remote. US citizen. B.S. Computer Science, University of
+              Maryland.
             </p>
           </motion.div>
 
@@ -284,12 +318,17 @@ export default function PortfolioHome() {
             <div className={styles.aboutColumn}>
               <p className={styles.aboutLabel}>Who I am</p>
               <p className={styles.aboutLead}>
-                I’m To Yin Yu, an independent software developer who takes
-                products from idea to production.
+                I’m To Yin Yu, a software developer in Lynnwood, Washington. I
+                finished my computer science degree at the University of
+                Maryland in December 2022 and have been building and shipping my
+                own products since 2024.
               </p>
               <p className={styles.aboutBody}>
-                I move between product, frontend, backend, deployment, and the
-                production details that make software dependable.
+                I do the whole job: the product decision, the frontend, the
+                backend, deployment, and the part after launch where things
+                break. Most of my recent work puts language models in
+                production, so I spend a lot of time on cost limits, evaluation,
+                and failure handling.
               </p>
               <div className={styles.timeline}>
                 <p>
@@ -307,30 +346,32 @@ export default function PortfolioHome() {
                 <li>
                   <span>01</span>
                   <div>
-                    <h3>Own the whole path</h3>
+                    <h3>Bound the cost before launch</h3>
                     <p>
-                      Take projects from messy inputs to reliable systems I can
-                      stand behind.
+                      SoloMock and SoloYap mint short-lived keys, cap sessions
+                      at 15 minutes, and rate-limit by IP, so an open voice app
+                      cannot run up the OpenAI bill.
                     </p>
                   </div>
                 </li>
                 <li>
                   <span>02</span>
                   <div>
-                    <h3>Design the failure states</h3>
+                    <h3>Refuse bad data</h3>
                     <p>
-                      Anticipate what breaks and build the behavior before it
-                      happens.
+                      Plugrade’s daily scrape only commits when row counts,
+                      coverage, and day-over-day changes pass sanity gates. A
+                      failed gate keeps yesterday’s snapshot and opens an issue.
                     </p>
                   </div>
                 </li>
                 <li>
                   <span>03</span>
                   <div>
-                    <h3>Start with the user’s task</h3>
+                    <h3>Keep private data in the browser</h3>
                     <p>
-                      Focus on the job to be done, then remove everything that
-                      gets in the way.
+                      How’s My Job Fit? parses resumes on the user’s machine and
+                      stores nothing. The report never leaves the page.
                     </p>
                   </div>
                 </li>

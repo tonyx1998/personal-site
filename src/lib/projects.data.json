@@ -1,60 +1,69 @@
 [
   {
-    "title": "Throughline — Technical Learning Ecosystem",
-    "description": "The hub for a connected set of first-principles technical learning guides — a 5-act ladder (Code → Specialize → Build → Prep → Practice) linking every guide plus SoloMock and Shipyard into one path from absolute beginner to job-ready.",
+    "title": "Plugrade",
+    "description": "Trust index for Claude Code plugins: security audits with file-and-line evidence, plus a daily record of what the official directory ships and how installs move.",
     "highlights": [
-      "Designed and shipped a static Astro hub that maps the whole ecosystem as a 5-act learning ladder, routing readers from a programming on-ramp through specialization guides into building and interview practice",
-      "Unified every guide on one house design system (`@throughline/guide-kit`) and a single pedagogical standard — readers enter knowing nothing and leave job-ready, read top-to-bottom",
-      "Source-available across the ecosystem (© 2026 To Yin Yu, All Rights Reserved), with in-browser interactive code and checkpoint quizzes throughout"
+      "Built the daily snapshotter (Playwright on GitHub Actions) that records install counts for 300+ plugins from claude.com/plugins into a Neon Postgres time series. It has run every day since July 31, 2026",
+      "Made the scrape refuse bad data. A run only commits if row counts stay in bounds, nearly every row has a count, yesterday's slugs are still present, and no count drops more than 20% in a day. A failed gate keeps the last good snapshot and opens an issue",
+      "Wrote the audit publishing pipeline with a default-deny embargo, so an unpublished finding can never be reached by URL. A test pins the rule and fails if the old default comes back"
     ],
-    "tags": ["Astro", "TypeScript", "Design System", "Vercel"],
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "Neon Postgres",
+      "GitHub Actions",
+      "Playwright"
+    ],
     "github": null,
-    "live": "https://throughline.guide",
+    "live": "https://plugrade.dev",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
+    "dateModified": "2026-09-02",
     "resume": {
-      "order": 4,
-      "title": "Throughline - Technical Learning Platform",
-      "stack": "Docusaurus, Astro, React, TypeScript, MDX",
+      "order": 1,
+      "title": "Plugrade - Trust Index for Claude Code Plugins",
+      "stack": "Next.js, TypeScript, Neon Postgres, GitHub Actions, Playwright, Vercel",
       "date": "2026",
-      "linksOverride": "<a href=\"https://throughline.guide\" color=\"#4f46e5\">throughline.guide</a>",
       "bullets": [
-        "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path from fundamentals to hands-on projects and interview practice.",
-        "Created a shared React and TypeScript design system with navigation, quizzes, code exercises, and consistent content patterns across the guide sites."
+        "Built a daily scraper and time-series store that has recorded install counts for 300+ Claude Code plugins every day since July 2026, with sanity gates that reject a run when row counts, coverage, or day-over-day drops look wrong.",
+        "Audited plugin manifests line by line for a security report with file-and-line citations, and built the publishing pipeline with a default-deny embargo covered by tests."
       ]
     }
   },
   {
-    "title": "SoloYap",
-    "description": "Realtime voice English tutor — practice spoken English with an AI partner over scenarios like ordering coffee, doctor visits, and salary negotiation, with grammar corrections after every turn.",
+    "title": "How's My Job Fit?",
+    "description": "Compares a candidate's own evidence with a job's requirements and shows what is fully supported, transferable, partial, or not shown at all. Files never leave the browser.",
     "highlights": [
-      "Built the realtime voice loop on OpenAI's Realtime API over WebRTC; instant grammar corrections and better-phrasing suggestions stream back after every learner turn",
-      "Authored 13 CEFR-graded scenarios (A2–C1) plus free-chat and custom-topic modes, with optional Mandarin/Cantonese native-language hints to lower the floor for beginners",
-      "Shipped as an installable PWA with manifest + apple-touch icons; layered cost protection via per-IP rate limits, session caps, and an email-allowlist request-access flow"
+      "Parses resumes and notes in the browser (PDF through pdf.js, Word through mammoth, images through Tesseract OCR), so nothing is uploaded or stored",
+      "Scores fit with a deterministic weighted model: requirements ranked by importance, eligibility checks kept separate from skills, and transferable evidence given partial credit with the reasoning shown",
+      "Ships six fictional example reports across industries plus public methodology and limitations pages, so a reader can judge the method before trusting a score"
     ],
-    "tags": [
-      "Next.js",
-      "React 19",
-      "TypeScript",
-      "OpenAI Realtime API",
-      "WebRTC",
-      "Tailwind CSS",
-      "PWA"
-    ],
+    "tags": ["Next.js", "React", "TypeScript", "pdf.js", "Tesseract.js"],
     "github": null,
-    "live": "https://soloyap.com",
+    "live": "https://howsmyjobfit.com",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2025"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 2,
+      "title": "How's My Job Fit? - Evidence-Based Job-Fit Reports",
+      "stack": "Next.js, React, TypeScript, pdf.js, Tesseract.js, Vercel",
+      "date": "2026",
+      "bullets": [
+        "Built a candidate-side job-fit workbench that parses resumes in the browser (PDF, DOCX, OCR) and scores them against a posting with a deterministic weighted model that keeps eligibility separate from skills.",
+        "Shipped six fictional example reports and a public methodology page; launched on Vercel in August 2026."
+      ]
+    }
   },
   {
     "title": "SoloMock",
-    "description": "Verbal mock-interview app — talk through coding problems out loud with an AI interviewer over realtime voice, get instant feedback.",
+    "description": "Talk through a coding problem out loud with an AI interviewer that hears you and watches your editor. Feedback arrives while you are still speaking.",
     "highlights": [
-      "Built the realtime voice loop on OpenAI's GA Realtime API over WebRTC; debounced code-editor snapshots stream into the model so the AI reacts to what you type, not just what you say",
-      "Authored 15 structured per-problem 'interviewer briefs' (solution tree, 4-rung Socratic hint ladder, follow-ups, edge cases) that drive interviewer behavior via the system prompt",
-      "Layered cost protection: per-IP rate limit, 15-min session cap, ephemeral key TTL, and a Discord-webhook extended-access request flow with manual-whitelist approval"
+      "Built the voice loop on OpenAI's Realtime API over WebRTC. Debounced snapshots of the code editor stream into the model, so the interviewer reacts to what you type as well as what you say",
+      "Wrote 15 per-problem interviewer briefs: a solution tree, a four-step hint ladder, follow-ups, and edge cases. The system prompt is built from the brief, so sessions stay consistent",
+      "Kept costs bounded with a per-IP rate limit, a 15-minute session cap, short-lived ephemeral keys, and a request-access flow that posts to Discord for manual approval"
     ],
     "tags": [
       "Next.js",
@@ -69,25 +78,140 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2025",
+    "dateModified": "2026-09-02",
     "resume": {
-      "order": 1,
+      "order": 3,
       "title": "SoloMock - Realtime Voice Mock Interviewer",
       "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
       "date": "2025",
       "bullets": [
-        "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and structured coding problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
-        "Created 15 interviewer guides with solution paths, staged hints, follow-up questions, and edge cases to keep sessions consistent across problems.",
+        "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and 15 structured problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
         "Protected sessions with server-minted ephemeral keys, sliding-window rate limits, a 15-minute session cap, and a manual extended-access workflow."
       ]
     }
   },
   {
-    "title": "all-in-one-URL",
-    "description": "Short links, QR codes, barcodes, and analytics platform.",
+    "title": "SoloYap",
+    "description": "Spoken English practice with an AI partner. Pick a scenario, talk it through, and get a correction and a better phrasing after every turn.",
     "highlights": [
-      "Built FastAPI backend with PostgreSQL, Redis caching, and tiered rate limiting",
-      "Added JWT auth and per-resource ownership while preserving anonymous resources",
-      "Deployed full stack on Vercel, Render, Neon, and Upstash"
+      "Realtime voice over WebRTC on OpenAI's Realtime API. A grammar correction and a better phrasing come back after each learner turn",
+      "13 scenarios graded A2 to C1 on the CEFR scale, plus free chat and custom topics, with optional Mandarin and Cantonese hints for beginners",
+      "Installable as a PWA, with the same cost controls as SoloMock: per-IP rate limits, session caps, and an email allowlist for extended access"
+    ],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "OpenAI Realtime API",
+      "WebRTC",
+      "Tailwind CSS",
+      "PWA"
+    ],
+    "github": null,
+    "live": "https://soloyap.com",
+    "featured": true,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2025",
+    "dateModified": "2026-09-02"
+  },
+  {
+    "title": "Gasolytics — US Gas Price Map",
+    "description": "Gas prices for all 50 states and DC on one interactive map, with state and metro pages, a trip cost calculator, and an EV-versus-gas comparison.",
+    "highlights": [
+      "Draws the choropleth with d3-geo on the server and ships it as SVG, so no d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
+      "Grew from a map into a toolkit: 51 state pages, metro pages, cheapest-gas-near-me, a trip calculator, an EV suite with per-state registration fees and break-even miles, and gas-tax, border-gap, and affordability pages",
+      "Reads daily AAA averages for four fuel grades from a Vercel Blob snapshot feed through an in-process cache. Mobile app-shell layout with a tab bar and a drag sheet over the map"
+    ],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "d3-geo",
+      "Vercel Blob",
+      "Vercel"
+    ],
+    "github": null,
+    "live": "https://www.gasolytics.com/",
+    "featured": true,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 4,
+      "title": "Gasolytics - US Gas Price Map",
+      "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
+      "date": "2026",
+      "bullets": [
+        "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
+        "Expanded it into a national fuel-economics toolkit with 51 state pages plus metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
+      ]
+    }
+  },
+  {
+    "title": "Throughline — Technical Learning Ecosystem",
+    "description": "The hub that connects six technical guides, SoloMock, and Shipyard into one path: learn to code, pick a specialty, build something, prepare, practice.",
+    "highlights": [
+      "Static Astro hub that lays the whole set out as a five-act ladder and routes readers from the programming on-ramp into a specialty guide, then into building and interview practice",
+      "Every guide runs on one shared design system, the guide-kit package, with in-browser code and checkpoint quizzes, and follows the same rule: start from nothing, read top to bottom",
+      "Each guide's source is available to read; all of the sites deploy on Vercel"
+    ],
+    "tags": ["Astro", "TypeScript", "Design System", "Vercel"],
+    "github": null,
+    "live": "https://throughline.guide",
+    "featured": true,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 6,
+      "title": "Throughline - Technical Learning Platform",
+      "stack": "Astro, Docusaurus, React, TypeScript, MDX",
+      "date": "2026",
+      "linksOverride": "<a href=\"https://throughline.guide\" color=\"#1f4e6b\">throughline.guide</a>",
+      "bullets": [
+        "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path, on a shared React and TypeScript design system with navigation, quizzes, and code exercises."
+      ]
+    }
+  },
+  {
+    "title": "Amex Roofing — Site + AI Booking Agent",
+    "description": "Production website for a Bay Area roofing contractor in English and Chinese: 26 city pages, instant roof estimates from satellite measurements, and an AI chat agent that books onto the crew's calendar.",
+    "highlights": [
+      "Buildless HTML and Tailwind site with English and Chinese homepage twins and 26 city landing pages (13 cities in each language), kept in sync by build scripts",
+      "Instant ballpark estimates from Google Solar API roof measurements feed a three-step mobile booking flow. Vercel serverless routes write the appointment to the crew's Google Calendar and post a Discord alert",
+      "Hours-aware contact: the crew's phone during working hours, a bilingual AI chat agent after hours, plus SEO articles and a daily analytics digest to Discord"
+    ],
+    "tags": [
+      "HTML",
+      "Tailwind CSS",
+      "Vercel Serverless",
+      "Google Calendar API",
+      "Google Solar API"
+    ],
+    "github": null,
+    "live": "https://amex-roofing.com",
+    "featured": false,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 5,
+      "title": "Amex Roofing - Client Site with AI Booking Agent",
+      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar API, Google Solar API",
+      "date": "2026",
+      "bullets": [
+        "Delivered a bilingual (English/Chinese) production site for a roofing contractor with 26 local-SEO city pages and instant estimates from Google Solar API roof measurements.",
+        "Built an after-hours AI chat agent and a booking flow that writes appointments straight to the crew's Google Calendar through Vercel serverless routes."
+      ]
+    }
+  },
+  {
+    "title": "all-in-one-URL",
+    "description": "Short links, QR codes, and barcodes with click and scan analytics, on a FastAPI backend with Postgres and Redis.",
+    "highlights": [
+      "FastAPI backend with PostgreSQL, Redis caching and counter batching, and tiered rate limiting",
+      "JWT auth with per-resource ownership that still allows anonymous resources",
+      "Two-tier app in Docker Compose, deployed across Vercel, Render, Neon, and Upstash"
     ],
     "tags": [
       "Python",
@@ -103,182 +227,159 @@
     "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2024",
-    "resume": {
-      "order": 3,
-      "title": "all-in-one-URL - Short URLs, QR Codes &amp; Barcodes",
-      "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript, Tailwind CSS",
-      "date": "2024",
-      "bullets": [
-        "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource click/scan analytics, Redis-backed caching and counter batching, and tiered SlowAPI rate limiting.",
-        "Implemented JWT auth with bcrypt hashing and per-resource ownership (preserving anonymous resources); containerized the two-tier app with Docker Compose and deployed across Vercel, Render, Neon (Postgres), and Upstash (Redis)."
-      ]
-    }
-  },
-  {
-    "title": "Gasolytics — US Gas Price Map",
-    "description": "Live US fuel-economics site — an interactive map of all 50 states + DC with daily AAA averages, plus a full toolkit of state and metro pages, a trip cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses.",
-    "highlights": [
-      "Built an interactive d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), with metro price pins, hover tooltips, wheel-zoom/drag-pan, and a per-state detail panel",
-      "Grew it into a national toolkit: 51 state pages plus metro pages, cheapest-gas-near-me, a trip gas calculator, an EV suite (EV-vs-gas with per-state registration fees and break-even miles, charging costs and stations), and gas-tax, border-gap, and affordability analyses",
-      "Reads daily AAA averages (50 states + DC, 4 fuel grades) from a separate pipeline's Vercel Blob snapshot feed through an in-process cache; mobile app-shell UX with a global tab bar and drag-sheet map expansion, on Next.js 16 + React 19"
-    ],
-    "tags": [
-      "Next.js",
-      "React 19",
-      "TypeScript",
-      "d3-geo",
-      "Vercel Blob",
-      "Vercel"
-    ],
-    "github": null,
-    "live": "https://www.gasolytics.com/",
-    "featured": true,
-    "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026",
-    "resume": {
-      "order": 2,
-      "title": "Gasolytics - US Gas Price Map",
-      "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
-      "date": "2026",
-      "bullets": [
-        "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
-        "Expanded it into a national fuel-economics toolkit with 51 state and metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
-      ]
-    }
-  },
-  {
-    "title": "Amex Roofing — Site + AI Booking Agent",
-    "description": "Production site for a Bay Area roofing contractor — English/中文/Español, 22 local-SEO city pages, instant roof-measurement estimates, and an AI chat agent that hands off to a real booking calendar.",
-    "highlights": [
-      "Shipped a buildless HTML + Tailwind site with English/中文/Español homepage twins and 22 city landing pages (11 cities × EN/中文) kept in sync by build scripts — every URL indexed by Google",
-      "Built instant ballpark estimates from Google Solar API roof measurements feeding a 3-step mobile booking flow, with Vercel serverless routes booking directly onto the crew's Google Calendar and firing Discord alerts",
-      "Added an hours-aware contact layer — crew phone during work hours, bilingual AI chat agent after hours — plus SEO articles and a daily analytics digest to Discord"
-    ],
-    "tags": [
-      "HTML",
-      "Tailwind CSS",
-      "Vercel Serverless",
-      "Google Calendar API",
-      "Google Solar API"
-    ],
-    "github": null,
-    "live": "https://amex-roofing.com",
-    "featured": false,
-    "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026"
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Programming Basics",
-    "description": "A zero-to-programming foundational on-ramp guide — the prerequisite track the other Throughline guides link to, taking absolute beginners from nothing to ready-to-specialize.",
+    "description": "An introduction to programming for people who have never written code. The on-ramp the other Throughline guides point to.",
     "highlights": [
-      "Authored a first-principles, read-top-to-bottom introduction to programming for readers with no prior experience, serving as the shared entry point for the specialization guides",
-      "Built as an interactive Docusaurus course with in-browser code and checkpoint quizzes, on the shared `@throughline/guide-kit` design system",
-      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel"
+      "Written for readers with no experience, top to bottom, as the shared entry point to the specialty guides",
+      "Interactive Docusaurus course with in-browser code and checkpoint quizzes on the shared guide-kit design system",
+      "Source available to read; deployed on Vercel"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX"],
     "github": null,
     "live": "https://programmingbasics.dev",
     "featured": false,
     "className": "lg:col-span-1",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Modern Web Dev Guide",
-    "description": "A 2026 web dev guide turned into an interactive course — 17 chapters plus a capstone, ~700 quiz questions, mandatory checkpoints, and progressive chapter unlock.",
+    "description": "A web development course in 17 chapters plus a capstone, with about 700 quiz questions, checkpoints you must pass, and chapters that unlock in order.",
     "highlights": [
-      "Built a sampled-quiz engine with a ~700-question bank, per-session seeded shuffling, and localStorage state",
-      "Wired progressive sidebar locking so each chapter unlocks only after its prereq quiz passes",
-      "Authored 17 chapters plus a capstone across foundations, lifecycle, tech stack, scale workflows, AI, and career — refreshed for 2026 currency"
+      "Sampled-quiz engine drawing from a bank of roughly 700 questions, shuffled per session, with progress kept in localStorage",
+      "Progressive sidebar locking: a chapter opens only after the previous checkpoint quiz is passed",
+      "17 chapters plus a capstone covering foundations, the request lifecycle, the stack, team workflows, AI tooling, and careers"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-web-dev-guide",
     "live": "https://modernwebdevguide.com/",
     "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Modern AI Guide",
-    "description": "A 2026 AI engineering guide — 18 chapters from how LLM systems actually work to shipping evaluated production AI, with interactive checkpoint quizzes and runnable in-browser Python challenges.",
+    "description": "An AI engineering course in 18 chapters, from how language models actually work to shipping and evaluating production systems, with runnable Python challenges in the browser.",
     "highlights": [
-      "Authored 18 chapters spanning LLM foundations, project lifecycle, the modern AI tech stack, solo/startup/enterprise workflows, decision frameworks, production patterns, and career paths",
-      "Built an interactive Quiz React component with per-chapter checkpoint quizzes that verify understanding before progressing",
-      "Deployed via Docusaurus + MDX + Mermaid on GitHub Pages — beginner-readable but still useful for working engineers"
+      "18 chapters: model foundations, the project lifecycle, the AI stack, solo, startup, and enterprise workflows, decision frameworks, production patterns, and career paths",
+      "Quiz component with per-chapter checkpoints that confirm understanding before the next chapter opens",
+      "Docusaurus, MDX, and Mermaid, written to be readable by a beginner and still useful to a working engineer"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-ai-guide",
     "live": "https://modernaiguide.dev/",
     "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Modern Security Engineer Guide",
-    "description": "A 2026 security engineering guide — 14 chapters of offensive and defensive security, from the attacker's mindset to a job-ready security engineer, with interactive checkpoint quizzes and hands-on code challenges.",
+    "description": "Fourteen chapters of offensive and defensive security, from the attacker's point of view to the job of a security engineer, with quizzes and hands-on code challenges.",
     "highlights": [
-      "Authored 14 chapters across 7 parts — cryptography, application security (OWASP Top 10), secure SDLC, offensive testing, detection & response, incident forensics, cloud/identity, governance, and the new AI attack surface (prompt injection, LLM Top 10, AI red-teaming)",
-      "Built interactive Quiz and CodeChallenge React components with per-chapter checkpoints that gate progress until concepts are demonstrated, plus an in-page feedback widget",
-      "Deployed via Docusaurus + MDX + Mermaid on GitHub Pages — first-principles for absolute beginners but sharp enough as a 2026 refresh for working engineers; pairs with the Web Dev and AI Engineer guides"
+      "Covers cryptography, application security and the OWASP Top 10, secure SDLC, offensive testing, detection and response, forensics, cloud and identity, governance, and the AI attack surface (prompt injection, the LLM Top 10, red-teaming)",
+      "Quiz and CodeChallenge components gate each chapter until the concept is demonstrated; an in-page feedback widget collects corrections",
+      "Pairs with the Web Dev and AI guides on the same Docusaurus and MDX setup"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-security-engineer-guide",
     "live": "https://modernsecurityengineer.com/",
     "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Modern Cloud Engineer Guide",
-    "description": "A 2026 first-principles cloud engineering guide — from cloud foundations and core services through Infrastructure-as-Code, Kubernetes, CI/CD, SRE, and platform engineering.",
+    "description": "Cloud engineering from first principles in 11 chapters: core services, infrastructure as code, Kubernetes, CI/CD, SRE, and platform engineering.",
     "highlights": [
-      "Authored all 11 chapters — cloud foundations, core services, Infrastructure-as-Code, Kubernetes, CI/CD & GitOps, observability & SRE, platform engineering, cloud security, FinOps, MLOps/LLMOps, and scale/career",
-      "Built as an interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams, on the shared `@throughline/guide-kit` design system",
-      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel as part of the Throughline ecosystem"
+      "11 chapters: foundations, core services, infrastructure as code, Kubernetes, CI/CD and GitOps, observability and SRE, platform engineering, cloud security, FinOps, MLOps and LLMOps, and career",
+      "Interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams on the shared guide-kit design system",
+      "Source available to read; deployed on Vercel as part of Throughline"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
     "live": "https://moderncloudengineer.com",
     "featured": false,
     "className": "lg:col-span-1",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Modern Data Engineering Guide",
-    "description": "A 2026 first-principles data engineering guide — how data moves from raw source to trusted, query-ready tables: storage & file formats, SQL & query engines, modeling & warehousing, Spark, ingestion/CDC, dbt, orchestration, streaming, and the lakehouse.",
+    "description": "How data gets from a raw source to trusted, query-ready tables, in 12 chapters: storage and file formats, SQL engines, modeling, Spark, ingestion and CDC, dbt, orchestration, streaming, and the lakehouse.",
     "highlights": [
-      "Authored all 12 chapters — foundations, storage & formats, SQL & query engines, modeling & warehousing, Spark, ingestion & CDC, dbt, orchestration, streaming (Kafka), the lakehouse, data quality & governance, and career",
-      "Curriculum mined from real 2026 data-engineering job postings and gap-checked by a completeness critic; authored concept-first (columnar storage, desired-state pipelines, exactly-once) then mapped to today's tools (Snowflake/BigQuery, dbt, Airflow, Kafka, Iceberg/Delta)",
-      "Built on the shared `@throughline/guide-kit` design system with checkpoint quizzes; source-available (© 2026 To Yin Yu, All Rights Reserved), deployed on Vercel"
+      "12 chapters from foundations through storage and formats, SQL and query engines, modeling and warehousing, Spark, ingestion and CDC, dbt, orchestration, Kafka streaming, the lakehouse, data quality and governance, and career",
+      "Each topic is taught as a concept first (columnar storage, desired-state pipelines, exactly-once delivery) and then mapped to the current tools: Snowflake, BigQuery, dbt, Airflow, Kafka, Iceberg, and Delta",
+      "Built on the shared guide-kit design system with checkpoint quizzes; source available to read; deployed on Vercel"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
     "live": "https://moderndataengineering.dev",
     "featured": false,
     "className": "lg:col-span-1",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Shipyard",
-    "description": "A guided platform where you build a portfolio-grade project and get it AI-graded (Claude-as-judge) — the 'Build' act of Throughline, with a teaching-first coaching loop instead of a pass/fail gate.",
+    "description": "Build a portfolio-grade project with guidance, then have it graded by Claude against a rubric. The grade explains gaps and next steps instead of passing or failing you.",
     "highlights": [
-      "Designed a guided build-and-grade flow that walks a learner through shipping a real, portfolio-grade project, then grades the result with an LLM-as-judge rubric (Claude-as-judge)",
-      "Built a teaching-first coaching loop that explains gaps and next steps rather than just scoring, closing the loop from learning into proving you can ship",
-      "Source-available (© 2026 To Yin Yu, All Rights Reserved); deployed on Vercel as the 'Prove you can ship' act of the Throughline ladder"
+      "Guided build flow that walks a learner through shipping a real project, then grades the result with an LLM-as-judge rubric",
+      "The coaching loop explains what is missing and what to do next rather than returning a score alone",
+      "The Build act of the Throughline ladder; source available to read; deployed on Vercel"
     ],
     "tags": ["TypeScript", "React", "Claude / LLM-as-Judge", "Vercel"],
     "github": null,
     "live": "https://shipyard.vercel.app",
     "featured": false,
     "className": "lg:col-span-1",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
+  },
+  {
+    "title": "SWE Interview Guide",
+    "description": "Interview prep from zero in 108 lessons over 17 phases, including the newer rounds: AI-assisted coding, problem decomposition, RAG, and agent and eval design. Built alongside SoloMock.",
+    "highlights": [
+      "108 lessons over 17 phases: foundations through dynamic programming, system design, the AI-era rounds, AI product engineering, frontend, and behavioral",
+      "Quiz-gated progression with star ratings, a mock interview timer with phase coaching, and a problem tracker saved to localStorage",
+      "One HTML file with JavaScript and Tailwind from a CDN, a hash router, and no build step, served from Vercel"
+    ],
+    "tags": ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
+    "github": null,
+    "live": "https://sweinterviewguide.com",
+    "featured": false,
+    "className": "lg:col-span-1",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
+  },
+  {
+    "title": "2026 Skills Roadmap",
+    "description": "A single-page roadmap from zero to a working web development stack: 13 stages across JavaScript, HTML and CSS, the browser, Git, TypeScript, React, Tailwind, and the toolchain.",
+    "highlights": [
+      "13 stages, numbered 0 to 12, each with a time budget, references, and a concrete deliverable",
+      "One self-contained HTML file with a sticky sidebar and dark-mode design tokens",
+      "Published on GitHub Pages with no build step"
+    ],
+    "tags": ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+    "github": "https://github.com/tonyx1998/skills-roadmap",
+    "live": "https://tonyx1998.github.io/skills-roadmap/",
+    "featured": false,
+    "className": "lg:col-span-1",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Reachspan",
-    "description": "Landing site for an AI-infused digital marketing service — listens across Reddit, IG, FB, and Nextdoor, scores buying signals in real time, and engages warm leads. Performance-priced, no retainer.",
+    "description": "Landing site for an AI-assisted digital marketing service that listens across Reddit, Instagram, Facebook, and Nextdoor, scores buying signals, and engages warm leads. Performance-priced, no retainer.",
     "highlights": [
-      "Designed and shipped a single-file Tailwind + HTML landing with alternating warm-dark hero and cream content sections; custom display/mono typography and scroll-reveal motion throughout",
-      "Wired Vercel serverless API routes (`/api/book`, `/api/slots`) to the Cal.com API so audit-call bookings land directly on the calendar with auto-confirmation",
-      "Honest positioning copy throughout — spec demos labelled as such, no fabricated KPIs or testimonials; performance-pricing pitch made load-bearing in the FAQ as the agency's core differentiator"
+      "Single-file Tailwind and HTML landing page with alternating warm-dark hero and cream content sections, custom display and mono typography, and scroll-reveal motion",
+      "Vercel serverless routes (book and slots) call the Cal.com API so audit-call bookings land directly on the calendar with auto-confirmation",
+      "Spec demos are labelled as such; no fabricated KPIs or testimonials. The performance-pricing pitch carries the FAQ"
     ],
     "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     "github": null,
@@ -286,36 +387,7 @@
     "featured": false,
     "hidden": true,
     "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026"
-  },
-  {
-    "title": "SWE Interview Guide",
-    "description": "Zero-to-hero interview prep — 108 lessons across 17 phases, including AI-era interview rounds (AI-assisted coding, FDE decomposition, RAG, agent and eval design). Companion to SoloMock.",
-    "highlights": [
-      "Authored 108 lessons across 17 phases from foundations through DP, system design, AI-era interview rounds (2024–2026 formats), AI-product engineering, frontend, and behavioral",
-      "Built quiz-gated progression with star ratings, a mock interview timer with phase coaching, and a problem tracker that persists to localStorage",
-      "Single-file HTML + JS + Tailwind (CDN), hash-based router, no build step — deployed on Vercel as a static asset"
-    ],
-    "tags": ["HTML", "JavaScript", "Tailwind CSS", "Vercel"],
-    "github": null,
-    "live": "https://sweinterviewguide.com",
-    "featured": false,
-    "className": "lg:col-span-1",
-    "datePublished": "2026"
-  },
-  {
-    "title": "2026 Skills Roadmap",
-    "description": "Single-page roadmap from zero to a working 2026 web-dev stack — 12 stages across JS, HTML/CSS, browser JS, Git, TypeScript, React, Tailwind, and the modern toolchain.",
-    "highlights": [
-      "Authored 12 sequential learning stages with time budgets, references, and concrete deliverables",
-      "Single self-contained HTML file with sticky sidebar nav and dark-mode design tokens",
-      "Published via GitHub Pages — zero build step, instant edit-and-push iteration"
-    ],
-    "tags": ["HTML", "CSS", "JavaScript", "GitHub Pages"],
-    "github": "https://github.com/tonyx1998/skills-roadmap",
-    "live": "https://tonyx1998.github.io/skills-roadmap/",
-    "featured": false,
-    "className": "lg:col-span-1",
-    "datePublished": "2026"
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   }
 ]
