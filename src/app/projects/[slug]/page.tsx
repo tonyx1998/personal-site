@@ -194,7 +194,7 @@ export default async function ProjectDetailPage({
                     <dd>
                       {project.live
                         ? `Live, checked ${formatDate(LINKS_CHECKED_ON)}`
-                        : "Archived"}
+                        : "Not deployed"}
                     </dd>
                   </div>
                   <div>
