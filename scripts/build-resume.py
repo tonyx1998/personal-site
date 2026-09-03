@@ -96,6 +96,14 @@ def main(out_path: str) -> None:
         textColor=DARK,
         spaceAfter=2,
     )
+    title_line_style = ParagraphStyle(
+        "TitleLine",
+        fontName="Helvetica",
+        fontSize=10.5,
+        leading=13,
+        textColor=DARK,
+        spaceAfter=2,
+    )
     contact_style = ParagraphStyle(
         "Contact",
         fontName="Helvetica",
@@ -163,7 +171,14 @@ def main(out_path: str) -> None:
     story.append(Paragraph("TO YIN YU", name_style))
     story.append(
         Paragraph(
-            "Lynnwood, WA &nbsp;·&nbsp; +1 (206) 712-5144 &nbsp;·&nbsp; "
+            "Software Developer &nbsp;·&nbsp; Lynnwood, WA (Seattle area) "
+            "&nbsp;·&nbsp; US citizen",
+            title_line_style,
+        )
+    )
+    story.append(
+        Paragraph(
+            "(206) 712-5144 &nbsp;·&nbsp; "
             '<a href="mailto:tonyx1998@gmail.com" color="#1f4e6b">tonyx1998@gmail.com</a> '
             "&nbsp;·&nbsp; "
             '<a href="https://toyinyu.com" color="#1f4e6b">toyinyu.com</a> '
@@ -182,11 +197,10 @@ def main(out_path: str) -> None:
     story.append(
         Paragraph(
             "Software developer with a B.S. in Computer Science from the University of "
-            "Maryland. Since 2024 I have designed, built, and run my own web products, "
-            "most recently a job-fit analysis tool, two realtime voice apps on the "
-            "OpenAI Realtime API, and a bilingual client site with an AI booking agent. US citizen "
-            "based near Seattle, open to relocation. Seeking a first full-time software "
-            "engineering role.",
+            "Maryland. Since 2024 I have designed, built, and run my own web products: a "
+            "job-fit analysis tool, two realtime voice apps on the OpenAI Realtime API, "
+            "and a bilingual client site with an AI booking agent. Seeking a first "
+            "full-time software engineering role; open to relocation.",
             summary_style,
         )
     )
@@ -217,15 +231,10 @@ def main(out_path: str) -> None:
     projects = load_resume_projects()
 
     for p in projects:
+        story.append(Paragraph(f"<b>{p['title']}</b>", role_style))
         story.append(
             Paragraph(
-                f"<b>{p['title']}</b> &nbsp;|&nbsp; <font color='#525252'>{p['stack']}</font>",
-                role_style,
-            )
-        )
-        story.append(
-            Paragraph(
-                f"{p['links']} &nbsp;·&nbsp; <font color='#525252'>{p['date']}</font>",
+                f"{p['links']} &nbsp;·&nbsp; {p['date']} &nbsp;·&nbsp; {p['stack']}",
                 role_meta_style,
             )
         )
