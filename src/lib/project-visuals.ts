@@ -4,10 +4,6 @@ export type ProjectVisual = {
 };
 
 export const projectVisuals: Record<string, ProjectVisual> = {
-  plugrade: {
-    src: "/projects/plugrade.png",
-    alt: "Plugrade home page explaining trust grades for Claude Code plugins",
-  },
   "hows-my-job-fit": {
     src: "/projects/howsmyjobfit.png",
     alt: "How's My Job Fit? workbench with a resume drop zone and report panel",
@@ -23,6 +19,14 @@ export const projectVisuals: Record<string, ProjectVisual> = {
   soloyap: {
     src: "/projects/soloyap.png",
     alt: "SoloYap realtime English speaking practice workspace",
+  },
+  "amex-roofing-site-ai-booking-agent": {
+    src: "/projects/amex-roofing.png",
+    alt: "Amex Roofing home page with a roof photo and a free inspection call to action",
+  },
+  reachspan: {
+    src: "/projects/reachspan.png",
+    alt: "ReachSpan landing page headline listing where a local business's next customer is",
   },
   "throughline-technical-learning-ecosystem": {
     src: "/projects/throughline.png",

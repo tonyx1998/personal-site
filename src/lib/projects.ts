@@ -27,11 +27,23 @@ export type Project = {
   resume?: ResumeMeta;
 };
 
-// Single source of truth: src/lib/projects.data.json. Edit the JSON (or run the
-// /update-portfolio command) — the site, the sitemap, and build-resume.py all
+// Single source of truth: src/lib/projects.data.json. Edit the JSON, then run
+// `make resume`. The site, the sitemap, the JSON-LD, and build-resume.py all
 // read from it, so there is exactly one place a project's facts live.
+//
+// Order matters: featured entries come first in the JSON, in the order they
+// should appear on the homepage and at the top of the archive. Supporting
+// entries follow in their archive order.
 export const projects: Project[] = (projectsData as Project[]).filter(
   (project) => !project.hidden
+);
+
+/** The products shown at full size on the homepage and the top of the archive. */
+export const selectedProjects: Project[] = projects.filter((p) => p.featured);
+
+/** Everything else: client work, tools, and the technical guides. */
+export const supportingProjects: Project[] = projects.filter(
+  (p) => !p.featured
 );
 
 // URL slug derived from the title (no slug field in the data) — used by the
@@ -45,3 +57,13 @@ export const projectSlug = (p: Project) =>
 
 export const projectBySlug = (slug: string): Project | null =>
   projects.find((p) => projectSlug(p) === slug) ?? null;
+
+/** "gasolytics.com" from "https://www.gasolytics.com/", for link labels. */
+export const displayUrl = (url: string) =>
+  url
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/\/$/, "");
+
+/** Short display title: the part before an em dash, e.g. "Gasolytics". */
+export const shortTitle = (p: Project) => p.title.split(" — ")[0];

@@ -1,19 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, Public_Sans } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const publicSans = Public_Sans({
+  variable: "--font-public-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu, software developer near Seattle. Live products include Plugrade, How's My Job Fit?, SoloMock, and Gasolytics. Open to a first full-time role.",
+    "To Yin Yu, software developer near Seattle. Live products include How's My Job Fit?, SoloMock, Gasolytics, and a bilingual client site with an AI booking agent. Open to a first full-time role.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
@@ -34,10 +40,9 @@ export const metadata: Metadata = {
     "TypeScript",
     "Python",
     "OpenAI Realtime API",
-    "Claude Code plugins",
     "Portfolio",
   ],
-  authors: [{ name: "To Yin Yu" }],
+  authors: [{ name: "To Yin Yu", url: SITE_URL }],
   creator: "To Yin Yu",
   alternates: {
     canonical: "/",
@@ -47,14 +52,15 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu · Software Developer",
     description:
-      "Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline. All live, all built and run by one person.",
+      "How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline. All live, all built and run by one person.",
     siteName: "To Yin Yu",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "To Yin Yu · Software Developer",
     description:
-      "Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline. All live, all built and run by one person.",
+      "How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline. All live, all built and run by one person.",
   },
   robots: {
     index: true,
@@ -70,35 +76,29 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#f3f4f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#131716" },
   ],
   width: "device-width",
   initialScale: 1,
 };
 
-type ThemePref = "light" | "dark" | "auto";
-
-// Runs before first paint: applies the saved theme, resolving the default
-// (auto — anything that isn't an explicit light/dark) against the visitor's
-// local clock, which the server can't know. Prevents a flash.
-// Keep the 7pm–7am window in sync with timeBasedTheme() in providers.tsx.
-const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');var r;if(p==='light'||p==='dark'){r=p;}else{var h=new Date().getHours();r=(h>=19||h<7)?'dark':'light';}document.documentElement.classList.toggle('dark',r==='dark');}catch(e){}})();`;
+// Runs before first paint. A saved choice wins; otherwise the system
+// preference decides. Keep in sync with readResolvedTheme() in providers.tsx.
+const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');var d=p==='dark'||(p!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Keep the layout static so content routes can be prerendered and cached.
-  // The inline script applies the saved preference before content paints, and
-  // Providers hydrates that same local preference on the client.
-  const pref: ThemePref = "auto";
-
+  // The layout reads no request data, so every route can be prerendered. The
+  // server sends the light theme; the inline script corrects the class before
+  // anything paints.
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark overflow-x-hidden`}
+      className={`${newsreader.variable} ${publicSans.variable} overflow-x-hidden`}
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
@@ -107,7 +107,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
         />
-        <Providers initialPref={pref}>{children}</Providers>
+        <Providers>{children}</Providers>
         <Analytics />
       </body>
     </html>

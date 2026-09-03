@@ -1,37 +1,5 @@
 [
   {
-    "title": "Plugrade",
-    "description": "Trust index for Claude Code plugins: security audits with file-and-line evidence, plus a daily record of what the official directory ships and how installs move.",
-    "highlights": [
-      "Built the daily snapshotter (Playwright on GitHub Actions) that records install counts for 300+ plugins from claude.com/plugins into a Neon Postgres time series. It has run every day since July 31, 2026",
-      "Made the scrape refuse bad data. A run only commits if row counts stay in bounds, nearly every row has a count, yesterday's slugs are still present, and no count drops more than 20% in a day. A failed gate keeps the last good snapshot and opens an issue",
-      "Wrote the audit publishing pipeline with a default-deny embargo, so an unpublished finding can never be reached by URL. A test pins the rule and fails if the old default comes back"
-    ],
-    "tags": [
-      "Next.js",
-      "TypeScript",
-      "Neon Postgres",
-      "GitHub Actions",
-      "Playwright"
-    ],
-    "github": null,
-    "live": "https://plugrade.dev",
-    "featured": true,
-    "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026",
-    "dateModified": "2026-09-02",
-    "resume": {
-      "order": 1,
-      "title": "Plugrade - Trust Index for Claude Code Plugins",
-      "stack": "Next.js, TypeScript, Neon Postgres, GitHub Actions, Playwright, Vercel",
-      "date": "2026",
-      "bullets": [
-        "Built a daily scraper and time-series store that has recorded install counts for 300+ Claude Code plugins every day since July 2026, with sanity gates that reject a run when row counts, coverage, or day-over-day drops look wrong.",
-        "Audited plugin manifests line by line for a security report with file-and-line citations, and built the publishing pipeline with a default-deny embargo covered by tests."
-      ]
-    }
-  },
-  {
     "title": "How's My Job Fit?",
     "description": "Compares a candidate's own evidence with a job's requirements and shows what is fully supported, transferable, partial, or not shown at all. Files never leave the browser.",
     "highlights": [
@@ -47,7 +15,7 @@
     "datePublished": "2026",
     "dateModified": "2026-09-02",
     "resume": {
-      "order": 2,
+      "order": 1,
       "title": "How's My Job Fit? - Evidence-Based Job-Fit Reports",
       "stack": "Next.js, React, TypeScript, pdf.js, Tesseract.js, Vercel",
       "date": "2026",
@@ -80,13 +48,46 @@
     "datePublished": "2025",
     "dateModified": "2026-09-02",
     "resume": {
-      "order": 3,
+      "order": 2,
       "title": "SoloMock - Realtime Voice Mock Interviewer",
       "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
       "date": "2025",
       "bullets": [
         "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and 15 structured problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
         "Protected sessions with server-minted ephemeral keys, sliding-window rate limits, a 15-minute session cap, and a manual extended-access workflow."
+      ]
+    }
+  },
+  {
+    "title": "Gasolytics — US Gas Price Map",
+    "description": "Gas prices for all 50 states and DC on one interactive map, with state and metro pages, a trip cost calculator, and an EV-versus-gas comparison.",
+    "highlights": [
+      "Draws the choropleth with d3-geo on the server and ships it as SVG, so no d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
+      "Grew from a map into a toolkit: 51 state pages, metro pages, cheapest-gas-near-me, a trip calculator, an EV suite with per-state registration fees and break-even miles, and gas-tax, border-gap, and affordability pages",
+      "Reads daily AAA averages for four fuel grades from a Vercel Blob snapshot feed through an in-process cache. Mobile app-shell layout with a tab bar and a drag sheet over the map"
+    ],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "d3-geo",
+      "Vercel Blob",
+      "Vercel"
+    ],
+    "github": null,
+    "live": "https://www.gasolytics.com/",
+    "featured": true,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 3,
+      "title": "Gasolytics - US Gas Price Map",
+      "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
+      "date": "2026",
+      "bullets": [
+        "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
+        "Expanded it into a national fuel-economics toolkit with 51 state pages plus metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
       ]
     }
   },
@@ -115,37 +116,53 @@
     "dateModified": "2026-09-02"
   },
   {
-    "title": "Gasolytics — US Gas Price Map",
-    "description": "Gas prices for all 50 states and DC on one interactive map, with state and metro pages, a trip cost calculator, and an EV-versus-gas comparison.",
+    "title": "Amex Roofing — Site + AI Booking Agent",
+    "description": "Production website for a Bay Area roofing contractor in English and Chinese: 26 city pages, instant roof estimates from satellite measurements, and an AI chat agent that books onto the crew's calendar.",
     "highlights": [
-      "Draws the choropleth with d3-geo on the server and ships it as SVG, so no d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
-      "Grew from a map into a toolkit: 51 state pages, metro pages, cheapest-gas-near-me, a trip calculator, an EV suite with per-state registration fees and break-even miles, and gas-tax, border-gap, and affordability pages",
-      "Reads daily AAA averages for four fuel grades from a Vercel Blob snapshot feed through an in-process cache. Mobile app-shell layout with a tab bar and a drag sheet over the map"
+      "Buildless HTML and Tailwind site with English and Chinese homepage twins and 26 city landing pages (13 cities in each language), kept in sync by build scripts",
+      "Instant ballpark estimates from Google Solar API roof measurements feed a three-step mobile booking flow. Vercel serverless routes write the appointment to the crew's Google Calendar and post a Discord alert",
+      "Hours-aware contact: the crew's phone during working hours, a bilingual AI chat agent after hours, plus SEO articles and a daily analytics digest to Discord"
     ],
     "tags": [
-      "Next.js",
-      "React 19",
-      "TypeScript",
-      "d3-geo",
-      "Vercel Blob",
-      "Vercel"
+      "HTML",
+      "Tailwind CSS",
+      "Vercel Serverless",
+      "Google Calendar API",
+      "Google Solar API"
     ],
     "github": null,
-    "live": "https://www.gasolytics.com/",
+    "live": "https://amex-roofing.com",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
     "dateModified": "2026-09-02",
     "resume": {
       "order": 4,
-      "title": "Gasolytics - US Gas Price Map",
-      "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
+      "title": "Amex Roofing - Client Site with AI Booking Agent",
+      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar API, Google Solar API",
       "date": "2026",
       "bullets": [
-        "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
-        "Expanded it into a national fuel-economics toolkit with 51 state pages plus metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
+        "Delivered a bilingual (English/Chinese) production site for a roofing contractor with 26 local-SEO city pages and instant estimates from Google Solar API roof measurements.",
+        "Built an after-hours AI chat agent and a booking flow that writes appointments straight to the crew's Google Calendar through Vercel serverless routes."
       ]
     }
+  },
+  {
+    "title": "Reachspan",
+    "description": "Marketing site for ReachSpan, a service that runs the website, AI receptionist, reviews, and social listening for local service businesses. Booking a call lands straight on the calendar.",
+    "highlights": [
+      "Single-file HTML and Tailwind landing page with a warm-dark hero, custom display and mono typography, and scroll-reveal motion that respects reduced-motion settings",
+      "Vercel serverless routes call the Cal.com API for available slots and bookings, so an audit call is confirmed on the calendar without a form round-trip",
+      "Spec demos are labelled as demos. No fabricated results or testimonials anywhere on the page"
+    ],
+    "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
+    "github": null,
+    "live": "https://reachspan.ai",
+    "featured": true,
+    "hidden": false,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-02"
   },
   {
     "title": "Throughline — Technical Learning Ecosystem",
@@ -163,45 +180,13 @@
     "datePublished": "2026",
     "dateModified": "2026-09-02",
     "resume": {
-      "order": 6,
+      "order": 5,
       "title": "Throughline - Technical Learning Platform",
       "stack": "Astro, Docusaurus, React, TypeScript, MDX",
       "date": "2026",
       "linksOverride": "<a href=\"https://throughline.guide\" color=\"#1f4e6b\">throughline.guide</a>",
       "bullets": [
         "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path, on a shared React and TypeScript design system with navigation, quizzes, and code exercises."
-      ]
-    }
-  },
-  {
-    "title": "Amex Roofing — Site + AI Booking Agent",
-    "description": "Production website for a Bay Area roofing contractor in English and Chinese: 26 city pages, instant roof estimates from satellite measurements, and an AI chat agent that books onto the crew's calendar.",
-    "highlights": [
-      "Buildless HTML and Tailwind site with English and Chinese homepage twins and 26 city landing pages (13 cities in each language), kept in sync by build scripts",
-      "Instant ballpark estimates from Google Solar API roof measurements feed a three-step mobile booking flow. Vercel serverless routes write the appointment to the crew's Google Calendar and post a Discord alert",
-      "Hours-aware contact: the crew's phone during working hours, a bilingual AI chat agent after hours, plus SEO articles and a daily analytics digest to Discord"
-    ],
-    "tags": [
-      "HTML",
-      "Tailwind CSS",
-      "Vercel Serverless",
-      "Google Calendar API",
-      "Google Solar API"
-    ],
-    "github": null,
-    "live": "https://amex-roofing.com",
-    "featured": false,
-    "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026",
-    "dateModified": "2026-09-02",
-    "resume": {
-      "order": 5,
-      "title": "Amex Roofing - Client Site with AI Booking Agent",
-      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar API, Google Solar API",
-      "date": "2026",
-      "bullets": [
-        "Delivered a bilingual (English/Chinese) production site for a roofing contractor with 26 local-SEO city pages and instant estimates from Google Solar API roof measurements.",
-        "Built an after-hours AI chat agent and a booking flow that writes appointments straight to the crew's Google Calendar through Vercel serverless routes."
       ]
     }
   },
@@ -227,7 +212,16 @@
     "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2024",
-    "dateModified": "2026-09-02"
+    "dateModified": "2026-09-02",
+    "resume": {
+      "order": 6,
+      "title": "all-in-one-URL - Short URLs, QR Codes &amp; Barcodes",
+      "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript",
+      "date": "2024",
+      "bullets": [
+        "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource analytics, Redis-backed caching, tiered rate limiting, and JWT auth; containerized with Docker Compose and deployed across Vercel, Render, Neon, and Upstash."
+      ]
+    }
   },
   {
     "title": "Programming Basics",
@@ -374,20 +368,26 @@
     "dateModified": "2026-09-02"
   },
   {
-    "title": "Reachspan",
-    "description": "Landing site for an AI-assisted digital marketing service that listens across Reddit, Instagram, Facebook, and Nextdoor, scores buying signals, and engages warm leads. Performance-priced, no retainer.",
+    "title": "Plugrade",
+    "description": "Trust index for Claude Code plugins: security audits with file-and-line evidence, plus a daily record of what the official directory ships and how installs move.",
     "highlights": [
-      "Single-file Tailwind and HTML landing page with alternating warm-dark hero and cream content sections, custom display and mono typography, and scroll-reveal motion",
-      "Vercel serverless routes (book and slots) call the Cal.com API so audit-call bookings land directly on the calendar with auto-confirmation",
-      "Spec demos are labelled as such; no fabricated KPIs or testimonials. The performance-pricing pitch carries the FAQ"
+      "Built the daily snapshotter (Playwright on GitHub Actions) that records install counts for 300+ plugins from claude.com/plugins into a Neon Postgres time series. It has run every day since July 31, 2026",
+      "Made the scrape refuse bad data. A run only commits if row counts stay in bounds, nearly every row has a count, yesterday's slugs are still present, and no count drops more than 20% in a day. A failed gate keeps the last good snapshot and opens an issue",
+      "Wrote the audit publishing pipeline with a default-deny embargo, so an unpublished finding can never be reached by URL. A test pins the rule and fails if the old default comes back"
     ],
-    "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "Neon Postgres",
+      "GitHub Actions",
+      "Playwright"
+    ],
     "github": null,
-    "live": "https://reachspan.ai",
+    "live": "https://plugrade.dev",
     "featured": false,
-    "hidden": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-02"
+    "dateModified": "2026-09-02",
+    "hidden": true
   }
 ]

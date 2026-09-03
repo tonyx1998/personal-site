@@ -5,10 +5,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        // Reachspan was removed from the public project list.
-        source: "/projects/reachspan",
+        // Plugrade is hidden until it launches. Temporary so the page can
+        // come back without a cached permanent redirect in the way.
+        source: "/projects/plugrade",
         destination: "/projects",
-        permanent: true,
+        permanent: false,
       },
       {
         source: "/:path*",

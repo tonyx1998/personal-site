@@ -14,8 +14,8 @@ export default function Image() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "80px",
-        background: "#f4f5f7",
-        color: "#1c2128",
+        background: "#f3f4f2",
+        color: "#17201f",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
@@ -23,7 +23,7 @@ export default function Image() {
         style={{
           display: "flex",
           fontSize: "26px",
-          color: "#1e5f7a",
+          color: "#106b4e",
           letterSpacing: "0.04em",
         }}
       >
@@ -46,7 +46,7 @@ export default function Image() {
           style={{
             fontSize: "42px",
             fontWeight: 500,
-            color: "#4b5563",
+            color: "#4f5b58",
             display: "flex",
           }}
         >
@@ -55,14 +55,14 @@ export default function Image() {
         <div
           style={{
             fontSize: "28px",
-            color: "#4b5563",
+            color: "#4f5b58",
             maxWidth: "960px",
             lineHeight: 1.35,
             display: "flex",
           }}
         >
-          Plugrade, How&apos;s My Job Fit?, SoloMock, SoloYap, Gasolytics, and
-          Throughline. All live, all built and run by one person.
+          How&apos;s My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing,
+          ReachSpan, and Throughline. All live, all built and run by one person.
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export default function Image() {
         style={{
           display: "flex",
           fontSize: "24px",
-          color: "#7b8593",
+          color: "#7d8885",
         }}
       >
         Seattle area · US citizen · open to a first full-time role
