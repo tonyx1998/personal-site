@@ -21,6 +21,8 @@ export type Project = {
   live: string | null;
   featured: boolean;
   hidden?: boolean;
+  /** Pins the URL. Set when a title changes so existing links keep working. */
+  slug?: string;
   className: string;
   datePublished?: string;
   dateModified?: string;
@@ -49,6 +51,7 @@ export const supportingProjects: Project[] = projects.filter(
 // URL slug derived from the title (no slug field in the data) — used by the
 // per-project detail pages /projects/<slug>, the cards, the sitemap and JSON-LD.
 export const projectSlug = (p: Project) =>
+  p.slug ??
   p.title
     .toLowerCase()
     .replace(/['’]/g, "")

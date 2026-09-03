@@ -83,11 +83,10 @@
 }
 
 .label {
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  font-weight: 600;
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
   margin: 0 0 14px;
 }
 
@@ -182,9 +181,7 @@
 }
 
 .pager a span {
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
   color: var(--ink-3);
 }
 

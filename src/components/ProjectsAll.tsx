@@ -17,8 +17,8 @@ export default function ProjectsAll() {
       <header className={styles.intro}>
         <h1>Everything I have shipped</h1>
         <p>
-          Products, tools, and courses, all live. The first seven are the ones
-          to look at first. Each title opens my notes on what was built and why.
+          Products, tools, and courses, all live. Each title opens my notes on
+          what was built and why.
         </p>
       </header>
 
