@@ -1,9 +1,16 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-export default function Icon() {
+// A green tile with a serif T, matching the site's accent and wordmark.
+export default async function Icon() {
+  const newsreader = await readFile(
+    join(process.cwd(), "src/app/fonts/Newsreader-Medium.ttf")
+  );
+
   return new ImageResponse(
     <div
       style={{
@@ -12,17 +19,20 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "linear-gradient(135deg, #09090b 0%, #1e1b4b 60%, #4f46e5 100%)",
-        color: "#a5b4fc",
-        fontFamily: "ui-monospace, SFMono-Regular, monospace",
-        fontSize: 22,
-        fontWeight: 800,
-        letterSpacing: "-0.04em",
+        background: "#106b4e",
+        borderRadius: 7,
+        color: "#f3f4f2",
+        fontFamily: "Newsreader",
+        fontSize: 26,
+        lineHeight: 1,
+        paddingBottom: 2,
       }}
     >
       T
     </div>,
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: "Newsreader", data: newsreader, style: "normal" }],
+    }
   );
 }
