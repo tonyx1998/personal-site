@@ -5,7 +5,23 @@ import { projects, projectSlug } from "@/lib/projects";
 import { projectVisuals } from "@/lib/project-visuals";
 import styles from "./ProjectsAll.module.css";
 
+const selectedProjectOrder = [
+  "SoloMock",
+  "SoloYap",
+  "Gasolytics — US Gas Price Map",
+  "Throughline — Technical Learning Ecosystem",
+];
+
 export default function ProjectsAll() {
+  const selectedProjects = projects
+    .filter((project) => project.featured)
+    .sort(
+      (a, b) =>
+        selectedProjectOrder.indexOf(a.title) -
+        selectedProjectOrder.indexOf(b.title)
+    );
+  const supportingProjects = projects.filter((project) => !project.featured);
+
   return (
     <section className={styles.archive}>
       <div className={styles.container}>
@@ -28,7 +44,7 @@ export default function ProjectsAll() {
         </header>
 
         <div className={styles.projectList}>
-          {projects.map((project, index) => {
+          {selectedProjects.map((project, index) => {
             const slug = projectSlug(project);
             const visual = projectVisuals[slug];
 
@@ -40,9 +56,7 @@ export default function ProjectsAll() {
                 </div>
 
                 <div className={styles.projectCopy}>
-                  <p className={styles.projectType}>
-                    {project.featured ? "Selected work" : "Project archive"}
-                  </p>
+                  <p className={styles.projectType}>Selected work</p>
                   <h2>
                     <Link href={`/projects/${slug}`}>{project.title}</Link>
                   </h2>
@@ -82,6 +96,7 @@ export default function ProjectsAll() {
                       src={visual.src}
                       alt={visual.alt}
                       fill
+                      loading={index === 0 ? "eager" : "lazy"}
                       sizes="(max-width: 860px) 100vw, 36vw"
                     />
                   </a>
@@ -98,6 +113,75 @@ export default function ProjectsAll() {
             );
           })}
         </div>
+
+        <section
+          className={styles.experiments}
+          aria-labelledby="supporting-work-heading"
+        >
+          <header className={styles.experimentsHeader}>
+            <p className={styles.indexLabel}>
+              Supporting work /{" "}
+              {String(supportingProjects.length).padStart(2, "0")}
+            </p>
+            <div>
+              <h2 id="supporting-work-heading">
+                Experiments &amp; learning work.
+              </h2>
+              <p>
+                Smaller tools, client work, and focused builds that supported
+                the larger systems above.
+              </p>
+            </div>
+          </header>
+
+          <div className={styles.compactList}>
+            {supportingProjects.map((project, index) => {
+              const slug = projectSlug(project);
+
+              return (
+                <article key={project.title} className={styles.compactRow}>
+                  <div className={styles.compactMeta}>
+                    <span>
+                      {String(selectedProjects.length + index + 1).padStart(
+                        2,
+                        "0"
+                      )}
+                    </span>
+                    <span>{project.datePublished ?? "Ongoing"}</span>
+                  </div>
+
+                  <div className={styles.compactCopy}>
+                    <h3>
+                      <Link href={`/projects/${slug}`}>{project.title}</Link>
+                    </h3>
+                    <p>{project.description}</p>
+                  </div>
+
+                  <div className={styles.compactTags} aria-label="Technologies">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+
+                  <div className={styles.compactLinks}>
+                    <Link href={`/projects/${slug}`}>
+                      Notes <ArrowUpRight size={13} />
+                    </Link>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Live <ArrowUpRight size={13} />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
       </div>
     </section>
   );

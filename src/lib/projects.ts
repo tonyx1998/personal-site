@@ -20,6 +20,7 @@ export type Project = {
   github: string | null;
   live: string | null;
   featured: boolean;
+  hidden?: boolean;
   className: string;
   datePublished?: string;
   dateModified?: string;
@@ -29,7 +30,9 @@ export type Project = {
 // Single source of truth: src/lib/projects.data.json. Edit the JSON (or run the
 // /update-portfolio command) — the site, the sitemap, and build-resume.py all
 // read from it, so there is exactly one place a project's facts live.
-export const projects: Project[] = projectsData as Project[];
+export const projects: Project[] = (projectsData as Project[]).filter(
+  (project) => !project.hidden
+);
 
 // URL slug derived from the title (no slug field in the data) — used by the
 // per-project detail pages /projects/<slug>, the cards, the sitemap and JSON-LD.
