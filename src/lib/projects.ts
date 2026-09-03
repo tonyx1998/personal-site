@@ -39,6 +39,7 @@ export const projects: Project[] = (projectsData as Project[]).filter(
 export const projectSlug = (p: Project) =>
   p.title
     .toLowerCase()
+    .replace(/['’]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 

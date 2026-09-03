@@ -21,7 +21,7 @@ from reportlab.lib.enums import TA_LEFT
 from pypdf import PdfReader
 
 
-ACCENT = HexColor("#4f46e5")
+ACCENT = HexColor("#1f4e6b")
 MUTED = HexColor("#525252")
 DARK = HexColor("#0a0a0a")
 
@@ -55,11 +55,11 @@ def load_resume_projects():
             parts = []
             if p.get("live"):
                 parts.append(
-                    f'<a href="{p["live"]}" color="#4f46e5">{_link_display(p["live"])}</a>'
+                    f'<a href="{p["live"]}" color="#1f4e6b">{_link_display(p["live"])}</a>'
                 )
             if p.get("github"):
                 parts.append(
-                    f'<a href="{p["github"]}" color="#4f46e5">{_link_display(p["github"])}</a>'
+                    f'<a href="{p["github"]}" color="#1f4e6b">{_link_display(p["github"])}</a>'
                 )
             links = " &nbsp;·&nbsp; ".join(parts)
         out.append(
@@ -164,13 +164,13 @@ def main(out_path: str) -> None:
     story.append(
         Paragraph(
             "Lynnwood, WA &nbsp;·&nbsp; +1 (206) 712-5144 &nbsp;·&nbsp; "
-            '<a href="mailto:tonyx1998@gmail.com" color="#4f46e5">tonyx1998@gmail.com</a> '
+            '<a href="mailto:tonyx1998@gmail.com" color="#1f4e6b">tonyx1998@gmail.com</a> '
             "&nbsp;·&nbsp; "
-            '<a href="https://toyinyu.com" color="#4f46e5">toyinyu.com</a> '
+            '<a href="https://toyinyu.com" color="#1f4e6b">toyinyu.com</a> '
             "&nbsp;·&nbsp; "
-            '<a href="https://linkedin.com/in/to-yin-yu" color="#4f46e5">linkedin.com/in/to-yin-yu</a> '
+            '<a href="https://linkedin.com/in/to-yin-yu" color="#1f4e6b">linkedin.com/in/to-yin-yu</a> '
             "&nbsp;·&nbsp; "
-            '<a href="https://github.com/tonyx1998" color="#4f46e5">github.com/tonyx1998</a>',
+            '<a href="https://github.com/tonyx1998" color="#1f4e6b">github.com/tonyx1998</a>',
             contact_style,
         )
     )
@@ -181,11 +181,12 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     story.append(
         Paragraph(
-            "Full-stack software developer with a B.S. in Computer Science from the "
-            "University of Maryland. Builds and operates web products across frontend, "
-            "APIs, data pipelines, databases, and deployment, with recent work in "
-            "realtime voice, public-data tools, and developer education. Open to "
-            "software engineering roles.",
+            "Software developer with a B.S. in Computer Science from the University of "
+            "Maryland. Since 2024 I have designed, built, and run my own web products, "
+            "most recently a trust index for Claude Code plugins, a job-fit analysis "
+            "tool, and two realtime voice apps on the OpenAI Realtime API. US citizen "
+            "based near Seattle, open to relocation. Seeking a first full-time software "
+            "engineering role.",
             summary_style,
         )
     )
@@ -195,9 +196,10 @@ def main(out_path: str) -> None:
     story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
     skill_rows = [
         ("Languages", "TypeScript, Python, JavaScript, SQL"),
-        ("Frontend", "Next.js, React, Tailwind CSS, Docusaurus, Astro"),
-        ("Backend &amp; Data", "FastAPI, PostgreSQL, Redis, REST APIs, d3-geo"),
-        ("Infrastructure", "Docker, Git, Linux, Vercel, Render, Neon, Upstash"),
+        ("AI", "OpenAI Realtime API, Claude API, LLM-as-judge evaluation, prompt design, cost controls"),
+        ("Frontend", "Next.js, React, Tailwind CSS, d3-geo, Docusaurus, Astro"),
+        ("Backend &amp; Data", "FastAPI, PostgreSQL (Neon), Redis, REST APIs, WebRTC"),
+        ("Infrastructure", "Vercel, GitHub Actions, Docker, Git, Linux, Playwright"),
     ]
     for label, items in skill_rows:
         story.append(Paragraph(f"<b>{label}:</b> {items}", body_style))

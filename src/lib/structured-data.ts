@@ -11,9 +11,18 @@ export const personJsonLd = {
   name: "To Yin Yu",
   alternateName: "tonyx1998",
   url: SITE_URL,
-  jobTitle: "Full-Stack Software Engineer",
+  jobTitle: "Software Developer",
   description:
-    "Full-stack engineer building applied AI products with TypeScript, Python, Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "Software developer near Seattle who builds and runs his own products: Plugrade, How's My Job Fit?, SoloMock, SoloYap, Gasolytics, and Throughline.",
+  homeLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Lynnwood",
+      addressRegion: "WA",
+      addressCountry: "US",
+    },
+  },
   email: "mailto:tonyx1998@gmail.com",
   image: `${SITE_URL}/opengraph-image`,
   alumniOf: {
@@ -31,9 +40,12 @@ export const personJsonLd = {
     "Docker",
     "WebRTC",
     "OpenAI Realtime API",
-    "Applied AI",
+    "Claude API",
     "Large Language Models",
+    "LLM Evaluation",
     "Realtime Voice Agents",
+    "Playwright",
+    "GitHub Actions",
   ],
   sameAs: [
     "https://github.com/tonyx1998",
@@ -46,9 +58,9 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": WEBSITE_ID,
   url: SITE_URL,
-  name: "To Yin Yu — Full-Stack Engineer & Applied AI Builder",
+  name: "To Yin Yu · Software Developer",
   description:
-    "Portfolio of To Yin Yu — full-stack engineer shipping applied AI products with Next.js, FastAPI, WebRTC, and the OpenAI Realtime API.",
+    "Portfolio of To Yin Yu, a software developer near Seattle. Products, tools, and courses, all live.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "To Yin Yu — Full-Stack Engineer & Applied AI Builder";
+export const alt = "To Yin Yu, software developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,32 +14,29 @@ export default function Image() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "80px",
-        background:
-          "linear-gradient(135deg, #09090b 0%, #1e1b4b 60%, #4f46e5 100%)",
-        color: "#fafafa",
+        background: "#f4f5f7",
+        color: "#1c2128",
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
       <div
         style={{
           display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          fontFamily: "ui-monospace, SFMono-Regular, monospace",
-          color: "#a5b4fc",
-          fontSize: "28px",
+          fontSize: "26px",
+          color: "#1e5f7a",
+          letterSpacing: "0.04em",
         }}
       >
-        &lt;ToYinYu /&gt;
+        toyinyu.com
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <div
           style={{
-            fontSize: "92px",
-            fontWeight: 700,
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
+            fontSize: "96px",
+            fontWeight: 600,
+            lineHeight: 1.02,
+            letterSpacing: "-0.02em",
             display: "flex",
           }}
         >
@@ -47,37 +44,36 @@ export default function Image() {
         </div>
         <div
           style={{
-            fontSize: "44px",
+            fontSize: "42px",
             fontWeight: 500,
-            color: "#c7d2fe",
+            color: "#4b5563",
             display: "flex",
           }}
         >
-          Full-Stack Engineer · Applied AI Builder
+          Software developer
         </div>
         <div
           style={{
             fontSize: "28px",
-            color: "#a1a1aa",
-            maxWidth: "900px",
+            color: "#4b5563",
+            maxWidth: "960px",
+            lineHeight: 1.35,
             display: "flex",
           }}
         >
-          Shipping applied AI products with Next.js, FastAPI, WebRTC, and the
-          OpenAI Realtime API.
+          Plugrade, How&apos;s My Job Fit?, SoloMock, SoloYap, Gasolytics, and
+          Throughline. All live, all built and run by one person.
         </div>
       </div>
 
       <div
         style={{
           display: "flex",
-          gap: "16px",
-          fontFamily: "ui-monospace, SFMono-Regular, monospace",
-          fontSize: "22px",
-          color: "#71717a",
+          fontSize: "24px",
+          color: "#7b8593",
         }}
       >
-        <span>toyinyu.com</span>
+        Seattle area · US citizen · open to a first full-time role
       </div>
     </div>,
     { ...size }

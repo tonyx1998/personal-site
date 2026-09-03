@@ -24,24 +24,34 @@ export async function generateMetadata({
   const project = projectBySlug(slug);
   if (!project) return {};
   const url = `/projects/${slug}`;
+  const description = shortDescription(project.description);
 
   return {
     title: project.title,
-    description: project.description,
+    description,
     keywords: project.tags,
     alternates: { canonical: url },
     openGraph: {
       title: `${project.title} · To Yin Yu`,
-      description: project.description,
+      description,
       url,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: project.title,
-      description: project.description,
+      description,
     },
   };
+}
+
+// Search engines cut descriptions at roughly 155 characters. Cut at a word
+// boundary so the snippet does not end mid-word.
+function shortDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 80 ? lastSpace : max - 1).replace(/[,;:]$/, "")}…`;
 }
 
 export default async function ProjectDetailPage({

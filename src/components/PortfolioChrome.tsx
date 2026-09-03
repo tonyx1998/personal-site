@@ -102,7 +102,10 @@ export function PortfolioHeader() {
 export function PortfolioFooter() {
   return (
     <footer className={`${styles.container} ${styles.footer}`} id="contact">
-      <p>Have a useful problem?</p>
+      <p>
+        Looking for a first full-time software engineering role, Seattle area or
+        remote.
+      </p>
       <div className={styles.footerLinks}>
         <a href="mailto:tonyx1998@gmail.com">tonyx1998@gmail.com</a>
         <a

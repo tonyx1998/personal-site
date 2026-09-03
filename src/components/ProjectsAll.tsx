@@ -6,6 +6,8 @@ import { projectVisuals } from "@/lib/project-visuals";
 import styles from "./ProjectsAll.module.css";
 
 const selectedProjectOrder = [
+  "Plugrade",
+  "How's My Job Fit?",
   "SoloMock",
   "SoloYap",
   "Gasolytics — US Gas Price Map",
@@ -35,10 +37,10 @@ export default function ProjectsAll() {
             Projects / {String(projects.length).padStart(2, "0")}
           </p>
           <div>
-            <h1>Built, shipped, maintained.</h1>
+            <h1>Everything I have shipped.</h1>
             <p>
-              A running archive of products, developer tools, public-data
-              systems, and technical learning work.
+              Products, tools, and courses, all live. The first six are the ones
+              to look at.
             </p>
           </div>
         </header>
@@ -124,12 +126,10 @@ export default function ProjectsAll() {
               {String(supportingProjects.length).padStart(2, "0")}
             </p>
             <div>
-              <h2 id="supporting-work-heading">
-                Experiments &amp; learning work.
-              </h2>
+              <h2 id="supporting-work-heading">Smaller builds and courses.</h2>
               <p>
-                Smaller tools, client work, and focused builds that supported
-                the larger systems above.
+                Client work, tools, and the technical guides that make up
+                Throughline.
               </p>
             </div>
           </header>
