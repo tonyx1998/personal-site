@@ -3,9 +3,9 @@
     "title": "How's My Job Fit?",
     "description": "Compares a candidate's own evidence with a job's requirements and shows what is fully supported, transferable, partial, or not shown at all. Files never leave the browser.",
     "highlights": [
-      "Parses resumes and notes in the browser (PDF through pdf.js, Word through mammoth, images through Tesseract OCR), so nothing is uploaded or stored",
+      "Parses resumes and notes in the browser: PDF through pdf.js, Word through mammoth, images through Tesseract OCR. Nothing is uploaded or stored",
       "Scores fit with a deterministic weighted model: requirements ranked by importance, eligibility checks kept separate from skills, and transferable evidence given partial credit with the reasoning shown",
-      "Ships six fictional example reports across industries plus public methodology and limitations pages, so a reader can judge the method before trusting a score"
+      "Ships six fictional example reports across industries plus public methodology and limitations pages. A reader can judge the method before trusting a score"
     ],
     "tags": ["Next.js", "React", "TypeScript", "pdf.js", "Tesseract.js"],
     "github": null,
@@ -17,7 +17,7 @@
     "resume": {
       "order": 1,
       "title": "How's My Job Fit? - Evidence-Based Job-Fit Reports",
-      "stack": "Next.js, React, TypeScript, pdf.js, Tesseract.js, Vercel",
+      "stack": "Next.js, React, TypeScript, pdf.js, Tesseract.js",
       "date": "2026",
       "bullets": [
         "Built a candidate-side job-fit workbench that parses resumes in the browser (PDF, DOCX, OCR) and scores them against a posting with a deterministic weighted model that keeps eligibility separate from skills.",
@@ -29,8 +29,8 @@
     "title": "SoloMock",
     "description": "Talk through a coding problem out loud with an AI interviewer that hears you and watches your editor. Feedback arrives while you are still speaking.",
     "highlights": [
-      "Built the voice loop on OpenAI's Realtime API over WebRTC. Debounced snapshots of the code editor stream into the model, so the interviewer reacts to what you type as well as what you say",
-      "Wrote 15 per-problem interviewer briefs: a solution tree, a four-step hint ladder, follow-ups, and edge cases. The system prompt is built from the brief, so sessions stay consistent",
+      "Built the voice loop on OpenAI's Realtime API over WebRTC. Debounced snapshots of the code editor stream into the model, and the interviewer reacts to what you type as well as what you say",
+      "Wrote 15 per-problem interviewer briefs: a solution tree, a four-step hint ladder, follow-ups, and edge cases. The system prompt is built from the brief, which keeps sessions consistent",
       "Kept costs bounded with a per-IP rate limit, a 15-minute session cap, short-lived ephemeral keys, and a request-access flow that posts to Discord for manual approval"
     ],
     "tags": [
@@ -50,7 +50,7 @@
     "resume": {
       "order": 2,
       "title": "SoloMock - Realtime Voice Mock Interviewer",
-      "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS, Vercel",
+      "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco",
       "date": "2025",
       "bullets": [
         "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and 15 structured problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
@@ -59,10 +59,10 @@
     }
   },
   {
-    "title": "Gasolytics — US Gas Price Map",
+    "title": "Gasolytics",
     "description": "Gas prices for all 50 states and DC on one interactive map, with state and metro pages, a trip cost calculator, and an EV-versus-gas comparison.",
     "highlights": [
-      "Draws the choropleth with d3-geo on the server and ships it as SVG, so no d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
+      "Draws the choropleth with d3-geo on the server and ships it as SVG. No d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
       "Grew from a map into a toolkit: 51 state pages, metro pages, cheapest-gas-near-me, a trip calculator, an EV suite with per-state registration fees and break-even miles, and gas-tax, border-gap, and affordability pages",
       "Reads daily AAA averages for four fuel grades from a Vercel Blob snapshot feed through an in-process cache. Mobile app-shell layout with a tab bar and a drag sheet over the map"
     ],
@@ -83,13 +83,14 @@
     "resume": {
       "order": 3,
       "title": "Gasolytics - US Gas Price Map",
-      "stack": "Next.js 16, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
+      "stack": "Next.js, React, TypeScript, d3-geo, Vercel Blob",
       "date": "2026",
       "bullets": [
         "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
         "Expanded it into a national fuel-economics toolkit with 51 state pages plus metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
       ]
-    }
+    },
+    "slug": "gasolytics-us-gas-price-map"
   },
   {
     "title": "SoloYap",
@@ -116,12 +117,12 @@
     "dateModified": "2026-09-02"
   },
   {
-    "title": "Amex Roofing — Site + AI Booking Agent",
+    "title": "Amex Roofing",
     "description": "Production website for a Bay Area roofing contractor in English and Chinese: 26 city pages, instant roof estimates from satellite measurements, and an AI chat agent that books onto the crew's calendar.",
     "highlights": [
       "Buildless HTML and Tailwind site with English and Chinese homepage twins and 26 city landing pages (13 cities in each language), kept in sync by build scripts",
       "Instant ballpark estimates from Google Solar API roof measurements feed a three-step mobile booking flow. Vercel serverless routes write the appointment to the crew's Google Calendar and post a Discord alert",
-      "Hours-aware contact: the crew's phone during working hours, a bilingual AI chat agent after hours, plus SEO articles and a daily analytics digest to Discord"
+      "Contact changes with the hour: the crew's phone during working hours and a bilingual AI chat agent after. SEO articles and a daily analytics digest to Discord round it out"
     ],
     "tags": [
       "HTML",
@@ -139,21 +140,22 @@
     "resume": {
       "order": 4,
       "title": "Amex Roofing - Client Site with AI Booking Agent",
-      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar API, Google Solar API",
+      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar and Solar APIs",
       "date": "2026",
       "bullets": [
         "Delivered a bilingual (English/Chinese) production site for a roofing contractor with 26 local-SEO city pages and instant estimates from Google Solar API roof measurements.",
         "Built an after-hours AI chat agent and a booking flow that writes appointments straight to the crew's Google Calendar through Vercel serverless routes."
       ]
-    }
+    },
+    "slug": "amex-roofing-site-ai-booking-agent"
   },
   {
     "title": "Reachspan",
     "description": "Marketing site for ReachSpan, a service that runs the website, AI receptionist, reviews, and social listening for local service businesses. Booking a call lands straight on the calendar.",
     "highlights": [
       "Single-file HTML and Tailwind landing page with a warm-dark hero, custom display and mono typography, and scroll-reveal motion that respects reduced-motion settings",
-      "Vercel serverless routes call the Cal.com API for available slots and bookings, so an audit call is confirmed on the calendar without a form round-trip",
-      "Spec demos are labelled as demos. No fabricated results or testimonials anywhere on the page"
+      "Vercel serverless routes call the Cal.com API for available slots and bookings. An audit call is confirmed on the calendar without a form round-trip",
+      "Spec demos are labelled as demos, and the page has no fabricated results or testimonials"
     ],
     "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     "github": null,
@@ -165,12 +167,12 @@
     "dateModified": "2026-09-02"
   },
   {
-    "title": "Throughline — Technical Learning Ecosystem",
+    "title": "Throughline",
     "description": "The hub that connects six technical guides, SoloMock, and Shipyard into one path: learn to code, pick a specialty, build something, prepare, practice.",
     "highlights": [
       "Static Astro hub that lays the whole set out as a five-act ladder and routes readers from the programming on-ramp into a specialty guide, then into building and interview practice",
       "Every guide runs on one shared design system, the guide-kit package, with in-browser code and checkpoint quizzes, and follows the same rule: start from nothing, read top to bottom",
-      "Each guide's source is available to read; all of the sites deploy on Vercel"
+      "Each guide's source is available to read, and all of the sites deploy on Vercel"
     ],
     "tags": ["Astro", "TypeScript", "Design System", "Vercel"],
     "github": null,
@@ -188,7 +190,8 @@
       "bullets": [
         "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path, on a shared React and TypeScript design system with navigation, quizzes, and code exercises."
       ]
-    }
+    },
+    "slug": "throughline-technical-learning-ecosystem"
   },
   {
     "title": "all-in-one-URL",
@@ -216,7 +219,7 @@
     "resume": {
       "order": 6,
       "title": "all-in-one-URL - Short URLs, QR Codes &amp; Barcodes",
-      "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React, TypeScript",
+      "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React",
       "date": "2024",
       "bullets": [
         "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource analytics, Redis-backed caching, tiered rate limiting, and JWT auth; containerized with Docker Compose and deployed across Vercel, Render, Neon, and Upstash."
@@ -228,8 +231,7 @@
     "description": "An introduction to programming for people who have never written code. The on-ramp the other Throughline guides point to.",
     "highlights": [
       "Written for readers with no experience, top to bottom, as the shared entry point to the specialty guides",
-      "Interactive Docusaurus course with in-browser code and checkpoint quizzes on the shared guide-kit design system",
-      "Source available to read; deployed on Vercel"
+      "Interactive Docusaurus course with in-browser code and checkpoint quizzes on the shared guide-kit design system, deployed on Vercel"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX"],
     "github": null,
@@ -257,7 +259,7 @@
   },
   {
     "title": "Modern AI Guide",
-    "description": "An AI engineering course in 18 chapters, from how language models actually work to shipping and evaluating production systems, with runnable Python challenges in the browser.",
+    "description": "An AI engineering course in 18 chapters, from how language models work to shipping and evaluating production systems, with runnable Python challenges in the browser.",
     "highlights": [
       "18 chapters: model foundations, the project lifecycle, the AI stack, solo, startup, and enterprise workflows, decision frameworks, production patterns, and career paths",
       "Quiz component with per-chapter checkpoints that confirm understanding before the next chapter opens",
@@ -275,7 +277,7 @@
     "title": "Modern Security Engineer Guide",
     "description": "Fourteen chapters of offensive and defensive security, from the attacker's point of view to the job of a security engineer, with quizzes and hands-on code challenges.",
     "highlights": [
-      "Covers cryptography, application security and the OWASP Top 10, secure SDLC, offensive testing, detection and response, forensics, cloud and identity, governance, and the AI attack surface (prompt injection, the LLM Top 10, red-teaming)",
+      "Covers cryptography, application security and the OWASP Top 10, secure SDLC, offensive testing, detection and response, forensics, cloud and identity, governance, and the AI attack surface, including prompt injection and the LLM Top 10",
       "Quiz and CodeChallenge components gate each chapter until the concept is demonstrated; an in-page feedback widget collects corrections",
       "Pairs with the Web Dev and AI guides on the same Docusaurus and MDX setup"
     ],
@@ -292,8 +294,7 @@
     "description": "Cloud engineering from first principles in 11 chapters: core services, infrastructure as code, Kubernetes, CI/CD, SRE, and platform engineering.",
     "highlights": [
       "11 chapters: foundations, core services, infrastructure as code, Kubernetes, CI/CD and GitOps, observability and SRE, platform engineering, cloud security, FinOps, MLOps and LLMOps, and career",
-      "Interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams on the shared guide-kit design system",
-      "Source available to read; deployed on Vercel as part of Throughline"
+      "Interactive Docusaurus course with checkpoint quizzes and Mermaid diagrams on the shared guide-kit design system, deployed on Vercel as part of Throughline"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
@@ -309,7 +310,7 @@
     "highlights": [
       "12 chapters from foundations through storage and formats, SQL and query engines, modeling and warehousing, Spark, ingestion and CDC, dbt, orchestration, Kafka streaming, the lakehouse, data quality and governance, and career",
       "Each topic is taught as a concept first (columnar storage, desired-state pipelines, exactly-once delivery) and then mapped to the current tools: Snowflake, BigQuery, dbt, Airflow, Kafka, Iceberg, and Delta",
-      "Built on the shared guide-kit design system with checkpoint quizzes; source available to read; deployed on Vercel"
+      "Built on the shared guide-kit design system with checkpoint quizzes and deployed on Vercel"
     ],
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": null,
@@ -325,7 +326,7 @@
     "highlights": [
       "Guided build flow that walks a learner through shipping a real project, then grades the result with an LLM-as-judge rubric",
       "The coaching loop explains what is missing and what to do next rather than returning a score alone",
-      "The Build act of the Throughline ladder; source available to read; deployed on Vercel"
+      "The Build step of the Throughline ladder, deployed on Vercel"
     ],
     "tags": ["TypeScript", "React", "Claude / LLM-as-Judge", "Vercel"],
     "github": null,

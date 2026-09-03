@@ -164,12 +164,12 @@ export default function PortfolioHome() {
             <p>
               I do the whole job: the product decision, the frontend, the
               backend, deployment, and the part after launch where things break.
-              Most of my recent work puts language models in production, so I
-              spend a lot of time on cost limits, evaluation, and failure
+              Most of my recent work puts language models in production, which
+              means a lot of time spent on cost limits, evaluation, and failure
               handling.
             </p>
             <div className={styles.habits}>
-              <h3>Three habits, with the project each came from</h3>
+              <h3>Habits, and the project each one came from</h3>
               <p>
                 <b>Bound the cost before launch.</b> SoloMock and SoloYap mint
                 short-lived keys, cap sessions at 15 minutes, and rate-limit by

@@ -25,12 +25,11 @@
 }
 
 .sectionTitle {
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  font-weight: 600;
-  margin: 0 0 4px;
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 6px;
 }
 
 .rows {
