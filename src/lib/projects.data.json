@@ -33,7 +33,15 @@
       "Authored 13 CEFR-graded scenarios (A2–C1) plus free-chat and custom-topic modes, with optional Mandarin/Cantonese native-language hints to lower the floor for beginners",
       "Shipped as an installable PWA with manifest + apple-touch icons; layered cost protection via per-IP rate limits, session caps, and an email-allowlist request-access flow"
     ],
-    "tags": ["Next.js", "React 19", "TypeScript", "OpenAI Realtime API", "WebRTC", "Tailwind CSS", "PWA"],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "OpenAI Realtime API",
+      "WebRTC",
+      "Tailwind CSS",
+      "PWA"
+    ],
     "github": null,
     "live": "https://soloyap.com",
     "featured": true,
@@ -48,7 +56,14 @@
       "Authored 15 structured per-problem 'interviewer briefs' (solution tree, 4-rung Socratic hint ladder, follow-ups, edge cases) that drive interviewer behavior via the system prompt",
       "Layered cost protection: per-IP rate limit, 15-min session cap, ephemeral key TTL, and a Discord-webhook extended-access request flow with manual-whitelist approval"
     ],
-    "tags": ["Next.js", "TypeScript", "OpenAI Realtime API", "WebRTC", "Monaco", "Tailwind CSS"],
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "OpenAI Realtime API",
+      "WebRTC",
+      "Monaco",
+      "Tailwind CSS"
+    ],
     "github": null,
     "live": "https://solomock.com",
     "featured": true,
@@ -74,10 +89,18 @@
       "Added JWT auth and per-resource ownership while preserving anonymous resources",
       "Deployed full stack on Vercel, Render, Neon, and Upstash"
     ],
-    "tags": ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "React", "TypeScript"],
+    "tags": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "React",
+      "TypeScript"
+    ],
     "github": null,
     "live": "https://all-in-one-url.vercel.app",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2024",
     "resume": {
@@ -99,7 +122,14 @@
       "Grew it into a national toolkit: 51 state pages plus metro pages, cheapest-gas-near-me, a trip gas calculator, an EV suite (EV-vs-gas with per-state registration fees and break-even miles, charging costs and stations), and gas-tax, border-gap, and affordability analyses",
       "Reads daily AAA averages (50 states + DC, 4 fuel grades) from a separate pipeline's Vercel Blob snapshot feed through an in-process cache; mobile app-shell UX with a global tab bar and drag-sheet map expansion, on Next.js 16 + React 19"
     ],
-    "tags": ["Next.js", "React 19", "TypeScript", "d3-geo", "Vercel Blob", "Vercel"],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "d3-geo",
+      "Vercel Blob",
+      "Vercel"
+    ],
     "github": null,
     "live": "https://www.gasolytics.com/",
     "featured": true,
@@ -118,16 +148,22 @@
   },
   {
     "title": "Amex Roofing — Site + AI Booking Agent",
-    "description": "Production site for a Bay Area roofing contractor (Reachspan AI client) — English/中文/Español, 22 local-SEO city pages, instant roof-measurement estimates, and an AI chat agent that hands off to a real booking calendar.",
+    "description": "Production site for a Bay Area roofing contractor — English/中文/Español, 22 local-SEO city pages, instant roof-measurement estimates, and an AI chat agent that hands off to a real booking calendar.",
     "highlights": [
       "Shipped a buildless HTML + Tailwind site with English/中文/Español homepage twins and 22 city landing pages (11 cities × EN/中文) kept in sync by build scripts — every URL indexed by Google",
       "Built instant ballpark estimates from Google Solar API roof measurements feeding a 3-step mobile booking flow, with Vercel serverless routes booking directly onto the crew's Google Calendar and firing Discord alerts",
       "Added an hours-aware contact layer — crew phone during work hours, bilingual AI chat agent after hours — plus SEO articles and a daily analytics digest to Discord"
     ],
-    "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Google Calendar API", "Google Solar API"],
+    "tags": [
+      "HTML",
+      "Tailwind CSS",
+      "Vercel Serverless",
+      "Google Calendar API",
+      "Google Solar API"
+    ],
     "github": null,
     "live": "https://amex-roofing.com",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
   },
@@ -157,7 +193,7 @@
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-web-dev-guide",
     "live": "https://modernwebdevguide.com/",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
   },
@@ -172,7 +208,7 @@
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-ai-guide",
     "live": "https://modernaiguide.dev/",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
   },
@@ -187,7 +223,7 @@
     "tags": ["Docusaurus", "TypeScript", "React", "MDX", "Mermaid"],
     "github": "https://github.com/tonyx1998/modern-security-engineer-guide",
     "live": "https://modernsecurityengineer.com/",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
   },
@@ -247,7 +283,8 @@
     "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     "github": null,
     "live": "https://reachspan.ai",
-    "featured": true,
+    "featured": false,
+    "hidden": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026"
   },
