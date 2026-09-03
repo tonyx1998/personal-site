@@ -1,112 +1,60 @@
 # personal-site
 
-[![Live](https://img.shields.io/badge/live-toyinyu.com-6366f1?style=flat-square)](https://www.toyinyu.com)
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
+The portfolio and résumé of **To Yin Yu**, live at [www.toyinyu.com](https://www.toyinyu.com).
 
-The personal portfolio of **To Yin Yu** — a full-stack software engineer focused on applied AI. A single-page Next.js site with a hero spotlight, a bento-grid project showcase with cursor-tracked spotlight cards, server-rendered dark/light theming, and a serverless contact form.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Framer Motion. Hosted on Vercel.
 
-**Live:** [www.toyinyu.com](https://www.toyinyu.com)
+## How the site is put together
 
----
+- `src/lib/projects.data.json` is the single source of truth for every project. The homepage, the archive at `/projects`, each `/projects/<slug>` page, the sitemap, the JSON-LD, and the résumé PDF all read from it. Edit the JSON, then regenerate the résumé.
+- `src/components/PortfolioHome.tsx` renders the homepage. Its four hero cards are hand-picked in that file, so adding a project to the JSON does not put it on the homepage.
+- `src/components/ProjectsAll.tsx` renders the archive: four selected projects at full size, the rest in a compact list. A project with `"hidden": true` is left out of the archive, the sitemap, and the routes.
+- `src/app/layout.tsx` ships the page with the dark class and a small pre-hydration script that reads `localStorage.theme`, so there is no theme flash and every route can be statically rendered.
+- `scripts/build-resume.py` generates `public/resume.pdf` from the `resume` block of each project entry.
 
-## Features
-
-- **Server-rendered theming** — dark/light mode resolved from a cookie in the root layout, so there's no flash of unstyled content and no theme `<script>` tag.
-- **Bento-grid project gallery** — asymmetric featured/standard cards with a cursor-tracking radial-gradient spotlight on hover.
-- **Motion** — entrance and scroll-triggered animations via Framer Motion, with full `prefers-reduced-motion` fallbacks.
-- **Serverless contact form** — posts to Web3Forms with an `AbortController` timeout; no backend to run.
-- **SEO-ready** — Metadata API, dynamic Open Graph / Twitter images, schema.org JSON-LD structured data, and generated `sitemap.xml` / `robots.txt`.
-- **Generated résumé** — an ATS-friendly PDF built from a single Python source of truth.
-
-## Tech stack
-
-| Layer     | Choice                                  |
-| --------- | --------------------------------------- |
-| Framework | Next.js 16 (App Router, Turbopack)      |
-| UI        | React 19, TypeScript 5                  |
-| Styling   | Tailwind CSS v4 (class-based dark mode) |
-| Animation | Framer Motion                           |
-| Icons     | lucide-react + hand-rolled SVGs         |
-| Forms     | Web3Forms (no server)                   |
-| Hosting   | Vercel                                  |
-
-A deeper, teaching-oriented tour of every library and pattern lives in **[docs/STACK.md](docs/STACK.md)**.
-
-## Getting started
-
-### Prerequisites
-
-- Node.js 20+
-- npm
-
-### Setup
+## Working on it
 
 ```bash
-git clone https://github.com/tonyx1998/personal-site.git
-cd personal-site
-npm install
-cp .env.example .env.local   # add your Web3Forms key
-npm run dev
+npm ci
+npm run dev          # http://localhost:3000
+npm run build        # production build
+npm run lint         # eslint
+npm run format:check # prettier
+npm run resume       # rebuild public/resume.pdf (needs: pip install reportlab pypdf)
 ```
 
-The dev server runs at [http://localhost:3000](http://localhost:3000).
+No environment variables are required.
 
-### Environment variables
+## Deploying
 
-| Variable                    | Required | Description                                                                                                                |
-| --------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | Yes      | Access key from [web3forms.com](https://web3forms.com), used by the contact form. Without it, submissions report an error. |
+Pushes to `master` deploy to production through the Vercel Git integration. Do not run `vercel --prod` by hand; it does not move the production alias.
 
-See [`.env.example`](.env.example).
-
-## Scripts
-
-| Command                                             | Description                                               |
-| --------------------------------------------------- | --------------------------------------------------------- |
-| `npm run dev`                                       | Start the dev server (port 3000)                          |
-| `npm run build`                                     | Production build                                          |
-| `npm run start`                                     | Serve the production build locally                        |
-| `npm run lint`                                      | Run ESLint                                                |
-| `python3 scripts/build-resume.py public/resume.pdf` | Regenerate the résumé PDF (`pip install reportlab pypdf`) |
-
-## Project structure
+## Layout
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx            # root layout, metadata, cookie-based theming
-│   ├── page.tsx              # home page — composes all sections
-│   ├── projects/page.tsx     # full project listing
-│   ├── providers.tsx         # in-house theme context (no next-themes)
-│   ├── globals.css           # Tailwind v4 tokens + a11y rules
-│   ├── sitemap.ts / robots.ts
-│   └── icon / apple-icon / opengraph-image / twitter-image   # generated assets
-├── components/               # Hero, About, Skills, Projects, Experience, Contact, …
+│   ├── layout.tsx              root layout, metadata, theme bootstrap
+│   ├── page.tsx                homepage
+│   ├── projects/page.tsx       archive
+│   ├── projects/[slug]/        one page per project
+│   ├── not-found.tsx           404
+│   ├── providers.tsx           theme store (localStorage)
+│   ├── sitemap.ts, robots.ts
+│   └── icon, apple-icon, opengraph-image, twitter-image
+├── components/
+│   ├── PortfolioChrome.tsx     header and footer
+│   ├── PortfolioHome.tsx       homepage sections
+│   └── ProjectsAll.tsx         archive list
 └── lib/
-    ├── projects.ts           # project data (single source of truth)
-    ├── site.ts               # SITE_URL — used by metadata, sitemap, robots
-    ├── structured-data.ts    # JSON-LD
-    └── utils.ts              # cn() helper
-public/                       # resume.pdf + static assets
-scripts/build-resume.py       # ATS-friendly résumé PDF generator
-docs/STACK.md                 # stack & skills walkthrough
-```
-
-## Architecture notes
-
-- **Cookie-based theming.** The root layout reads a `theme` cookie and sets `class="dark"` on `<html>` server-side — no FOUC, no hydration-warning `<script>`. `src/lib/site.ts` is the single source of truth for the canonical URL used by `metadataBase`, the sitemap, and robots.
-- **Client-only contact form.** `ContactForm` is loaded with `ssr: false` so browser extensions that mutate form inputs before hydration can't trigger mismatches — the SSR HTML ships zero inputs.
-- **Data-driven projects.** Everything in the gallery comes from `src/lib/projects.ts`; cards link to a live URL when one is public and show a "private repo" badge otherwise.
-
-## Deployment
-
-Hosted on Vercel; pushes to `master` deploy to production. Manual deploy:
-
-```bash
-vercel --prod
+    ├── projects.data.json      project roster (source of truth)
+    ├── projects.ts             types, slug helper, hidden filter
+    ├── project-visuals.ts      screenshot paths and alt text
+    ├── site.ts                 canonical URL
+    └── structured-data.ts      JSON-LD builders
+public/projects/                product screenshots (1280×720)
+public/resume.pdf               generated résumé
+scripts/build-resume.py         résumé generator
 ```
 
 ## License
