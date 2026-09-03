@@ -326,15 +326,15 @@
     "highlights": [
       "Guided build flow that walks a learner through shipping a real project, then grades the result with an LLM-as-judge rubric",
       "The coaching loop explains what is missing and what to do next rather than returning a score alone",
-      "The Build step of the Throughline ladder, deployed on Vercel"
+      "The Build step of the Throughline ladder, run locally rather than hosted: a Python engine collects repo signals, and two Claude skills do the coaching and grading"
     ],
-    "tags": ["TypeScript", "React", "Claude / LLM-as-Judge", "Vercel"],
+    "tags": ["Python", "YAML", "Claude Code skills", "LLM-as-Judge"],
     "github": null,
-    "live": "https://shipyard.vercel.app",
+    "live": null,
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026",
-    "dateModified": "2026-09-02"
+    "dateModified": "2026-09-03"
   },
   {
     "title": "SWE Interview Guide",
