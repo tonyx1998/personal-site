@@ -1,10 +1,16 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt = "To Yin Yu, software developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image() {
+  const newsreader = await readFile(
+    join(process.cwd(), "src/app/fonts/Newsreader-Medium.ttf")
+  );
+
   return new ImageResponse(
     <div
       style={{
@@ -33,10 +39,10 @@ export default function Image() {
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <div
           style={{
-            fontSize: "96px",
-            fontWeight: 600,
+            fontFamily: "Newsreader",
+            fontSize: "104px",
             lineHeight: 1.02,
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.01em",
             display: "flex",
           }}
         >
@@ -76,6 +82,9 @@ export default function Image() {
         Seattle area · US citizen · open to a first full-time role
       </div>
     </div>,
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: "Newsreader", data: newsreader, style: "normal" }],
+    }
   );
 }

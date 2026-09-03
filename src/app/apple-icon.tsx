@@ -1,9 +1,16 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default function AppleIcon() {
+// iOS rounds the corners itself, so the tile is square here.
+export default async function AppleIcon() {
+  const newsreader = await readFile(
+    join(process.cwd(), "src/app/fonts/Newsreader-Medium.ttf")
+  );
+
   return new ImageResponse(
     <div
       style={{
@@ -12,17 +19,19 @@ export default function AppleIcon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "linear-gradient(135deg, #09090b 0%, #1e1b4b 60%, #4f46e5 100%)",
-        color: "#a5b4fc",
-        fontFamily: "ui-monospace, SFMono-Regular, monospace",
-        fontSize: 76,
-        fontWeight: 800,
-        letterSpacing: "-0.04em",
+        background: "#106b4e",
+        color: "#f3f4f2",
+        fontFamily: "Newsreader",
+        fontSize: 138,
+        lineHeight: 1,
+        paddingBottom: 10,
       }}
     >
-      &lt;T/&gt;
+      T
     </div>,
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: "Newsreader", data: newsreader, style: "normal" }],
+    }
   );
 }
