@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
@@ -86,27 +86,28 @@ type ThemePref = "light" | "dark" | "auto";
 // Keep the 7pm–7am window in sync with timeBasedTheme() in providers.tsx.
 const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');var r;if(p==='light'||p==='dark'){r=p;}else{var h=new Date().getHours();r=(h>=19||h<7)?'dark':'light';}document.documentElement.classList.toggle('dark',r==='dark');}catch(e){}})();`;
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookie = (await cookies()).get("theme")?.value;
-  const pref: ThemePref =
-    cookie === "light" || cookie === "dark" || cookie === "auto"
-      ? cookie
-      : "auto";
-  // SSR best-guess class; the inline script corrects `auto` against the clock.
-  const isDark = pref !== "light";
+  // Keep the layout static so content routes can be prerendered and cached.
+  // The inline script applies the saved preference before content paints, and
+  // Providers hydrates that same local preference on the client.
+  const pref: ThemePref = "auto";
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${isDark ? "dark" : ""} overflow-x-hidden`}
+      className={`${geistSans.variable} ${geistMono.variable} dark overflow-x-hidden`}
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <Script
+          id="theme-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
+        />
         <Providers initialPref={pref}>{children}</Providers>
         <Analytics />
       </body>
