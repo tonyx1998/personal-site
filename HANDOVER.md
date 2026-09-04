@@ -27,13 +27,25 @@ b1b7bd6 Persist theme in localStorage instead of a cookie so routes can be stati
 
 ## Next action
 
-Two things only the user can do: enable Vercel Web Analytics in the dashboard
-(the package is installed, the API says analytics is not enabled), and request
-indexing in Search Console for the pages Google has never fetched. Then confirm
-the LinkedIn URL. After that, run `npm run check-links` about once a month so
-the "Live, checked" date stays honest.
+Request indexing in Search Console for the pages Google has never fetched, then
+confirm the LinkedIn URL. After that, run `npm run check-links` about once a
+month so the "Live, checked" date stays honest.
+
+Web Analytics is enabled and collecting; the earlier note here saying it was not
+is out of date. The dashboard read 7 visitors and 21 page views over the seven
+days to 2026-09-04.
 
 ## State
+
+2026-09-04 (Speed Insights): `@vercel/speed-insights` is installed and
+`<SpeedInsights />` sits next to `<Analytics />` in `layout.tsx`. These are two
+separate Vercel products: Web Analytics counts visitors, Speed Insights reports
+Core Web Vitals, and the Speed Insights panel reading "No data available" was
+only ever the second one having no package to report from. The free tier is
+deliberate. It gives the Real Experience Score and a 10,000-event monthly
+allowance shared across the whole team, against roughly 1,100 events a month
+from every site combined. Speed Insights Plus is $10 per project per month and
+buys the individual Core Web Vitals; it is not worth it at this traffic.
 
 2026-09-03 (Shipyard): the Shipyard entry linked https://shipyard.vercel.app.
 That subdomain is not ours; it serves a stranger's 2021 ship-launcher page.
