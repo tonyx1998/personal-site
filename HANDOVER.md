@@ -53,7 +53,9 @@ has stronger contrast, mobile navigation uses native details/summary, Escape
 returns focus to Menu, and a skip link targets the page's main content. All
 essential content/navigation is server-rendered and usable without JavaScript.
 External product links use ordinary navigation; screenshots/titles open the
-internal study or notes. The footer's Download PDF has a friendly filename.
+internal study or notes. The footer's Download PDF has a friendly filename;
+the PDF response header preserves that filename on Vercel while keeping inline
+viewing available.
 
 The default resume is one Letter page with 10.5-point body text, one independent
 role, and Amex/SoloMock/Gasolytics. Five explicit profiles select shared resume
