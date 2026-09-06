@@ -67,8 +67,8 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          How&apos;s My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing,
-          ReachSpan, and Throughline. All live, all built and run by one person.
+          Useful web products, from the interface to the backend. Selected work
+          and the engineering decisions behind it.
         </div>
       </div>
 
@@ -76,10 +76,10 @@ export default async function Image() {
         style={{
           display: "flex",
           fontSize: "24px",
-          color: "#7d8885",
+          color: "#62706a",
         }}
       >
-        Seattle area · US citizen · open to a first full-time role
+        Seattle area · US citizen · open to software engineering roles
       </div>
     </div>,
     {

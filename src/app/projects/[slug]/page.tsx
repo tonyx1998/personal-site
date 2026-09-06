@@ -1,23 +1,34 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
+import { ProjectLinks } from "@/components/ProjectLinks";
 import chrome from "@/components/Chrome.module.css";
 import {
-  displayUrl,
   projects,
   projectSlug,
   projectBySlug,
-  shortTitle,
+  type StudyFigure,
 } from "@/lib/projects";
-import { projectVisuals } from "@/lib/project-visuals";
+import { projectVisual } from "@/lib/project-visuals";
 import { jsonLdScriptProps } from "@/lib/structured-data";
-import { formatDate, LINKS_CHECKED_ON, SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import styles from "./ProjectDetail.module.css";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: projectSlug(project) }));
+}
+
+function shortDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (
+    cut.slice(0, lastSpace > 80 ? lastSpace : max - 1).replace(/[,;:]$/, "") +
+    "…"
+  );
 }
 
 export async function generateMetadata({
@@ -28,35 +39,46 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = projectBySlug(slug);
   if (!project) return {};
-  const url = `/projects/${slug}`;
+  const url = "/projects/" + slug;
   const description = shortDescription(project.description);
-
   return {
     title: project.title,
     description,
     keywords: project.tags,
     alternates: { canonical: url },
     openGraph: {
-      title: `${project.title} · To Yin Yu`,
+      title: project.title + " · To Yin Yu",
       description,
       url,
       type: "article",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: project.title,
-      description,
-    },
+    twitter: { card: "summary_large_image", title: project.title, description },
   };
 }
 
-// Search engines cut descriptions at roughly 155 characters. Cut at a word
-// boundary so the snippet does not end mid-word.
-function shortDescription(text: string, max = 155): string {
-  if (text.length <= max) return text;
-  const cut = text.slice(0, max - 1);
-  const lastSpace = cut.lastIndexOf(" ");
-  return `${cut.slice(0, lastSpace > 80 ? lastSpace : max - 1).replace(/[,;:]$/, "")}…`;
+function StudyImage({
+  figure,
+  eager = false,
+}: {
+  figure: StudyFigure;
+  eager?: boolean;
+}) {
+  return (
+    <figure className={styles.figure}>
+      <Image
+        src={figure.originalSrc ?? figure.src}
+        alt={figure.alt}
+        width={figure.width}
+        height={figure.height}
+        loading={eager ? "eager" : "lazy"}
+        sizes="(max-width: 1000px) calc(100vw - 40px), 960px"
+      />
+      <figcaption>
+        {figure.caption}{" "}
+        <a href={figure.originalSrc ?? figure.src}>View full-size image</a>
+      </figcaption>
+    </figure>
+  );
 }
 
 export default async function ProjectDetailPage({
@@ -67,17 +89,15 @@ export default async function ProjectDetailPage({
   const { slug } = await params;
   const project = projectBySlug(slug);
   if (!project) notFound();
-
-  // Previous and next stay inside the same tier, so a product never pages
-  // into the supporting list and back.
+  const study = project.caseStudy;
+  const firstFigure = study?.sections.find((section) => section.figure)?.figure;
+  const visual = projectVisual(project, slug);
   const tier = projects.filter((p) => p.featured === project.featured);
   const index = tier.findIndex((candidate) => projectSlug(candidate) === slug);
-  const previousProject = index > 0 ? tier[index - 1] : null;
-  const nextProject = index < tier.length - 1 ? tier[index + 1] : null;
-  const visual = projectVisuals[slug];
-
-  const personId = `${SITE_URL}/#person`;
-  const url = `${SITE_URL}/projects/${slug}`;
+  const previous = index > 0 ? tier[index - 1] : null;
+  const next = index < tier.length - 1 ? tier[index + 1] : null;
+  const personId = SITE_URL + "/#person";
+  const url = SITE_URL + "/projects/" + slug;
   const creativeWork = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -99,8 +119,8 @@ export default async function ProjectDetailPage({
       {
         "@type": "ListItem",
         position: 2,
-        name: "Projects",
-        item: `${SITE_URL}/projects`,
+        name: "All projects",
+        item: SITE_URL + "/projects",
       },
       { "@type": "ListItem", position: 3, name: project.title, item: url },
     ],
@@ -110,145 +130,135 @@ export default async function ProjectDetailPage({
     <>
       <script {...jsonLdScriptProps(creativeWork)} />
       <script {...jsonLdScriptProps(breadcrumb)} />
-
       <div className={chrome.page}>
         <PortfolioHeader />
-
-        <main className={`${chrome.container} ${styles.main}`}>
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className={chrome.container + " " + styles.main}
+        >
           <article>
             <Link href="/projects" className={styles.back}>
-              ← All projects
+              <ArrowLeft size={16} aria-hidden="true" /> All projects
             </Link>
-
             <header className={styles.hero}>
               <h1>{project.title}</h1>
-              <p>{project.description}</p>
-              <div className={styles.actions}>
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open {displayUrl(project.live)}
-                  </a>
+              <p className={styles.lead}>
+                {study?.summary ?? project.description}
+              </p>
+              {study && <p className={styles.context}>{study.context}</p>}
+              <dl className={styles.overview}>
+                {study && (
+                  <div>
+                    <dt>My role</dt>
+                    <dd>{study.role}</dd>
+                  </div>
                 )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Source on GitHub
-                  </a>
+                <div>
+                  <dt>Year</dt>
+                  <dd>{project.datePublished ?? "Ongoing"}</dd>
+                </div>
+                {!project.live && (
+                  <div>
+                    <dt>Format</dt>
+                    <dd>Local tool</dd>
+                  </div>
                 )}
-              </div>
+              </dl>
+              <ProjectLinks project={project} showNotes={false} />
+              <p className={styles.stack}>{project.tags.join(" · ")}</p>
             </header>
 
-            {visual && project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.screen}
-                aria-label={`Open ${shortTitle(project)} in a new tab`}
-              >
-                <Image
-                  src={visual.src}
-                  alt={visual.alt}
-                  width={1280}
-                  height={720}
-                  priority
-                  sizes="(max-width: 1240px) 100vw, 1140px"
-                />
-              </a>
+            {firstFigure ? (
+              <StudyImage figure={firstFigure} eager />
+            ) : (
+              visual && (
+                <figure className={styles.figure}>
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    width={1280}
+                    height={720}
+                    loading="eager"
+                    sizes="(max-width: 1000px) calc(100vw - 40px), 960px"
+                  />
+                </figure>
+              )
             )}
 
-            <div className={styles.body}>
-              <section aria-labelledby="built-heading">
-                <h2 id="built-heading" className={styles.label}>
-                  What I built
-                </h2>
-                {project.highlights && project.highlights.length > 0 ? (
-                  <ul className={styles.built}>
+            {study ? (
+              <div className={styles.study}>
+                {study.sections.map((section, sectionIndex) => (
+                  <section
+                    key={section.title}
+                    className={styles.studySection}
+                    aria-labelledby={"study-section-" + sectionIndex}
+                  >
+                    <div className={styles.prose}>
+                      <h2 id={"study-section-" + sectionIndex}>
+                        {section.title}
+                      </h2>
+                      {section.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                    {section.figure &&
+                      section.figure.src !== firstFigure?.src && (
+                        <StudyImage figure={section.figure} />
+                      )}
+                  </section>
+                ))}
+                <p className={styles.evidenceNote}>{study.evidenceNote}</p>
+              </div>
+            ) : (
+              <section className={styles.notes} aria-labelledby="notes-heading">
+                <h2 id="notes-heading">Project notes</h2>
+                {project.highlights?.length ? (
+                  <ul>
                     {project.highlights.map((highlight) => (
                       <li key={highlight}>{highlight}</li>
                     ))}
                   </ul>
                 ) : (
-                  <p>Designed, built, and shipped as an independent project.</p>
+                  <p>{project.description}</p>
                 )}
               </section>
-
-              <aside aria-labelledby="details-heading">
-                <h2 id="details-heading" className={styles.label}>
-                  Details
-                </h2>
-                <dl className={styles.facts}>
-                  <div>
-                    <dt>Year</dt>
-                    <dd>{project.datePublished ?? "Ongoing"}</dd>
-                  </div>
-                  <div>
-                    <dt>Status</dt>
-                    <dd>
-                      {project.live
-                        ? `Live, checked ${formatDate(LINKS_CHECKED_ON)}`
-                        : "Not deployed"}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Source</dt>
-                    <dd>
-                      {project.github ? (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Public repository
-                        </a>
-                      ) : (
-                        "Private repository"
-                      )}
-                    </dd>
-                  </div>
-                </dl>
-                <ul className={styles.tags} aria-label="Stack">
-                  {project.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
-              </aside>
-            </div>
+            )}
 
             <nav className={styles.pager} aria-label="More projects">
-              {previousProject ? (
-                <Link href={`/projects/${projectSlug(previousProject)}`}>
-                  <span>Previous</span>
-                  <b>{previousProject.title}</b>
+              {previous ? (
+                <Link href={"/projects/" + projectSlug(previous)}>
+                  <span>
+                    <ArrowLeft size={15} aria-hidden="true" /> Previous{" "}
+                    {study ? "case study" : "project"}
+                  </span>
+                  <b>{previous.title}</b>
                 </Link>
               ) : (
                 <span />
               )}
-              {nextProject ? (
+              {next ? (
                 <Link
-                  href={`/projects/${projectSlug(nextProject)}`}
+                  href={"/projects/" + projectSlug(next)}
                   className={styles.pagerNext}
                 >
-                  <span>Next</span>
-                  <b>{nextProject.title}</b>
+                  <span>
+                    Next {study ? "case study" : "project"}{" "}
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </span>
+                  <b>{next.title}</b>
                 </Link>
               ) : (
                 <Link href="/projects" className={styles.pagerNext}>
-                  <span>Next</span>
+                  <span>
+                    Keep exploring <ArrowRight size={15} aria-hidden="true" />
+                  </span>
                   <b>All projects</b>
                 </Link>
               )}
             </nav>
           </article>
         </main>
-
         <PortfolioFooter />
       </div>
     </>

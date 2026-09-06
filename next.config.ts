@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  async headers() {
+    return [
+      {
+        source: "/resume.pdf",
+        headers: [
+          {
+            key: "Content-Disposition",
+            value: 'inline; filename="To-Yin-Yu-Resume.pdf"',
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {

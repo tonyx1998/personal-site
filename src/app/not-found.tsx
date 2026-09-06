@@ -7,7 +7,11 @@ export default function NotFound() {
   return (
     <div className={chrome.page}>
       <PortfolioHeader />
-      <main className={`${chrome.container} ${styles.main}`}>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={`${chrome.container} ${styles.main}`}
+      >
         <p className={styles.code}>404</p>
         <h1>There is no page at this address.</h1>
         <p className={styles.help}>

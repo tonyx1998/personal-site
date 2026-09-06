@@ -27,15 +27,55 @@ b1b7bd6 Persist theme in localStorage instead of a cookie so routes can be stati
 
 ## Next action
 
-Request indexing in Search Console for the pages Google has never fetched, then
-confirm the LinkedIn URL. After that, run `npm run check-links` about once a
-month so the "Live, checked" date stays honest.
+Keep the evidence and shared project facts current as the products change.
+Before tailoring an application, use the resume profiles documented in
+`docs/resume-tailoring.md`. Verify changed claims against the deployed product
+and source revision using `docs/project-evidence.md`; do not restore old broad
+privacy or total-cost claims from the historical notes below.
 
 Web Analytics is enabled and collecting; the earlier note here saying it was not
 is out of date. The dashboard read 7 visitors and 21 page views over the seven
 days to 2026-09-04.
 
 ## State
+
+2026-09-05 (hiring portfolio and resume): the homepage now leads with Amex
+Roofing, SoloMock, and Gasolytics. Job Fit, SoloYap, Reachspan, and Throughline
+remain as compact entries with thumbnails. All 17 public detail routes stay
+in the archive and sitemap; Plugrade remains hidden. Three new case studies
+explain decisions, failure behavior, and evidence. Six product captures and
+their 2× originals replace empty-state covers; simulated Amex/SoloMock examples
+are labeled. Source and capture details are in `docs/project-evidence.md`.
+
+The current Newsreader/Public Sans identity, palette, and light/system theme
+model remain. The introduction includes Resume and Email, light-theme metadata
+has stronger contrast, mobile navigation uses native details/summary, Escape
+returns focus to Menu, and a skip link targets the page's main content. All
+essential content/navigation is server-rendered and usable without JavaScript.
+External product links use ordinary navigation; screenshots/titles open the
+internal study or notes. The footer's Download PDF has a friendly filename;
+the PDF response header preserves that filename on Vercel while keeping inline
+viewing available.
+
+The default resume is one Letter page with 10.5-point body text, one independent
+role, and Amex/SoloMock/Gasolytics. Five explicit profiles select shared resume
+records. The generator validates a temporary file before atomic replacement;
+unchanged input produces identical bytes. Use `make resume PYTHON=/path/to/python3`
+when the default interpreter lacks ReportLab/pypdf. Four Python regression checks
+cover the profiles and preservation of the previous PDF after a failed build.
+
+`make verify` now includes four data/route/evidence checks via `npm test`, using
+Node.js 24's native TypeScript support. The production build remains fully static.
+Browser verification covers desktop/phone, 320/768/1440-pixel reflow, both themes,
+keyboard and no-JavaScript navigation, all 17 routes, hidden/404 behavior, sitemap,
+and matching PDF bytes. Vercel analytics scripts return 404 on a plain local
+production server; check their hosted behavior on the deployment.
+
+The existing Figma review/roadmap file hit its Starter tool quota during screen
+production. No new Figma screen nodes were created. Seven editable local layout
+references and focused state examples are saved in the sibling audit directory
+at `personal-site-audit-2026-09-05/implementation/design/`; the running site and
+generator-produced PDF are the implementation reference.
 
 2026-09-04 (Speed Insights): `@vercel/speed-insights` is installed and
 `<SpeedInsights />` sits next to `<Analytics />` in `layout.tsx`. These are two
@@ -116,18 +156,20 @@ is no `PROJECTS_OVERVIEW.md` in this repo.
 
 ## Gotchas
 
-Homepage and archive order is the JSON order: featured entries first, then
-supporting, hidden last. A featured project needs a 1280×720 screenshot in
-public/projects/ and an entry in src/lib/project-visuals.ts or it renders with
-no image.
+Homepage and archive selections follow the shared JSON order. Featured projects
+use the first case-study figure as their cover when present; other entries use
+the screenshot map in src/lib/project-visuals.ts. Keep either image source
+available when changing the selected work.
 
 Newsreader is loaded with `weight: "variable"`; next/font refuses `axes` with a
 fixed weight list.
 
 Do not run `vercel --prod`. It does not move the production alias.
 
-Vercel Web Analytics is installed in the layout but the Analytics API reports it
-as not enabled for the project; enable it in the Vercel dashboard.
+Vercel Web Analytics and Speed Insights are installed in the layout. Analytics
+is enabled and collecting; Speed Insights needs real visits before its dashboard
+has enough measurements. Their scripts are served by Vercel, so a plain local
+production preview returns 404 for those two paths.
 
 `npm run check-links` proves a URL answers, not that the site is ours.
 shipyard.vercel.app returned 200 for two months while belonging to someone
