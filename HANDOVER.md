@@ -154,18 +154,20 @@ is no `PROJECTS_OVERVIEW.md` in this repo.
 
 ## Gotchas
 
-Homepage and archive order is the JSON order: featured entries first, then
-supporting, hidden last. A featured project needs a 1280×720 screenshot in
-public/projects/ and an entry in src/lib/project-visuals.ts or it renders with
-no image.
+Homepage and archive selections follow the shared JSON order. Featured projects
+use the first case-study figure as their cover when present; other entries use
+the screenshot map in src/lib/project-visuals.ts. Keep either image source
+available when changing the selected work.
 
 Newsreader is loaded with `weight: "variable"`; next/font refuses `axes` with a
 fixed weight list.
 
 Do not run `vercel --prod`. It does not move the production alias.
 
-Vercel Web Analytics is installed in the layout but the Analytics API reports it
-as not enabled for the project; enable it in the Vercel dashboard.
+Vercel Web Analytics and Speed Insights are installed in the layout. Analytics
+is enabled and collecting; Speed Insights needs real visits before its dashboard
+has enough measurements. Their scripts are served by Vercel, so a plain local
+production preview returns 404 for those two paths.
 
 `npm run check-links` proves a URL answers, not that the site is ours.
 shipyard.vercel.app returned 200 for two months while belonging to someone
