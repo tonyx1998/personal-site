@@ -1,282 +1,285 @@
-"""Generate To Yin Yu's resume as an ATS-friendly PDF.
+"""Build a readable, single-column resume from the shared project records.
 
-Single-column, standard fonts, semantic structure — designed to parse cleanly
-through any applicant tracking system while still looking polished in a viewer.
+The output has selectable text and a checked reading order. These checks do not
+promise how an applicant tracking system will interpret the document.
 """
 
+import argparse
+from html import escape, unescape
 import json
+import os
 from pathlib import Path
+import tempfile
+from urllib.parse import urlsplit
 
+from pypdf import PdfReader
+from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.lib.colors import HexColor, black
-from reportlab.platypus import (
-    SimpleDocTemplate,
-    Paragraph,
-    Spacer,
-    HRFlowable,
-)
-from reportlab.lib.enums import TA_LEFT
-from pypdf import PdfReader
+from reportlab.platypus import HRFlowable, KeepTogether, Paragraph, SimpleDocTemplate, Spacer
 
-
+ROOT = Path(__file__).resolve().parent.parent
+PROJECTS_JSON = ROOT / "src" / "lib" / "projects.data.json"
 ACCENT = HexColor("#1f4e6b")
 MUTED = HexColor("#525252")
 DARK = HexColor("#0a0a0a")
+SUMMARY = (
+    "Software developer building full-stack web products, realtime voice tools, "
+    "and client booking systems with TypeScript, React, Next.js, and Python. "
+    "B.S. in Computer Science, University of Maryland; based near Seattle and "
+    "open to relocation."
+)
+CONTACT_LINKS = (
+    ("mailto:tonyx1998@gmail.com", "tonyx1998@gmail.com"),
+    ("https://toyinyu.com", "toyinyu.com"),
+    ("https://linkedin.com/in/to-yin-yu", "linkedin.com/in/to-yin-yu"),
+    ("https://github.com/tonyx1998", "github.com/tonyx1998"),
+)
 
-# Single source of truth shared with the website (src/lib/projects.ts imports it).
-PROJECTS_JSON = Path(__file__).resolve().parent.parent / "src" / "lib" / "projects.data.json"
+# Profiles select approved facts; project copy lives only in projects.data.json.
+# The complete set of resume records remains the editable master.
+PROFILES = {
+    "default": {
+        "title": "Software Developer | Full-Stack Web Applications",
+        "projects": ("amex-roofing", "solomock", "gasolytics"),
+        "skills": (
+            ("Languages", "TypeScript, JavaScript, Python, SQL"),
+            ("Frontend", "React, Next.js, HTML/CSS, Tailwind CSS"),
+            ("APIs", "REST APIs, WebRTC, Vercel Serverless, Google Calendar API"),
+            ("Tools", "Git, Vercel"),
+        ),
+    },
+    "frontend": {
+        "title": "Software Developer | Frontend Applications",
+        "projects": ("gasolytics", "solomock", "throughline"),
+        "skills": (
+            ("Languages", "TypeScript, JavaScript, HTML/CSS"),
+            ("Frontend", "React, Next.js, Tailwind CSS, d3-geo, Monaco"),
+            ("Content systems", "Astro, Docusaurus, MDX"),
+            ("Tools and APIs", "Git, Vercel, WebRTC"),
+        ),
+    },
+    "product": {
+        "title": "Software Developer | Product Engineering",
+        "projects": ("amex-roofing", "gasolytics", "solomock"),
+        "skills": (
+            ("Languages", "TypeScript, JavaScript, HTML/CSS"),
+            ("Frontend", "React, Next.js, Tailwind CSS"),
+            ("APIs", "Google Calendar API, REST APIs, WebRTC, OpenAI Realtime API"),
+            ("Tools", "Git, Vercel, Vercel Serverless"),
+        ),
+    },
+    "ai": {
+        "title": "Software Developer | Realtime Web Applications",
+        "projects": ("solomock", "gasolytics", "amex-roofing"),
+        "skills": (
+            ("Languages", "TypeScript, JavaScript, HTML/CSS"),
+            ("Realtime", "OpenAI Realtime API, WebRTC, Monaco"),
+            ("Frontend", "React, Next.js, Tailwind CSS"),
+            ("Tools and APIs", "Git, Vercel, Vercel Serverless, Google Calendar API"),
+        ),
+    },
+    "backend": {
+        "title": "Software Developer | Backend and Integrations",
+        "projects": ("all-in-one-url", "amex-roofing", "solomock"),
+        "skills": (
+            ("Languages", "Python, TypeScript, JavaScript, SQL"),
+            ("Backend and data", "FastAPI, PostgreSQL, Redis, REST APIs"),
+            ("Integrations", "Google Calendar API, WebRTC, OpenAI Realtime API"),
+            ("Tools", "Docker, Git, Vercel"),
+        ),
+    },
+}
 
 
-def _link_display(url: str) -> str:
-    """solomock.com from https://www.solomock.com/ — for a clean résumé label."""
-    s = url.split("://", 1)[-1]
-    if s.startswith("www."):
-        s = s[4:]
-    return s.rstrip("/")
+def plain(value: str) -> str:
+    """Accept existing HTML entities, but keep project copy as plain text."""
+    return unescape(value).replace("\u2013", "-").replace("\u2014", "-").replace("\u2011", "-")
 
 
-def load_resume_projects():
-    """Pull the curated résumé subset from the shared JSON, ordered by resume.order.
+def markup(value: str) -> str:
+    return escape(plain(value))
 
-    Site-facing metadata (live URL, github, date) is sourced here so it can never
-    drift from the website; only the ATS-tuned bullets/stack/title are résumé-local.
-    """
-    data = json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
-    out = []
-    for p in data:
-        r = p.get("resume")
-        if not r:
+
+def link(url: str, label: str | None = None) -> str:
+    if label is None:
+        parsed = urlsplit(url)
+        label = (parsed.netloc.removeprefix("www.") + parsed.path).rstrip("/")
+    return f'<a href="{escape(url, quote=True)}" color="#1f4e6b">{markup(label)}</a>'
+
+
+def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JSON):
+    records = {}
+    for project in json.loads(data_path.read_text(encoding="utf-8")):
+        resume = project.get("resume")
+        if not resume or not resume.get("id"):
             continue
-        if r.get("linksOverride"):
-            links = r["linksOverride"]
-        else:
-            parts = []
-            if p.get("live"):
-                parts.append(
-                    f'<a href="{p["live"]}" color="#1f4e6b">{_link_display(p["live"])}</a>'
-                )
-            if p.get("github"):
-                parts.append(
-                    f'<a href="{p["github"]}" color="#1f4e6b">{_link_display(p["github"])}</a>'
-                )
-            links = " &nbsp;·&nbsp; ".join(parts)
-        out.append(
-            {
-                "order": r.get("order", 999),
-                "title": r.get("title") or p["title"],
-                "date": r.get("date") or p.get("datePublished", ""),
-                "stack": r["stack"],
-                "links": links,
-                "bullets": r["bullets"],
-            }
-        )
-    out.sort(key=lambda x: x["order"])
-    return out
+        identifier = resume["id"]
+        if identifier in records:
+            raise ValueError(f"Duplicate resume id: {identifier}")
+        records[identifier] = (project, resume)
+    result = []
+    for identifier in PROFILES[profile]["projects"]:
+        if identifier not in records:
+            raise ValueError(f"Profile {profile!r} is missing resume record {identifier!r}")
+        project, resume = records[identifier]
+        if project.get("hidden"):
+            raise ValueError(f"Profile {profile!r} selects hidden project {identifier!r}")
+        bullets = resume.get("bullets", [])
+        if len(bullets) != 2 or not all(isinstance(b, str) and b.strip() for b in bullets):
+            raise ValueError(f"Selected project {identifier!r} must have two approved bullets")
+        relationship = resume.get("relationship")
+        if relationship not in ("Client project", "Independent product"):
+            raise ValueError(f"Selected project {identifier!r} needs an explicit relationship")
+        url = project.get("live") or project.get("github")
+        if (
+            not url
+            or urlsplit(url).scheme not in ("https", "http")
+            or not urlsplit(url).netloc
+        ):
+            raise ValueError(f"Selected project {identifier!r} needs an HTTP evidence link")
+        date = resume.get("date") or project.get("datePublished")
+        if not date or not resume.get("stack"):
+            raise ValueError(f"Selected project {identifier!r} needs a date and stack")
+        result.append({
+            "id": identifier,
+            "title": plain(resume.get("title") or project["title"]),
+            "relationship": relationship,
+            "date": plain(date),
+            "stack": plain(resume["stack"]),
+            "url": url,
+            "bullets": [plain(b) for b in bullets],
+        })
+    return result
 
 
-def main(out_path: str) -> None:
-    doc = SimpleDocTemplate(
-        out_path,
-        pagesize=LETTER,
-        leftMargin=0.5 * inch,
-        rightMargin=0.5 * inch,
-        topMargin=0.33 * inch,
-        bottomMargin=0.33 * inch,
-        title="To Yin Yu — Resume",
-        author="To Yin Yu",
-    )
+def styles():
+    body = ParagraphStyle("Body", fontName="Helvetica", fontSize=10.5, leading=13.5,
+                          textColor=DARK, spaceAfter=2)
+    return {
+        "name": ParagraphStyle("Name", parent=body, fontName="Helvetica-Bold", fontSize=22,
+                               leading=26, spaceAfter=3),
+        "title": ParagraphStyle("Title", parent=body, spaceAfter=3),
+        "contact": ParagraphStyle("Contact", parent=body, fontSize=9.5, leading=12,
+                                  textColor=MUTED, spaceAfter=2),
+        "section": ParagraphStyle("Section", parent=body, fontName="Helvetica-Bold", fontSize=11,
+                                  leading=14, textColor=ACCENT, spaceBefore=10, spaceAfter=4,
+                                  keepWithNext=True),
+        "role": ParagraphStyle("Role", parent=body, fontName="Helvetica-Bold", fontSize=11,
+                               leading=14, spaceAfter=9, keepWithNext=True),
+        "project": ParagraphStyle("Project", parent=body, fontName="Helvetica-Bold", fontSize=11,
+                                  leading=14, spaceAfter=2, keepWithNext=True),
+        "meta": ParagraphStyle("Meta", parent=body, fontSize=9.5, leading=12, textColor=MUTED,
+                               spaceAfter=3, keepWithNext=True),
+        "body": body,
+        "bullet": ParagraphStyle("Bullet", parent=body, leftIndent=12, bulletIndent=0,
+                                 bulletFontName="Helvetica", bulletFontSize=10.5, spaceAfter=2),
+    }
 
-    name_style = ParagraphStyle(
-        "Name",
-        fontName="Helvetica-Bold",
-        fontSize=22,
-        leading=26,
-        textColor=DARK,
-        spaceAfter=2,
-    )
-    title_line_style = ParagraphStyle(
-        "TitleLine",
-        fontName="Helvetica",
-        fontSize=10.5,
-        leading=13,
-        textColor=DARK,
-        spaceAfter=2,
-    )
-    contact_style = ParagraphStyle(
-        "Contact",
-        fontName="Helvetica",
-        fontSize=9.5,
-        leading=12,
-        textColor=MUTED,
-        spaceAfter=6,
-    )
-    section_style = ParagraphStyle(
-        "Section",
-        fontName="Helvetica-Bold",
-        fontSize=10.5,
-        leading=13,
-        textColor=ACCENT,
-        spaceBefore=3,
-        spaceAfter=2,
-    )
-    role_style = ParagraphStyle(
-        "Role",
-        fontName="Helvetica-Bold",
-        fontSize=10,
-        leading=12.5,
-        textColor=DARK,
-        spaceBefore=1.5,
-        spaceAfter=0,
-    )
-    role_meta_style = ParagraphStyle(
-        "RoleMeta",
-        fontName="Helvetica",
-        fontSize=9,
-        leading=11,
-        textColor=MUTED,
-        spaceAfter=1,
-    )
-    body_style = ParagraphStyle(
-        "Body",
-        fontName="Helvetica",
-        fontSize=9.5,
-        leading=12,
-        textColor=DARK,
-        spaceAfter=1,
-    )
-    bullet_style = ParagraphStyle(
-        "Bullet",
-        fontName="Helvetica",
-        fontSize=9.5,
-        leading=11.0,
-        textColor=DARK,
-        leftIndent=12,
-        bulletIndent=2,
-        spaceAfter=0,
-    )
 
-    summary_style = ParagraphStyle(
-        "Summary",
-        fontName="Helvetica",
-        fontSize=9.5,
-        leading=12,
-        textColor=DARK,
-        spaceAfter=2,
-    )
-
-    story = []
-
-    story.append(Paragraph("TO YIN YU", name_style))
-    story.append(
-        Paragraph(
-            "Software Developer &nbsp;·&nbsp; Lynnwood, WA (Seattle area) "
-            "&nbsp;·&nbsp; US citizen",
-            title_line_style,
-        )
-    )
-    story.append(
-        Paragraph(
-            "(206) 712-5144 &nbsp;·&nbsp; "
-            '<a href="mailto:tonyx1998@gmail.com" color="#1f4e6b">tonyx1998@gmail.com</a> '
-            "&nbsp;·&nbsp; "
-            '<a href="https://toyinyu.com" color="#1f4e6b">toyinyu.com</a> '
-            "&nbsp;·&nbsp; "
-            '<a href="https://linkedin.com/in/to-yin-yu" color="#1f4e6b">linkedin.com/in/to-yin-yu</a> '
-            "&nbsp;·&nbsp; "
-            '<a href="https://github.com/tonyx1998" color="#1f4e6b">github.com/tonyx1998</a>',
-            contact_style,
-        )
-    )
-    story.append(HRFlowable(width="100%", thickness=0.6, color=HexColor("#d4d4d8"), spaceAfter=4))
-
-    # SUMMARY
-    story.append(Paragraph("SUMMARY", section_style))
-    story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
-    story.append(
-        Paragraph(
-            "Software developer with a B.S. in Computer Science from the University of "
-            "Maryland. Since 2024 I have designed, built, and run my own web products: a "
-            "job-fit analysis tool, two realtime voice apps on the OpenAI Realtime API, "
-            "and a bilingual client site with an AI booking agent. Seeking a first "
-            "full-time software engineering role; open to relocation.",
-            summary_style,
-        )
-    )
-
-    # SKILLS
-    story.append(Paragraph("TECHNICAL SKILLS", section_style))
-    story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
-    skill_rows = [
-        ("Languages", "TypeScript, Python, JavaScript, SQL"),
-        ("AI", "OpenAI Realtime API, Claude API, LLM-as-judge evaluation, prompt design, cost controls"),
-        ("Frontend", "Next.js, React, Tailwind CSS, d3-geo, Docusaurus, Astro"),
-        ("Backend &amp; Data", "FastAPI, PostgreSQL (Neon), Redis, REST APIs, WebRTC"),
-        ("Infrastructure", "Vercel, GitHub Actions, Docker, Git, Linux, Playwright"),
+def build_story(projects, profile: str = "default"):
+    style = styles()
+    story = [
+        Paragraph("TO YIN YU", style["name"]),
+        Paragraph(markup(PROFILES[profile]["title"]), style["title"]),
+        Paragraph("Lynnwood, WA (Seattle area) &nbsp;|&nbsp; US citizen", style["contact"]),
+        Paragraph("(206) 712-5144 &nbsp;|&nbsp; "
+                  + " &nbsp;|&nbsp; ".join(link(url, label) for url, label in CONTACT_LINKS),
+                  style["contact"]),
     ]
-    for label, items in skill_rows:
-        story.append(Paragraph(f"<b>{label}:</b> {items}", body_style))
 
-    # PROJECT EXPERIENCE
-    story.append(
-        Paragraph(
-            "INDEPENDENT SOFTWARE DEVELOPMENT &nbsp;·&nbsp; "
-            "<font color='#0a0a0a'>2024 - Present</font>",
-            section_style,
-        )
-    )
-    story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
+    def section(title):
+        story.append(Paragraph(title, style["section"]))
+        rule = HRFlowable(width="100%", thickness=0.4, color=HexColor("#d4d4d8"), spaceAfter=4)
+        rule.keepWithNext = True
+        story.append(rule)
 
-    projects = load_resume_projects()
+    section("SUMMARY")
+    story.append(Paragraph(markup(SUMMARY), style["body"]))
+    section("TECHNICAL SKILLS")
+    for label, items in PROFILES[profile]["skills"]:
+        story.append(Paragraph(f"<b>{markup(label)}:</b> {markup(items)}", style["body"]))
+    section("EXPERIENCE")
+    story.append(Paragraph("Independent Software Developer &nbsp;|&nbsp; 2024 - Present", style["role"]))
+    for project in projects:
+        intro = [
+            Paragraph(markup(project["title"]), style["project"]),
+            Paragraph(f'{markup(project["relationship"])} &nbsp;|&nbsp; {markup(project["date"])}'
+                      f' &nbsp;|&nbsp; {link(project["url"])}', style["meta"]),
+            Paragraph(markup(project["stack"]), style["meta"]),
+            Paragraph(markup(project["bullets"][0]), style["bullet"], bulletText="-"),
+        ]
+        story.append(KeepTogether(intro))
+        story.append(Paragraph(markup(project["bullets"][1]), style["bullet"], bulletText="-"))
+        story.append(Spacer(1, 9))
+    section("EDUCATION")
+    story.append(Paragraph("<b>University of Maryland, College Park</b>", style["body"]))
+    story.append(Paragraph("Bachelor of Science, Computer Science &nbsp;|&nbsp; December 2022",
+                           style["body"]))
+    return story
 
-    for p in projects:
-        story.append(Paragraph(f"<b>{p['title']}</b>", role_style))
-        story.append(
-            Paragraph(
-                f"{p['links']} &nbsp;·&nbsp; {p['date']} &nbsp;·&nbsp; {p['stack']}",
-                role_meta_style,
-            )
-        )
-        for b in p["bullets"]:
-            story.append(Paragraph(f"- {b}", bullet_style))
 
-    # EDUCATION
-    story.append(Paragraph("EDUCATION", section_style))
-    story.append(HRFlowable(width="100%", thickness=0.4, color=HexColor("#e4e4e7"), spaceAfter=4))
-    story.append(
-        Paragraph(
-            "<b>University of Maryland, College Park</b> &nbsp;—&nbsp; College Park, MD",
-            role_style,
-        )
-    )
-    story.append(
-        Paragraph(
-            "Bachelor of Science, Computer Science &nbsp;·&nbsp; December 2022",
-            role_meta_style,
-        )
-    )
-    story.append(
-        Paragraph(
-            "<b>Relevant coursework:</b> Data Structures, Artificial Intelligence, "
-            "Data Science, Computer Systems, Web Development.",
-            body_style,
-        )
-    )
+def validate_pdf(path: Path, projects):
+    reader = PdfReader(path)
+    if len(reader.pages) != 1:
+        raise RuntimeError(f"Resume must fit on one page; produced {len(reader.pages)}. "
+                           "Edit the selected content before reducing type size.")
+    page = reader.pages[0]
+    if tuple(float(v) for v in page.mediabox[2:]) != LETTER:
+        raise RuntimeError("Resume must use a US Letter page")
+    text = " ".join(page.extract_text().split())
+    expected_order = ["TO YIN YU", "SUMMARY", "TECHNICAL SKILLS", "EXPERIENCE"]
+    expected_order += [p["title"] for p in projects]
+    expected_order += ["EDUCATION", "University of Maryland, College Park", "December 2022"]
+    cursor = 0
+    for phrase in expected_order:
+        position = text.find(phrase, cursor)
+        if position == -1:
+            raise RuntimeError(f"Missing or out-of-order resume text: {phrase}")
+        cursor = position + len(phrase)
+    for phrase in ["(206) 712-5144", "Independent Software Developer", "2024 - Present"] + [
+        b for p in projects for b in p["bullets"]
+    ]:
+        if " ".join(phrase.split()) not in text:
+            raise RuntimeError(f"Resume text did not extract intact: {phrase}")
+    links = []
+    for annotation in page.get("/Annots", []):
+        action = annotation.get_object().get("/A", {})
+        if action.get("/URI"):
+            links.append(str(action["/URI"]))
+    expected_links = {url for url, _ in CONTACT_LINKS} | {p["url"] for p in projects}
+    if set(links) != expected_links:
+        raise RuntimeError("Resume link targets do not match the selected source records")
+    return {"pages": 1, "words": len(text.split()), "links": len(links)}
 
-    doc.build(story)
 
-    page_count = len(PdfReader(out_path).pages)
-    if page_count != 1:
-        raise RuntimeError(
-            f"Resume must fit on one page; produced {page_count}. "
-            "Trim content or tighten layout in build-resume.py."
+def main(out_path: str, profile: str = "default"):
+    projects = load_resume_projects(profile)
+    destination = Path(out_path).resolve()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(prefix=f".{destination.stem}.", suffix=".pdf",
+                                     dir=destination.parent, delete=False) as temporary:
+        staging = Path(temporary.name)
+    try:
+        document = SimpleDocTemplate(
+            str(staging), pagesize=LETTER, leftMargin=0.55 * inch, rightMargin=0.55 * inch,
+            topMargin=0.45 * inch, bottomMargin=0.45 * inch,
+            title="To Yin Yu - Resume", author="To Yin Yu", invariant=1,
         )
+        document.build(build_story(projects, profile))
+        checks = validate_pdf(staging, projects)
+        staging.chmod(0o644)
+        os.replace(staging, destination)
+        return checks
+    finally:
+        staging.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
-    import sys
-
-    out = sys.argv[1] if len(sys.argv) > 1 else "resume.pdf"
-    main(out)
-    print(f"Wrote {out}")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("output", nargs="?", default=str(ROOT / "public" / "resume.pdf"))
+    parser.add_argument("--profile", choices=PROFILES, default="default")
+    args = parser.parse_args()
+    checks = main(args.output, args.profile)
+    print(f"Wrote {args.output} ({args.profile}; {checks['pages']} page; {checks['words']} words)")

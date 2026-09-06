@@ -1,160 +1,167 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { PortfolioFooter, PortfolioHeader } from "./PortfolioChrome";
+import { ProjectLinks } from "./ProjectLinks";
 import {
-  displayUrl,
+  homepageSupportingProjects,
   projectSlug,
   selectedProjects,
   shortTitle,
-  supportingProjects,
 } from "@/lib/projects";
-import { projectVisuals } from "@/lib/project-visuals";
-import { formatDate, LINKS_CHECKED_ON } from "@/lib/site";
+import { projectVisual } from "@/lib/project-visuals";
 import chrome from "./Chrome.module.css";
 import styles from "./PortfolioHome.module.css";
 
 export default function PortfolioHome() {
-  const checked = formatDate(LINKS_CHECKED_ON);
-
   return (
     <div className={chrome.page}>
       <PortfolioHeader />
-
-      <main>
-        <section className={`${chrome.container} ${styles.hero}`} id="top">
-          <h1>I build software products on my own and keep them running.</h1>
+      <main id="main-content" tabIndex={-1}>
+        <section className={chrome.container + " " + styles.hero} id="top">
+          <h1>Software developer building useful web products.</h1>
           <p className={styles.lead}>
-            Seven of them are live right now: a job-fit checker, two realtime
-            voice apps, a gas-price map, two business sites with real booking
-            flows, and a set of technical courses. Every screenshot below opens
-            the real thing.
+            I build full-stack apps, realtime voice tools, and booking systems
+            for service businesses. My work covers the interface, backend,
+            deployment, and the behavior users see when something goes wrong.
           </p>
-          <ul className={styles.ask} aria-label="What I am looking for">
-            <li className={styles.askMain}>
-              Looking for my first full-time software engineering role
-            </li>
-            <li>Seattle area or remote</li>
-            <li>US citizen</li>
-            <li>B.S. Computer Science, University of Maryland</li>
-          </ul>
+          <div className={styles.availability}>
+            <p>Open to software engineering roles</p>
+            <p>Seattle area · Open to relocation</p>
+          </div>
+          <p className={styles.credentials}>
+            B.S. Computer Science, University of Maryland · US citizen
+          </p>
+          <div className={styles.heroActions}>
+            <a href="#work" className={styles.primaryAction}>
+              View selected work <ArrowDown size={17} aria-hidden="true" />
+            </a>
+            <a href="/resume.pdf">Resume (PDF)</a>
+            <a href="mailto:tonyx1998@gmail.com">Email me</a>
+          </div>
         </section>
 
         <section
-          className={`${chrome.container} ${styles.products}`}
+          className={chrome.container + " " + styles.selected}
           id="work"
-          aria-label="Selected products"
+          aria-labelledby="work-heading"
         >
-          {selectedProjects.map((project, index) => {
-            const slug = projectSlug(project);
-            const visual = projectVisuals[slug];
-            const name = shortTitle(project);
+          <div className={styles.sectionHeading}>
+            <h2 id="work-heading">Selected work</h2>
+            <p>Client delivery, realtime interaction, and data systems.</p>
+          </div>
+          <div className={styles.products}>
+            {selectedProjects.map((project, index) => {
+              const slug = projectSlug(project);
+              const visual = projectVisual(project, slug);
+              const figure = project.caseStudy?.sections.find(
+                (section) => section.figure
+              )?.figure;
+              return (
+                <article
+                  key={slug}
+                  className={styles.product}
+                  aria-labelledby={slug + "-title"}
+                >
+                  <div className={styles.productIntro}>
+                    <h3 id={slug + "-title"}>
+                      <Link href={"/projects/" + slug}>
+                        {shortTitle(project)}
+                      </Link>
+                    </h3>
+                    <p className={styles.what}>
+                      {project.homepageSummary ?? project.description}
+                    </p>
+                  </div>
+                  {visual && (
+                    <figure className={styles.screen}>
+                      <Link href={"/projects/" + slug} tabIndex={-1}>
+                        <Image
+                          src={visual.src}
+                          alt={visual.alt}
+                          width={1280}
+                          height={720}
+                          loading={index === 0 ? "eager" : "lazy"}
+                          sizes="(max-width: 820px) calc(100vw - 40px), (max-width: 1180px) 52vw, 594px"
+                        />
+                      </Link>
+                      {figure && <figcaption>{figure.caption}</figcaption>}
+                    </figure>
+                  )}
+                  <div className={styles.proof}>
+                    <p>{project.contribution ?? project.highlights?.[0]}</p>
+                    <p className={styles.meta}>
+                      {project.tags.slice(0, 3).join(" · ")}
+                    </p>
+                    <ProjectLinks project={project} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
 
-            return (
-              <article key={project.title} className={styles.product}>
-                {visual && project.live && (
-                  <div className={styles.screen}>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${name} in a new tab`}
+        <section
+          className={chrome.container + " " + styles.more}
+          id="more"
+          aria-labelledby="more-heading"
+        >
+          <div className={styles.sectionHeading}>
+            <h2 id="more-heading">More work</h2>
+            <p>Other products I build and maintain.</p>
+          </div>
+          <ul className={styles.compactList}>
+            {homepageSupportingProjects.map((project) => {
+              const slug = projectSlug(project);
+              const visual = projectVisual(project, slug);
+              return (
+                <li key={slug} className={styles.compactRow}>
+                  {visual && (
+                    <Link
+                      href={"/projects/" + slug}
+                      className={styles.thumbnail}
+                      aria-hidden="true"
+                      tabIndex={-1}
                     >
                       <Image
                         src={visual.src}
-                        alt={visual.alt}
+                        alt=""
                         width={1280}
                         height={720}
-                        priority={index === 0}
-                        sizes="(max-width: 1240px) 100vw, 1140px"
+                        sizes="(max-width: 820px) 96px, 160px"
                       />
-                      <span className={styles.open} aria-hidden="true">
-                        Open {displayUrl(project.live)}
-                      </span>
-                    </a>
-                  </div>
-                )}
-
-                <div className={styles.spec}>
+                    </Link>
+                  )}
                   <div>
-                    <h2>
-                      <Link href={`/projects/${slug}`}>{name}</Link>
-                    </h2>
-                    <p className={styles.what}>{project.description}</p>
-                    <div className={styles.links}>
-                      {project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {displayUrl(project.live)}
-                        </a>
-                      )}
-                      <Link href={`/projects/${slug}`}>Project notes</Link>
-                    </div>
-                    <p className={styles.meta}>
-                      {project.live && (
-                        <span className={styles.live}>
-                          Live, checked {checked}
-                        </span>
-                      )}
-                      <span>{project.datePublished}</span>
-                      <span>{project.tags.slice(0, 5).join(" · ")}</span>
-                    </p>
-                  </div>
-                  {project.highlights && (
-                    <ul className={styles.facts}>
-                      {project.highlights.map((fact) => (
-                        <li key={fact}>{fact}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </article>
-            );
-          })}
-        </section>
-
-        <section className={`${chrome.container} ${styles.more}`} id="more">
-          <h2>Smaller builds and courses</h2>
-          <p className={styles.moreLead}>
-            Client work, tools, and the guides that make up Throughline. All
-            live.{" "}
-            <Link href="/projects" className={styles.moreLink}>
-              See the full list with notes
-            </Link>
-          </p>
-          <ul className={styles.list}>
-            {supportingProjects.map((project) => {
-              const slug = projectSlug(project);
-              return (
-                <li key={project.title}>
-                  <Link href={`/projects/${slug}`} className={styles.listTitle}>
-                    {shortTitle(project)}
-                  </Link>
-                  <span className={styles.listYear}>
-                    {project.datePublished}
-                  </span>
-                  <span className={styles.listDesc}>{project.description}</span>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.listLink}
+                    <h3>
+                      <Link href={"/projects/" + slug}>
+                        {shortTitle(project)}
+                      </Link>
+                    </h3>
+                    <p>{project.homepageSummary ?? project.description}</p>
+                    <Link
+                      className={styles.notesLink}
+                      href={"/projects/" + slug}
                     >
-                      {displayUrl(project.live)}
-                    </a>
-                  )}
+                      Project notes <ArrowRight size={15} aria-hidden="true" />
+                    </Link>
+                  </div>
                 </li>
               );
             })}
           </ul>
+          <Link href="/projects" className={styles.archiveLink}>
+            All projects <ArrowRight size={18} aria-hidden="true" />
+          </Link>
         </section>
 
-        <section className={`${chrome.container} ${styles.about}`} id="about">
+        <section
+          className={chrome.container + " " + styles.about}
+          id="about"
+          aria-labelledby="about-heading"
+        >
           <div>
-            <h2>About</h2>
+            <h2 id="about-heading">About</h2>
             <p>
               I’m To Yin Yu, a software developer in Lynnwood, Washington. I
               finished my computer science degree at the University of Maryland
@@ -162,44 +169,37 @@ export default function PortfolioHome() {
               products since 2024.
             </p>
             <p>
-              I do the whole job: the product decision, the frontend, the
-              backend, deployment, and the part after launch where things break.
-              Most of my recent work puts language models in production, which
-              means a lot of time spent on cost limits, evaluation, and failure
-              handling.
+              I work across the frontend, backend, and deployment. The part
+              after launch matters to me, too: tracing a failed request, making
+              an error understandable, and deciding what a system should do when
+              a dependency is unavailable.
             </p>
-            <div className={styles.habits}>
-              <h3>Habits, and the project each one came from</h3>
-              <p>
-                <b>Bound the cost before launch.</b> SoloMock and SoloYap mint
-                short-lived keys, cap sessions at 15 minutes, and rate-limit by
-                IP, so an open voice app cannot run up the OpenAI bill.
-              </p>
-              <p>
-                <b>Fail loudly, not quietly.</b> Amex Roofing’s booking route
-                refuses requests from unknown origins before it touches the
-                calendar, and its calendar sync raises an alarm instead of
-                dropping a booking.
-              </p>
-              <p>
-                <b>Keep private data in the browser.</b> How’s My Job Fit?
-                parses resumes on the user’s machine and stores nothing.
-              </p>
-            </div>
+            <p>
+              The case studies here explain those decisions, including the
+              limits of what I have tested. I’m looking for a software
+              engineering role where I can contribute that experience and learn
+              from a team.
+            </p>
           </div>
-          <dl className={styles.timeline}>
+          <dl className={styles.background}>
             <div>
-              <dt>2024 to now</dt>
-              <dd>Independent software developer, seven live products</dd>
+              <dt>Experience</dt>
+              <dd>Independent software developer, 2024–present</dd>
             </div>
             <div>
-              <dt>Dec 2022</dt>
-              <dd>B.S. Computer Science, University of Maryland</dd>
-            </div>
-            <div>
-              <dt>Location</dt>
+              <dt>Education</dt>
               <dd>
-                Lynnwood, WA (Seattle area). US citizen. Open to relocation.
+                B.S. Computer Science
+                <br />
+                University of Maryland, 2022
+              </dd>
+            </div>
+            <div>
+              <dt>Based in</dt>
+              <dd>
+                Lynnwood, WA, near Seattle
+                <br />
+                US citizen · Open to relocation
               </dd>
             </div>
             <div>
@@ -209,7 +209,6 @@ export default function PortfolioHome() {
           </dl>
         </section>
       </main>
-
       <PortfolioFooter />
     </div>
   );

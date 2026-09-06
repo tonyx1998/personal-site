@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu, software developer near Seattle. Live products include How's My Job Fit?, SoloMock, Gasolytics, and a bilingual client site with an AI booking agent. Open to a first full-time role.",
+    "To Yin Yu, software developer near Seattle. Selected work in client booking, realtime voice, and data tools, with case studies explaining the engineering. Open to software engineering roles.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu · Software Developer",
     description:
-      "How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline. All live, all built and run by one person.",
+      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
     siteName: "To Yin Yu",
     locale: "en_US",
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "To Yin Yu · Software Developer",
     description:
-      "How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline. All live, all built and run by one person.",
+      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
   },
   robots: {
     index: true,
@@ -99,10 +99,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${publicSans.variable} overflow-x-hidden`}
+      className={`${newsreader.variable} ${publicSans.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased bg-background text-foreground overflow-x-hidden">
+      <body className="min-h-screen antialiased bg-background text-foreground">
         <Script
           id="theme-bootstrap"
           strategy="beforeInteractive"

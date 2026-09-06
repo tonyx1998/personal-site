@@ -1,135 +1,146 @@
 .intro {
-  padding: 72px 0 40px;
+  padding-block: var(--space-8) var(--space-7);
   max-width: 760px;
 }
-
 .intro h1 {
   font-family: var(--font-newsreader), Georgia, serif;
   font-weight: 400;
-  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  font-size: clamp(40px, 4.8vw, 60px);
   line-height: 1.08;
-  letter-spacing: -0.015em;
-  margin: 0 0 18px;
+  letter-spacing: -0.025em;
+  margin: 0 0 var(--space-5);
   text-wrap: balance;
 }
-
 .intro p {
-  font-size: 1.1rem;
   color: var(--ink-2);
   margin: 0;
-  max-width: 60ch;
+  max-width: 62ch;
 }
-
+.sectionLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  color: var(--accent);
+  font-size: 15px;
+}
+.sectionLinks a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .section {
-  padding: 8px 0 40px;
+  padding-bottom: var(--space-7);
 }
-
 .sectionTitle {
   font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 1.35rem;
+  font-size: 32px;
   font-weight: 500;
-  color: var(--ink);
-  margin: 0 0 6px;
+  line-height: 1.2;
+  margin: 0 0 var(--space-5);
+  scroll-margin-top: var(--space-5);
 }
-
 .rows {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 }
-
 .row {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 20px 40px;
-  padding: 28px 0;
+  grid-template-columns: 224px minmax(0, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-6);
   border-top: 1px solid var(--line);
 }
-
-.rowCompact {
-  grid-template-columns: minmax(0, 1fr);
-  padding: 22px 0;
+.compactRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: var(--space-6);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--line);
 }
-
 .thumb {
   display: block;
-  background: var(--frame);
   border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 6px;
+  border-radius: 6px;
   align-self: start;
+  overflow: hidden;
+  background: var(--frame);
 }
-
 .thumb img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 2px;
-  border: 1px solid var(--line);
 }
-
+.rowCopy {
+  min-width: 0;
+}
 .rowCopy h3 {
   font-family: var(--font-newsreader), Georgia, serif;
   font-weight: 500;
-  font-size: 1.55rem;
+  font-size: 30px;
   line-height: 1.15;
   letter-spacing: -0.01em;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-3);
 }
-
-.rowCompact .rowCopy h3 {
-  font-size: 1.25rem;
-}
-
 .rowCopy h3 a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: var(--line-strong);
 }
-
+.compactRow h3 {
+  font-size: 25px;
+}
 .desc {
   color: var(--ink-2);
-  margin: 0 0 10px;
-  max-width: 64ch;
+  margin: 0 0 var(--space-3);
+  max-width: 68ch;
+  font-size: 16px;
 }
-
-.rowCompact .desc {
-  font-size: 0.95rem;
-}
-
 .meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  margin: 0 0 12px;
-  font-size: 0.85rem;
   color: var(--ink-3);
+  font-size: 14px;
+  margin: 0;
 }
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  font-size: 0.93rem;
-  font-weight: 500;
+.compactLinks {
+  align-self: center;
 }
-
-.links a {
-  color: var(--accent);
-}
-
-.links a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 @media (max-width: 820px) {
   .intro {
-    padding: 48px 0 28px;
+    padding-block: var(--space-7) var(--space-6);
   }
-
+  .section {
+    padding-bottom: var(--space-6);
+  }
+  .compactRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
   .row {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 22px 0;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+  }
+  .rowCopy h3 {
+    font-size: 26px;
+  }
+  .row .desc {
+    font-size: 15px;
+  }
+  .row .meta {
+    font-size: 14px;
+  }
+}
+@media (max-width: 359px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .thumb {
+    width: 160px;
   }
 }

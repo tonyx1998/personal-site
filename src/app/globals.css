@@ -10,12 +10,22 @@
   --frame: #ffffff;
   --ink: #17201f;
   --ink-2: #4f5b58;
-  --ink-3: #7d8885;
+  --ink-3: #62706a;
   --line: #d6dad7;
   --line-strong: #b9c0bd;
   --accent: #106b4e;
   --accent-soft: #e3efe9;
   --focus: #106b4e;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --page-gutter: 28px;
 
   /* Legacy names still used by the body classes in layout.tsx. */
   --background: var(--ground);
@@ -60,8 +70,8 @@ body {
     Helvetica,
     Arial,
     sans-serif;
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -77,8 +87,18 @@ a {
 }
 
 @media (max-width: 820px) {
+  :root {
+    --page-gutter: 20px;
+  }
+
   body {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 359px) {
+  :root {
+    --page-gutter: 16px;
   }
 }
 

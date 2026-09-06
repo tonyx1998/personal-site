@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
@@ -8,111 +8,105 @@ import { useTheme } from "@/app/providers";
 import styles from "./Chrome.module.css";
 
 const navItems = [
-  { label: "Work", href: "/#work", section: "home" },
-  { label: "All projects", href: "/projects", section: "projects" },
-  { label: "About", href: "/#about", section: "home" },
-  { label: "Resume", href: "/resume.pdf", section: "resume" },
+  { label: "Work", href: "/#work" },
+  { label: "All projects", href: "/projects" },
+  { label: "About", href: "/#about" },
+  { label: "Resume (PDF)", href: "/resume.pdf" },
 ];
+const subscribeToHydration = () => () => {};
 
-function ThemeButton({ className }: { className?: string }) {
-  const { toggle } = useTheme();
+function ThemeButton() {
+  const { theme, toggle } = useTheme();
+  const hydrated = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false
+  );
+  // Reserve space without presenting a dead control when scripts are off.
+  if (!hydrated)
+    return <span className={styles.themeSpace} aria-hidden="true" />;
+  const label = "Switch to " + (theme === "dark" ? "light" : "dark") + " theme";
   return (
     <button
       type="button"
-      className={className ?? styles.themeButton}
+      className={styles.themeButton}
       onClick={toggle}
-      aria-label="Switch between light and dark theme"
-      title="Switch theme"
+      aria-label={label}
+      title={label}
     >
-      <Sun size={16} className={styles.sun} aria-hidden="true" />
-      <Moon size={16} className={styles.moon} aria-hidden="true" />
+      {theme === "dark" ? (
+        <Sun size={18} aria-hidden="true" />
+      ) : (
+        <Moon size={18} aria-hidden="true" />
+      )}
     </button>
   );
 }
 
 export function PortfolioHeader() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const menu = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
-
-  const isActive = (label: string, section: string) =>
-    (label === "Work" && pathname === "/") ||
-    (section === "projects" && pathname.startsWith("/projects"));
-
-  const linkClass = (label: string, section: string) =>
-    isActive(label, section)
-      ? `${styles.navLink} ${styles.navLinkActive}`
-      : styles.navLink;
-
+  const current = (href: string) =>
+    href === "/projects" && pathname.startsWith("/projects");
   return (
-    <header className={`${styles.container} ${styles.header}`}>
-      <nav className={styles.nav} aria-label="Main navigation">
-        <Link className={styles.wordmark} href="/" aria-label="To Yin Yu home">
-          To Yin Yu
-        </Link>
-
-        <div className={styles.desktopNav}>
-          {navItems.map((item) =>
-            item.section === "projects" ? (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={linkClass(item.label, item.section)}
-              >
-                {item.label}
-              </Link>
-            ) : (
+    <header className={styles.container + " " + styles.header}>
+      <a href="#main-content" className={styles.skipLink}>
+        Skip to content
+      </a>
+      <nav aria-label="Main navigation">
+        <div className={styles.navBar}>
+          <Link
+            className={styles.wordmark}
+            href="/"
+            aria-label="To Yin Yu home"
+          >
+            To Yin Yu
+          </Link>
+          <div className={styles.desktopNav}>
+            {navItems.map((item) => (
               <a
-                key={item.label}
+                key={item.href}
                 href={item.href}
-                className={linkClass(item.label, item.section)}
+                className={styles.navLink}
+                aria-current={current(item.href) ? "location" : undefined}
               >
                 {item.label}
               </a>
-            )
-          )}
+            ))}
+          </div>
           <ThemeButton />
         </div>
-
-        <button
-          type="button"
-          className={styles.menuButton}
-          aria-expanded={mobileOpen}
-          aria-controls="portfolio-mobile-menu"
-          aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
-          onClick={() => setMobileOpen((open) => !open)}
+        <details
+          ref={menu}
+          className={styles.mobileDisclosure}
+          onKeyDown={(event) => {
+            if (event.key === "Escape" && menu.current?.open) {
+              event.preventDefault();
+              menu.current.open = false;
+              menu.current.querySelector("summary")?.focus();
+            }
+          }}
         >
-          {mobileOpen ? <X size={19} /> : <Menu size={19} />}
-        </button>
-
-        {mobileOpen && (
-          <div id="portfolio-mobile-menu" className={styles.mobileMenu}>
-            {navItems.map((item) =>
-              item.section === "projects" ? (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </a>
-              )
-            )}
-            <div className={styles.mobileTheme}>
-              <ThemeButton />
-              <span>Light or dark</span>
-            </div>
+          <summary className={styles.menuButton}>
+            <Menu size={18} className={styles.openIcon} aria-hidden="true" />
+            <X size={18} className={styles.closeIcon} aria-hidden="true" />
+            Menu
+          </summary>
+          <div className={styles.mobileMenu}>
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={current(item.href) ? "location" : undefined}
+                onClick={() => {
+                  if (menu.current) menu.current.open = false;
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
-        )}
+        </details>
       </nav>
     </header>
   );
@@ -120,25 +114,28 @@ export function PortfolioHeader() {
 
 export function PortfolioFooter() {
   return (
-    <footer className={`${styles.container} ${styles.footer}`} id="contact">
-      <p>If you are hiring a developer who ships, let’s talk.</p>
-      <div className={styles.footerLinks}>
-        <a href="mailto:tonyx1998@gmail.com">tonyx1998@gmail.com</a>
-        <a
-          href="https://github.com/tonyx1998"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub <ArrowUpRight size={14} />
+    <footer className={styles.container + " " + styles.footer} id="contact">
+      <div className={styles.footerIntro}>
+        <h2>Let’s talk.</h2>
+        <p>
+          Open to software engineering roles, near Seattle or further afield.
+        </p>
+      </div>
+      <div className={styles.contact}>
+        <a className={styles.email} href="mailto:tonyx1998@gmail.com">
+          tonyx1998@gmail.com
         </a>
-        <a
-          href="https://www.linkedin.com/in/to-yin-yu/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          LinkedIn <ArrowUpRight size={14} />
-        </a>
-        <a href="/resume.pdf">Resume (PDF)</a>
+        <div className={styles.footerLinks}>
+          <a href="/resume.pdf" download="To-Yin-Yu-Resume.pdf">
+            Download PDF
+          </a>
+          <a href="https://github.com/tonyx1998">
+            GitHub <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
+          <a href="https://www.linkedin.com/in/to-yin-yu/">
+            LinkedIn <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </footer>
   );

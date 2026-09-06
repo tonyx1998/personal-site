@@ -1,15 +1,38 @@
-import projectsData from "./projects.data.json";
+import projectsData from "./projects.data.json" with { type: "json" };
 
 // Resume-only presentation for the curated subset that appears on the PDF résumé.
 // Site-facing metadata (live URL, github, date) is sourced from the parent Project
 // so it can never drift; only the ATS-tuned bullets/stack/title live here.
 export type ResumeMeta = {
+  id?: string;
+  relationship?: string;
   order: number;
   bullets: string[];
   stack: string;
   title?: string;
   date?: string;
   linksOverride?: string;
+};
+
+export type StudyFigure = {
+  src: string;
+  originalSrc?: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+};
+
+export type CaseStudy = {
+  role: string;
+  context: string;
+  summary: string;
+  sections: {
+    title: string;
+    paragraphs: string[];
+    figure?: StudyFigure;
+  }[];
+  evidenceNote: string;
 };
 
 export type Project = {
@@ -20,6 +43,10 @@ export type Project = {
   github: string | null;
   live: string | null;
   featured: boolean;
+  homepageCompact?: boolean;
+  homepageSummary?: string;
+  contribution?: string;
+  caseStudy?: CaseStudy;
   hidden?: boolean;
   /** Pins the URL. Set when a title changes so existing links keep working. */
   slug?: string;
@@ -46,6 +73,11 @@ export const selectedProjects: Project[] = projects.filter((p) => p.featured);
 /** Everything else: client work, tools, and the technical guides. */
 export const supportingProjects: Project[] = projects.filter(
   (p) => !p.featured
+);
+
+/** A homepage subset, independent of archive membership and public routes. */
+export const homepageSupportingProjects: Project[] = supportingProjects.filter(
+  (project) => project.homepageCompact
 );
 
 // URL slug derived from the title (no slug field in the data) — used by the

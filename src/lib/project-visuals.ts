@@ -33,3 +33,15 @@ export const projectVisuals: Record<string, ProjectVisual> = {
     alt: "Throughline technical learning platform home page",
   },
 };
+
+/** Reuse a study's meaningful result view as its homepage and archive cover. */
+export function projectVisual(
+  project: Project,
+  slug: string
+): ProjectVisual | undefined {
+  const figure = project.caseStudy?.sections.find(
+    (section) => section.figure
+  )?.figure;
+  return figure ? { src: figure.src, alt: figure.alt } : projectVisuals[slug];
+}
+import type { Project } from "./projects";

@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectLinks } from "./ProjectLinks";
 import {
-  displayUrl,
   projectSlug,
   selectedProjects,
-  shortTitle,
   supportingProjects,
 } from "@/lib/projects";
-import { projectVisuals } from "@/lib/project-visuals";
+import { projectVisual } from "@/lib/project-visuals";
 import chrome from "./Chrome.module.css";
 import styles from "./ProjectsAll.module.css";
 
@@ -15,27 +14,30 @@ export default function ProjectsAll() {
   return (
     <div className={chrome.container}>
       <header className={styles.intro}>
-        <h1>Everything I have shipped</h1>
+        <h1>All projects</h1>
         <p>
-          Products, tools, and courses, all live. Each title opens my notes on
-          what was built and why.
+          Client work, independent products, local tools, and technical courses.
+          Start with a case study or browse the shorter project notes.
         </p>
+        <nav className={styles.sectionLinks} aria-label="Project sections">
+          <a href="#selected-heading">Selected work</a>
+          <a href="#supporting-heading">More work</a>
+        </nav>
       </header>
 
       <section aria-labelledby="selected-heading" className={styles.section}>
         <h2 id="selected-heading" className={styles.sectionTitle}>
-          Products
+          Selected work
         </h2>
         <div className={styles.rows}>
           {selectedProjects.map((project, index) => {
             const slug = projectSlug(project);
-            const visual = projectVisuals[slug];
-
+            const visual = projectVisual(project, slug);
             return (
-              <article key={project.title} className={styles.row}>
+              <article key={slug} className={styles.row}>
                 {visual && (
                   <Link
-                    href={`/projects/${slug}`}
+                    href={"/projects/" + slug}
                     className={styles.thumb}
                     aria-hidden="true"
                     tabIndex={-1}
@@ -45,32 +47,23 @@ export default function ProjectsAll() {
                       alt=""
                       width={1280}
                       height={720}
-                      loading={index < 2 ? "eager" : "lazy"}
-                      sizes="(max-width: 820px) 100vw, 360px"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      sizes="(max-width: 600px) 96px, 224px"
                     />
                   </Link>
                 )}
                 <div className={styles.rowCopy}>
                   <h3>
-                    <Link href={`/projects/${slug}`}>{project.title}</Link>
+                    <Link href={"/projects/" + slug}>{project.title}</Link>
                   </h3>
-                  <p className={styles.desc}>{project.description}</p>
-                  <p className={styles.meta}>
-                    <span>{project.datePublished}</span>
-                    <span>{project.tags.slice(0, 5).join(" · ")}</span>
+                  <p className={styles.desc}>
+                    {project.homepageSummary ?? project.description}
                   </p>
-                  <div className={styles.links}>
-                    <Link href={`/projects/${slug}`}>Project notes</Link>
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {displayUrl(project.live)}
-                      </a>
-                    )}
-                  </div>
+                  <p className={styles.meta}>
+                    {project.datePublished} ·{" "}
+                    {project.tags.slice(0, 3).join(" · ")}
+                  </p>
+                  <ProjectLinks project={project} />
                 </div>
               </article>
             );
@@ -80,49 +73,26 @@ export default function ProjectsAll() {
 
       <section aria-labelledby="supporting-heading" className={styles.section}>
         <h2 id="supporting-heading" className={styles.sectionTitle}>
-          Smaller builds and courses
+          More work
         </h2>
         <div className={styles.rows}>
           {supportingProjects.map((project) => {
             const slug = projectSlug(project);
-
             return (
-              <article
-                key={project.title}
-                className={`${styles.row} ${styles.rowCompact}`}
-              >
+              <article key={slug} className={styles.compactRow}>
                 <div className={styles.rowCopy}>
                   <h3>
-                    <Link href={`/projects/${slug}`}>
-                      {shortTitle(project)}
-                    </Link>
+                    <Link href={"/projects/" + slug}>{project.title}</Link>
                   </h3>
                   <p className={styles.desc}>{project.description}</p>
                   <p className={styles.meta}>
-                    <span>{project.datePublished}</span>
-                    <span>{project.tags.slice(0, 4).join(" · ")}</span>
+                    {project.datePublished}
+                    {!project.live && " · Local tool"} ·{" "}
+                    {project.tags.slice(0, 3).join(" · ")}
                   </p>
-                  <div className={styles.links}>
-                    <Link href={`/projects/${slug}`}>Project notes</Link>
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {displayUrl(project.live)}
-                      </a>
-                    )}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Source
-                      </a>
-                    )}
-                  </div>
+                </div>
+                <div className={styles.compactLinks}>
+                  <ProjectLinks project={project} />
                 </div>
               </article>
             );

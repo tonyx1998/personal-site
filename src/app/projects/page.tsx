@@ -8,16 +8,16 @@ import {
 } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "All projects",
   description:
-    "Every project To Yin Yu has shipped: How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, Throughline, and technical courses.",
+    "Explore To Yin Yu's software projects, client work, local tools, and technical courses, with case studies and project notes.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
-    title: "Projects · To Yin Yu",
+    title: "All projects · To Yin Yu",
     description:
-      "Every project To Yin Yu has shipped, from AI products to technical courses.",
+      "Software projects, client work, local tools, and technical courses, with case studies and project notes.",
     url: "/projects",
     type: "website",
   },
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
       <script {...jsonLdScriptProps(projectsCollectionJsonLd)} />
       <div className={chrome.page}>
         <PortfolioHeader />
-        <main>
+        <main id="main-content" tabIndex={-1}>
           <ProjectsAll />
         </main>
         <PortfolioFooter />

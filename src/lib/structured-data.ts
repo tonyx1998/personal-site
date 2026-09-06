@@ -13,7 +13,7 @@ export const personJsonLd = {
   url: SITE_URL,
   jobTitle: "Software Developer",
   description:
-    "Software developer near Seattle who builds and runs his own products: How's My Job Fit?, SoloMock, SoloYap, Gasolytics, Amex Roofing, ReachSpan, and Throughline.",
+    "Software developer near Seattle building web products, with experience across interfaces, backend systems, and deployment.",
   homeLocation: {
     "@type": "Place",
     address: {
@@ -60,7 +60,7 @@ export const websiteJsonLd = {
   url: SITE_URL,
   name: "To Yin Yu · Software Developer",
   description:
-    "Portfolio of To Yin Yu, a software developer near Seattle. Products, tools, and courses, all live.",
+    "Portfolio of To Yin Yu, a software developer near Seattle. Software projects, client work, local tools, and technical courses.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },

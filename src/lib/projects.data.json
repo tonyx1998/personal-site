@@ -1,37 +1,105 @@
 [
   {
-    "title": "How's My Job Fit?",
-    "description": "Compares a candidate's own evidence with a job's requirements and shows what is fully supported, transferable, partial, or not shown at all. Files never leave the browser.",
+    "title": "Amex Roofing",
+    "description": "An English and Chinese website for a Bay Area roofing contractor, with inspection requests, calendar integration, and clear recovery when a requested time is unavailable.",
     "highlights": [
-      "Parses resumes and notes in the browser: PDF through pdf.js, Word through mammoth, images through Tesseract OCR. Nothing is uploaded or stored",
-      "Scores fit with a deterministic weighted model: requirements ranked by importance, eligibility checks kept separate from skills, and transferable evidence given partial credit with the reasoning shown",
-      "Ships six fictional example reports across industries plus public methodology and limitations pages. A reader can judge the method before trusting a score"
+      "Generated English and Chinese pages from shared content and maintained a common booking flow across both languages.",
+      "Connected inspection requests to Google Calendar through serverless routes; validated requests before delivery and surfaced unavailable-slot errors beside the time field."
     ],
-    "tags": ["Next.js", "React", "TypeScript", "pdf.js", "Tesseract.js"],
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Vercel Serverless",
+      "Google Calendar API"
+    ],
     "github": null,
-    "live": "https://howsmyjobfit.com",
+    "live": "https://amex-roofing.com",
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-02",
+    "dateModified": "2026-09-05",
     "resume": {
       "order": 1,
-      "title": "How's My Job Fit? - Evidence-Based Job-Fit Reports",
-      "stack": "Next.js, React, TypeScript, pdf.js, Tesseract.js",
+      "title": "Amex Roofing - Bilingual Website and Booking",
+      "stack": "HTML, CSS, JavaScript, Vercel Serverless, Google Calendar API",
       "date": "2026",
       "bullets": [
-        "Built a candidate-side job-fit workbench that parses resumes in the browser (PDF, DOCX, OCR) and scores them against a posting with a deterministic weighted model that keeps eligibility separate from skills.",
-        "Shipped six fictional example reports and a public methodology page; launched on Vercel in August 2026."
-      ]
+        "Delivered an English/Chinese website for a roofing contractor, with location pages and a mobile appointment-booking flow.",
+        "Integrated appointment booking with Google Calendar through Vercel serverless routes and made scheduling failures visible in the booking flow."
+      ],
+      "id": "amex-roofing",
+      "relationship": "Client project"
+    },
+    "slug": "amex-roofing-site-ai-booking-agent",
+    "homepageSummary": "An English and Chinese website that turns a homeowner’s inspection request into a scheduling workflow for a Bay Area roofing contractor.",
+    "contribution": "I built the bilingual interface and Calendar integration, with validation and visible recovery when a time is taken.",
+    "caseStudy": {
+      "role": "Independent developer",
+      "context": "Client project · English and Chinese · 2026",
+      "summary": "I built a bilingual website and inspection-request workflow for a Bay Area roofing contractor, connecting the public form to serverless scheduling routes and making failure states part of the interface.",
+      "sections": [
+        {
+          "title": "Make the next step clear",
+          "paragraphs": [
+            "A homeowner arrives with a roof problem and needs a practical next step: call the contractor or request an inspection. The site puts those choices beside the service explanation. The booking flow collects a property address, contact details, preferred date, and one-hour arrival window. Its receipt says “Inspection requested” and explains that the crew will call to confirm. That distinction keeps a successful form submission from promising a completed appointment.",
+            "My work covers the public interface, the bilingual page structure, and the serverless booking integration. This is client delivery, separate from the independent products elsewhere in my portfolio."
+          ],
+          "figure": {
+            "src": "/projects/evidence/amex-result.png",
+            "alt": "Amex Roofing inspection-request receipt showing a fictional address and preferred arrival window.",
+            "caption": "Sample inspection receipt with a simulated success response.",
+            "width": 1280,
+            "height": 720,
+            "originalSrc": "/projects/evidence/originals/amex-result.png"
+          }
+        },
+        {
+          "title": "Keep both languages on one workflow",
+          "paragraphs": [
+            "English and Chinese pages use a shared visual system and booking behavior. Build scripts generate the translated homepage and service-area pages from maintained source content. That keeps layout and interaction changes from turning into two unrelated implementations. The language choice also travels with the inspection request, giving the crew useful context for the follow-up.",
+            "The front end uses HTML, CSS, and JavaScript, while provider credentials stay in serverless routes. A form can still submit through its native POST path when the enhanced browser flow is unavailable. The tradeoff is maintaining consistent validation and messages across both the browser and server."
+          ]
+        },
+        {
+          "title": "Validate before touching the calendar",
+          "paragraphs": [
+            "The booking route checks the request source and validates contact, address, date, and time fields before delivery. The browser shows errors near the field that needs attention. Date selection and availability requests also need to handle responses arriving out of order: changing the selected date must not let an older response overwrite the current choice.",
+            "Local booking-contract checks exercised rejected origins, invalid inputs, accepted date windows, and the native-form fallback. Separate calendar-sync checks confirmed that a failed notification does not advance the synchronization checkpoint. Holding that checkpoint until delivery succeeds gives a later retry a chance to recover the missed notification."
+          ]
+        },
+        {
+          "title": "Recover when a time is taken",
+          "paragraphs": [
+            "An available slot can become unavailable between selection and submission. The interface handles the server’s conflict response by clearing the selected time, marking busy windows unavailable, and placing an explanation beside the time field. The address and contact fields remain populated so the user can choose another window without starting over.",
+            "A controlled browser check reproduced this sequence with a simulated slot-conflict response. The deployed interface kept the contact information, cleared the unavailable time, and moved attention to the field that needed correction. This makes recovery part of the normal form flow."
+          ],
+          "figure": {
+            "src": "/projects/evidence/amex-detail.png",
+            "alt": "Amex Roofing booking form preserves sample contact information and asks the user to choose another arrival window after a simulated conflict.",
+            "caption": "Simulated slot conflict: contact details stay in place while the user chooses another arrival window.",
+            "width": 1280,
+            "height": 960,
+            "originalSrc": "/projects/evidence/originals/amex-detail.png"
+          }
+        },
+        {
+          "title": "Delivered scope and remaining limits",
+          "paragraphs": [
+            "The delivered site joins service information, bilingual content, and an inspection-request flow in one customer-facing experience. The important boundary is between receiving a request and completing the crew’s scheduling process. The public receipt reflects that distinction, while the integration handles validation and delivery behind it.",
+            "The next engineering step is to exercise the complete scheduling lifecycle in a controlled environment, including duplicate requests, delayed provider responses, and notification retries. Those checks would extend the existing contracts from individual boundaries to the whole workflow."
+          ]
+        }
+      ],
+      "evidenceNote": "Screenshots use the deployed UI with fictional inputs and simulated API responses. Local contract checks used mocked dependencies; no bookings were sent. Captured September 5, 2026."
     }
   },
   {
     "title": "SoloMock",
-    "description": "Talk through a coding problem out loud with an AI interviewer that hears you and watches your editor. Feedback arrives while you are still speaking.",
+    "description": "A coding-interview workspace that combines voice conversation, a Monaco editor, and structured problem briefs. Editor snapshots give the interviewer context from the candidate’s code.",
     "highlights": [
-      "Built the voice loop on OpenAI's Realtime API over WebRTC. Debounced snapshots of the code editor stream into the model, and the interviewer reacts to what you type as well as what you say",
-      "Wrote 15 per-problem interviewer briefs: a solution tree, a four-step hint ladder, follow-ups, and edge cases. The system prompt is built from the brief, which keeps sessions consistent",
-      "Kept costs bounded with a per-IP rate limit, a 15-minute session cap, short-lived ephemeral keys, and a request-access flow that posts to Discord for manual approval"
+      "Streamed debounced code snapshots over a WebRTC data channel alongside realtime audio, with structured interviewer briefs kept on the server.",
+      "Added server-issued temporary credentials, rate limits, a client-side session timer, and cleanup for connection loss or an ended interview."
     ],
     "tags": [
       "Next.js",
@@ -46,25 +114,87 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2025",
-    "dateModified": "2026-09-02",
+    "dateModified": "2026-09-05",
     "resume": {
       "order": 2,
-      "title": "SoloMock - Realtime Voice Mock Interviewer",
+      "title": "SoloMock - Realtime Voice Interview Workspace",
       "stack": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco",
       "date": "2025",
       "bullets": [
-        "Built a browser-based mock-interview workspace that combines live voice, a Monaco code editor, and 15 structured problems; streamed debounced code snapshots over a WebRTC data channel so feedback stays in sync with the candidate's work.",
-        "Protected sessions with server-minted ephemeral keys, sliding-window rate limits, a 15-minute session cap, and a manual extended-access workflow."
-      ]
+        "Built a browser-based interview workspace combining live voice and a Monaco editor; streamed debounced code snapshots over WebRTC so the interviewer responds to speech and code.",
+        "Issued temporary session credentials and added rate limits, session-duration controls, and a manual workflow for extended access."
+      ],
+      "id": "solomock",
+      "relationship": "Independent product"
+    },
+    "homepageSummary": "A voice interview workspace where the interviewer can follow both a candidate’s spoken reasoning and the code in their editor.",
+    "contribution": "I connected WebRTC voice and debounced editor updates, then added temporary credentials and explicit session cleanup.",
+    "caseStudy": {
+      "role": "Independent developer",
+      "context": "Independent product · Realtime voice and code · 2025–present",
+      "summary": "I built a mock-interview workspace that connects spoken reasoning with the candidate’s code. The engineering work centers on editor synchronization, temporary session credentials, and a session lifecycle that ends visibly and cleans up resources.",
+      "sections": [
+        {
+          "title": "Give the interviewer the code context",
+          "paragraphs": [
+            "Practicing a coding interview means explaining an approach while writing and revising code. A voice-only interviewer misses those changes; a text-only workflow loses the spoken explanation. SoloMock places a Monaco editor beside the problem and transcript, and sends editor snapshots through the same WebRTC connection used for the conversation.",
+            "The example shows a candidate explaining a hash-map solution to Two Sum, including why a lookup happens before insertion. Keeping the solution and transcript together lets the candidate review both the implementation and the reasoning used to explain it."
+          ],
+          "figure": {
+            "src": "/projects/evidence/solomock-result.png",
+            "alt": "SoloMock displays a completed Python Two Sum solution beside a sample spoken explanation and interviewer follow-up.",
+            "caption": "Sample code and transcript in a simulated interview session.",
+            "width": 1280,
+            "height": 720,
+            "originalSrc": "/projects/evidence/originals/solomock-result.png"
+          }
+        },
+        {
+          "title": "Send useful changes, not every keystroke",
+          "paragraphs": [
+            "The editor waits for a pause before sending a snapshot and skips unchanged code. The current implementation uses a 2.5-second debounce. This reduces repetitive context updates while still letting a revised solution enter the conversation. The tradeoff is deliberate delay: this mechanism is not a promise that the model sees each keystroke immediately.",
+            "Problem content is structured separately from the transport. Interviewer briefs hold solution approaches, hint ladders, follow-ups, and edge cases; the browser receives the candidate-facing problem. That gives the interview a consistent source of context while keeping the editor and WebRTC code focused on interaction."
+          ]
+        },
+        {
+          "title": "Treat the session as a lifecycle",
+          "paragraphs": [
+            "The browser requests microphone access before asking the server for a temporary credential. The long-lived provider key remains on the server. Once connected, the client manages the audio tracks, data channel, countdown, and transcript. Explicit stop, timeout, and lost connection all lead into cleanup instead of leaving an apparently active interview behind.",
+            "There are important limits to these safeguards. The duration timer runs in the client. Rate limiting uses a shared Redis service when configured, but falls back to per-instance memory when that service is unavailable. These controls reduce exposure; they do not establish an unbypassable session boundary or a hard total spending cap."
+          ]
+        },
+        {
+          "title": "Make a lost connection understandable",
+          "paragraphs": [
+            "A connection can fail after the user has already invested time in an answer. The interface ends the session, explains that the connection was lost, and offers a way to start again. It retains the transcript and code so the user can still review the work and request post-session feedback.",
+            "In a controlled connection-loss check, changing a mocked WebRTC peer to failed triggered the cleanup path: the audio track stopped, the peer closed, and the error appeared. The feedback component then accepted a simulated response while keeping the interview work available for review."
+          ],
+          "figure": {
+            "src": "/projects/evidence/solomock-detail.png",
+            "alt": "SoloMock shows a lost-connection message, retained code and transcript, and a feedback card populated from a test fixture.",
+            "caption": "Simulated connection loss with retained interview work and sample feedback.",
+            "width": 1280,
+            "height": 720,
+            "originalSrc": "/projects/evidence/originals/solomock-detail.png"
+          }
+        },
+        {
+          "title": "What the checks establish",
+          "paragraphs": [
+            "Local tests cover the problem-brief structure, rate-limiter behavior, and session-route response. The browser demonstration also exercised editor snapshot delivery and cleanup through substituted dependencies. These checks concentrate on the boundaries that connect the interface, transport, and server.",
+            "The next evaluation should focus on the interviewer itself: a declared set of practice sessions, consistent assessment criteria, and observed response behavior. Application correctness and useful coaching are different questions. The session and feedback structure gives that evaluation a repeatable starting point."
+          ]
+        }
+      ],
+      "evidenceNote": "Screenshots use the deployed UI with sample code, transcripts, and simulated media and provider responses. Connection cleanup was checked with mocks; no paid session was started. Captured September 5, 2026."
     }
   },
   {
     "title": "Gasolytics",
-    "description": "Gas prices for all 50 states and DC on one interactive map, with state and metro pages, a trip cost calculator, and an EV-versus-gas comparison.",
+    "description": "An interactive U.S. gas-price map with state and metro views, a trip-cost calculator, and EV comparisons. Published AAA snapshots supply prices and their data dates.",
     "highlights": [
-      "Draws the choropleth with d3-geo on the server and ships it as SVG. No d3 code goes to the browser. Metro price pins, hover tooltips, wheel zoom, drag pan, and a per-state panel",
-      "Grew from a map into a toolkit: 51 state pages, metro pages, cheapest-gas-near-me, a trip calculator, an EV suite with per-state registration fees and break-even miles, and gas-tax, border-gap, and affordability pages",
-      "Reads daily AAA averages for four fuel grades from a Vercel Blob snapshot feed through an in-process cache. Mobile app-shell layout with a tab bar and a drag sheet over the map"
+      "Generated SVG map geometry on the server and added browser zoom, pan, metro pins, and state detail panels.",
+      "Read published AAA snapshots through an in-process cache and kept the snapshot date distinct from the time the application read it."
     ],
     "tags": [
       "Next.js",
@@ -79,26 +209,120 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-02",
+    "dateModified": "2026-09-05",
     "resume": {
       "order": 3,
-      "title": "Gasolytics - US Gas Price Map",
+      "title": "Gasolytics - Gas-Price Map and Fuel Comparisons",
       "stack": "Next.js, React, TypeScript, d3-geo, Vercel Blob",
       "date": "2026",
       "bullets": [
-        "Built an interactive US gas-price map with a d3-geo choropleth projected to SVG server-side (so no d3 ships to the client), metro price pins, wheel-zoom/drag-pan, and per-state detail panels.",
-        "Expanded it into a national fuel-economics toolkit with 51 state pages plus metro pages, a trip-cost calculator, an EV-vs-gas suite, and gas-tax, border-gap, and affordability analyses fed by daily AAA snapshots."
-      ]
+        "Rendered an interactive U.S. gas-price map as server-generated SVG with d3-geo; added metro pins, zoom, pan, and state detail panels.",
+        "Built trip-cost and EV-versus-gas comparison tools using AAA price snapshots; served price data through an in-process cache for state and metro views."
+      ],
+      "id": "gasolytics",
+      "relationship": "Independent product"
     },
-    "slug": "gasolytics-us-gas-price-map"
+    "slug": "gasolytics-us-gas-price-map",
+    "homepageSummary": "A U.S. fuel-price map and comparison toolkit that connects dated price snapshots to state details, trip estimates, and EV calculations.",
+    "contribution": "I projected map geometry on the server and separated snapshot delivery, caching, and interactive comparisons.",
+    "caseStudy": {
+      "role": "Independent developer",
+      "context": "Independent product · Maps and data delivery · 2026",
+      "summary": "I built a fuel-price map and comparison toolkit around published price snapshots. The application separates server-side map geometry, dated data delivery, and browser interactions such as state selection and trip-cost calculation.",
+      "sections": [
+        {
+          "title": "Connect the map to a useful question",
+          "paragraphs": [
+            "A national map gives a quick comparison, but a visitor may want to inspect one state or estimate fuel for a trip. Gasolytics connects the overview to state and metro details, price history, a trip calculator, and EV comparisons. The map’s selected state opens a panel with the corresponding prices and trend instead of sending the reader through a separate search.",
+            "The capture shows California selected with a visible snapshot date. The panel connects its map position to prices and history, so a reader can move from a national pattern to a specific place. State and metro averages describe an area, rather than individual station quotes."
+          ],
+          "figure": {
+            "src": "/projects/evidence/gasolytics-result.png",
+            "alt": "Gasolytics map with California selected, metro price pins, a dated state price, and a price-history panel.",
+            "caption": "California selected with dated price data and a state trend. Captured September 5, 2026.",
+            "width": 1280,
+            "height": 720,
+            "originalSrc": "/projects/evidence/originals/gasolytics-result.png"
+          }
+        },
+        {
+          "title": "Project the geometry on the server",
+          "paragraphs": [
+            "The server uses d3-geo to turn geographic shapes into SVG path strings. The browser receives those shapes and handles the interactive layer: selection, zoom, pan, and metro pins. This keeps map projection separate from the changing price data and from the event-handling code.",
+            "Changing a fuel grade updates the displayed prices without rebuilding the geographic projection in the browser. The geometry is imported as a traced asset instead of read from an assumed runtime file location, so the serverless deployment includes the shapes it needs. The tradeoff is sending rendered paths with the page rather than making the browser compute them."
+          ]
+        },
+        {
+          "title": "Keep the snapshot date distinct",
+          "paragraphs": [
+            "The separate Databank project publishes AAA snapshots; Gasolytics reads them from Vercel Blob. It does not perform the upstream scraping in the request path. The application shapes the snapshots for its views and uses a short-lived, in-process cache so repeated reads can reuse a result.",
+            "The response carries both the source data date and the time it was read. Those have different meanings: a page can be rendered now from an older snapshot. The current cache lasts up to 30 minutes within a process, while page revalidation and the upstream publication schedule are separate concerns. A recent request alone does not prove fresh source data."
+          ]
+        },
+        {
+          "title": "Explain both estimates and unavailable data",
+          "paragraphs": [
+            "The trip calculator exposes the assumptions behind its result: distance, fuel economy, selected fuel grade, and the state averages used for price. Visitors can enter their own distance instead of relying on the approximate city-to-city distance. The result is a planning estimate, with the method beside it, rather than an unexplained dollar amount.",
+            "Unavailable data needs a separate response. I tested the data reader against local synthetic snapshots with network access disabled. A successful read populated the cache; an expired cache followed by an unreadable input returned the previous result marked stale. A fresh process without usable data raised an explicit error instead of returning an invented price."
+          ],
+          "figure": {
+            "src": "/projects/evidence/gasolytics-detail.png",
+            "alt": "Gasolytics trip calculator displays selected cities, fuel economy, the average price used, and a calculated fuel-cost estimate.",
+            "caption": "Trip estimate with its distance, fuel economy, and price assumptions. Captured September 5, 2026.",
+            "width": 1280,
+            "height": 720,
+            "originalSrc": "/projects/evidence/originals/gasolytics-detail.png"
+          }
+        },
+        {
+          "title": "What this demonstrates and what comes next",
+          "paragraphs": [
+            "The work connects a published data artifact to an interactive comparison: read and shape the data, render stable geometry, expose useful detail, and explain the estimate. The local checks establish the tested cache and failure behaviors, while the public interface makes the underlying date and calculation inputs visible.",
+            "The next improvement I would validate is how clearly readers distinguish fresh, cached, and unavailable data across every view. The same status should mean the same thing on the map, detail pages, and calculators, with the actual source date available wherever it affects a decision."
+          ]
+        }
+      ],
+      "evidenceNote": "Public map and calculator captured read-only on September 5, 2026. Cache and failure checks used isolated local fixtures with network access disabled."
+    }
+  },
+  {
+    "title": "How's My Job Fit?",
+    "description": "Compares candidate evidence with a job’s requirements and explains what is supported, transferable, partial, or not shown. Local documents are parsed in the browser.",
+    "highlights": [
+      "Parsed PDF and Word documents in the browser, with OCR for image evidence and source excerpts alongside the analysis.",
+      "Used a deterministic weighted model with separate eligibility checks and explicit supported, transferable, partial, and not-shown states.",
+      "Published fictional example reports, methodology, and limitations. Optional public-link retrieval and aggregate counters are separate from local file parsing."
+    ],
+    "tags": ["React", "TypeScript", "pdf.js", "Tesseract.js"],
+    "github": null,
+    "live": "https://howsmyjobfit.com",
+    "featured": false,
+    "className": "lg:col-span-2 lg:row-span-2",
+    "datePublished": "2026",
+    "dateModified": "2026-09-05",
+    "resume": {
+      "order": 4,
+      "title": "How's My Job Fit? - Evidence-Based Job-Fit Reports",
+      "stack": "React, TypeScript, pdf.js, Tesseract.js",
+      "date": "2026",
+      "bullets": [
+        "Built a candidate-side workbench that parses local resume documents in the browser and compares evidence with job requirements using a deterministic weighted model.",
+        "Kept eligibility checks separate from skill evidence and published fictional examples with methodology and limitations."
+      ],
+      "id": "hows-my-job-fit",
+      "relationship": "Independent product"
+    },
+    "homepageSummary": "A document workbench that compares candidate evidence with job requirements and explains the gaps.",
+    "contribution": "Browser document parsing and a deterministic scoring model keep eligibility checks separate from skills.",
+    "homepageCompact": true
   },
   {
     "title": "SoloYap",
     "description": "Spoken English practice with an AI partner. Pick a scenario, talk it through, and get a correction and a better phrasing after every turn.",
     "highlights": [
-      "Realtime voice over WebRTC on OpenAI's Realtime API. A grammar correction and a better phrasing come back after each learner turn",
-      "13 scenarios graded A2 to C1 on the CEFR scale, plus free chat and custom topics, with optional Mandarin and Cantonese hints for beginners",
-      "Installable as a PWA, with the same cost controls as SoloMock: per-IP rate limits, session caps, and an email allowlist for extended access"
+      "Built spoken practice around OpenAI’s Realtime API over WebRTC, with corrections and alternative phrasing after learner turns.",
+      "Organized practice into graded scenarios, free chat, and custom topics, with Mandarin and Cantonese hints.",
+      "Added an installable PWA interface and access controls for extended sessions."
     ],
     "tags": [
       "Next.js",
@@ -111,76 +335,49 @@
     ],
     "github": null,
     "live": "https://soloyap.com",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2025",
-    "dateModified": "2026-09-02"
-  },
-  {
-    "title": "Amex Roofing",
-    "description": "Production website for a Bay Area roofing contractor in English and Chinese: 26 city pages, instant roof estimates from satellite measurements, and an AI chat agent that books onto the crew's calendar.",
-    "highlights": [
-      "Buildless HTML and Tailwind site with English and Chinese homepage twins and 26 city landing pages (13 cities in each language), kept in sync by build scripts",
-      "Instant ballpark estimates from Google Solar API roof measurements feed a three-step mobile booking flow. Vercel serverless routes write the appointment to the crew's Google Calendar and post a Discord alert",
-      "Contact changes with the hour: the crew's phone during working hours and a bilingual AI chat agent after. SEO articles and a daily analytics digest to Discord round it out"
-    ],
-    "tags": [
-      "HTML",
-      "Tailwind CSS",
-      "Vercel Serverless",
-      "Google Calendar API",
-      "Google Solar API"
-    ],
-    "github": null,
-    "live": "https://amex-roofing.com",
-    "featured": true,
-    "className": "lg:col-span-2 lg:row-span-2",
-    "datePublished": "2026",
-    "dateModified": "2026-09-02",
-    "resume": {
-      "order": 4,
-      "title": "Amex Roofing - Client Site with AI Booking Agent",
-      "stack": "HTML, Tailwind CSS, Vercel Serverless, Google Calendar and Solar APIs",
-      "date": "2026",
-      "bullets": [
-        "Delivered a bilingual (English/Chinese) production site for a roofing contractor with 26 local-SEO city pages and instant estimates from Google Solar API roof measurements.",
-        "Built an after-hours AI chat agent and a booking flow that writes appointments straight to the crew's Google Calendar through Vercel serverless routes."
-      ]
-    },
-    "slug": "amex-roofing-site-ai-booking-agent"
+    "dateModified": "2026-09-05",
+    "homepageSummary": "Spoken English practice with scenario prompts, turn-by-turn corrections, and optional Chinese-language hints.",
+    "contribution": "Realtime audio and an installable interface support repeated speaking practice.",
+    "homepageCompact": true
   },
   {
     "title": "Reachspan",
-    "description": "Marketing site for ReachSpan, a service that runs the website, AI receptionist, reviews, and social listening for local service businesses. Booking a call lands straight on the calendar.",
+    "description": "A marketing website for a service supporting local businesses, with a consultation-booking interface connected to Cal.com.",
     "highlights": [
-      "Single-file HTML and Tailwind landing page with a warm-dark hero, custom display and mono typography, and scroll-reveal motion that respects reduced-motion settings",
-      "Vercel serverless routes call the Cal.com API for available slots and bookings. An audit call is confirmed on the calendar without a form round-trip",
-      "Spec demos are labelled as demos, and the page has no fabricated results or testimonials"
+      "Built an HTML and Tailwind marketing page with responsive layouts and motion that respects reduced-motion preferences.",
+      "Connected consultation availability and booking to Cal.com through Vercel serverless routes.",
+      "Kept demonstration examples labeled as demos."
     ],
     "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     "github": null,
     "live": "https://reachspan.ai",
-    "featured": true,
+    "featured": false,
     "hidden": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-02"
+    "dateModified": "2026-09-05",
+    "homepageSummary": "A marketing website for local-business services, with consultation availability and booking through Cal.com.",
+    "contribution": "I built the landing page and serverless scheduling integration.",
+    "homepageCompact": true
   },
   {
     "title": "Throughline",
-    "description": "The hub that connects six technical guides, SoloMock, and Shipyard into one path: learn to code, pick a specialty, build something, prepare, practice.",
+    "description": "A learning hub that connects technical guides, project building, and interview practice through a shared path and interface.",
     "highlights": [
-      "Static Astro hub that lays the whole set out as a five-act ladder and routes readers from the programming on-ramp into a specialty guide, then into building and interview practice",
-      "Every guide runs on one shared design system, the guide-kit package, with in-browser code and checkpoint quizzes, and follows the same rule: start from nothing, read top to bottom",
-      "Each guide's source is available to read, and all of the sites deploy on Vercel"
+      "Built an Astro hub that connects programming foundations, specialty guides, project building, and interview practice.",
+      "Created shared navigation, checkpoint quizzes, and code-exercise components for the Docusaurus guides.",
+      "Linked hosted learning resources and the locally run Shipyard tool without treating every resource as a deployed application."
     ],
     "tags": ["Astro", "TypeScript", "Design System", "Vercel"],
     "github": null,
     "live": "https://throughline.guide",
-    "featured": true,
+    "featured": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-02",
+    "dateModified": "2026-09-05",
     "resume": {
       "order": 5,
       "title": "Throughline - Technical Learning Platform",
@@ -188,10 +385,16 @@
       "date": "2026",
       "linksOverride": "<a href=\"https://throughline.guide\" color=\"#1f4e6b\">throughline.guide</a>",
       "bullets": [
-        "Built an Astro and Docusaurus learning platform that connects six technical guides through a five-stage path, on a shared React and TypeScript design system with navigation, quizzes, and code exercises."
-      ]
+        "Built an Astro hub connecting technical guides through a shared learning path, from programming foundations to project building and interview practice.",
+        "Created a shared React and TypeScript design system for Docusaurus guides with navigation, checkpoint quizzes, and in-browser code exercises."
+      ],
+      "id": "throughline",
+      "relationship": "Independent product"
     },
-    "slug": "throughline-technical-learning-ecosystem"
+    "slug": "throughline-technical-learning-ecosystem",
+    "homepageSummary": "A learning hub connecting programming guides, project building, and interview practice.",
+    "contribution": "I built the Astro hub and a shared interface for the technical guides.",
+    "homepageCompact": true
   },
   {
     "title": "all-in-one-URL",
@@ -222,8 +425,11 @@
       "stack": "Python, FastAPI, PostgreSQL, Redis, Docker, React",
       "date": "2024",
       "bullets": [
-        "Built a FastAPI backend for short URLs, QR codes, and barcodes with per-resource analytics, Redis-backed caching, tiered rate limiting, and JWT auth; containerized with Docker Compose and deployed across Vercel, Render, Neon, and Upstash."
-      ]
+        "Built a FastAPI service for short URLs, QR codes, and barcodes with per-resource analytics, PostgreSQL persistence, and Redis caching.",
+        "Implemented JWT authentication, resource ownership checks, and tiered rate limits; containerized the app with Docker Compose and deployed across Vercel, Render, Neon, and Upstash."
+      ],
+      "id": "all-in-one-url",
+      "relationship": "Independent product"
     }
   },
   {
