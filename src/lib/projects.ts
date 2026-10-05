@@ -27,6 +27,11 @@ export type CaseStudy = {
   role: string;
   context: string;
   summary: string;
+  takeaways: {
+    problem: string;
+    decision: string;
+    verifiedBehavior: string;
+  };
   sections: {
     title: string;
     paragraphs: string[];

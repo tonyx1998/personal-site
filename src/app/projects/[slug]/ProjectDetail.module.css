@@ -31,12 +31,6 @@
   margin: 0 0 var(--space-5);
   max-width: 65ch;
 }
-.context {
-  font-size: 16px;
-  color: var(--ink-2);
-  margin: 0 0 var(--space-5);
-  max-width: 68ch;
-}
 .overview {
   display: flex;
   flex-wrap: wrap;
@@ -53,6 +47,24 @@
 }
 .overview dd {
   margin: 0;
+}
+.takeaways {
+  max-width: 740px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-5);
+}
+.takeaways div {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: var(--space-4);
+}
+.takeaways dt {
+  font-weight: 600;
+}
+.takeaways dd {
+  margin: 0;
+  color: var(--ink-2);
 }
 .stack {
   font-size: 14px;
@@ -199,6 +211,10 @@
   }
 }
 @media (max-width: 480px) {
+  .takeaways div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
   .pager {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);

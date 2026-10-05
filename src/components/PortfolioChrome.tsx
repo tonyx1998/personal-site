@@ -63,16 +63,19 @@ export function PortfolioHeader() {
             To Yin Yu
           </Link>
           <div className={styles.desktopNav}>
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={styles.navLink}
-                aria-current={current(item.href) ? "location" : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const NavLink = item.href === "/resume.pdf" ? "a" : Link;
+              return (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  className={styles.navLink}
+                  aria-current={current(item.href) ? "location" : undefined}
+                >
+                  {item.label}
+                </NavLink>
+              );
+            })}
           </div>
           <ThemeButton />
         </div>
@@ -93,18 +96,21 @@ export function PortfolioHeader() {
             Menu
           </summary>
           <div className={styles.mobileMenu}>
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                aria-current={current(item.href) ? "location" : undefined}
-                onClick={() => {
-                  if (menu.current) menu.current.open = false;
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const NavLink = item.href === "/resume.pdf" ? "a" : Link;
+              return (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  aria-current={current(item.href) ? "location" : undefined}
+                  onClick={() => {
+                    if (menu.current) menu.current.open = false;
+                  }}
+                >
+                  {item.label}
+                </NavLink>
+              );
+            })}
           </div>
         </details>
       </nav>
@@ -127,7 +133,7 @@ export function PortfolioFooter() {
         </a>
         <div className={styles.footerLinks}>
           <a href="/resume.pdf" download="To-Yin-Yu-Resume.pdf">
-            Download PDF
+            Download resume (PDF)
           </a>
           <a href="https://github.com/tonyx1998">
             GitHub <ArrowUpRight size={15} aria-hidden="true" />

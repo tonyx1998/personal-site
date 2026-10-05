@@ -27,6 +27,10 @@ b1b7bd6 Persist theme in localStorage instead of a cookie so routes can be stati
 
 ## Next action
 
+Review and publish `codex/personal-site-audit-fixes` after the October audit
+validation. This branch is local only; production still serves the earlier
+revision until the normal Git integration publishes an approved merge.
+
 Keep the evidence and shared project facts current as the products change.
 Before tailoring an application, use the resume profiles documented in
 `docs/resume-tailoring.md`. Verify changed claims against the deployed product
@@ -38,6 +42,36 @@ is out of date. The dashboard read 7 visitors and 21 page views over the seven
 days to 2026-09-04.
 
 ## State
+
+2026-10-05 (audit fixes): Next.js and its ESLint configuration are pinned to
+16.3.8, React/React DOM to 19.2.8, and Node.js to 24 with matching Node types.
+Compatible transitive security updates remove the obsolete PostCSS override.
+The production npm audit has zero findings. Five remaining high-severity npm
+entries describe one unpatched, development-only `braces` dependency chain
+through the ESLint plugin; do not force-downgrade `eslint-config-next` to fix it.
+
+The unused Newsreader italic request is removed. Mobile selected-work archive
+entries now show a full-width image above their 16px description. The three
+case studies have shorter introductions, consolidated Context metadata, and
+Problem / Decision / Verified behavior summaries that preserve simulated,
+mocked, and local-fixture qualifiers. All original narratives, project facts,
+resume bullets, links, and public routes are retained. Internal header links
+use Next navigation; PDF links remain ordinary anchors. Repeated project
+actions name their project for assistive technology, and the footer names the
+downloaded resume explicitly.
+
+The resume generator uses semantic HTML and WeasyPrint with a bundled Public
+Sans font to create actual PDF structure tags, document language, and linked
+annotations. Python dependencies and setup are documented in
+`docs/resume-tailoring.md`. Validation checks document structure and content;
+tag presence alone is not a claim of full accessibility compliance.
+
+The Verify workflow runs lint, data/schema tests, formatting, types, a static
+production build, and resume regression tests. `make verify` includes types
+and no longer requires an unused `.env` file. Local lint, four project tests,
+type generation/TypeScript, and the Next 16.3.8 production build pass. All
+27 generated pages remain static. Browser and final PDF checks are recorded
+with the review evidence before publication.
 
 2026-09-05 (hiring portfolio and resume): the homepage now leads with Amex
 Roofing, SoloMock, and Gasolytics. Job Fit, SoloYap, Reachspan, and Throughline

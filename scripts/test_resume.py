@@ -1,20 +1,44 @@
 """Regression checks for resume selection and safe PDF replacement."""
 
 import importlib.util
+from html.parser import HTMLParser
 import json
 from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
 
-from pypdf import PdfReader
-from reportlab.platypus import PageBreak, Paragraph
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import NameObject, TextStringObject
 
 spec = importlib.util.spec_from_file_location(
     "build_resume", Path(__file__).with_name("build-resume.py")
 )
 resume = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(resume)
+
+
+class BodyText(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_body = False
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "body":
+            self.in_body = True
+
+    def handle_endtag(self, tag):
+        if tag == "body":
+            self.in_body = False
+
+    def handle_data(self, data):
+        if self.in_body:
+            self.parts.append(data)
+
+
+def compact(text):
+    return "".join(text.split())
 
 
 class ResumeTests(unittest.TestCase):
@@ -48,6 +72,11 @@ class ResumeTests(unittest.TestCase):
                     checks = resume.main(str(destination), profile)
                     self.assertEqual(checks["pages"], 1)
                     self.assertEqual(checks["links"], 7)
+                    self.assertEqual(len(checks["tagged_links"]), 7)
+                    self.assertGreater(checks["marked_content"], 40)
+                    body = BodyText()
+                    body.feed(resume.build_html(resume.load_resume_projects(profile), profile))
+                    self.assertEqual(compact(checks["reading_order"]), compact("".join(body.parts)))
                     if profile == "backend":
                         text = PdfReader(destination).pages[0].extract_text()
                         self.assertIn("all-in-one-URL", text)
@@ -57,13 +86,44 @@ class ResumeTests(unittest.TestCase):
             destination = Path(directory) / "resume.pdf"
             previous = b"previous reviewed artifact"
             destination.write_bytes(previous)
-            body = resume.styles()["body"]
-            overflow = [Paragraph("First page", body), PageBreak(), Paragraph("Second page", body)]
-            with patch.object(resume, "build_story", return_value=overflow):
+            overflow = '<p>First page</p><p style="break-before: page">Second page</p>'
+            with patch.object(resume, "build_html", return_value=overflow):
                 with self.assertRaisesRegex(RuntimeError, "one page; produced 2"):
                     resume.main(str(destination))
             self.assertEqual(destination.read_bytes(), previous)
             self.assertEqual(list(Path(directory).iterdir()), [destination])
+
+    def test_structural_regressions_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "resume.pdf"
+            resume.main(str(source))
+            for defect in ("language", "structure", "link", "font", "reading_order"):
+                with self.subTest(defect=defect):
+                    writer = PdfWriter(clone_from=source)
+                    root = writer.root_object
+                    if defect == "language":
+                        root[NameObject("/Lang")] = TextStringObject("")
+                    elif defect == "structure":
+                        del root["/StructTreeRoot"]
+                    elif defect == "link":
+                        del writer.pages[0]["/Annots"][0].get_object()["/StructParent"]
+                    elif defect == "font":
+                        font = next(iter(writer.pages[0]["/Resources"]["/Font"].values())).get_object()
+                        del font["/ToUnicode"]
+                    else:
+                        document = root["/StructTreeRoot"]["/K"][0].get_object()
+                        document["/K"].reverse()
+                    broken = Path(directory) / "broken.pdf"
+                    writer.write(broken)
+                    with self.assertRaises((RuntimeError, KeyError)):
+                        resume.validate_pdf(broken, resume.load_resume_projects())
+
+    def test_committed_public_resume_has_current_facts_and_structure(self):
+        checks = resume.validate_pdf(resume.ROOT / "public" / "resume.pdf",
+                                     resume.load_resume_projects())
+        body = BodyText()
+        body.feed(resume.build_html(resume.load_resume_projects()))
+        self.assertEqual(compact(checks["reading_order"]), compact("".join(body.parts)))
 
     def test_incomplete_or_hidden_selection_fails_before_output(self):
         records = json.loads(resume.PROJECTS_JSON.read_text())
