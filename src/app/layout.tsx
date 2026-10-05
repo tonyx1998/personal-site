@@ -11,7 +11,7 @@ const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
   weight: "variable",
-  style: ["normal", "italic"],
+  style: "normal",
   axes: ["opsz"],
   display: "swap",
 });

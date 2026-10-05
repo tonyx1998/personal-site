@@ -122,25 +122,14 @@
 }
 @media (max-width: 600px) {
   .row {
-    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-4);
     padding-block: var(--space-5);
   }
   .rowCopy h3 {
     font-size: 26px;
   }
-  .row .desc {
-    font-size: 15px;
-  }
   .row .meta {
     font-size: 14px;
-  }
-}
-@media (max-width: 359px) {
-  .row {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .thumb {
-    width: 160px;
   }
 }

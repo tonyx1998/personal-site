@@ -16,7 +16,7 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 plus CSS Modules.
 
 ## Working on it
 
-Use Node.js 24 for the application and native TypeScript data tests. Resume generation uses Python 3 with `reportlab` and `pypdf`; `make resume PYTHON=/path/to/python3` selects an interpreter that has them installed.
+Use Node.js 24 (pinned in `.node-version`) for the application and native TypeScript data tests. Resume generation uses Python 3.13, WeasyPrint, pypdf, and Pango; install the pinned packages in `scripts/requirements-resume.txt` after following the platform setup in [resume tailoring](docs/resume-tailoring.md). `make resume PYTHON=/path/to/python3` selects that interpreter.
 
 ```bash
 npm ci
@@ -24,12 +24,18 @@ npm run dev          # http://localhost:3000
 npm run build        # production build
 npm run lint         # eslint
 npm test             # routes, curation, study schema, and evidence assets
+npm run typecheck    # generate route types and run TypeScript
 npm run format:check # prettier
-npm run resume       # rebuild public/resume.pdf (needs: pip install reportlab pypdf)
+npm run resume       # rebuild and validate the tagged public/resume.pdf
 npm run check-links  # verify every project URL and update the checked date
 ```
 
 No environment variables are required.
+
+The Verify workflow runs lint, data tests, formatting, types, a production build,
+and the Python résumé regression suite for pull requests and master pushes.
+Run `python -m unittest discover -s scripts -p 'test_resume.py'` locally with the
+résumé dependencies installed.
 
 ## Deploying
 

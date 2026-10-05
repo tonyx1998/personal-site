@@ -146,18 +146,25 @@ export default async function ProjectDetailPage({
               <p className={styles.lead}>
                 {study?.summary ?? project.description}
               </p>
-              {study && <p className={styles.context}>{study.context}</p>}
               <dl className={styles.overview}>
                 {study && (
+                  <>
+                    <div>
+                      <dt>My role</dt>
+                      <dd>{study.role}</dd>
+                    </div>
+                    <div>
+                      <dt>Context</dt>
+                      <dd>{study.context}</dd>
+                    </div>
+                  </>
+                )}
+                {!study && (
                   <div>
-                    <dt>My role</dt>
-                    <dd>{study.role}</dd>
+                    <dt>Year</dt>
+                    <dd>{project.datePublished ?? "Ongoing"}</dd>
                   </div>
                 )}
-                <div>
-                  <dt>Year</dt>
-                  <dd>{project.datePublished ?? "Ongoing"}</dd>
-                </div>
                 {!project.live && (
                   <div>
                     <dt>Format</dt>
@@ -188,6 +195,20 @@ export default async function ProjectDetailPage({
 
             {study ? (
               <div className={styles.study}>
+                <dl className={styles.takeaways}>
+                  <div>
+                    <dt>Problem</dt>
+                    <dd>{study.takeaways.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>Decision</dt>
+                    <dd>{study.takeaways.decision}</dd>
+                  </div>
+                  <div>
+                    <dt>Verified behavior</dt>
+                    <dd>{study.takeaways.verifiedBehavior}</dd>
+                  </div>
+                </dl>
                 {study.sections.map((section, sectionIndex) => (
                   <section
                     key={section.title}

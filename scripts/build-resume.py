@@ -1,10 +1,12 @@
-"""Build a readable, single-column resume from the shared project records.
+"""Build a tagged, single-column resume from the shared project records.
 
-The output has selectable text and a checked reading order. These checks do not
-promise how an applicant tracking system will interpret the document.
+Semantic HTML defines headings, lists, links and reading order. Structural
+checks are not a claim of complete PDF/UA conformance or ATS compatibility.
 """
 
 import argparse
+from collections import Counter
+from copy import copy
 from html import escape, unescape
 import json
 import os
@@ -13,17 +15,12 @@ import tempfile
 from urllib.parse import urlsplit
 
 from pypdf import PdfReader
-from reportlab.lib.colors import HexColor
-from reportlab.lib.pagesizes import LETTER
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import inch
-from reportlab.platypus import HRFlowable, KeepTogether, Paragraph, SimpleDocTemplate, Spacer
+from pypdf.generic import ContentStream, NameObject
+from weasyprint import HTML
 
 ROOT = Path(__file__).resolve().parent.parent
 PROJECTS_JSON = ROOT / "src" / "lib" / "projects.data.json"
-ACCENT = HexColor("#1f4e6b")
-MUTED = HexColor("#525252")
-DARK = HexColor("#0a0a0a")
+LETTER = (612, 792)
 SUMMARY = (
     "Software developer building full-stack web products, realtime voice tools, "
     "and client booking systems with TypeScript, React, Next.js, and Python. "
@@ -106,7 +103,7 @@ def link(url: str, label: str | None = None) -> str:
     if label is None:
         parsed = urlsplit(url)
         label = (parsed.netloc.removeprefix("www.") + parsed.path).rstrip("/")
-    return f'<a href="{escape(url, quote=True)}" color="#1f4e6b">{markup(label)}</a>'
+    return f'<a href="{escape(url, quote=True)}">{markup(label)}</a>'
 
 
 def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JSON):
@@ -154,70 +151,178 @@ def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JS
     return result
 
 
-def styles():
-    body = ParagraphStyle("Body", fontName="Helvetica", fontSize=10.5, leading=13.5,
-                          textColor=DARK, spaceAfter=2)
-    return {
-        "name": ParagraphStyle("Name", parent=body, fontName="Helvetica-Bold", fontSize=22,
-                               leading=26, spaceAfter=3),
-        "title": ParagraphStyle("Title", parent=body, spaceAfter=3),
-        "contact": ParagraphStyle("Contact", parent=body, fontSize=9.5, leading=12,
-                                  textColor=MUTED, spaceAfter=2),
-        "section": ParagraphStyle("Section", parent=body, fontName="Helvetica-Bold", fontSize=11,
-                                  leading=14, textColor=ACCENT, spaceBefore=10, spaceAfter=4,
-                                  keepWithNext=True),
-        "role": ParagraphStyle("Role", parent=body, fontName="Helvetica-Bold", fontSize=11,
-                               leading=14, spaceAfter=9, keepWithNext=True),
-        "project": ParagraphStyle("Project", parent=body, fontName="Helvetica-Bold", fontSize=11,
-                                  leading=14, spaceAfter=2, keepWithNext=True),
-        "meta": ParagraphStyle("Meta", parent=body, fontSize=9.5, leading=12, textColor=MUTED,
-                               spaceAfter=3, keepWithNext=True),
-        "body": body,
-        "bullet": ParagraphStyle("Bullet", parent=body, leftIndent=12, bulletIndent=0,
-                                 bulletFontName="Helvetica", bulletFontSize=10.5, spaceAfter=2),
-    }
-
-
-def build_story(projects, profile: str = "default"):
-    style = styles()
-    story = [
-        Paragraph("TO YIN YU", style["name"]),
-        Paragraph(markup(PROFILES[profile]["title"]), style["title"]),
-        Paragraph("Lynnwood, WA (Seattle area) &nbsp;|&nbsp; US citizen", style["contact"]),
-        Paragraph("(206) 712-5144 &nbsp;|&nbsp; "
-                  + " &nbsp;|&nbsp; ".join(link(url, label) for url, label in CONTACT_LINKS),
-                  style["contact"]),
-    ]
-
-    def section(title):
-        story.append(Paragraph(title, style["section"]))
-        rule = HRFlowable(width="100%", thickness=0.4, color=HexColor("#d4d4d8"), spaceAfter=4)
-        rule.keepWithNext = True
-        story.append(rule)
-
-    section("SUMMARY")
-    story.append(Paragraph(markup(SUMMARY), style["body"]))
-    section("TECHNICAL SKILLS")
+def build_html(projects, profile: str = "default"):
+    """Keep facts shared while authoring the semantic order before layout."""
+    font_dir = Path(__file__).with_name("fonts")
+    for name in ("PublicSans-Regular.ttf", "PublicSans-Bold.ttf"):
+        if not (font_dir / name).is_file():
+            raise FileNotFoundError(f"Required embedded resume font is missing: {name}")
+    parts = [f"""<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8">
+<title>To Yin Yu - Resume</title><meta name="author" content="To Yin Yu">
+<style>
+@font-face {{ font-family: 'Public Sans'; src: url('{(font_dir / 'PublicSans-Regular.ttf').as_uri()}'); font-weight: 400; }}
+@font-face {{ font-family: 'Public Sans'; src: url('{(font_dir / 'PublicSans-Bold.ttf').as_uri()}'); font-weight: 700; }}
+@page {{ size: Letter; margin: .45in .55in; }}
+* {{ box-sizing: border-box; }}
+body {{ margin: 0; font: 10.5pt/13.5pt 'Public Sans'; color: #0a0a0a;
+        font-variant-ligatures: none; }}
+h1, h2, h3, h4, p, ul {{ margin: 0; }}
+h1 {{ font-size: 22pt; line-height: 26pt; font-weight: 700; margin-bottom: 3pt; }}
+p {{ margin-bottom: 2pt; }}
+.title {{ margin-bottom: 3pt; }}
+.contact, .meta {{ font-size: 9.5pt; line-height: 12pt; color: #525252; }}
+h2 {{ font-size: 11pt; line-height: 14pt; color: #1f4e6b; margin-top: 10pt;
+      margin-bottom: 4pt; padding-bottom: 4pt; border-bottom: .4pt solid #d4d4d8; }}
+h3, h4 {{ font-size: 11pt; line-height: 14pt; font-weight: 700; }}
+h3 {{ margin-bottom: 9pt; }}
+h4 {{ margin-bottom: 2pt; }}
+.meta {{ margin-bottom: 3pt; }}
+a {{ color: #1f4e6b; text-decoration: underline; }}
+.project {{ margin-bottom: 9pt; break-inside: avoid; }}
+ul {{ padding-left: 12pt; list-style-type: "-  "; }}
+li {{ padding-left: 0; margin-bottom: 2pt; }}
+h2, h3, h4, .meta {{ break-after: avoid; }}
+</style></head><body>
+<h1>TO YIN YU</h1>
+<p class="title">{markup(PROFILES[profile]['title'])}</p>
+<p class="contact">Lynnwood, WA (Seattle area) &nbsp;|&nbsp; US citizen</p>
+<p class="contact">(206) 712-5144 &nbsp;|&nbsp; """
+             + " &nbsp;|&nbsp; ".join(link(url, label) for url, label in CONTACT_LINKS)
+             + "</p>"]
+    parts += ["<section><h2>SUMMARY</h2>", f"<p>{markup(SUMMARY)}</p></section>",
+              "<section><h2>TECHNICAL SKILLS</h2>"]
     for label, items in PROFILES[profile]["skills"]:
-        story.append(Paragraph(f"<b>{markup(label)}:</b> {markup(items)}", style["body"]))
-    section("EXPERIENCE")
-    story.append(Paragraph("Independent Software Developer &nbsp;|&nbsp; 2024 - Present", style["role"]))
+        parts.append(f"<p><strong>{markup(label)}:</strong> {markup(items)}</p>")
+    parts += ["</section><section><h2>EXPERIENCE</h2>",
+              "<h3>Independent Software Developer &nbsp;|&nbsp; 2024 - Present</h3>"]
     for project in projects:
-        intro = [
-            Paragraph(markup(project["title"]), style["project"]),
-            Paragraph(f'{markup(project["relationship"])} &nbsp;|&nbsp; {markup(project["date"])}'
-                      f' &nbsp;|&nbsp; {link(project["url"])}', style["meta"]),
-            Paragraph(markup(project["stack"]), style["meta"]),
-            Paragraph(markup(project["bullets"][0]), style["bullet"], bulletText="-"),
-        ]
-        story.append(KeepTogether(intro))
-        story.append(Paragraph(markup(project["bullets"][1]), style["bullet"], bulletText="-"))
-        story.append(Spacer(1, 9))
-    section("EDUCATION")
-    story.append(Paragraph("<b>University of Maryland, College Park</b>", style["body"]))
-    story.append(Paragraph("Bachelor of Science, Computer Science &nbsp;|&nbsp; December 2022",
-                           style["body"]))
-    return story
+        parts += [f'<div class="project"><h4>{markup(project["title"])}</h4>',
+                  f'<p class="meta">{markup(project["relationship"])} &nbsp;|&nbsp; '
+                  f'{markup(project["date"])} &nbsp;|&nbsp; {link(project["url"])}</p>',
+                  f'<p class="meta">{markup(project["stack"])}</p><ul>']
+        parts += [f"<li>{markup(bullet)}</li>" for bullet in project["bullets"]]
+        parts.append("</ul></div>")
+    parts += ["</section><section><h2>EDUCATION</h2>",
+              "<p><strong>University of Maryland, College Park</strong></p>",
+              "<p>Bachelor of Science, Computer Science &nbsp;|&nbsp; December 2022</p>",
+              "</section></body></html>"]
+    return "\n".join(parts)
+
+
+def validate_structure(reader):
+    """Check actual tagged content and annotation ownership, not just metadata.
+
+    This intentionally targets our single-page text-only resume, not arbitrary
+    PDFs or every PDF/UA requirement. Independent validator/AT review is separate.
+    """
+    root = reader.trailer["/Root"]
+    page = reader.pages[0]
+    if root.get("/Lang") != "en-US":
+        raise RuntimeError("Resume needs English document language")
+    if not root.get("/MarkInfo", {}).get("/Marked") or "/StructTreeRoot" not in root:
+        raise RuntimeError("Resume needs a real structure tree")
+    if page.get("/Tabs") != "/S":
+        raise RuntimeError("Resume tab order must follow the structure")
+    tree = root["/StructTreeRoot"]
+    numbers = tree["/ParentTree"]["/Nums"]
+    parents = dict(zip(numbers[::2], numbers[1::2]))
+    page_parents = parents[page["/StructParents"]]
+    operations = ContentStream(page["/Contents"], reader, forced_encoding="bytes").operations
+    contexts, marked, content_ids = [], [], set()
+    show_text = {b"Tj", b"TJ", b"'", b'"'}
+    paint = show_text | {b"S", b"s", b"f", b"F", b"f*", b"B", b"B*", b"b", b"b*", b"Do"}
+    for args, op in operations:
+        if op in {b"BDC", b"BMC"}:
+            mcid = args[1].get("/MCID") if op == b"BDC" else None
+            contexts.append((args[0], mcid))
+            if mcid is not None:
+                if mcid in content_ids:
+                    raise RuntimeError("Duplicate marked content ID")
+                content_ids.add(mcid)
+        active = next((value for _, value in reversed(contexts) if value is not None), None)
+        if op in paint and active is None and not any(t == "/Artifact" for t, _ in contexts):
+            raise RuntimeError("Resume has untagged visible content")
+        if op in show_text and any(t == "/Artifact" for t, _ in contexts):
+            raise RuntimeError("Resume text must not be hidden as an artifact")
+        marked.append((args, op, active))
+        if op == b"EMC":
+            if not contexts:
+                raise RuntimeError("Unbalanced marked content")
+            contexts.pop()
+    if contexts:
+        raise RuntimeError("Unbalanced marked content")
+
+    text_by_id = {}
+    for mcid in content_ids:
+        stream = ContentStream(None, reader)
+        stream.operations = [(args, op) for args, op, active in marked
+                             if op not in show_text or active == mcid]
+        isolated = copy(page)
+        isolated[NameObject("/Contents")] = stream
+        text_by_id[mcid] = " ".join(isolated.extract_text().split())
+
+    tags, headings, links, reading, referenced = Counter(), [], [], [], []
+
+    def walk(ref, ancestor=None, parent=None):
+        item = ref.get_object()
+        if isinstance(item, int):
+            if item not in text_by_id:
+                raise RuntimeError("Structure references missing marked content")
+            if page_parents[item] != parent:
+                raise RuntimeError("Marked content parent mapping is broken")
+            referenced.append(item)
+            text = text_by_id[item]
+            if ancestor != "/Lbl":
+                reading.append(text)
+            return text
+        if isinstance(item, list):
+            return " ".join(walk(child, ancestor, parent) for child in item)
+        if item.get("/Type") == "/OBJR":
+            annotation = item["/Obj"]
+            if parent is None or parents[annotation["/StructParent"]] != parent:
+                raise RuntimeError("Link annotation parent mapping is broken")
+            return ""
+        tag = item.get("/S")
+        if parent is not None and item.get("/P") != parent:
+            raise RuntimeError("Structure element parent mapping is broken")
+        tags[tag] += 1
+        kids = item.get("/K", [])
+        if tag == "/LI" and [k.get_object().get("/S") for k in kids] != ["/Lbl", "/LBody"]:
+            raise RuntimeError("List items need a label and body")
+        if tag == "/L" and (len(kids) != 2 or any(k.get_object().get("/S") != "/LI" for k in kids)):
+            raise RuntimeError("Each project needs a two-item semantic list")
+        value = walk(kids, tag if tag == "/Lbl" else ancestor, ref)
+        if tag in {"/H1", "/H2", "/H3", "/H4"}:
+            headings.append((tag, value.strip()))
+        if tag == "/Link":
+            objects = [k.get_object() for k in kids if isinstance(k.get_object(), dict)
+                       and k.get_object().get("/Type") == "/OBJR"]
+            if len(objects) != 1 or not value.strip():
+                raise RuntimeError("Links need both visible tagged text and an annotation")
+            links.append((objects[0]["/Obj"]["/A"]["/URI"], value.strip()))
+        return value
+
+    walk(tree["/K"])
+    if len(referenced) != len(set(referenced)) or set(referenced) != content_ids:
+        raise RuntimeError("Structure must cover all content exactly once")
+    if tags["/H1"] != 1 or tags["/H2"] != 4 or tags["/H3"] != 1 or tags["/H4"] != 3:
+        raise RuntimeError("Resume heading hierarchy is incomplete")
+    if tags["/L"] != 3 or tags["/LI"] != 6 or tags["/LBody"] != 6:
+        raise RuntimeError("Resume project bullets must be tagged lists")
+    for ref in page["/Resources"]["/Font"].values():
+        font = ref.get_object()
+        if "Public-Sans" not in str(font.get("/BaseFont", "")):
+            raise RuntimeError("Resume must use its bundled Public Sans font")
+        if "/ToUnicode" not in font:
+            raise RuntimeError("Resume fonts need Unicode mappings")
+        faces = font.get("/DescendantFonts", [font])
+        for face in faces:
+            descriptor = face.get_object()["/FontDescriptor"]
+            if not any(key in descriptor for key in ("/FontFile", "/FontFile2", "/FontFile3")):
+                raise RuntimeError("Resume fonts must be embedded")
+    return {"marked_content": len(content_ids), "headings": headings,
+            "tagged_links": links, "reading_order": " ".join(reading)}
 
 
 def validate_pdf(path: Path, projects):
@@ -251,7 +356,17 @@ def validate_pdf(path: Path, projects):
     expected_links = {url for url, _ in CONTACT_LINKS} | {p["url"] for p in projects}
     if set(links) != expected_links:
         raise RuntimeError("Resume link targets do not match the selected source records")
-    return {"pages": 1, "words": len(text.split()), "links": len(links)}
+    structure = validate_structure(reader)
+    if {url for url, _ in structure["tagged_links"]} != expected_links:
+        raise RuntimeError("Tagged links must match the source destinations")
+    expected_headings = [("/H1", "TO YIN YU"), ("/H2", "SUMMARY"),
+                         ("/H2", "TECHNICAL SKILLS"), ("/H2", "EXPERIENCE"),
+                         ("/H3", "Independent Software Developer | 2024 - Present")]
+    expected_headings += [("/H4", p["title"]) for p in projects]
+    expected_headings += [("/H2", "EDUCATION")]
+    if structure["headings"] != expected_headings:
+        raise RuntimeError("Semantic headings do not match resume reading order")
+    return {"pages": 1, "words": len(text.split()), "links": len(links), **structure}
 
 
 def main(out_path: str, profile: str = "default"):
@@ -262,12 +377,9 @@ def main(out_path: str, profile: str = "default"):
                                      dir=destination.parent, delete=False) as temporary:
         staging = Path(temporary.name)
     try:
-        document = SimpleDocTemplate(
-            str(staging), pagesize=LETTER, leftMargin=0.55 * inch, rightMargin=0.55 * inch,
-            topMargin=0.45 * inch, bottomMargin=0.45 * inch,
-            title="To Yin Yu - Resume", author="To Yin Yu", invariant=1,
+        HTML(string=build_html(projects, profile)).write_pdf(
+            staging, pdf_variant="pdf/ua-1", pdf_identifier=b"to-yin-yu-resume",
         )
-        document.build(build_story(projects, profile))
         checks = validate_pdf(staging, projects)
         staging.chmod(0o644)
         os.replace(staging, destination)

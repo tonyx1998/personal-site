@@ -48,7 +48,7 @@ export default function ProjectsAll() {
                       width={1280}
                       height={720}
                       loading={index === 0 ? "eager" : "lazy"}
-                      sizes="(max-width: 600px) 96px, 224px"
+                      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 820px) 160px, 224px"
                     />
                   </Link>
                 )}

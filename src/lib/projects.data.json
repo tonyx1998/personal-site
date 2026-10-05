@@ -37,7 +37,12 @@
     "caseStudy": {
       "role": "Independent developer",
       "context": "Client project · English and Chinese · 2026",
-      "summary": "I built a bilingual website and inspection-request workflow for a Bay Area roofing contractor, connecting the public form to serverless scheduling routes and making failure states part of the interface.",
+      "summary": "I built a bilingual website and inspection-request workflow for a Bay Area roofing contractor.",
+      "takeaways": {
+        "problem": "Homeowners need a clear next step: call the contractor or request an inspection.",
+        "decision": "Share the English and Chinese booking workflow, and confirm the request without promising a completed appointment.",
+        "verifiedBehavior": "A simulated slot conflict preserved contact information, cleared the unavailable time, and moved attention to the field needing correction."
+      },
       "sections": [
         {
           "title": "Make the next step clear",
@@ -132,7 +137,12 @@
     "caseStudy": {
       "role": "Independent developer",
       "context": "Independent product · Realtime voice and code · 2025–present",
-      "summary": "I built a mock-interview workspace that connects spoken reasoning with the candidate’s code. The engineering work centers on editor synchronization, temporary session credentials, and a session lifecycle that ends visibly and cleans up resources.",
+      "summary": "I built a mock-interview workspace that connects spoken reasoning with the candidate’s code.",
+      "takeaways": {
+        "problem": "Interview practice needs the candidate’s spoken explanation and changing code in the same context.",
+        "decision": "Send editor snapshots after a 2.5-second pause, skip unchanged code, and clean up session resources when an interview ends.",
+        "verifiedBehavior": "A mocked connection failure stopped the audio track, closed the peer, and retained the code and transcript for review."
+      },
       "sections": [
         {
           "title": "Give the interviewer the code context",
@@ -228,7 +238,12 @@
     "caseStudy": {
       "role": "Independent developer",
       "context": "Independent product · Maps and data delivery · 2026",
-      "summary": "I built a fuel-price map and comparison toolkit around published price snapshots. The application separates server-side map geometry, dated data delivery, and browser interactions such as state selection and trip-cost calculation.",
+      "summary": "I built a fuel-price map and comparison toolkit around published price snapshots.",
+      "takeaways": {
+        "problem": "Visitors need to move from a national price map to state details or a trip estimate.",
+        "decision": "Project map geometry on the server and keep source data dates distinct from read times.",
+        "verifiedBehavior": "Local fixtures confirmed stale-cache fallback and an explicit error when a fresh process had no usable data."
+      },
       "sections": [
         {
           "title": "Connect the map to a useful question",
