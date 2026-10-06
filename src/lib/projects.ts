@@ -40,6 +40,25 @@ export type CaseStudy = {
   evidenceNote: string;
 };
 
+export type EngineeringArticle = {
+  slug: string;
+  title: string;
+  description: string;
+  focus: string;
+  verifiedOn: string;
+  verifiedRevision: string;
+  dateModified: string;
+  introduction: string;
+  sections: {
+    title: string;
+    blocks: (
+      | { type: "paragraph"; text: string }
+      | { type: "list"; items: string[] }
+    )[];
+  }[];
+  evidenceNote: string;
+};
+
 export type Project = {
   title: string;
   description: string;
@@ -52,6 +71,7 @@ export type Project = {
   homepageSummary?: string;
   contribution?: string;
   caseStudy?: CaseStudy;
+  engineeringArticle?: EngineeringArticle;
   hidden?: boolean;
   /** Pins the URL. Set when a title changes so existing links keep working. */
   slug?: string;
@@ -97,6 +117,11 @@ export const projectSlug = (p: Project) =>
 
 export const projectBySlug = (slug: string): Project | null =>
   projects.find((p) => projectSlug(p) === slug) ?? null;
+
+export const projectArticlePath = (project: Project): string | null =>
+  project.engineeringArticle
+    ? `/projects/${projectSlug(project)}/${project.engineeringArticle.slug}`
+    : null;
 
 /** "gasolytics.com" from "https://www.gasolytics.com/", for link labels. */
 export const displayUrl = (url: string) =>

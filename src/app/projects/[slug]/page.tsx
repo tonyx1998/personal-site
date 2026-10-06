@@ -10,6 +10,7 @@ import {
   projects,
   projectSlug,
   projectBySlug,
+  projectArticlePath,
   type StudyFigure,
 } from "@/lib/projects";
 import { projectVisual } from "@/lib/project-visuals";
@@ -90,6 +91,7 @@ export default async function ProjectDetailPage({
   const project = projectBySlug(slug);
   if (!project) notFound();
   const study = project.caseStudy;
+  const articlePath = projectArticlePath(project);
   const firstFigure = study?.sections.find((section) => section.figure)?.figure;
   const visual = projectVisual(project, slug);
   const tier = projects.filter((p) => p.featured === project.featured);
@@ -174,6 +176,14 @@ export default async function ProjectDetailPage({
               </dl>
               <ProjectLinks project={project} showNotes={false} />
               <p className={styles.stack}>{project.tags.join(" · ")}</p>
+              {project.engineeringArticle && articlePath && (
+                <p className={styles.articleLink}>
+                  <Link href={articlePath}>
+                    {project.engineeringArticle.title}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </p>
+              )}
             </header>
 
             {firstFigure ? (

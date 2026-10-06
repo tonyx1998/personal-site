@@ -86,3 +86,32 @@ All product checks used a clean environment with a preload that throws on unexpe
 The Gasolytics harness imported the real `src/lib/aaa.ts`, then changed its working directory to a temporary fixture directory containing `data/history.json`. The synthetic snapshot had CA/NV values and a declared `9/1/26` source date. After the first read, invalid JSON replaced the input. The warm read reused the cached object; advancing the clock by 31 minutes exercised stale fallback. A separate process with no warm cache exercised the cold error. No synthetic prices appear in the public screenshots.
 
 Temporary capture harnesses and check output were stored in `/private/tmp/personal-site-evidence/` during implementation. This register and the checked-in screenshots are the durable evidence summary. Future product changes require renewed verification before strengthening the claims.
+
+## Gasolytics engineering article — October 6, 2026 integration
+
+The additive article at `/projects/gasolytics-us-gas-price-map/data-read-failures`
+preserves the independently reviewed October 5 editorial draft. Its facts live
+in `projects.data.json` alongside the unchanged original Gasolytics case study.
+The visible verification date and revision scope the account to October 5,
+2026 recovery commit `9786a435fcfab056fa9de699b0f22018b8296f19`.
+
+The inspected Gasolytics checkout at `dfa8a1f8363fbf98cad4792d8d60af558247b9db`
+has the same tree as that recovery commit (`7e2385b74267629a2acfe08f9b28444460b4727d`).
+Source review covers `src/lib/store.ts`, `src/lib/immutableJSONReads.ts`,
+`src/lib/aaa.ts`, `scripts/build.mjs` and `scripts/lib/build-data-gate.mjs`.
+The recovery design note and saved test/release receipts support the replay of
+95 captured failure diagnostics, hosted build result, 51 state/DC page checks,
+and 153 optional-table rows with independent arithmetic. The latter checked
+612 numeric cells and excluded EV fee and break-even columns. This is
+cross-page consistency evidence, not independent upstream data accuracy.
+
+A later October 6 diesel-flow release (`2555f166`) leaves the snapshot reader
+and build gate unchanged. The article does not describe that separate release.
+The original HTTP403 cause remains unproven; valid empty optional documents can
+escape a diagnostic-based gate. Reuse is process-local, not a global request or
+total-memory bound, and the runtime fallback has no maximum stale-age claim.
+No customer, conversion, cost-saving, bandwidth or latency outcome is asserted.
+
+The existing September screenshots remain with the original case study and
+keep their original captions. They are not reused as proof of the October
+recovery. No new product claim or resume bullet is introduced by this article.

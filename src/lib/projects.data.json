@@ -219,7 +219,7 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-05",
+    "dateModified": "2026-10-06",
     "resume": {
       "order": 3,
       "title": "Gasolytics - Gas-Price Map and Fuel Comparisons",
@@ -298,6 +298,125 @@
         }
       ],
       "evidenceNote": "Public map and calculator captured read-only on September 5, 2026. Cache and failure checks used isolated local fixtures with network access disabled."
+    },
+    "engineeringArticle": {
+      "slug": "data-read-failures",
+      "title": "Gasolytics: making data failures visible before release",
+      "description": "How Gasolytics reuses immutable snapshots and rejects builds with reported data failures, with verification limits from the October 5 recovery.",
+      "focus": "Snapshot delivery, failure handling, and release validation",
+      "verifiedOn": "2026-10-05",
+      "verifiedRevision": "9786a435",
+      "dateModified": "2026-10-06",
+      "introduction": "I built Gasolytics to help people compare U.S. fuel prices and explore trip and EV costs. The interface depends on dated datasets: a page can load successfully while the information behind one of its sections is unavailable. An October release exposed that distinction. The recovery focused on two things: reusing the same published snapshot safely, and preventing a successful build from hiding reported data failures.",
+      "sections": [
+        {
+          "title": "The failure that a green build missed",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Gasolytics reads snapshots published by a separate Databank project to Vercel Blob. It does not scrape the upstream fuel-price source during a visitor's request."
+            },
+            {
+              "type": "paragraph",
+              "text": "During one production build, Blob downloads returned 95 reported HTTP 403 failures. Optional-data fallbacks allowed the build to finish, but some rendered state pages lacked metro tables and other optional content. Runtime APIs could still return populated data, so checking an API endpoint alone did not establish that the static pages were complete."
+            },
+            {
+              "type": "paragraph",
+              "text": "The affected release was rolled back while the recovery was prepared. The useful question was broader than “Did the build exit successfully?” It was “Did this build encounter a data-read failure that its fallback behavior concealed?”"
+            }
+          ]
+        },
+        {
+          "title": "Reuse the immutable document, not an assumption about freshness",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Many pages need the same snapshot. The reader already resolved the latest published version, but repeated consumers could still download the same document."
+            },
+            {
+              "type": "paragraph",
+              "text": "The recovery keeps that latest-version lookup on every call. Only after a successful lookup can callers reuse the text for the exact immutable snapshot identity. If the listing fails, the reader does not silently substitute a previously cached identity."
+            },
+            {
+              "type": "paragraph",
+              "text": "Concurrent callers for the same identity share an acquisition. Successful, syntactically valid JSON text can then be reused; every caller receives a separately parsed object. Sharing text avoids one caller's mutation becoming another caller's data."
+            },
+            {
+              "type": "paragraph",
+              "text": "The reuse has explicit limits:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "At most eight retained entries and 32 MiB of accounted text and identity keys, with least-recently-used eviction.",
+                "At most eight active logical acquisitions per process.",
+                "A ten-second budget for each caller, and a separate ten-second limit for a shared download. One caller timing out does not cancel the others.",
+                "No retention of failed or invalid downloads, and no reuse of mutable legacy fixed-key reads."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "These limits are deliberately narrower than a claim about total application memory or global request volume. The cache is per process, so separate workers can still fetch independently. It also does not change the existing application-cache lifetime or the upstream publication schedule."
+            }
+          ]
+        },
+        {
+          "title": "Make the release boundary stricter than the runtime fallback",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "A temporary runtime failure and a new release need different decisions. The runtime reader can preserve a usable previous result marked stale. A build should not publish a new set of pages after a reported Blob failure merely because an optional section returned a fallback."
+            },
+            {
+              "type": "paragraph",
+              "text": "The build wrapper watches both output streams for structured data-read failure records. If it sees a Blob-source failure, the build fails—even when the framework exits successfully or a later read recovers. Local fixture misses remain permitted, so controlled builds do not require production data access."
+            },
+            {
+              "type": "paragraph",
+              "text": "This adds a release check without removing every runtime fallback or inventing substitute prices."
+            }
+          ]
+        },
+        {
+          "title": "What the checks established",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Three simultaneous mocked consumers performed three latest-version lookups and one download. Other regression checks covered new versions, listing failures, HTTP 403 responses, invalid JSON, recovery, independent parsed objects, and bounded eviction."
+            },
+            {
+              "type": "paragraph",
+              "text": "The 95 captured failure records from the affected production build were also replayed through the wrapper with a simulated successful child exit. The wrapper rejected that run."
+            },
+            {
+              "type": "paragraph",
+              "text": "The subsequent hosted production build recorded no Blob-read failures. After promotion, HTTP/HTML checks covered all 51 state and District of Columbia pages and the restored optional content. A separate check compared 153 rows across three EV and charging tables with the served datasets, using independent arithmetic, and found no numeric mismatches."
+            },
+            {
+              "type": "paragraph",
+              "text": "That establishes specific behavior at the checked revision. It does not independently validate the upstream datasets, measure user impact, or prove that future builds cannot fail."
+            }
+          ]
+        },
+        {
+          "title": "What remains unresolved",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "The original HTTP 403 cause is still unproven. Reducing duplicate downloads does not establish that concurrency, rate limiting, or a framework or SDK change caused those responses."
+            },
+            {
+              "type": "paragraph",
+              "text": "The gate is also only as complete as the failures it observes. A syntactically valid but empty optional document can still pass without a failure diagnostic. A useful next check is a content contract for required sections, separate from transport and JSON validity."
+            },
+            {
+              "type": "paragraph",
+              "text": "The result is a clearer release boundary: resolve the published version, reuse its immutable contents within explicit limits, and reject reported data failures before treating a build as releasable."
+            }
+          ]
+        }
+      ],
+      "evidenceNote": "This account describes the recovery verified on October 5, 2026 at revision 9786a435. Mocked integration and failure-record replay are separate from hosted HTTP/HTML checks. The EV arithmetic checks excluded fee and break-even columns. They do not independently validate upstream source accuracy or measure field performance or customer impact."
     }
   },
   {
