@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { projects, projectSlug } from "@/lib/projects";
+import { projects, projectSlug, projectArticlePath } from "@/lib/projects";
 
 // The most recent edit to any project entry. Used for the home and archive
 // pages, which list every project.
@@ -35,5 +35,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
+    ...projects.flatMap((project) => {
+      const articlePath = projectArticlePath(project);
+      return project.engineeringArticle && articlePath
+        ? [
+            {
+              url: SITE_URL + articlePath,
+              lastModified: new Date(project.engineeringArticle.dateModified),
+              changeFrequency: "monthly" as const,
+              priority: 0.6,
+            },
+          ]
+        : [];
+    }),
   ];
 }

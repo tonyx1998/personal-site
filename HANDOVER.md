@@ -27,19 +27,41 @@ b1b7bd6 Persist theme in localStorage instead of a cookie so routes can be stati
 
 ## Next action
 
-Review and publish `codex/personal-site-audit-fixes` after the October audit
-validation. This branch is local only; production still serves the earlier
-revision until the normal Git integration publishes an approved merge.
+Release the reviewed Gasolytics engineering article on branch
+`codex/gasolytics-engineering-article`, based on published master `6d9151b`.
+The new route is
+`/projects/gasolytics-us-gas-price-map/data-read-failures`, linked from the
+existing Gasolytics case-study header. The original case study, figures, project
+facts and resume records are preserved. Article content lives in the shared
+project JSON; its verification date is October 5, 2026 and revision `9786a435`,
+not a claim about the latest Gasolytics production revision.
 
-Keep the evidence and shared project facts current as the products change.
-Before tailoring an application, use the resume profiles documented in
-`docs/resume-tailoring.md`. Verify changed claims against the deployed product
-and source revision using `docs/project-evidence.md`; do not restore old broad
-privacy or total-cost claims from the historical notes below.
+The article retains the unresolved HTTP403 cause and the limits of the
+per-process cache, diagnostic-based build gate and saved verification receipts.
+It adds no performance or customer-impact claims. No Gasolytics crosslink,
+tracking or external outreach is included in this change.
 
-Web Analytics is enabled and collecting; the earlier note here saying it was not
-is out of date. The dashboard read 7 visitors and 21 page views over the seven
-days to 2026-09-04.
+Local verification passes: lint, four content tests, formatting, type checks,
+28-page static production build, 20 sitemap destinations, article metadata,
+server-rendered draft parity, three unknown-route 404 cases, and unchanged
+resume bytes after regeneration. Independent source and factual reviews pass.
+Browser checks covered desktop 1440x1000, phones 390x844 and 320x800, short
+landscape 844x390, keyboard navigation/focus, dark mode, visible list markers
+and no-JavaScript reading. These were isolated headless Chromium checks, not
+physical-device, screen-reader or Mac IAB tests. Local Vercel analytics scripts
+return expected 404s; no application page exceptions were captured.
+
+The release rerun passes lint, tests, formatting, types and resume regeneration.
+Its fresh Turbopack build is blocked by the execution environment denying a
+worker port bind, including on retry. The unchanged implementation passed the
+earlier local build; require a successful fresh hosted build before merging.
+
+The local production preview is on 127.0.0.1:3117. The review handoff and fresh
+screenshots are in the sibling `article-qa` workspace folder. The user approved
+publishing a draft PR, then merging and deploying through the Git integration
+if hosted checks and independent review pass. Verify the production article,
+project link, routes and unchanged resume after deployment; release receipts
+belong in `article-qa/release`.
 
 ## State
 
