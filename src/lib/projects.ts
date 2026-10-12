@@ -36,7 +36,12 @@ export type CaseStudy = {
 };
 
 export type Project = {
-  exhibition?: { summary: string; topics: string; caption: string };
+  exhibition?: {
+    summary: string;
+    topics: string;
+    caption: string;
+    relationship?: string;
+  };
   title: string;
   description: string;
   highlights?: string[];

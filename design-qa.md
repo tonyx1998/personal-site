@@ -49,3 +49,19 @@ No actionable P0/P1/P2 findings remain within the bounded checkpoint. Browser us
 - SEO risk: content ordering and headline prominence changed. Crawlers retain substantive text and destinations; this is not a ranking guarantee or SEO campaign. Client hydration hides inactive stage panels but persistent server-rendered background content keeps all critical project destinations visible.
 - No backend integrations, paid API calls, route migrations, push, merge, deployment or publication.
 - Screenshot Library upload could not start because prepared uploads were unavailable to the current helper. Captures remain local; no upload outcome is claimed.
+
+## Latest user-requested refinement
+
+final result: passed
+
+Visual truth additionally includes `../references/portfolio-feedback.png`, inspected before changes (1693×619 crop, Gasolytics selected), and the explicit request for seven-project navigation, large transparent side arrows and an editorial lower section. Compare `qa/Refined-Feedback-Comparison.jpg` (source left/current right), opened together. Current capture uses CSS viewport 1693×1100, density 1, cropped at image top minus 51px to 1693×619. The preserved stage proportions/copy/assets match; additional controls and changed neighboring projects are intended revisions.
+
+Final browser evidence: `qa/Refined-Exhibition-Desktop.jpg` at 1487×1058; `qa/Refined-Exhibition-Mobile.jpg` at 426×922; `qa/Refined-Editorial-Desktop.jpg` and `qa/Refined-Editorial-Mobile.jpg` at those same viewports, one viewport scrolled down. All opened and inspected. The matched feedback crop is focused evidence for copy, image and side-controls positioning; the full captures show the seven-item rail and editorial composition.
+
+No P0/P1/P2 findings remain. The bounded independent reviewer found no concrete P0–P2 issue. Browser tests exercised every project using next arrows, then seven-to-one wrapping with focus retained on the new arrow. Keyboard End reveals Reachspan in the scrolling rail (subpixel geometry tolerance <1px); Home/Left/Right retain the established tab model. Native engineering disclosures open/close using Enter. Menu and Contact navigation work. Production-mode console error/warning records for port 4174 were empty.
+
+Initial narrow-desktop check at 761px showed cramped copy and a wrapped primary action. Fixed by moving tablet/mobile stacking to 980px. Verified 320, 760, 980, 981, 1350 and 1351px: page width matches viewport; side targets stay wholly in viewport and are at least 56px wide (tablet/mobile), 58px at 981px and up to 132×180 on desktop. Mobile controls are 56×120 and overlap passive image edges only, never portfolio copy or links. Redundant bottom arrows are removed. The seven-item count and neighboring preview indexing use array length.
+
+Typography/layout/color/image/content pass: original Public Sans and Newsreader; oversized black scope words with yellow underline; high-contrast editorial rows, native notes, serif About and black/white contact ending; no generic card grid or new imagery. Seven verified public projects/cover assets only. Reachspan uses an ownership-neutral Website & integration label, and ViralSignal was not added. Original professional headline, descriptions, contributions, tags/captions, supporting work and all case-study routes remain server-rendered (`qa/refinement-ssr-checks.json`). Native disclosures retain crawlable text and work without JS. All critical project links are also in the exhibition's server-rendered panels.
+
+Build/type/lint/format/four tests passed; resume regeneration remained byte-identical. Reduced-motion styles were checked: no new continuous/scroll motion, instant rail positioning, project reveal only under no-preference, and global reduce rule covers arrow and disclosure transitions. Native motion emulation and physical touch-device validation remain the same known gaps. Pointer drag remains verified; no backend actions added.

@@ -329,7 +329,13 @@
     },
     "homepageSummary": "A document workbench that compares candidate evidence with job requirements and explains the gaps.",
     "contribution": "Browser document parsing and a deterministic scoring model keep eligibility checks separate from skills.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A document workbench that compares candidate evidence with job requirements.",
+      "topics": "Document parsing · Evidence · Scoring",
+      "caption": "Product interface preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "SoloYap",
@@ -356,7 +362,13 @@
     "dateModified": "2026-09-05",
     "homepageSummary": "Spoken English practice with scenario prompts, turn-by-turn corrections, and optional Chinese-language hints.",
     "contribution": "Realtime audio and an installable interface support repeated speaking practice.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "Spoken English practice, with realtime conversation and corrections after each turn.",
+      "topics": "Realtime voice · Language learning · PWA",
+      "caption": "Speaking workspace preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "Reachspan",
@@ -376,7 +388,13 @@
     "dateModified": "2026-09-05",
     "homepageSummary": "A marketing website for local-business services, with consultation availability and booking through Cal.com.",
     "contribution": "I built the landing page and serverless scheduling integration.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A marketing website for local businesses, with consultation booking in one flow.",
+      "topics": "Marketing website · Scheduling · Integration",
+      "caption": "Website preview",
+      "relationship": "Website & integration"
+    }
   },
   {
     "title": "Throughline",
@@ -409,7 +427,13 @@
     "slug": "throughline-technical-learning-ecosystem",
     "homepageSummary": "A learning hub connecting programming guides, project building, and interview practice.",
     "contribution": "I built the Astro hub and a shared interface for the technical guides.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A learning hub connecting technical guides, project building, and interview practice.",
+      "topics": "Learning tools · Astro · Shared interface",
+      "caption": "Learning hub preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "all-in-one-URL",

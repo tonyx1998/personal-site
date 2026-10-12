@@ -1,13 +1,24 @@
 "use client";
 
-import { useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { type Project, projectSlug, shortTitle } from "@/lib/projects";
+import { projectVisual } from "@/lib/project-visuals";
 import styles from "./Exhibition.module.css";
 
 const subscribe = () => () => {};
+const previewFor = (project: Project) => {
+  const figure = project.caseStudy?.sections.find(
+    (section) => section.figure
+  )?.figure;
+  const visual = projectVisual(project, projectSlug(project));
+  return {
+    src: figure?.originalSrc ?? visual!.src,
+    alt: figure?.alt ?? visual!.alt,
+  };
+};
 
 export default function Exhibition({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(0);
@@ -18,12 +29,64 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
   );
   const menu = useRef<HTMLDetailsElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const requestedControl = useRef<"previous" | "next" | null>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const tabRail = useRef<HTMLDivElement>(null);
   const gesture = useRef<{ x: number; y: number } | null>(null);
   const select = (index: number, focus = false) => {
     const next = (index + projects.length) % projects.length;
     setActive(next);
     if (focus) tabs.current[next]?.focus();
   };
+  useEffect(() => {
+    const rail = tabRail.current;
+    const tab = tabs.current[active];
+    if (requestedControl.current) {
+      stage.current
+        ?.querySelector<HTMLButtonElement>(
+          `article:not([hidden]) [data-direction="${requestedControl.current}"]`
+        )
+        ?.focus({ preventScroll: true });
+      requestedControl.current = null;
+    }
+    if (!rail || !tab) return;
+    const offset =
+      tab.getBoundingClientRect().left -
+      rail.getBoundingClientRect().left +
+      rail.scrollLeft;
+    rail.scrollTo({
+      left: Math.max(0, offset - (rail.clientWidth - tab.clientWidth) / 2),
+      behavior: "instant",
+    });
+  }, [active, hydrated]);
+  const controls = (
+    <>
+      <button
+        className={styles.arrow + " " + styles.previous}
+        data-direction="previous"
+        aria-label="Previous project"
+        aria-controls={"panel-" + projectSlug(projects[active])}
+        onClick={() => {
+          requestedControl.current = "previous";
+          select(active - 1);
+        }}
+      >
+        <ArrowLeft aria-hidden="true" />
+      </button>
+      <button
+        className={styles.arrow + " " + styles.next}
+        data-direction="next"
+        aria-label="Next project"
+        aria-controls={"panel-" + projectSlug(projects[active])}
+        onClick={() => {
+          requestedControl.current = "next";
+          select(active + 1);
+        }}
+      >
+        <ArrowRight aria-hidden="true" />
+      </button>
+    </>
+  );
   const nav = (
     <>
       <a
@@ -49,21 +112,15 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
   );
   const rail = (
     <div className={styles.rail}>
-      <button
-        className={styles.arrow + " " + styles.previous}
-        aria-label="Previous project"
-        onClick={() => select(active - 1)}
-        disabled={!hydrated}
-      >
-        <ArrowLeft aria-hidden="true" />
-      </button>
       <span className={styles.counter} aria-hidden="true">
-        {String(active + 1).padStart(2, "0")} / 03
+        {String(active + 1).padStart(2, "0")} /{" "}
+        {String(projects.length).padStart(2, "0")}
       </span>
       <div
         className={styles.tabs}
+        ref={tabRail}
         role={hydrated ? "tablist" : undefined}
-        aria-label="Selected projects"
+        aria-label="Selected projects, scroll to browse"
       >
         {projects.map((project, index) =>
           hydrated ? (
@@ -107,14 +164,6 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
           )
         )}
       </div>
-      <button
-        className={styles.arrow + " " + styles.next}
-        aria-label="Next project"
-        onClick={() => select(active + 1)}
-        disabled={!hydrated}
-      >
-        <ArrowRight aria-hidden="true" />
-      </button>
     </div>
   );
   return (
@@ -153,7 +202,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
       </div>
       <div id="main-content" className={styles.gallery} tabIndex={-1}>
         {rail}
-        <div className={styles.stage}>
+        <div className={styles.stage} ref={stage}>
           {hydrated && (
             <div
               className={styles.side + " " + styles.leftSide}
@@ -161,11 +210,9 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
             >
               <Image
                 src={
-                  projects[(active + 1) % 3].title.startsWith("Amex")
-                    ? "/projects/amex-roofing.png"
-                    : projects[(active + 1) % 3].title.startsWith("Gasolytics")
-                      ? "/projects/evidence/originals/gasolytics-result.png"
-                      : "/projects/evidence/originals/solomock-result.png"
+                  previewFor(
+                    projects[(active - 1 + projects.length) % projects.length]
+                  ).src
                 }
                 alt=""
                 width={2048}
@@ -176,9 +223,6 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
           )}
           {projects.map((project, index) => {
             const slug = projectSlug(project);
-            const figure = project.caseStudy?.sections.find(
-              (section) => section.figure
-            )?.figure;
             return (
               <article
                 key={slug}
@@ -191,46 +235,49 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
               >
                 <div className={styles.intro}>
                   <p className={styles.relationship}>
-                    {project.resume?.relationship === "Client project"
-                      ? "Client project"
-                      : "Personal project"}
+                    {project.exhibition?.relationship ??
+                      (project.resume?.relationship === "Client project"
+                        ? "Client project"
+                        : "Personal project")}
                   </p>
                   <h2 id={"title-" + slug}>{shortTitle(project)}</h2>
                 </div>
                 <figure className={styles.figure}>
-                  <div
-                    className={styles.preview}
-                    onPointerDown={(event) => {
-                      gesture.current = { x: event.clientX, y: event.clientY };
-                      event.currentTarget.setPointerCapture(event.pointerId);
-                    }}
-                    onPointerUp={(event) => {
-                      const start = gesture.current;
-                      gesture.current = null;
-                      if (
-                        start &&
-                        Math.abs(event.clientX - start.x) > 60 &&
-                        Math.abs(event.clientY - start.y) < 60
-                      )
-                        select(active + (event.clientX < start.x ? 1 : -1));
-                    }}
-                    onPointerCancel={() => {
-                      gesture.current = null;
-                    }}
-                  >
-                    <Image
-                      src={
-                        figure?.originalSrc ??
-                        figure?.src ??
-                        "/projects/" + slug + ".png"
-                      }
-                      alt={figure?.alt ?? shortTitle(project) + " preview"}
-                      width={2048}
-                      height={1152}
-                      sizes="(max-width: 760px) calc(100vw - 60px), 57vw"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      draggable={false}
-                    />
+                  <div className={styles.previewShell}>
+                    <div
+                      className={styles.preview}
+                      onPointerDown={(event) => {
+                        gesture.current = {
+                          x: event.clientX,
+                          y: event.clientY,
+                        };
+                        event.currentTarget.setPointerCapture(event.pointerId);
+                      }}
+                      onPointerUp={(event) => {
+                        const start = gesture.current;
+                        gesture.current = null;
+                        if (
+                          start &&
+                          Math.abs(event.clientX - start.x) > 60 &&
+                          Math.abs(event.clientY - start.y) < 60
+                        )
+                          select(active + (event.clientX < start.x ? 1 : -1));
+                      }}
+                      onPointerCancel={() => {
+                        gesture.current = null;
+                      }}
+                    >
+                      <Image
+                        src={previewFor(project).src}
+                        alt={previewFor(project).alt}
+                        width={2048}
+                        height={1152}
+                        sizes="(max-width: 980px) 86vw, 57vw"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        draggable={false}
+                      />
+                    </div>
+                    {hydrated && controls}
                   </div>
                   <figcaption>
                     <span>{project.exhibition?.caption}</span>
@@ -267,13 +314,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
               aria-hidden="true"
             >
               <Image
-                src={
-                  projects[(active + 2) % 3].title.startsWith("Amex")
-                    ? "/projects/amex-roofing.png"
-                    : projects[(active + 2) % 3].title.startsWith("Gasolytics")
-                      ? "/projects/evidence/originals/gasolytics-result.png"
-                      : "/projects/evidence/originals/solomock-result.png"
-                }
+                src={previewFor(projects[(active + 1) % projects.length]).src}
                 alt=""
                 width={2048}
                 height={1152}
@@ -283,7 +324,8 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
           )}
         </div>
         <p className={styles.sr} role="status" aria-live="polite">
-          {shortTitle(projects[active])}, project {active + 1} of 3
+          {shortTitle(projects[active])}, project {active + 1} of{" "}
+          {projects.length}
         </p>
       </div>
       <footer className={styles.strip}>

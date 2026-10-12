@@ -33,3 +33,7 @@ Build, typecheck, lint, formatting, four existing tests and SSR destination chec
 Native Library saving was attempted through the required current helper but failed before upload preparation: unavailable in this execution environment. Screenshots remain local artifacts. No public link was created. A separate preview publication requires user approval; do not deploy production or attach this branch to the existing production deployment automatically.
 
 Actual task credit usage was not measurable. The approved 40–80-credit estimate was neither a measured forecast nor a hard cap. No paid project API session or new image generation was used.
+
+## Latest refinement
+
+Seven-item exhibition: SoloMock, Gasolytics, Amex Roofing, How's My Job Fit?, SoloYap, Throughline, Reachspan. Large transparent side arrows replace the bottom arrows; count and rail are dynamic and scroll on smaller screens. Native engineering-note disclosures, an Interface/Backend/After launch editorial opening, a biographical ledger and a contrasting contact ending replace the plain lower text stack. See the latest subsection in design-qa.md and Refined-\* captures for evidence. This revision updates only the previously authorized separate Vercel preview, with noindex retained and no production promotion.
