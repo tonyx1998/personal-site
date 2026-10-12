@@ -92,6 +92,11 @@
         }
       ],
       "evidenceNote": "Screenshots use the deployed UI with fictional inputs and simulated API responses. Local contract checks used mocked dependencies; no bookings were sent. Captured September 5, 2026."
+    },
+    "exhibition": {
+      "summary": "A bilingual website and inspection-booking workflow for a Bay Area contractor.",
+      "topics": "Bilingual interface · Booking · Integration",
+      "caption": "Simulated inspection preview"
     }
   },
   {
@@ -187,6 +192,11 @@
         }
       ],
       "evidenceNote": "Screenshots use the deployed UI with sample code, transcripts, and simulated media and provider responses. Connection cleanup was checked with mocks; no paid session was started. Captured September 5, 2026."
+    },
+    "exhibition": {
+      "summary": "A realtime voice interview workspace, with code and conversation in one place.",
+      "topics": "Interface · Realtime voice · Backend",
+      "caption": "Simulated interview preview"
     }
   },
   {
@@ -283,6 +293,11 @@
         }
       ],
       "evidenceNote": "Public map and calculator captured read-only on September 5, 2026. Cache and failure checks used isolated local fixtures with network access disabled."
+    },
+    "exhibition": {
+      "summary": "A U.S. fuel-price map that turns dated snapshots into useful comparisons.",
+      "topics": "Data systems · Maps · Calculators",
+      "caption": "Historical price snapshot · September 2026"
     }
   },
   {

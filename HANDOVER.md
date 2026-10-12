@@ -183,3 +183,9 @@ supply it.
 
 2026-09-02: the phone number stays on the public résumé PDF until the user says
 otherwise.
+
+## Exhibition checkpoint — October 12, 2026
+
+Local-only checkpoint on `checkpoint/exhibition-20261012`. The homepage now opens with a responsive three-project exhibition based on the selected refined desktop/mobile references. Original public routes, metadata, case studies, resume and verified email remain. Server-rendered project and background text remains discoverable without JavaScript, including supporting projects. Project tabs use roving keyboard focus with Left/Right/Home/End; arrows wrap; pointer swipes switch previews. Native mobile menu supports Escape. Reduced motion removes transitions. Screenshots are passive previews; no project API actions are embedded.
+
+The refined layout uses off-white, black and yellow, with the existing Public Sans font. SoloMock/Gasolytics are personal projects and Amex Roofing is client work. Captions retain simulation and historical-data qualifications. Added concise exhibition copy in the canonical project JSON. Build/QA evidence and remaining polish are recorded in `design-qa.md` and `CHECKPOINT.md`. Do not push, merge or deploy this checkpoint without separate authorization.
