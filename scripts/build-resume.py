@@ -39,7 +39,7 @@ CONTACT_LINKS = (
 PROFILES = {
     "default": {
         "title": "Software Developer | Full-Stack Web Applications",
-        "projects": ("viralsignal", "solomock", "gasolytics"),
+        "projects": ("viralsignal", "amex-roofing", "gasolytics"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, Python, SQL"),
             ("Frontend", "React, Next.js, HTML/CSS, Tailwind CSS"),
