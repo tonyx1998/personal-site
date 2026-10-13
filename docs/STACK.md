@@ -4,7 +4,7 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Framework and rendering
 
-**Next.js 16, App Router.** Every route is a Server Component except the small client pieces that need state: the theme store in `src/app/providers.tsx` and the header with its mobile menu and theme toggle.
+**Next.js 16.3.8, React 19.2.8, Node.js 24.** Every route is a Server Component except the small client pieces that need state: the theme store in `src/app/providers.tsx` and the header with its mobile menu and theme toggle.
 
 **Static rendering.** Nothing on the site reads request data, so every page can be prerendered at build time and served from the Vercel CDN. The project pages use `generateStaticParams` over the JSON roster. Do not add `cookies()` or `headers()` to the root layout; that would turn every route dynamic again.
 
@@ -14,7 +14,7 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 **`src/lib/projects.data.json`** holds every project: title, description, year, tags, links, highlights, and an optional `resume` block. `projects.ts` types it, derives the URL slug from the title, and filters out `hidden` entries. The sitemap, JSON-LD, archive, and project pages all import from there.
 
-**`scripts/build-resume.py`** turns the `resume` blocks into `public/resume.pdf` with reportlab. Run `npm run resume` after editing the JSON.
+**`scripts/build-resume.py`** turns the `resume` blocks into a tagged `public/resume.pdf` with WeasyPrint and validates it with pypdf. The renderer is build tooling only; the site serves the generated static file. Python dependencies are pinned in `scripts/requirements-resume.txt`, with a bundled, licensed Public Sans font for predictable rendering. Run `npm run resume` after editing the JSON.
 
 ## Styling and motion
 
@@ -22,7 +22,7 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 **No animation library.** The only motion is a hover reveal on screenshot links. Everything is visible at rest, so the page reads the same with JavaScript off. `globals.css` zeroes transitions under `prefers-reduced-motion: reduce`.
 
-**Newsreader** (headings, variable weight with optical sizing) and **Public Sans** (text) are loaded through `next/font`.
+**Newsreader** (headings, variable weight with optical sizing) and **Public Sans** (text) are loaded through `next/font`. Only normal styles are requested; the site does not use Newsreader italic.
 
 ## SEO
 
@@ -31,3 +31,9 @@ Metadata API for titles and descriptions, file-convention `opengraph-image.tsx` 
 ## Tooling
 
 ESLint (`eslint-config-next`), Prettier, TypeScript strict, React Compiler enabled in `next.config.ts`. Vercel Web Analytics is included through `@vercel/analytics`.
+
+The Verify workflow checks the site and résumé on pull requests and master pushes.
+The October 2026 compatible dependency refresh removes an obsolete PostCSS
+override so Next.js can use its patched release. The remaining npm advisory is
+the unpatched, development-only `braces` chain in Next's ESLint plugin; forcing
+an older lint configuration is not an appropriate fix.

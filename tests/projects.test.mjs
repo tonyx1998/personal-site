@@ -77,6 +77,9 @@ test("selected studies have complete content and correctly sized evidence assets
     for (const field of ["role", "context", "summary", "evidenceNote"]) {
       assert.ok(study[field]?.trim(), project.title + ": " + field);
     }
+    for (const field of ["problem", "decision", "verifiedBehavior"]) {
+      assert.ok(study.takeaways?.[field]?.trim(), project.title + ": " + field);
+    }
     assert.ok(study.sections.length >= 3);
     assert.equal(
       new Set(study.sections.map((section) => section.title)).size,

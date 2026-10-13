@@ -21,11 +21,11 @@ lint:
 	npm run lint
 
 verify:
-	@test -f .env || (echo "Run: cp .env.example .env" && exit 1)
 	@command -v node >/dev/null
 	npm run lint
 	npm test
 	npm run format:check
+	npm run typecheck
 
 # Regenerate public/resume.pdf from the shared source (src/lib/projects.data.json).
 resume:

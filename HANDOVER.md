@@ -27,17 +27,73 @@ b1b7bd6 Persist theme in localStorage instead of a cookie so routes can be stati
 
 ## Next action
 
-Keep the evidence and shared project facts current as the products change.
-Before tailoring an application, use the resume profiles documented in
-`docs/resume-tailoring.md`. Verify changed claims against the deployed product
-and source revision using `docs/project-evidence.md`; do not restore old broad
-privacy or total-cost claims from the historical notes below.
+Release the reviewed Gasolytics engineering article on branch
+`codex/gasolytics-engineering-article`, based on published master `6d9151b`.
+The new route is
+`/projects/gasolytics-us-gas-price-map/data-read-failures`, linked from the
+existing Gasolytics case-study header. The original case study, figures, project
+facts and resume records are preserved. Article content lives in the shared
+project JSON; its verification date is October 5, 2026 and revision `9786a435`,
+not a claim about the latest Gasolytics production revision.
 
-Web Analytics is enabled and collecting; the earlier note here saying it was not
-is out of date. The dashboard read 7 visitors and 21 page views over the seven
-days to 2026-09-04.
+The article retains the unresolved HTTP403 cause and the limits of the
+per-process cache, diagnostic-based build gate and saved verification receipts.
+It adds no performance or customer-impact claims. No Gasolytics crosslink,
+tracking or external outreach is included in this change.
+
+Local verification passes: lint, four content tests, formatting, type checks,
+28-page static production build, 20 sitemap destinations, article metadata,
+server-rendered draft parity, three unknown-route 404 cases, and unchanged
+resume bytes after regeneration. Independent source and factual reviews pass.
+Browser checks covered desktop 1440x1000, phones 390x844 and 320x800, short
+landscape 844x390, keyboard navigation/focus, dark mode, visible list markers
+and no-JavaScript reading. These were isolated headless Chromium checks, not
+physical-device, screen-reader or Mac IAB tests. Local Vercel analytics scripts
+return expected 404s; no application page exceptions were captured.
+
+The release rerun passes lint, tests, formatting, types and resume regeneration.
+Its fresh Turbopack build is blocked by the execution environment denying a
+worker port bind, including on retry. The unchanged implementation passed the
+earlier local build; require a successful fresh hosted build before merging.
+
+The local production preview is on 127.0.0.1:3117. The review handoff and fresh
+screenshots are in the sibling `article-qa` workspace folder. The user approved
+publishing a draft PR, then merging and deploying through the Git integration
+if hosted checks and independent review pass. Verify the production article,
+project link, routes and unchanged resume after deployment; release receipts
+belong in `article-qa/release`.
 
 ## State
+
+2026-10-05 (audit fixes): Next.js and its ESLint configuration are pinned to
+16.3.8, React/React DOM to 19.2.8, and Node.js to 24 with matching Node types.
+Compatible transitive security updates remove the obsolete PostCSS override.
+The production npm audit has zero findings. Five remaining high-severity npm
+entries describe one unpatched, development-only `braces` dependency chain
+through the ESLint plugin; do not force-downgrade `eslint-config-next` to fix it.
+
+The unused Newsreader italic request is removed. Mobile selected-work archive
+entries now show a full-width image above their 16px description. The three
+case studies have shorter introductions, consolidated Context metadata, and
+Problem / Decision / Verified behavior summaries that preserve simulated,
+mocked, and local-fixture qualifiers. All original narratives, project facts,
+resume bullets, links, and public routes are retained. Internal header links
+use Next navigation; PDF links remain ordinary anchors. Repeated project
+actions name their project for assistive technology, and the footer names the
+downloaded resume explicitly.
+
+The resume generator uses semantic HTML and WeasyPrint with a bundled Public
+Sans font to create actual PDF structure tags, document language, and linked
+annotations. Python dependencies and setup are documented in
+`docs/resume-tailoring.md`. Validation checks document structure and content;
+tag presence alone is not a claim of full accessibility compliance.
+
+The Verify workflow runs lint, data/schema tests, formatting, types, a static
+production build, and resume regression tests. `make verify` includes types
+and no longer requires an unused `.env` file. Local lint, four project tests,
+type generation/TypeScript, and the Next 16.3.8 production build pass. All
+27 generated pages remain static. Browser and final PDF checks are recorded
+with the review evidence before publication.
 
 2026-09-05 (hiring portfolio and resume): the homepage now leads with Amex
 Roofing, SoloMock, and Gasolytics. Job Fit, SoloYap, Reachspan, and Throughline
@@ -223,3 +279,9 @@ Final coordinated-slot attempt: browser inventory reported the Mac locked again.
 ## Final unlocked browser check — 2026-10-13
 
 Passed in dedicated Chrome at 1487×1058 and 426×922: End selects Reachspan, Right wraps to SoloMock with focus retained, complete focus outline clears the rail, mobile menu opens and Escape closes it, résumé link opens updated PDF. No mobile overflow or captured console errors. Final desktop/mobile captures visually inspected. Native reduced-motion emulation and physical touch remain unverified; prior source checks stand. Supersedes earlier pending/locked-browser note.
+
+## Production release readiness — October 13
+
+User explicitly authorized publication of the polished personal site and updated résumé to toyinyu.com. Integrated current master 57a92f9; preserved its Next/React patches, mobile case-study improvements, tagged WeasyPrint PDF generator, and Gasolytics engineering article. Conflict resolutions combine exhibition and article fields, retain both evidence notes, and omit missing résumé-only dates in semantic HTML. Regenerated the approved ViralSignal/SoloMock/Gasolytics résumé with embedded Public Sans, verified tags/links/reading order and visually inspected the one-page render. No new employment/date/design claim. The earlier untagged checkpoint PDF is superseded by this tagged artifact.
+
+Fresh independent release review found no P0–P2 issues, including canonical/robots/sitemap and upstream preservation. Compatible source-map-js lockfile patch 1.2.1→1.2.2 fixes the runtime audit finding; no broad audit fix or framework downgrade. Six PDF tests and four site tests pass; lint/format/types and 28-route production build pass. Inherited development-tool braces advisory remains; it affects tooling pattern parsing rather than served portfolio input. Preview-only vercel.json/noindex configuration stays in the separate staging clone and is not tracked or released. Follow normal PR/master Git deployment, inspect exact-head remote checks before merge, and verify exact deployed SHA and domain routing after release. Data Guide and Gasolytics applications are excluded from this release.

@@ -19,16 +19,35 @@ Use a separate output path for a tailored application:
 python3 scripts/build-resume.py /tmp/To-Yin-Yu-Resume-Frontend.pdf --profile frontend
 ```
 
-The generator needs Python 3.10+ with `reportlab` and `pypdf` installed. If the
-configured interpreter is elsewhere, use `make resume PYTHON=/path/to/python3`.
-The package resume command uses `python3` from the current environment. In Codex,
-the bundled workspace Python provides these dependencies; use its discovered
-path as the `PYTHON` override rather than installing into the system interpreter.
+The generator needs Python 3.10+, WeasyPrint 70.0, pypdf 6.10.0, and the
+native Pango libraries. Install build dependencies in a virtual environment:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r scripts/requirements-resume.txt
+make resume PYTHON=.venv/bin/python
+```
+
+On Ubuntu, install `libpango-1.0-0`, `libpangoft2-1.0-0`, `libharfbuzz0b`,
+and `libharfbuzz-subset0` first. On macOS,
+install Pango with `brew install pango`; an Apple Silicon Python environment may
+also need `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib`. See the maintained
+[WeasyPrint installation instructions](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#installation)
+for other platforms. These dependencies are only used during PDF generation and
+validation; the website serves the committed static PDF.
+
+The renderer uses semantic HTML generated in memory from the existing facts.
+Public Sans is bundled under its OFL license in `scripts/fonts/` and embedded in
+the PDF with Unicode mappings. No network fetches or system fonts are needed
+when generating the resume. ReportLab was replaced because its automatic PDF
+tagging is a commercial ReportLab Plus feature.
 
 The output is written to a staging file beside the destination, checked, and
 atomically replaced only after it passes. A failed build preserves the previous
-file and removes its staging file. PDF metadata is deterministic, so unchanged
-source produces the same artifact.
+file and removes its staging file. Unchanged inputs produce identical bytes
+within the same installed rendering toolchain. Font shaping library differences
+between operating systems can change PDF bytes; CI compares source content and
+structure rather than demanding byte equality with the committed Mac build.
 
 ## Profiles
 
@@ -80,10 +99,27 @@ with 13.5 pt leading, and explicit separation between projects. Contact details
 are unchanged. The summary can occupy three lines. If new content overflows,
 edit the copy or project selection before reducing the type size.
 
-Every generation checks page size/count, text presence and reading order,
-complete project bullets, and the expected link destinations. These are document
-checks, not an ATS score or a universal parsing guarantee. They do not test the
-availability or functionality of external sites.
+Every generation checks page size/count, full project bullets, source link
+destinations, actual heading hierarchy, semantic bullet lists, English language,
+structure-based tab order, visible content coverage, annotation ownership, and
+embedded Unicode fonts. It traverses the tag tree and extracts the marked
+content in logical order; a `Tagged: yes` metadata flag alone is insufficient.
+The regression tests compare the complete semantic reading order with source
+HTML for every profile and for the committed public PDF. They also deliberately
+break tags, language, linked annotations, Unicode mappings, and reading order
+to ensure these regressions are rejected.
+
+The current default PDF passed veraPDF 1.30.2's PDF/UA-1 machine-verifiable
+profile (106 rules, 5,938 checks, zero failures). This is not a substitute for
+manual assistive-technology testing, a universal PDF/UA certification, or an ATS
+parsing guarantee. The checks do not test external website availability.
+
+For an independent validation after renderer, font, or layout changes, install
+[veraPDF](https://docs.verapdf.org/install/) and run:
+
+```sh
+verapdf --flavour ua1 --format text public/resume.pdf
+```
 
 Run the focused regression checks after generator or profile changes:
 

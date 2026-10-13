@@ -10,6 +10,7 @@ import {
   projects,
   projectSlug,
   projectBySlug,
+  projectArticlePath,
   type StudyFigure,
 } from "@/lib/projects";
 import { projectVisual } from "@/lib/project-visuals";
@@ -90,6 +91,7 @@ export default async function ProjectDetailPage({
   const project = projectBySlug(slug);
   if (!project) notFound();
   const study = project.caseStudy;
+  const articlePath = projectArticlePath(project);
   const firstFigure = study?.sections.find((section) => section.figure)?.figure;
   const visual = projectVisual(project, slug);
   const tier = projects.filter((p) => p.featured === project.featured);
@@ -146,18 +148,25 @@ export default async function ProjectDetailPage({
               <p className={styles.lead}>
                 {study?.summary ?? project.description}
               </p>
-              {study && <p className={styles.context}>{study.context}</p>}
               <dl className={styles.overview}>
                 {study && (
+                  <>
+                    <div>
+                      <dt>My role</dt>
+                      <dd>{study.role}</dd>
+                    </div>
+                    <div>
+                      <dt>Context</dt>
+                      <dd>{study.context}</dd>
+                    </div>
+                  </>
+                )}
+                {!study && (
                   <div>
-                    <dt>My role</dt>
-                    <dd>{study.role}</dd>
+                    <dt>Year</dt>
+                    <dd>{project.datePublished ?? "Ongoing"}</dd>
                   </div>
                 )}
-                <div>
-                  <dt>Year</dt>
-                  <dd>{project.datePublished ?? "Ongoing"}</dd>
-                </div>
                 {!project.live && (
                   <div>
                     <dt>Format</dt>
@@ -167,6 +176,14 @@ export default async function ProjectDetailPage({
               </dl>
               <ProjectLinks project={project} showNotes={false} />
               <p className={styles.stack}>{project.tags.join(" · ")}</p>
+              {project.engineeringArticle && articlePath && (
+                <p className={styles.articleLink}>
+                  <Link href={articlePath}>
+                    {project.engineeringArticle.title}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </p>
+              )}
             </header>
 
             {firstFigure ? (
@@ -188,6 +205,20 @@ export default async function ProjectDetailPage({
 
             {study ? (
               <div className={styles.study}>
+                <dl className={styles.takeaways}>
+                  <div>
+                    <dt>Problem</dt>
+                    <dd>{study.takeaways.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>Decision</dt>
+                    <dd>{study.takeaways.decision}</dd>
+                  </div>
+                  <div>
+                    <dt>Verified behavior</dt>
+                    <dd>{study.takeaways.verifiedBehavior}</dd>
+                  </div>
+                </dl>
                 {study.sections.map((section, sectionIndex) => (
                   <section
                     key={section.title}
