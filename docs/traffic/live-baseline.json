@@ -1,0 +1,144 @@
+[
+  {
+    "path": "/projects/solomock",
+    "status": 200,
+    "fetchAndBodyMs": 403,
+    "bytes": 49123,
+    "cache": "HIT",
+    "xRobots": null,
+    "title": "SoloMock · To Yin Yu",
+    "meta": [
+      "<meta name=\"description\" content=\"A coding-interview workspace that combines voice conversation, a Monaco editor, and structured problem briefs. Editor snapshots give the interviewer…\"/>",
+      "<meta name=\"robots\" content=\"index, follow\"/>",
+      "<meta property=\"og:title\" content=\"SoloMock · To Yin Yu\"/>",
+      "<meta property=\"og:description\" content=\"A coding-interview workspace that combines voice conversation, a Monaco editor, and structured problem briefs. Editor snapshots give the interviewer…\"/>",
+      "<meta property=\"og:url\" content=\"https://www.toyinyu.com/projects/solomock\"/>",
+      "<meta property=\"og:type\" content=\"article\"/>",
+      "<meta name=\"twitter:card\" content=\"summary_large_image\"/>",
+      "<meta name=\"twitter:title\" content=\"SoloMock\"/>",
+      "<meta name=\"twitter:description\" content=\"A coding-interview workspace that combines voice conversation, a Monaco editor, and structured problem briefs. Editor snapshots give the interviewer…\"/>"
+    ],
+    "canonical": "<link rel=\"canonical\" href=\"https://www.toyinyu.com/projects/solomock\"/>",
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "SoloMock",
+        "description": "A coding-interview workspace that combines voice conversation, a Monaco editor, and structured problem briefs. Editor snapshots give the interviewer context from the candidate’s code.",
+        "url": "https://www.toyinyu.com/projects/solomock",
+        "keywords": "Next.js, TypeScript, OpenAI Realtime API, WebRTC, Monaco, Tailwind CSS",
+        "author": {
+          "@id": "https://www.toyinyu.com/#person"
+        },
+        "sameAs": "https://solomock.com",
+        "datePublished": "2025",
+        "dateModified": "2026-09-05"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.toyinyu.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "All projects",
+            "item": "https://www.toyinyu.com/projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SoloMock",
+            "item": "https://www.toyinyu.com/projects/solomock"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/projects/gasolytics-us-gas-price-map",
+    "status": 200,
+    "fetchAndBodyMs": 225,
+    "bytes": 50376,
+    "cache": "HIT",
+    "xRobots": null,
+    "title": "Gasolytics · To Yin Yu",
+    "meta": [
+      "<meta name=\"description\" content=\"An interactive U.S. gas-price map with state and metro views, a trip-cost calculator, and EV comparisons. Published AAA snapshots supply prices and their…\"/>",
+      "<meta name=\"robots\" content=\"index, follow\"/>",
+      "<meta property=\"og:title\" content=\"Gasolytics · To Yin Yu\"/>",
+      "<meta property=\"og:description\" content=\"An interactive U.S. gas-price map with state and metro views, a trip-cost calculator, and EV comparisons. Published AAA snapshots supply prices and their…\"/>",
+      "<meta property=\"og:url\" content=\"https://www.toyinyu.com/projects/gasolytics-us-gas-price-map\"/>",
+      "<meta property=\"og:type\" content=\"article\"/>",
+      "<meta name=\"twitter:card\" content=\"summary_large_image\"/>",
+      "<meta name=\"twitter:title\" content=\"Gasolytics\"/>",
+      "<meta name=\"twitter:description\" content=\"An interactive U.S. gas-price map with state and metro views, a trip-cost calculator, and EV comparisons. Published AAA snapshots supply prices and their…\"/>"
+    ],
+    "canonical": "<link rel=\"canonical\" href=\"https://www.toyinyu.com/projects/gasolytics-us-gas-price-map\"/>",
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "Gasolytics",
+        "description": "An interactive U.S. gas-price map with state and metro views, a trip-cost calculator, and EV comparisons. Published AAA snapshots supply prices and their data dates.",
+        "url": "https://www.toyinyu.com/projects/gasolytics-us-gas-price-map",
+        "keywords": "Next.js, React 19, TypeScript, d3-geo, Vercel Blob, Vercel",
+        "author": {
+          "@id": "https://www.toyinyu.com/#person"
+        },
+        "sameAs": "https://www.gasolytics.com/",
+        "datePublished": "2026",
+        "dateModified": "2026-10-06"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.toyinyu.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "All projects",
+            "item": "https://www.toyinyu.com/projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Gasolytics",
+            "item": "https://www.toyinyu.com/projects/gasolytics-us-gas-price-map"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "fetchAndBodyMs": 31,
+    "bytes": 99,
+    "cache": "HIT",
+    "xRobots": null,
+    "meta": [],
+    "jsonLd": []
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "fetchAndBodyMs": 106,
+    "bytes": 3682,
+    "cache": "HIT",
+    "xRobots": null,
+    "meta": [],
+    "jsonLd": []
+  }
+]

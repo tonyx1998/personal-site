@@ -1,0 +1,28 @@
+[
+  {
+    "path": "/projects/solomock",
+    "title": "SoloMock: WebRTC voice and code interview case study",
+    "description": "How I connected WebRTC voice and Monaco code snapshots in SoloMock, with temporary credentials, session cleanup, and mocked failure checks.",
+    "descriptionLength": 139,
+    "shareImage": "/projects/evidence/solomock-result.png",
+    "imageBytes": 126645,
+    "h1": 1,
+    "canonical": true,
+    "robots": true,
+    "structuredDataTypes": ["CreativeWork", "BreadcrumbList"],
+    "crawlableTradeoff": true
+  },
+  {
+    "path": "/projects/gasolytics-us-gas-price-map",
+    "title": "Gasolytics: Next.js gas-price map and data case study",
+    "description": "How I built a Next.js gas-price map with server-rendered SVG, dated AAA snapshots, trip estimates, and explicit cache and data-failure behavior.",
+    "descriptionLength": 144,
+    "shareImage": "/projects/evidence/gasolytics-result.png",
+    "imageBytes": 165027,
+    "h1": 1,
+    "canonical": true,
+    "robots": true,
+    "structuredDataTypes": ["CreativeWork", "BreadcrumbList"],
+    "crawlableTradeoff": true
+  }
+]

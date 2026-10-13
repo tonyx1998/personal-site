@@ -31,6 +31,7 @@ export type CaseStudy = {
     problem: string;
     decision: string;
     verifiedBehavior: string;
+    tradeoff?: string;
   };
   sections: {
     title: string;
@@ -60,6 +61,7 @@ export type EngineeringArticle = {
 };
 
 export type Project = {
+  seo?: { title: string; description: string };
   exhibition?: {
     summary: string;
     topics: string;
