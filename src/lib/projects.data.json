@@ -124,7 +124,7 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2025",
-    "dateModified": "2026-09-05",
+    "dateModified": "2026-10-13",
     "resume": {
       "order": 2,
       "title": "SoloMock - Realtime Voice Interview Workspace",
@@ -142,15 +142,16 @@
     "caseStudy": {
       "role": "Independent developer",
       "context": "Independent product · Realtime voice and code · 2025–present",
-      "summary": "I built a mock-interview workspace that connects spoken reasoning with the candidate’s code.",
+      "summary": "I built SoloMock with Next.js, WebRTC and Monaco to put spoken reasoning and changing code in one interview context. This case study explains snapshot delivery, temporary credentials, and cleanup after a failed connection.",
       "takeaways": {
         "problem": "Interview practice needs the candidate’s spoken explanation and changing code in the same context.",
         "decision": "Send editor snapshots after a 2.5-second pause, skip unchanged code, and clean up session resources when an interview ends.",
-        "verifiedBehavior": "A mocked connection failure stopped the audio track, closed the peer, and retained the code and transcript for review."
+        "verifiedBehavior": "A mocked connection failure stopped the audio track, closed the peer, and retained the code and transcript for review.",
+        "tradeoff": "A 2.5-second debounce avoids repetitive code updates but delays the next snapshot. Client timers and per-instance rate-limit fallback do not enforce a hard spending cap."
       },
       "sections": [
         {
-          "title": "Give the interviewer the code context",
+          "title": "Connect WebRTC voice with Monaco editor context",
           "paragraphs": [
             "Practicing a coding interview means explaining an approach while writing and revising code. A voice-only interviewer misses those changes; a text-only workflow loses the spoken explanation. SoloMock places a Monaco editor beside the problem and transcript, and sends editor snapshots through the same WebRTC connection used for the conversation.",
             "The example shows a candidate explaining a hash-map solution to Two Sum, including why a lookup happens before insertion. Keeping the solution and transcript together lets the candidate review both the implementation and the reasoning used to explain it."
@@ -165,21 +166,21 @@
           }
         },
         {
-          "title": "Send useful changes, not every keystroke",
+          "title": "Debounce code snapshots: fewer updates, deliberate delay",
           "paragraphs": [
             "The editor waits for a pause before sending a snapshot and skips unchanged code. The current implementation uses a 2.5-second debounce. This reduces repetitive context updates while still letting a revised solution enter the conversation. The tradeoff is deliberate delay: this mechanism is not a promise that the model sees each keystroke immediately.",
             "Problem content is structured separately from the transport. Interviewer briefs hold solution approaches, hint ladders, follow-ups, and edge cases; the browser receives the candidate-facing problem. That gives the interview a consistent source of context while keeping the editor and WebRTC code focused on interaction."
           ]
         },
         {
-          "title": "Treat the session as a lifecycle",
+          "title": "Temporary credentials and session lifecycle limits",
           "paragraphs": [
             "The browser requests microphone access before asking the server for a temporary credential. The long-lived provider key remains on the server. Once connected, the client manages the audio tracks, data channel, countdown, and transcript. Explicit stop, timeout, and lost connection all lead into cleanup instead of leaving an apparently active interview behind.",
             "There are important limits to these safeguards. The duration timer runs in the client. Rate limiting uses a shared Redis service when configured, but falls back to per-instance memory when that service is unavailable. These controls reduce exposure; they do not establish an unbypassable session boundary or a hard total spending cap."
           ]
         },
         {
-          "title": "Make a lost connection understandable",
+          "title": "Recover from a failed WebRTC connection",
           "paragraphs": [
             "A connection can fail after the user has already invested time in an answer. The interface ends the session, explains that the connection was lost, and offers a way to start again. It retains the transcript and code so the user can still review the work and request post-session feedback.",
             "In a controlled connection-loss check, changing a mocked WebRTC peer to failed triggered the cleanup path: the audio track stopped, the peer closed, and the error appeared. The feedback component then accepted a simulated response while keeping the interview work available for review."
@@ -207,6 +208,10 @@
       "summary": "A realtime voice interview workspace, with code and conversation in one place.",
       "topics": "Interface · Realtime voice · Backend",
       "caption": "Simulated interview preview"
+    },
+    "seo": {
+      "title": "SoloMock: WebRTC voice and code interview case study",
+      "description": "How I connected WebRTC voice and Monaco code snapshots in SoloMock, with temporary credentials, session cleanup, and mocked failure checks."
     }
   },
   {
@@ -229,7 +234,7 @@
     "featured": true,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-10-06",
+    "dateModified": "2026-10-13",
     "resume": {
       "order": 3,
       "title": "Gasolytics - Gas-Price Map and Fuel Comparisons",
@@ -248,15 +253,16 @@
     "caseStudy": {
       "role": "Independent developer",
       "context": "Independent product · Maps and data delivery · 2026",
-      "summary": "I built a fuel-price map and comparison toolkit around published price snapshots.",
+      "summary": "I built Gasolytics with Next.js and d3-geo to connect dated AAA snapshots to a U.S. gas-price map, state details, and trip estimates. This case study separates map rendering, snapshot freshness, and unavailable-data behavior.",
       "takeaways": {
         "problem": "Visitors need to move from a national price map to state details or a trip estimate.",
         "decision": "Project map geometry on the server and keep source data dates distinct from read times.",
-        "verifiedBehavior": "Local fixtures confirmed stale-cache fallback and an explicit error when a fresh process had no usable data."
+        "verifiedBehavior": "Local fixtures confirmed stale-cache fallback and an explicit error when a fresh process had no usable data.",
+        "tradeoff": "Server projection moves geometry work out of the browser but sends SVG paths with the page. A per-process cache can reuse older data; read time is not source freshness."
       },
       "sections": [
         {
-          "title": "Connect the map to a useful question",
+          "title": "From a U.S. gas-price map to a trip estimate",
           "paragraphs": [
             "A national map gives a quick comparison, but a visitor may want to inspect one state or estimate fuel for a trip. Gasolytics connects the overview to state and metro details, price history, a trip calculator, and EV comparisons. The map’s selected state opens a panel with the corresponding prices and trend instead of sending the reader through a separate search.",
             "The capture shows California selected with a visible snapshot date. The panel connects its map position to prices and history, so a reader can move from a national pattern to a specific place. State and metro averages describe an area, rather than individual station quotes."
@@ -271,21 +277,21 @@
           }
         },
         {
-          "title": "Project the geometry on the server",
+          "title": "Server-rendered SVG with Next.js and d3-geo",
           "paragraphs": [
             "The server uses d3-geo to turn geographic shapes into SVG path strings. The browser receives those shapes and handles the interactive layer: selection, zoom, pan, and metro pins. This keeps map projection separate from the changing price data and from the event-handling code.",
             "Changing a fuel grade updates the displayed prices without rebuilding the geographic projection in the browser. The geometry is imported as a traced asset instead of read from an assumed runtime file location, so the serverless deployment includes the shapes it needs. The tradeoff is sending rendered paths with the page rather than making the browser compute them."
           ]
         },
         {
-          "title": "Keep the snapshot date distinct",
+          "title": "AAA snapshot dates and per-process caching",
           "paragraphs": [
             "The separate Databank project publishes AAA snapshots; Gasolytics reads them from Vercel Blob. It does not perform the upstream scraping in the request path. The application shapes the snapshots for its views and uses a short-lived, in-process cache so repeated reads can reuse a result.",
             "The response carries both the source data date and the time it was read. Those have different meanings: a page can be rendered now from an older snapshot. The current cache lasts up to 30 minutes within a process, while page revalidation and the upstream publication schedule are separate concerns. A recent request alone does not prove fresh source data."
           ]
         },
         {
-          "title": "Explain both estimates and unavailable data",
+          "title": "Trip-cost assumptions and unavailable data",
           "paragraphs": [
             "The trip calculator exposes the assumptions behind its result: distance, fuel economy, selected fuel grade, and the state averages used for price. Visitors can enter their own distance instead of relying on the approximate city-to-city distance. The result is a planning estimate, with the method beside it, rather than an unexplained dollar amount.",
             "Unavailable data needs a separate response. I tested the data reader against local synthetic snapshots with network access disabled. A successful read populated the cache; an expired cache followed by an unreadable input returned the previous result marked stale. A fresh process without usable data raised an explicit error instead of returning an invented price."
@@ -432,6 +438,10 @@
         }
       ],
       "evidenceNote": "This account describes the recovery verified on October 5, 2026 at revision 9786a435. Mocked integration and failure-record replay are separate from hosted HTTP/HTML checks. The EV arithmetic checks excluded fee and break-even columns. They do not independently validate upstream source accuracy or measure field performance or customer impact."
+    },
+    "seo": {
+      "title": "Gasolytics: Next.js gas-price map and data case study",
+      "description": "How I built a Next.js gas-price map with server-rendered SVG, dated AAA snapshots, trip estimates, and explicit cache and data-failure behavior."
     }
   },
   {

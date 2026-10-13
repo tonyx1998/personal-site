@@ -41,19 +41,39 @@ export async function generateMetadata({
   const project = projectBySlug(slug);
   if (!project) return {};
   const url = "/projects/" + slug;
-  const description = shortDescription(project.description);
+  const title = project.seo?.title ?? project.title;
+  const description =
+    project.seo?.description ?? shortDescription(project.description);
+  const figure = project.caseStudy?.sections.find(
+    (section) => section.figure
+  )?.figure;
+  const shareImage =
+    project.seo && figure
+      ? {
+          url: figure.src,
+          width: figure.width,
+          height: figure.height,
+          alt: figure.alt,
+        }
+      : undefined;
   return {
-    title: project.title,
+    title,
     description,
     keywords: project.tags,
     alternates: { canonical: url },
     openGraph: {
-      title: project.title + " · To Yin Yu",
+      title: title + " · To Yin Yu",
       description,
       url,
       type: "article",
+      ...(shareImage ? { images: [shareImage] } : {}),
     },
-    twitter: { card: "summary_large_image", title: project.title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(shareImage ? { images: [shareImage] } : {}),
+    },
   };
 }
 
@@ -104,10 +124,15 @@ export default async function ProjectDetailPage({
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     name: project.title,
-    description: project.description,
+    description: project.seo?.description ?? project.description,
     url,
     keywords: project.tags.join(", "),
-    author: { "@id": personId },
+    author: {
+      "@type": "Person",
+      "@id": personId,
+      name: "To Yin Yu",
+      url: SITE_URL,
+    },
     ...(project.github ? { codeRepository: project.github } : {}),
     ...(project.live ? { sameAs: project.live } : {}),
     ...(project.datePublished ? { datePublished: project.datePublished } : {}),
@@ -144,7 +169,7 @@ export default async function ProjectDetailPage({
               <ArrowLeft size={16} aria-hidden="true" /> All projects
             </Link>
             <header className={styles.hero}>
-              <h1>{project.title}</h1>
+              <h1>{project.seo?.title ?? project.title}</h1>
               <p className={styles.lead}>
                 {study?.summary ?? project.description}
               </p>
@@ -214,6 +239,12 @@ export default async function ProjectDetailPage({
                     <dt>Decision</dt>
                     <dd>{study.takeaways.decision}</dd>
                   </div>
+                  {study.takeaways.tradeoff && (
+                    <div>
+                      <dt>Tradeoff</dt>
+                      <dd>{study.takeaways.tradeoff}</dd>
+                    </div>
+                  )}
                   <div>
                     <dt>Verified behavior</dt>
                     <dd>{study.takeaways.verifiedBehavior}</dd>
