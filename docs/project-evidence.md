@@ -87,6 +87,10 @@ The Gasolytics harness imported the real `src/lib/aaa.ts`, then changed its work
 
 Temporary capture harnesses and check output were stored in `/private/tmp/personal-site-evidence/` during implementation. This register and the checked-in screenshots are the durable evidence summary. Future product changes require renewed verification before strengthening the claims.
 
+## Reachspan visual refresh — October 13, 2026 UTC
+
+Public English page https://www.reachspan.ai/en.html captured read-only in Chrome at 1280×720 after confirming the existing portfolio link https://reachspan.ai redirects to https://www.reachspan.ai/. New shared capture shows Get found / Follow through, Hong Kong skyline and the empty marketing-audit form. No form inputs, bookings, chat submissions or integrations were exercised. Replaced the shared portfolio cover and added a dated filename for cache freshness. Showcase, archive and /projects/reachspan use the same visual. Contribution and ownership wording remain unchanged; this capture proves current public UI, not current provider behavior or commercial outcomes.
+
 ## Gasolytics engineering article — October 6, 2026 integration
 
 The additive article at `/projects/gasolytics-us-gas-price-map/data-read-failures`

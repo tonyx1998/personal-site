@@ -239,3 +239,49 @@ supply it.
 
 2026-09-02: the phone number stays on the public résumé PDF until the user says
 otherwise.
+
+## Exhibition checkpoint — October 12, 2026
+
+Local-only checkpoint on `checkpoint/exhibition-20261012`. The homepage now opens with a responsive three-project exhibition based on the selected refined desktop/mobile references. Original public routes, metadata, case studies, resume and verified email remain. Server-rendered project and background text remains discoverable without JavaScript, including supporting projects. Project tabs use roving keyboard focus with Left/Right/Home/End; arrows wrap; pointer swipes switch previews. Native mobile menu supports Escape. Reduced motion removes transitions. Screenshots are passive previews; no project API actions are embedded.
+
+The refined layout uses off-white, black and yellow, with the existing Public Sans font. SoloMock/Gasolytics are personal projects and Amex Roofing is client work. Captions retain simulation and historical-data qualifications. Added concise exhibition copy in the canonical project JSON. Build/QA evidence and remaining polish are recorded in `design-qa.md` and `CHECKPOINT.md`. Do not push, merge or deploy this checkpoint without separate authorization.
+
+### User-requested refinement — October 12
+
+Expanded the exhibition to seven existing public projects: SoloMock, Gasolytics, Amex Roofing, How's My Job Fit?, SoloYap, Throughline, Reachspan. Reachspan is labeled Website & integration; ViralSignal is not added or claimed as personal work. Large transparent arrows sit at the desktop sides (up to 132×180 targets), and along passive screenshot edges on mobile (56×120 targets); bottom arrows removed. A scrolling rail keeps the selected project in view and uses a dynamic 07 count. Keyboard arrow focus survives switching and wraparound. Tablet stacking starts at 980px so text and controls stay comfortable.
+
+The lower section now uses an oversized Interface / Backend / After launch editorial opening, a professional introduction and availability ledger, native expandable engineering notes, serif About heading, biographical ledger, and a black/white contact ending. Existing facts, original summaries/contributions and routes remain in server-rendered markup. Details and links work without JavaScript. Reduced motion retains static content and removes motion via existing global rules. Update the separate preview only; production domains remain unchanged.
+
+### Rail alignment correction — awaiting browser QA
+
+User supplied a crop of the seven-project rail showing a large empty region to the right. The labels used flex-start inside a centered but oversized two-column rail: a counter occupied only the left side, and the remaining tab track did not center its contents. Corrected the rail to match the stage's 76%/1440px width, reserve equal 70px edge tracks for visual balance, and use auto outer margins to center the seven labels when they fit. Overflow still falls back to start-aligned scrolling, and the balancing spacer is removed in the stacked mobile layout. No stage/editorial asymmetry, public content, project inventory, route, or control behavior was changed. Browser QA is pending coordination with the Data Guide task; do not publish before that check.
+
+### Decorative circle removal — pending combined preview update
+
+Removed both desktop and mobile `.figure::before` circle rules at the user’s explicit request. No substitute decoration was added. The screenshot container, side controls, content and rail structure are unchanged. Other yellow link/type accents remain outside this specifically requested removal. Include with the rail alignment correction and current Reachspan UI capture after coordinated browser QA.
+
+### Combined update verified — October 13
+
+Mac browser was confirmed responsive after unlock. Captured the public English Reachspan page at https://www.reachspan.ai/en.html at 1280×720, without entering or submitting anything. Refreshed public/projects/reachspan.png and added public/projects/reachspan-current-20261013.png; the shared visual map uses the dated path to avoid cached old screenshots. Showcase, archive and project page share this asset. Alt text and exhibition caption now identify the current English homepage. Existing contribution/ownership copy remains unchanged. Current public messaging targets Hong Kong and reads Get found / Follow through; portfolio copy remains a narrower description of Tony's website/scheduling work.
+
+Chrome QA confirms fitting rail labels are centered exactly (715 at 1430px, 743.496 at 1487px, 846.5 at 1693px). Narrow rails scroll, no page overflow at 981/426/320px. Circle computed content is none at all sizes. Home/End, seven-to-one arrow wrapping, mobile menu/Escape and Reachspan project image were exercised. Console errors/warnings empty. Only separate preview publication is authorized.
+
+### Resume update and final polish review — October 13
+
+Current generator/master, not a cached public PDF, supplied the résumé source. User confirmed full-stack contributions to Reachspan's ViralSignal with GPT/Claude assistance, excluding its landing-page design, and authorized the two supplied development/security/testing bullets. Added ViralSignal as a resumeOnly master record labeled Reachspan product; no employment role, project date, landing-page design claim, growth or revenue claim. Default full-stack preset now selects ViralSignal, SoloMock, Gasolytics. Product preset retains Amex/Gasolytics/SoloMock; other presets and unrelated facts unchanged. Missing dates are permitted only for resumeOnly records and omitted cleanly from PDF metadata rows. The record is excluded from public project routes/exhibition/archive.
+
+Generated public/resume.pdf using the canonical script: one Letter page, original 10.5pt body/13.5pt leading, 290 extracted words and seven expected URI links. Rendered at 120dpi and inspected with no clipping or overlap. All four résumé regression tests cover every preset, deterministic output and safe rejection; all pass. Selectable ordered text is verified, but the existing generator does not produce a tagged PDF/UA document. Library create succeeded: libfile_73804c59b52881918103d430f5e5aad3, with identity metadata persisted locally.
+
+Polish review against approved desktop/mobile captures found no redesign need. Source showed focus rings could be clipped at the vertical edge of the scrolling rail; added 5px vertical padding only. The passive Reachspan cover's crop is intentional; case-study/archive share the current dated asset. Existing factual/ownership labels and historical/simulation captions remain. Final browser check of focus clearance is pending the coordinated slot (Data Guide then Gasolytics); no browser acquired or publication performed in this phase.
+
+Final coordinated-slot attempt: browser inventory reported the Mac locked again. No tab was acquired or operated. Final source build (27 static pages), types/lint/format, four site tests and four résumé regression tests passed. Preview publication remains gated on the focused native browser check; the current public preview is still the previously verified 14bc6e6 deployment.
+
+## Final unlocked browser check — 2026-10-13
+
+Passed in dedicated Chrome at 1487×1058 and 426×922: End selects Reachspan, Right wraps to SoloMock with focus retained, complete focus outline clears the rail, mobile menu opens and Escape closes it, résumé link opens updated PDF. No mobile overflow or captured console errors. Final desktop/mobile captures visually inspected. Native reduced-motion emulation and physical touch remain unverified; prior source checks stand. Supersedes earlier pending/locked-browser note.
+
+## Production release readiness — October 13
+
+User explicitly authorized publication of the polished personal site and updated résumé to toyinyu.com. Integrated current master 57a92f9; preserved its Next/React patches, mobile case-study improvements, tagged WeasyPrint PDF generator, and Gasolytics engineering article. Conflict resolutions combine exhibition and article fields, retain both evidence notes, and omit missing résumé-only dates in semantic HTML. Regenerated the approved ViralSignal/SoloMock/Gasolytics résumé with embedded Public Sans, verified tags/links/reading order and visually inspected the one-page render. No new employment/date/design claim. The earlier untagged checkpoint PDF is superseded by this tagged artifact.
+
+Fresh independent release review found no P0–P2 issues, including canonical/robots/sitemap and upstream preservation. Compatible source-map-js lockfile patch 1.2.1→1.2.2 fixes the runtime audit finding; no broad audit fix or framework downgrade. Six PDF tests and four site tests pass; lint/format/types and 28-route production build pass. Inherited development-tool braces advisory remains; it affects tooling pattern parsing rather than served portfolio input. Preview-only vercel.json/noindex configuration stays in the separate staging clone and is not tracked or released. Follow normal PR/master Git deployment, inspect exact-head remote checks before merge, and verify exact deployed SHA and domain routing after release. Data Guide and Gasolytics applications are excluded from this release.

@@ -1,0 +1,38 @@
+{
+  "Amex Roofing": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "SoloMock": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "Gasolytics": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "How's My Job Fit?": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "SoloYap": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "Reachspan": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "Throughline": {
+    "route": true,
+    "original_summary": true,
+    "image_present": true
+  },
+  "anchors": true
+}

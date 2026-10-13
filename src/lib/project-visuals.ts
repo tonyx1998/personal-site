@@ -25,8 +25,8 @@ export const projectVisuals: Record<string, ProjectVisual> = {
     alt: "Amex Roofing home page with a roof photo and a free inspection call to action",
   },
   reachspan: {
-    src: "/projects/reachspan.png",
-    alt: "ReachSpan landing page headline listing where a local business's next customer is",
+    src: "/projects/reachspan-current-20261013.png",
+    alt: "ReachSpan current English homepage with Get found. Follow through. headline, Hong Kong skyline, and free marketing audit form",
   },
   "throughline-technical-learning-ecosystem": {
     src: "/projects/throughline.png",

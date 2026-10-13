@@ -1,215 +1,203 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight } from "lucide-react";
-import { PortfolioFooter, PortfolioHeader } from "./PortfolioChrome";
-import { ProjectLinks } from "./ProjectLinks";
+import { ArrowUpRight, Plus } from "lucide-react";
+import Exhibition from "./Exhibition";
+import { PortfolioFooter } from "./PortfolioChrome";
 import {
+  selectedProjects,
+  projects as publicProjects,
+  shortTitle,
   homepageSupportingProjects,
   projectSlug,
-  selectedProjects,
-  shortTitle,
 } from "@/lib/projects";
-import { projectVisual } from "@/lib/project-visuals";
-import chrome from "./Chrome.module.css";
-import styles from "./PortfolioHome.module.css";
+import styles from "./Exhibition.module.css";
 
 export default function PortfolioHome() {
+  const projects = ["SoloMock", "Gasolytics", "Amex Roofing"].map(
+    (title) =>
+      selectedProjects.find((project) => shortTitle(project) === title)!
+  );
+  const exhibitionProjects = [
+    "SoloMock",
+    "Gasolytics",
+    "Amex Roofing",
+    "How's My Job Fit?",
+    "SoloYap",
+    "Throughline",
+    "Reachspan",
+  ].map(
+    (title) => publicProjects.find((project) => shortTitle(project) === title)!
+  );
   return (
-    <div className={chrome.page}>
-      <PortfolioHeader />
-      <main id="main-content" tabIndex={-1}>
-        <section className={chrome.container + " " + styles.hero} id="top">
-          <h1>Software developer building useful web products.</h1>
-          <p className={styles.lead}>
-            I build full-stack apps, realtime voice tools, and booking systems
-            for service businesses. My work covers the interface, backend,
-            deployment, and the behavior users see when something goes wrong.
-          </p>
-          <div className={styles.availability}>
-            <p>Open to software engineering roles</p>
-            <p>Seattle area · Open to relocation</p>
-          </div>
-          <p className={styles.credentials}>
-            B.S. Computer Science, University of Maryland · US citizen
-          </p>
-          <div className={styles.heroActions}>
-            <a href="#work" className={styles.primaryAction}>
-              View selected work <ArrowDown size={17} aria-hidden="true" />
-            </a>
-            <a href="/resume.pdf">Resume (PDF)</a>
-            <a href="mailto:tonyx1998@gmail.com">Email me</a>
-          </div>
-        </section>
-
-        <section
-          className={chrome.container + " " + styles.selected}
-          id="work"
-          aria-labelledby="work-heading"
-        >
-          <div className={styles.sectionHeading}>
-            <h2 id="work-heading">Selected work</h2>
-            <p>Client delivery, realtime interaction, and data systems.</p>
-          </div>
-          <div className={styles.products}>
-            {selectedProjects.map((project, index) => {
-              const slug = projectSlug(project);
-              const visual = projectVisual(project, slug);
-              const figure = project.caseStudy?.sections.find(
-                (section) => section.figure
-              )?.figure;
-              return (
-                <article
-                  key={slug}
-                  className={styles.product}
-                  aria-labelledby={slug + "-title"}
+    <div className={styles.page}>
+      <main>
+        <Exhibition projects={exhibitionProjects} />
+        <div aria-label="Background">
+          <section
+            className={styles.backgroundWork}
+            aria-labelledby="background-work-heading"
+          >
+            <div className={styles.editorialHeader}>
+              <h2 id="background-work-heading" className={styles.scopeWords}>
+                <span>Interface.</span>
+                <span>Backend.</span>
+                <span>After launch.</span>
+              </h2>
+              <div className={styles.editorialIntro}>
+                <p className={styles.noteLabel}>
+                  Software developer building useful web products.
+                </p>
+                <p>
+                  I build full-stack apps, realtime voice tools, and booking
+                  systems for service businesses. My work covers the interface,
+                  backend, deployment, and the behavior users see when something
+                  goes wrong.
+                </p>
+                <div className={styles.availabilityLedger}>
+                  <p>Open to software engineering roles</p>
+                  <p>Seattle area · Open to relocation</p>
+                  <p>
+                    B.S. Computer Science, University of Maryland · US citizen
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.notesHeading}>
+              <h2>Engineering notes</h2>
+              <p>The decisions behind the previews.</p>
+            </div>
+            <div className={styles.notes}>
+              {projects.map((project, index) => (
+                <details
+                  key={projectSlug(project)}
+                  open={index === 0}
+                  className={styles.note}
                 >
-                  <div className={styles.productIntro}>
-                    <h3 id={slug + "-title"}>
-                      <Link href={"/projects/" + slug}>
-                        {shortTitle(project)}
-                      </Link>
-                    </h3>
-                    <p className={styles.what}>
-                      {project.homepageSummary ?? project.description}
-                    </p>
-                  </div>
-                  {visual && (
-                    <figure className={styles.screen}>
-                      <Link href={"/projects/" + slug} tabIndex={-1}>
-                        <Image
-                          src={visual.src}
-                          alt={visual.alt}
-                          width={1280}
-                          height={720}
-                          loading={index === 0 ? "eager" : "lazy"}
-                          sizes="(max-width: 820px) calc(100vw - 40px), (max-width: 1180px) 52vw, 594px"
-                        />
-                      </Link>
-                      {figure && <figcaption>{figure.caption}</figcaption>}
-                    </figure>
-                  )}
-                  <div className={styles.proof}>
-                    <p>{project.contribution ?? project.highlights?.[0]}</p>
-                    <p className={styles.meta}>
+                  <summary>
+                    <h3>{shortTitle(project)}</h3>
+                    <span>
+                      {project.contribution ?? project.highlights?.[0]}
+                    </span>
+                    <Plus
+                      className={styles.disclosureIcon}
+                      size={26}
+                      aria-hidden="true"
+                    />
+                  </summary>
+                  <div className={styles.noteBody}>
+                    <p>{project.homepageSummary ?? project.description}</p>
+                    <p className={styles.noteLabel}>
                       {project.tags.slice(0, 3).join(" · ")}
                     </p>
-                    <ProjectLinks project={project} />
+                    <p className={styles.noteCaption}>
+                      {
+                        project.caseStudy?.sections.find(
+                          (section) => section.figure
+                        )?.figure?.caption
+                      }
+                    </p>
+                    <Link href={"/projects/" + projectSlug(project)}>
+                      Read the case study{" "}
+                      <ArrowUpRight size={17} aria-hidden="true" />
+                    </Link>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section
-          className={chrome.container + " " + styles.more}
-          id="more"
-          aria-labelledby="more-heading"
-        >
-          <div className={styles.sectionHeading}>
-            <h2 id="more-heading">More work</h2>
-            <p>Other products I build and maintain.</p>
-          </div>
-          <ul className={styles.compactList}>
-            {homepageSupportingProjects.map((project) => {
-              const slug = projectSlug(project);
-              const visual = projectVisual(project, slug);
-              return (
-                <li key={slug} className={styles.compactRow}>
-                  {visual && (
-                    <Link
-                      href={"/projects/" + slug}
-                      className={styles.thumbnail}
+                </details>
+              ))}
+            </div>
+            <div className={styles.notesHeading}>
+              <h2 id="more">More work</h2>
+              <p>Other products I build and maintain.</p>
+            </div>
+            <div className={styles.notes}>
+              {homepageSupportingProjects.map((project) => (
+                <details key={projectSlug(project)} className={styles.note}>
+                  <summary>
+                    <h3>{shortTitle(project)}</h3>
+                    <span>
+                      {project.homepageSummary ?? project.description}
+                    </span>
+                    <Plus
+                      className={styles.disclosureIcon}
+                      size={26}
                       aria-hidden="true"
-                      tabIndex={-1}
-                    >
-                      <Image
-                        src={visual.src}
-                        alt=""
-                        width={1280}
-                        height={720}
-                        sizes="(max-width: 820px) 96px, 160px"
-                      />
-                    </Link>
-                  )}
-                  <div>
-                    <h3>
-                      <Link href={"/projects/" + slug}>
-                        {shortTitle(project)}
-                      </Link>
-                    </h3>
-                    <p>{project.homepageSummary ?? project.description}</p>
-                    <Link
-                      className={styles.notesLink}
-                      href={"/projects/" + slug}
-                    >
-                      Project notes <ArrowRight size={15} aria-hidden="true" />
+                    />
+                  </summary>
+                  <div className={styles.noteBody}>
+                    <p>{project.contribution ?? project.highlights?.[0]}</p>
+                    <Link href={"/projects/" + projectSlug(project)}>
+                      Project notes{" "}
+                      <ArrowUpRight size={17} aria-hidden="true" />
                     </Link>
                   </div>
-                </li>
-              );
-            })}
-          </ul>
-          <Link href="/projects" className={styles.archiveLink}>
-            All projects <ArrowRight size={18} aria-hidden="true" />
-          </Link>
-        </section>
-
-        <section
-          className={chrome.container + " " + styles.about}
-          id="about"
-          aria-labelledby="about-heading"
-        >
-          <div>
-            <h2 id="about-heading">About</h2>
-            <p>
-              I’m To Yin Yu, a software developer in Lynnwood, Washington. I
-              finished my computer science degree at the University of Maryland
-              in December 2022 and have been building and shipping my own
-              products since 2024.
+                </details>
+              ))}
+            </div>
+            <p className={styles.allWork}>
+              <Link href="/projects">
+                All projects <ArrowUpRight size={20} aria-hidden="true" />
+              </Link>
             </p>
-            <p>
-              I work across the frontend, backend, and deployment. The part
-              after launch matters to me, too: tracing a failed request, making
-              an error understandable, and deciding what a system should do when
-              a dependency is unavailable.
-            </p>
-            <p>
-              The case studies here explain those decisions, including the
-              limits of what I have tested. I’m looking for a software
-              engineering role where I can contribute that experience and learn
-              from a team.
-            </p>
-          </div>
-          <dl className={styles.background}>
+          </section>
+          <section
+            className={styles.about}
+            id="about"
+            aria-labelledby="about-heading"
+          >
             <div>
-              <dt>Experience</dt>
-              <dd>Independent software developer, 2024–present</dd>
+              <h2 id="about-heading">About</h2>
+              <p className={styles.noteLabel}>
+                To Yin Yu · Lynnwood, Washington
+              </p>
+              <p>
+                I’m To Yin Yu, a software developer in Lynnwood, Washington. I
+                finished my computer science degree at the University of
+                Maryland in December 2022 and have been building and shipping my
+                own products since 2024.
+              </p>
+              <p>
+                I work across the frontend, backend, and deployment. The part
+                after launch matters to me, too: tracing a failed request,
+                making an error understandable, and deciding what a system
+                should do when a dependency is unavailable.
+              </p>
+              <p>
+                The case studies here explain those decisions, including the
+                limits of what I have tested. I’m looking for a software
+                engineering role where I can contribute that experience and
+                learn from a team.
+              </p>
             </div>
-            <div>
-              <dt>Education</dt>
-              <dd>
-                B.S. Computer Science
-                <br />
-                University of Maryland, 2022
-              </dd>
-            </div>
-            <div>
-              <dt>Based in</dt>
-              <dd>
-                Lynnwood, WA, near Seattle
-                <br />
-                US citizen · Open to relocation
-              </dd>
-            </div>
-            <div>
-              <dt>Languages</dt>
-              <dd>English, Mandarin, Cantonese</dd>
-            </div>
-          </dl>
-        </section>
+            <dl className={styles.background}>
+              <div>
+                <dt>Experience</dt>
+                <dd>Independent software developer, 2024–present</dd>
+              </div>
+              <div>
+                <dt>Education</dt>
+                <dd>
+                  B.S. Computer Science
+                  <br />
+                  University of Maryland, 2022
+                </dd>
+              </div>
+              <div>
+                <dt>Based in</dt>
+                <dd>
+                  Lynnwood, WA, near Seattle
+                  <br />
+                  US citizen · Open to relocation
+                </dd>
+              </div>
+              <div>
+                <dt>Languages</dt>
+                <dd>English, Mandarin, Cantonese</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
       </main>
-      <PortfolioFooter />
+      <div className={styles.contact}>
+        <PortfolioFooter />
+      </div>
     </div>
   );
 }

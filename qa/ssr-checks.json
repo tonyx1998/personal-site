@@ -1,0 +1,32 @@
+{
+  "amex-roofing-site-ai-booking-agent": {
+    "summary": true,
+    "route": true
+  },
+  "solomock": {
+    "summary": true,
+    "route": true
+  },
+  "gasolytics-us-gas-price-map": {
+    "summary": true,
+    "route": true
+  },
+  "soloyap": {
+    "summary": true,
+    "route": true
+  },
+  "reachspan": {
+    "summary": true,
+    "route": true
+  },
+  "throughline-technical-learning-ecosystem": {
+    "summary": true,
+    "route": true
+  },
+  "metadata_unchanged": true,
+  "anchors": true,
+  "hows-my-job-fit": {
+    "summary": true,
+    "route": true
+  }
+}

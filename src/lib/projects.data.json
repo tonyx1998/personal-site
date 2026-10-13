@@ -97,6 +97,11 @@
         }
       ],
       "evidenceNote": "Screenshots use the deployed UI with fictional inputs and simulated API responses. Local contract checks used mocked dependencies; no bookings were sent. Captured September 5, 2026."
+    },
+    "exhibition": {
+      "summary": "A bilingual website and inspection-booking workflow for a Bay Area contractor.",
+      "topics": "Bilingual interface · Booking · Integration",
+      "caption": "Simulated inspection preview"
     }
   },
   {
@@ -197,6 +202,11 @@
         }
       ],
       "evidenceNote": "Screenshots use the deployed UI with sample code, transcripts, and simulated media and provider responses. Connection cleanup was checked with mocks; no paid session was started. Captured September 5, 2026."
+    },
+    "exhibition": {
+      "summary": "A realtime voice interview workspace, with code and conversation in one place.",
+      "topics": "Interface · Realtime voice · Backend",
+      "caption": "Simulated interview preview"
     }
   },
   {
@@ -298,6 +308,11 @@
         }
       ],
       "evidenceNote": "Public map and calculator captured read-only on September 5, 2026. Cache and failure checks used isolated local fixtures with network access disabled."
+    },
+    "exhibition": {
+      "summary": "A U.S. fuel-price map that turns dated snapshots into useful comparisons.",
+      "topics": "Data systems · Maps · Calculators",
+      "caption": "Historical price snapshot · September 2026"
     },
     "engineeringArticle": {
       "slug": "data-read-failures",
@@ -448,7 +463,13 @@
     },
     "homepageSummary": "A document workbench that compares candidate evidence with job requirements and explains the gaps.",
     "contribution": "Browser document parsing and a deterministic scoring model keep eligibility checks separate from skills.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A document workbench that compares candidate evidence with job requirements.",
+      "topics": "Document parsing · Evidence · Scoring",
+      "caption": "Product interface preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "SoloYap",
@@ -475,7 +496,13 @@
     "dateModified": "2026-09-05",
     "homepageSummary": "Spoken English practice with scenario prompts, turn-by-turn corrections, and optional Chinese-language hints.",
     "contribution": "Realtime audio and an installable interface support repeated speaking practice.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "Spoken English practice, with realtime conversation and corrections after each turn.",
+      "topics": "Realtime voice · Language learning · PWA",
+      "caption": "Speaking workspace preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "Reachspan",
@@ -495,7 +522,13 @@
     "dateModified": "2026-09-05",
     "homepageSummary": "A marketing website for local-business services, with consultation availability and booking through Cal.com.",
     "contribution": "I built the landing page and serverless scheduling integration.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A marketing website for local businesses, with consultation booking in one flow.",
+      "topics": "Marketing website · Scheduling · Integration",
+      "caption": "Current English homepage · October 2026",
+      "relationship": "Website & integration"
+    }
   },
   {
     "title": "Throughline",
@@ -528,7 +561,13 @@
     "slug": "throughline-technical-learning-ecosystem",
     "homepageSummary": "A learning hub connecting programming guides, project building, and interview practice.",
     "contribution": "I built the Astro hub and a shared interface for the technical guides.",
-    "homepageCompact": true
+    "homepageCompact": true,
+    "exhibition": {
+      "summary": "A learning hub connecting technical guides, project building, and interview practice.",
+      "topics": "Learning tools · Astro · Shared interface",
+      "caption": "Learning hub preview",
+      "relationship": "Personal project"
+    }
   },
   {
     "title": "all-in-one-URL",
@@ -730,5 +769,26 @@
     "datePublished": "2026",
     "dateModified": "2026-09-02",
     "hidden": true
+  },
+  {
+    "title": "ViralSignal",
+    "description": "Reachspan product with Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
+    "tags": ["TypeScript", "Next.js", "React", "PostgreSQL", "OAuth"],
+    "github": null,
+    "live": "https://viralsignalapp.com",
+    "featured": false,
+    "resumeOnly": true,
+    "className": "lg:col-span-1",
+    "resume": {
+      "id": "viralsignal",
+      "order": 0,
+      "relationship": "Reachspan product",
+      "title": "ViralSignal | Reachspan product | Full-stack development",
+      "stack": "TypeScript, React, Next.js, PostgreSQL, OAuth",
+      "bullets": [
+        "Built the full-stack application for Reachspan’s ViralSignal, integrating Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
+        "Implemented OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for authentication, billing, and failure recovery."
+      ]
+    }
   }
 ]
