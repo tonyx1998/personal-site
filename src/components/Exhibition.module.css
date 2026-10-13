@@ -162,17 +162,6 @@
   position: relative;
   z-index: 1;
 }
-.figure::before {
-  content: "";
-  position: absolute;
-  right: -5%;
-  top: -12%;
-  width: 49%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--exhibition-yellow);
-  z-index: -1;
-}
 .preview {
   aspect-ratio: 1.9;
   border: 1px solid #101c32;
@@ -235,13 +224,16 @@
 }
 .rail {
   order: 1;
-  width: 77%;
-  max-width: 1450px;
+  width: 76%;
+  max-width: 1440px;
   margin: 46px auto 0;
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr);
+  grid-template-columns: 70px minmax(0, 1fr) 70px;
   align-items: center;
   column-gap: 24px;
+}
+.rail::after {
+  content: "";
 }
 .previewShell {
   position: relative;
@@ -314,6 +306,12 @@
   cursor: pointer;
   color: var(--ink-2);
   white-space: nowrap;
+}
+.tabs > :first-child {
+  margin-inline-start: auto;
+}
+.tabs > :last-child {
+  margin-inline-end: auto;
 }
 .tabs button[aria-selected="true"] {
   border-bottom-color: var(--ink);
@@ -451,7 +449,7 @@
   }
   .rail {
     width: 85%;
-    grid-template-columns: 70px minmax(0, 1fr);
+    grid-template-columns: 70px minmax(0, 1fr) 70px;
     gap: 20px;
   }
   .tabs {
@@ -561,6 +559,9 @@
     margin: 0 7% 18px;
     order: 0;
   }
+  .rail::after {
+    display: none;
+  }
   .tabs {
     order: 0;
     margin: 0;
@@ -594,11 +595,6 @@
   }
   .figure {
     margin-bottom: 11px;
-  }
-  .figure::before {
-    width: 52%;
-    top: -12%;
-    right: -5%;
   }
   .preview {
     aspect-ratio: 1.61;

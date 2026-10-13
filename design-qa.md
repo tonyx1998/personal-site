@@ -65,3 +65,25 @@ Initial narrow-desktop check at 761px showed cramped copy and a wrapped primary 
 Typography/layout/color/image/content pass: original Public Sans and Newsreader; oversized black scope words with yellow underline; high-contrast editorial rows, native notes, serif About and black/white contact ending; no generic card grid or new imagery. Seven verified public projects/cover assets only. Reachspan uses an ownership-neutral Website & integration label, and ViralSignal was not added. Original professional headline, descriptions, contributions, tags/captions, supporting work and all case-study routes remain server-rendered (`qa/refinement-ssr-checks.json`). Native disclosures retain crawlable text and work without JS. All critical project links are also in the exhibition's server-rendered panels.
 
 Build/type/lint/format/four tests passed; resume regeneration remained byte-identical. Reduced-motion styles were checked: no new continuous/scroll motion, instant rail positioning, project reveal only under no-preference, and global reduce rule covers arrow and disclosure transitions. Native motion emulation and physical touch-device validation remain the same known gaps. Pointer drag remains verified; no backend actions added.
+
+## Pending rail alignment correction
+
+final result: blocked
+
+Exact source `../references/portfolio-alignment-feedback.png` was materialized and opened. It is a 1430×127 crop of the project rail; the full viewport is not supplied. The visible underline runs far beyond the last label while all seven labels are packed toward its left. Source inspection confirms that the rail container itself has symmetric margins, but a flex-start tab row and counter-only left track cause the apparent imbalance. The slight 77%/1450px rail versus 76%/1440px stage mismatch also existed.
+
+Local CSS now matches rail/stage width, reserves symmetric edge tracks, and centers fitting labels through automatic outer margins. Smaller overflowing rails remain scrollable with zero auto margins. Mobile removes the empty balancing track and retains its existing stacking. All seven projects, side arrows and editorial asymmetry remain. Types/lint/format/four tests pass. Browser capture, measured alignment and interaction recheck are intentionally pending: another task may own the Mac browser. No browser acquisition or preview publication was performed for this correction yet.
+
+### Pending circle removal
+
+Both desktop/mobile decorative circle pseudo-element rules were removed entirely, with no replacement. Browser validation and combined separate-preview publication remain blocked on the coordinated Mac browser slot. The screenshot layout and side-arrow positions do not depend on the removed absolute-positioned circle.
+
+## Combined alignment, circle removal and Reachspan refresh — verified
+
+final result: passed
+
+Supersedes the pending blocked entries above. Exact alignment/yellow screenshots were inspected earlier. Captured and inspected current Reachspan public English UI in Chrome at 1280×720 (qa/Reachspan-Current-UI-20261013.jpg). It shows the new Hong Kong skyline, Get found / Follow through headline and empty audit form. No bookings or project actions were performed.
+
+Inspected combined desktop/mobile browser captures: qa/Aligned-No-Circle-Desktop.jpg (1487×1058) and qa/Aligned-No-Circle-Mobile.jpg (426×922), density 1. Fitting labels center at the viewport midpoint to <0.01px; matching 1430px and 1693px checks also exact. Original editorial asymmetry remains. No actionable P0/P1/P2 issue. Overflowing rails at 981/426/320px remain scrollable; document width matches viewport; Home/End and arrow wrapping/menu dismissal pass. Decorative circle pseudo-element returns content none at every checked width, with no substitute. Current Reachspan image visibly verified both in showcase and /projects/reachspan. The archive consumes that same visual map. Empty production-mode console error/warning records. Existing reduced-motion and physical-touch test limitations unchanged.
+
+Actual image files refreshed: public/projects/reachspan.png and new public/projects/reachspan-current-20261013.png. Shared source map points to dated asset to prevent old optimizer cache reuse. Other project images/role claims/public routes unchanged. Current UI messaging is broader and Hong Kong-focused; existing portfolio contributions are retained as historical work scope, without asserting ownership or adding ViralSignal.
