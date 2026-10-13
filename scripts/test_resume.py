@@ -49,11 +49,11 @@ class ResumeTests(unittest.TestCase):
             reader = PdfReader(destination)
             self.assertEqual(len(reader.pages), 1)
             text = reader.pages[0].extract_text()
-            names = ["ViralSignal", "SoloMock", "Gasolytics"]
+            names = ["ViralSignal", "Amex Roofing", "Gasolytics"]
             positions = [text.index(name) for name in names]
             self.assertEqual(positions, sorted(positions))
             self.assertIn("Reachspan product", text)
-            self.assertNotIn("Amex Roofing", text)
+            self.assertNotIn("SoloMock", text)
             self.assertNotIn("Reachspan Software Developer", text)
             self.assertIn("Independent Software Developer", text)
             self.assertNotIn("How's My Job Fit?", text)
