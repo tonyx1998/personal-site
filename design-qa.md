@@ -95,3 +95,7 @@ final result: blocked
 Source and approved prior captures reviewed for spacing, type, crops, focus, mobile and link consistency. Only concrete small polish fix: scrolling-tab focus outlines needed 5px vertical clearance. No broad design changes. All previous alignment/circle/current-image approvals remain. New native browser verification is pending coordination; browser was not acquired in this phase.
 
 Résumé was separately rendered and visually inspected offline: qa/resume/updated-resume.png; extraction/link/page checks in qa/resume/validation.json. One page, no clipping or overlap, original type scale/margins. It is saved to Library. Website route-set and content tests pass with the résumé-only ViralSignal record excluded from public project inventory. No employment/date/landing-page design claim added.
+
+## Final unlocked browser check — 2026-10-13
+
+Passed in dedicated Chrome at 1487×1058 and 426×922: End selects Reachspan, Right wraps to SoloMock with focus retained, complete focus outline clears the rail, mobile menu opens and Escape closes it, résumé link opens updated PDF. No mobile overflow or captured console errors. Final desktop/mobile captures visually inspected. Native reduced-motion emulation and physical touch remain unverified; prior source checks stand. Supersedes earlier pending/locked-browser note.

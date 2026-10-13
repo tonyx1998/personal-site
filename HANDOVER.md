@@ -219,3 +219,7 @@ Generated public/resume.pdf using the canonical script: one Letter page, origina
 Polish review against approved desktop/mobile captures found no redesign need. Source showed focus rings could be clipped at the vertical edge of the scrolling rail; added 5px vertical padding only. The passive Reachspan cover's crop is intentional; case-study/archive share the current dated asset. Existing factual/ownership labels and historical/simulation captions remain. Final browser check of focus clearance is pending the coordinated slot (Data Guide then Gasolytics); no browser acquired or publication performed in this phase.
 
 Final coordinated-slot attempt: browser inventory reported the Mac locked again. No tab was acquired or operated. Final source build (27 static pages), types/lint/format, four site tests and four résumé regression tests passed. Preview publication remains gated on the focused native browser check; the current public preview is still the previously verified 14bc6e6 deployment.
+
+## Final unlocked browser check — 2026-10-13
+
+Passed in dedicated Chrome at 1487×1058 and 426×922: End selects Reachspan, Right wraps to SoloMock with focus retained, complete focus outline clears the rail, mobile menu opens and Escape closes it, résumé link opens updated PDF. No mobile overflow or captured console errors. Final desktop/mobile captures visually inspected. Native reduced-motion emulation and physical touch remain unverified; prior source checks stand. Supersedes earlier pending/locked-browser note.
