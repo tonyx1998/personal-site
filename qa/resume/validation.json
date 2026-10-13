@@ -1,0 +1,10 @@
+{
+  "pages": 1,
+  "words": 290,
+  "links": 7,
+  "tagged": false,
+  "selectable_text": true,
+  "default_ids": ["viralsignal", "solomock", "gasolytics"],
+  "product_ids": ["amex-roofing", "gasolytics", "solomock"],
+  "no_project_date_invented": true
+}

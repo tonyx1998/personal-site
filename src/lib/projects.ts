@@ -54,6 +54,8 @@ export type Project = {
   contribution?: string;
   caseStudy?: CaseStudy;
   hidden?: boolean;
+  /** Master resume entry without a portfolio route or exhibition placement. */
+  resumeOnly?: boolean;
   /** Pins the URL. Set when a title changes so existing links keep working. */
   slug?: string;
   className: string;
@@ -70,7 +72,7 @@ export type Project = {
 // should appear on the homepage and at the top of the archive. Supporting
 // entries follow in their archive order.
 export const projects: Project[] = (projectsData as Project[]).filter(
-  (project) => !project.hidden
+  (project) => !project.hidden && !project.resumeOnly
 );
 
 /** The products shown at full size on the homepage and the top of the archive. */

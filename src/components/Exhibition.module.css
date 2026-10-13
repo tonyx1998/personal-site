@@ -291,6 +291,7 @@
   overflow-x: auto;
   scrollbar-width: thin;
   padding-inline: 4px;
+  padding-block: 5px;
   border-bottom: 1px solid var(--line);
   margin-right: 0;
 }

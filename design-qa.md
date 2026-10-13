@@ -87,3 +87,11 @@ Supersedes the pending blocked entries above. Exact alignment/yellow screenshots
 Inspected combined desktop/mobile browser captures: qa/Aligned-No-Circle-Desktop.jpg (1487×1058) and qa/Aligned-No-Circle-Mobile.jpg (426×922), density 1. Fitting labels center at the viewport midpoint to <0.01px; matching 1430px and 1693px checks also exact. Original editorial asymmetry remains. No actionable P0/P1/P2 issue. Overflowing rails at 981/426/320px remain scrollable; document width matches viewport; Home/End and arrow wrapping/menu dismissal pass. Decorative circle pseudo-element returns content none at every checked width, with no substitute. Current Reachspan image visibly verified both in showcase and /projects/reachspan. The archive consumes that same visual map. Empty production-mode console error/warning records. Existing reduced-motion and physical-touch test limitations unchanged.
 
 Actual image files refreshed: public/projects/reachspan.png and new public/projects/reachspan-current-20261013.png. Shared source map points to dated asset to prevent old optimizer cache reuse. Other project images/role claims/public routes unchanged. Current UI messaging is broader and Hong Kong-focused; existing portfolio contributions are retained as historical work scope, without asserting ownership or adding ViralSignal.
+
+## Final polish and resume phase — browser check pending
+
+final result: blocked
+
+Source and approved prior captures reviewed for spacing, type, crops, focus, mobile and link consistency. Only concrete small polish fix: scrolling-tab focus outlines needed 5px vertical clearance. No broad design changes. All previous alignment/circle/current-image approvals remain. New native browser verification is pending coordination; browser was not acquired in this phase.
+
+Résumé was separately rendered and visually inspected offline: qa/resume/updated-resume.png; extraction/link/page checks in qa/resume/validation.json. One page, no clipping or overlap, original type scale/margins. It is saved to Library. Website route-set and content tests pass with the résumé-only ViralSignal record excluded from public project inventory. No employment/date/landing-page design claim added.

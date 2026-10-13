@@ -635,5 +635,26 @@
     "datePublished": "2026",
     "dateModified": "2026-09-02",
     "hidden": true
+  },
+  {
+    "title": "ViralSignal",
+    "description": "Reachspan product with Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
+    "tags": ["TypeScript", "Next.js", "React", "PostgreSQL", "OAuth"],
+    "github": null,
+    "live": "https://viralsignalapp.com",
+    "featured": false,
+    "resumeOnly": true,
+    "className": "lg:col-span-1",
+    "resume": {
+      "id": "viralsignal",
+      "order": 0,
+      "relationship": "Reachspan product",
+      "title": "ViralSignal | Reachspan product | Full-stack development",
+      "stack": "TypeScript, React, Next.js, PostgreSQL, OAuth",
+      "bullets": [
+        "Built the full-stack application for Reachspan’s ViralSignal, integrating Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
+        "Implemented OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for authentication, billing, and failure recovery."
+      ]
+    }
   }
 ]

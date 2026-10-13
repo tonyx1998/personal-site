@@ -1,6 +1,6 @@
 # Resume tailoring
 
-The public resume is a one-page full-stack application resume with Amex Roofing,
+The public resume is a one-page full-stack application resume with ViralSignal (Reachspan product),
 SoloMock, and Gasolytics. The complete collection of `resume` records in
 `src/lib/projects.data.json` is the editable master. A project's homepage
 placement does not determine whether a resume profile selects it.
@@ -32,13 +32,13 @@ source produces the same artifact.
 
 ## Profiles
 
-| Profile    | Project order                       | Emphasis                                       |
-| ---------- | ----------------------------------- | ---------------------------------------------- |
-| `default`  | Amex → SoloMock → Gasolytics        | Client delivery, realtime apps, data rendering |
-| `frontend` | Gasolytics → SoloMock → Throughline | Interactive UI and shared frontend systems     |
-| `product`  | Amex → Gasolytics → SoloMock        | Useful flows and product delivery              |
-| `ai`       | SoloMock → Gasolytics → Amex        | Realtime AI interaction plus web engineering   |
-| `backend`  | all-in-one-URL → Amex → SoloMock    | Data services, auth, APIs, integrations        |
+| Profile    | Project order                       | Emphasis                                        |
+| ---------- | ----------------------------------- | ----------------------------------------------- |
+| `default`  | ViralSignal → SoloMock → Gasolytics | Full-stack product, realtime apps, data systems |
+| `frontend` | Gasolytics → SoloMock → Throughline | Interactive UI and shared frontend systems      |
+| `product`  | Amex → Gasolytics → SoloMock        | Useful flows and product delivery               |
+| `ai`       | SoloMock → Gasolytics → Amex        | Realtime AI interaction plus web engineering    |
+| `backend`  | all-in-one-URL → Amex → SoloMock    | Data services, auth, APIs, integrations         |
 
 The AI profile leads with SoloMock's OpenAI Realtime API work. It does not imply
 that every selected project uses AI, claim Claude API experience, or describe
@@ -54,7 +54,7 @@ Edit project facts only in `src/lib/projects.data.json`. Selected records use:
 
 - `resume.id`: a unique, stable selector such as `amex-roofing`; it does not change
   the project's public URL.
-- `resume.relationship`: `Client project` or `Independent product`.
+- `resume.relationship`: `Client project`, `Independent product`, or `Reachspan product`.
 - `resume.title`, `resume.date`, `resume.stack`, and exactly two `resume.bullets`.
   Existing HTML entities are accepted as text; formatting markup is not needed.
 - The parent project's `live` link, falling back to `github`. The displayed link
@@ -97,3 +97,7 @@ absence of clipping. Inspect the chosen profile rather than assuming that a
 successful default render proves every variation. Use the existing website's
 `/resume.pdf` link for the public version; keep tailored PDFs separate. Update
 `HANDOVER.md` alongside source changes as required by the repository.
+
+## ViralSignal master entry
+
+ViralSignal is a `resumeOnly` project record, not an employment entry or a new public portfolio route. The default full-stack preset selects it before SoloMock and Gasolytics. The product preset retains Amex, Gasolytics and SoloMock. Existing other presets are unchanged. The record uses the user-approved full-stack/auth/billing/test bullets and labels the relationship Reachspan product. No project date was supplied, so this resume-only entry has no invented date; the generator omits that metadata segment. Existing independent-development role and all unrelated contact/education facts are unchanged. GPT/Claude assistance does not create a claim of designing the ViralSignal landing page.

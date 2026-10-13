@@ -42,11 +42,11 @@ CONTACT_LINKS = (
 PROFILES = {
     "default": {
         "title": "Software Developer | Full-Stack Web Applications",
-        "projects": ("amex-roofing", "solomock", "gasolytics"),
+        "projects": ("viralsignal", "solomock", "gasolytics"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, Python, SQL"),
             ("Frontend", "React, Next.js, HTML/CSS, Tailwind CSS"),
-            ("APIs", "REST APIs, WebRTC, Vercel Serverless, Google Calendar API"),
+            ("Backend and APIs", "PostgreSQL, REST APIs, OAuth, WebRTC"),
             ("Tools", "Git, Vercel"),
         ),
     },
@@ -130,7 +130,7 @@ def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JS
         if len(bullets) != 2 or not all(isinstance(b, str) and b.strip() for b in bullets):
             raise ValueError(f"Selected project {identifier!r} must have two approved bullets")
         relationship = resume.get("relationship")
-        if relationship not in ("Client project", "Independent product"):
+        if relationship not in ("Client project", "Independent product", "Reachspan product"):
             raise ValueError(f"Selected project {identifier!r} needs an explicit relationship")
         url = project.get("live") or project.get("github")
         if (
@@ -140,13 +140,13 @@ def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JS
         ):
             raise ValueError(f"Selected project {identifier!r} needs an HTTP evidence link")
         date = resume.get("date") or project.get("datePublished")
-        if not date or not resume.get("stack"):
+        if (not date and not project.get("resumeOnly")) or not resume.get("stack"):
             raise ValueError(f"Selected project {identifier!r} needs a date and stack")
         result.append({
             "id": identifier,
             "title": plain(resume.get("title") or project["title"]),
             "relationship": relationship,
-            "date": plain(date),
+            "date": plain(date) if date else "",
             "stack": plain(resume["stack"]),
             "url": url,
             "bullets": [plain(b) for b in bullets],
@@ -205,8 +205,9 @@ def build_story(projects, profile: str = "default"):
     for project in projects:
         intro = [
             Paragraph(markup(project["title"]), style["project"]),
-            Paragraph(f'{markup(project["relationship"])} &nbsp;|&nbsp; {markup(project["date"])}'
-                      f' &nbsp;|&nbsp; {link(project["url"])}', style["meta"]),
+            Paragraph(f'{markup(project["relationship"])}'
+                      + (f' &nbsp;|&nbsp; {markup(project["date"])}' if project["date"] else "")
+                      + f' &nbsp;|&nbsp; {link(project["url"])}', style["meta"]),
             Paragraph(markup(project["stack"]), style["meta"]),
             Paragraph(markup(project["bullets"][0]), style["bullet"], bulletText="-"),
         ]
