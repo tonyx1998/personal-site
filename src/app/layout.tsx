@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Public_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -7,19 +7,19 @@ import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const newsreader = localFont({
+  src: "./fonts/newsreader-latin-variable.woff2",
   variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: "variable",
+  weight: "200 800",
   style: "normal",
-  axes: ["opsz"],
   display: "swap",
 });
 
-const publicSans = Public_Sans({
+const publicSans = localFont({
+  src: "./fonts/public-sans-latin-variable.woff2",
   variable: "--font-public-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "800", "900"],
+  weight: "100 900",
+  style: "normal",
   display: "swap",
 });
 
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu · Software Developer",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Explore To Yin Yu’s fuel-price map, realtime interview workspace, and client booking system. See the products and the engineering decisions behind them.",
     siteName: "To Yin Yu",
     locale: "en_US",
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "To Yin Yu · Software Developer",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Explore To Yin Yu’s fuel-price map, realtime interview workspace, and client booking system. See the products and the engineering decisions behind them.",
   },
   robots: {
     index: true,

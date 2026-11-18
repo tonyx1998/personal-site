@@ -3,15 +3,15 @@
 import { useRef, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/app/providers";
 import styles from "./Chrome.module.css";
 
 const navItems = [
-  { label: "Work", href: "/#work" },
-  { label: "All projects", href: "/projects" },
+  { label: "Projects", href: "/projects" },
   { label: "About", href: "/#about" },
-  { label: "Resume (PDF)", href: "/resume.pdf" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Résumé (PDF)", href: "/resume.pdf" },
 ];
 const subscribeToHydration = () => () => {};
 
@@ -60,7 +60,7 @@ export function PortfolioHeader() {
             href="/"
             aria-label="To Yin Yu home"
           >
-            To Yin Yu
+            tyy.
           </Link>
           <div className={styles.desktopNav}>
             {navItems.map((item) => {
@@ -122,9 +122,10 @@ export function PortfolioFooter() {
   return (
     <footer className={styles.container + " " + styles.footer} id="contact">
       <div className={styles.footerIntro}>
-        <h2>Let’s talk.</h2>
+        <h2>Get in touch</h2>
         <p>
-          Open to software engineering roles, near Seattle or further afield.
+          I’m looking for a software engineering role. I’m based near Seattle
+          and open to relocating.
         </p>
       </div>
       <div className={styles.contact}>
@@ -133,14 +134,10 @@ export function PortfolioFooter() {
         </a>
         <div className={styles.footerLinks}>
           <a href="/resume.pdf" download="To-Yin-Yu-Resume.pdf">
-            Download resume (PDF)
+            Download résumé (PDF)
           </a>
-          <a href="https://github.com/tonyx1998">
-            GitHub <ArrowUpRight size={15} aria-hidden="true" />
-          </a>
-          <a href="https://www.linkedin.com/in/to-yin-yu/">
-            LinkedIn <ArrowUpRight size={15} aria-hidden="true" />
-          </a>
+          <a href="https://github.com/tonyx1998">GitHub</a>
+          <a href="https://www.linkedin.com/in/to-yin-yu/">LinkedIn</a>
         </div>
       </div>
     </footer>

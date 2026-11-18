@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
 import { ProjectLinks } from "@/components/ProjectLinks";
@@ -16,6 +15,7 @@ import {
 import { projectVisual } from "@/lib/project-visuals";
 import { jsonLdScriptProps } from "@/lib/structured-data";
 import { SITE_URL } from "@/lib/site";
+import SectionContents from "./SectionContents";
 import styles from "./ProjectDetail.module.css";
 
 export function generateStaticParams() {
@@ -77,22 +77,15 @@ export async function generateMetadata({
   };
 }
 
-function StudyImage({
-  figure,
-  eager = false,
-}: {
-  figure: StudyFigure;
-  eager?: boolean;
-}) {
+function StudyImage({ figure }: { figure: StudyFigure }) {
   return (
     <figure className={styles.figure}>
       <Image
-        src={figure.originalSrc ?? figure.src}
+        src={figure.src}
         alt={figure.alt}
         width={figure.width}
         height={figure.height}
-        loading={eager ? "eager" : "lazy"}
-        sizes="(max-width: 1000px) calc(100vw - 40px), 960px"
+        sizes="(max-width: 56rem) calc(100vw - 40px), (max-width: 72rem) 68vw, 800px"
       />
       <figcaption>
         {figure.caption}{" "}
@@ -112,7 +105,6 @@ export default async function ProjectDetailPage({
   if (!project) notFound();
   const study = project.caseStudy;
   const articlePath = projectArticlePath(project);
-  const firstFigure = study?.sections.find((section) => section.figure)?.figure;
   const visual = projectVisual(project, slug);
   const tier = projects.filter((p) => p.featured === project.featured);
   const index = tier.findIndex((candidate) => projectSlug(candidate) === slug);
@@ -166,158 +158,163 @@ export default async function ProjectDetailPage({
         >
           <article>
             <Link href="/projects" className={styles.back}>
-              <ArrowLeft size={16} aria-hidden="true" /> All projects
+              All projects
             </Link>
             <header className={styles.hero}>
-              <h1>{project.seo?.title ?? project.title}</h1>
-              <p className={styles.lead}>
-                {study?.summary ?? project.description}
-              </p>
-              <dl className={styles.overview}>
-                {study && (
-                  <>
-                    <div>
-                      <dt>My role</dt>
-                      <dd>{study.role}</dd>
-                    </div>
-                    <div>
-                      <dt>Context</dt>
-                      <dd>{study.context}</dd>
-                    </div>
-                  </>
-                )}
-                {!study && (
-                  <div>
-                    <dt>Year</dt>
-                    <dd>{project.datePublished ?? "Ongoing"}</dd>
-                  </div>
-                )}
-                {!project.live && (
-                  <div>
-                    <dt>Format</dt>
-                    <dd>Local tool</dd>
-                  </div>
-                )}
-              </dl>
-              <ProjectLinks project={project} showNotes={false} />
-              <p className={styles.stack}>{project.tags.join(" · ")}</p>
-              {project.engineeringArticle && articlePath && (
-                <p className={styles.articleLink}>
-                  <Link href={articlePath}>
-                    {project.engineeringArticle.title}
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </Link>
+              <div>
+                <h1>{project.seo?.title ?? project.title}</h1>
+                <p className={styles.lead}>
+                  {study?.summary ?? project.description}
                 </p>
-              )}
-            </header>
-
-            {firstFigure ? (
-              <StudyImage figure={firstFigure} eager />
-            ) : (
-              visual && (
-                <figure className={styles.figure}>
-                  <Image
-                    src={visual.src}
-                    alt={visual.alt}
-                    width={1280}
-                    height={720}
-                    loading="eager"
-                    sizes="(max-width: 1000px) calc(100vw - 40px), 960px"
-                  />
-                </figure>
-              )
-            )}
-
-            {study ? (
-              <div className={styles.study}>
-                <dl className={styles.takeaways}>
-                  <div>
-                    <dt>Problem</dt>
-                    <dd>{study.takeaways.problem}</dd>
-                  </div>
-                  <div>
-                    <dt>Decision</dt>
-                    <dd>{study.takeaways.decision}</dd>
-                  </div>
-                  {study.takeaways.tradeoff && (
+              </div>
+              <div className={styles.facts}>
+                <dl className={styles.overview}>
+                  {study ? (
+                    <>
+                      <div>
+                        <dt>My role</dt>
+                        <dd>{study.role}</dd>
+                      </div>
+                      <div>
+                        <dt>Context</dt>
+                        <dd>{study.context}</dd>
+                      </div>
+                    </>
+                  ) : (
                     <div>
-                      <dt>Tradeoff</dt>
-                      <dd>{study.takeaways.tradeoff}</dd>
+                      <dt>Year</dt>
+                      <dd>{project.datePublished ?? "Ongoing"}</dd>
+                    </div>
+                  )}
+                  {!project.live && (
+                    <div>
+                      <dt>Format</dt>
+                      <dd>Local tool</dd>
                     </div>
                   )}
                   <div>
-                    <dt>Verified behavior</dt>
-                    <dd>{study.takeaways.verifiedBehavior}</dd>
+                    <dt>Built with</dt>
+                    <dd>{project.tags.join(", ")}</dd>
                   </div>
                 </dl>
-                {study.sections.map((section, sectionIndex) => (
-                  <section
-                    key={section.title}
-                    className={styles.studySection}
-                    aria-labelledby={"study-section-" + sectionIndex}
-                  >
-                    <div className={styles.prose}>
-                      <h2 id={"study-section-" + sectionIndex}>
-                        {section.title}
-                      </h2>
-                      {section.paragraphs.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                    {section.figure &&
-                      section.figure.src !== firstFigure?.src && (
-                        <StudyImage figure={section.figure} />
-                      )}
-                  </section>
-                ))}
-                <p className={styles.evidenceNote}>{study.evidenceNote}</p>
+                <ProjectLinks project={project} showNotes={false} />
               </div>
-            ) : (
-              <section className={styles.notes} aria-labelledby="notes-heading">
-                <h2 id="notes-heading">Project notes</h2>
-                {project.highlights?.length ? (
-                  <ul>
-                    {project.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
+            </header>
+
+            {study ? (
+              <>
+                <section
+                  aria-labelledby="decisions-heading"
+                  className={styles.decisions}
+                >
+                  <h2 id="decisions-heading">Engineering decisions</h2>
+                  <dl className={styles.takeaways}>
+                    <div>
+                      <dt>Problem</dt>
+                      <dd>{study.takeaways.problem}</dd>
+                    </div>
+                    <div>
+                      <dt>Decision</dt>
+                      <dd>{study.takeaways.decision}</dd>
+                    </div>
+                    {study.takeaways.tradeoff && (
+                      <div>
+                        <dt>Tradeoff</dt>
+                        <dd>{study.takeaways.tradeoff}</dd>
+                      </div>
+                    )}
+                    <div>
+                      <dt>Verified behavior</dt>
+                      <dd>{study.takeaways.verifiedBehavior}</dd>
+                    </div>
+                  </dl>
+                </section>
+                <div className={styles.reading}>
+                  <SectionContents
+                    sections={study.sections}
+                    prefix="study-section"
+                  />
+                  <div className={styles.body}>
+                    {study.sections.map((section, sectionIndex) => (
+                      <section
+                        key={section.title}
+                        className={styles.studySection}
+                        aria-labelledby={"study-section-" + sectionIndex}
+                      >
+                        <div className={styles.prose}>
+                          <h2 id={"study-section-" + sectionIndex}>
+                            {section.title}
+                          </h2>
+                          {section.paragraphs.map((paragraph) => (
+                            <p key={paragraph}>{paragraph}</p>
+                          ))}
+                        </div>
+                        {section.figure && (
+                          <StudyImage figure={section.figure} />
+                        )}
+                      </section>
                     ))}
-                  </ul>
-                ) : (
-                  <p>{project.description}</p>
+                    <p className={styles.evidenceNote}>{study.evidenceNote}</p>
+                    {project.engineeringArticle && articlePath && (
+                      <aside
+                        className={styles.related}
+                        aria-label="Related engineering article"
+                      >
+                        <Link href={articlePath}>
+                          {project.engineeringArticle.title}
+                        </Link>
+                      </aside>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {visual && (
+                  <figure className={styles.projectImage}>
+                    <Image
+                      src={visual.src}
+                      alt={visual.alt}
+                      width={1280}
+                      height={720}
+                      sizes="(max-width: 56rem) calc(100vw - 40px), 800px"
+                    />
+                  </figure>
                 )}
-              </section>
+                {!!project.highlights?.length && (
+                  <section
+                    className={styles.notes}
+                    aria-labelledby="notes-heading"
+                  >
+                    <h2 id="notes-heading">Project notes</h2>
+                    <ul>
+                      {project.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </>
             )}
 
             <nav className={styles.pager} aria-label="More projects">
-              {previous ? (
+              {previous && (
                 <Link href={"/projects/" + projectSlug(previous)}>
-                  <span>
-                    <ArrowLeft size={15} aria-hidden="true" /> Previous{" "}
-                    {study ? "case study" : "project"}
-                  </span>
+                  <span>Previous {study ? "case study" : "project"}</span>
                   <b>{previous.title}</b>
                 </Link>
-              ) : (
-                <span />
               )}
-              {next ? (
-                <Link
-                  href={"/projects/" + projectSlug(next)}
-                  className={styles.pagerNext}
-                >
-                  <span>
-                    Next {study ? "case study" : "project"}{" "}
-                    <ArrowRight size={15} aria-hidden="true" />
-                  </span>
-                  <b>{next.title}</b>
-                </Link>
-              ) : (
-                <Link href="/projects" className={styles.pagerNext}>
-                  <span>
-                    Keep exploring <ArrowRight size={15} aria-hidden="true" />
-                  </span>
-                  <b>All projects</b>
-                </Link>
-              )}
+              <Link
+                href={next ? "/projects/" + projectSlug(next) : "/projects"}
+                className={styles.pagerNext}
+              >
+                <span>
+                  {next
+                    ? `Next ${study ? "case study" : "project"}`
+                    : "Project index"}
+                </span>
+                <b>{next?.title ?? "All projects"}</b>
+              </Link>
             </nav>
           </article>
         </main>

@@ -305,3 +305,9 @@ Regenerated one Letter page with 283 extracted words, embedded fonts, semantic h
 ## SEO publication authorized — October 13
 
 User approved publication of the two prepared SoloMock/Gasolytics case-study SEO changes after review. Integrated current master ec5c718 and retained its default ViralSignal/Amex Roofing/Gasolytics tagged résumé byte for byte. No social posts, GitHub profile edits, tracking implementation, new content batch or other repository changes authorized. Earlier local-only notes describe checkpoint history; current release scope is these two pages and their supporting local documentation. Await fresh independent review and exact-head checks before normal master Git deployment.
+
+## Portfolio revision — November 18, 2026
+
+The homepage opens with Gasolytics and presents the two other featured studies once. The archive retains all 17 public project pages. Study and article readers can jump to sections, see the engineering decisions up front, and open the original evidence images. The homepage and inner pages now use the same navigation, theme control, and contact footer.
+
+Google Chrome’s Modern Web Guidance v1.0.1 is available in `.agents/skills/modern-web-guidance`. The upstream revision and license accompany the skill. The page fonts are bundled locally so production builds can run without contacting Google Fonts. The lead project also links directly to its data-failure write-up. Follow the existing pull request and Git deployment workflow.

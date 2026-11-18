@@ -14,19 +14,21 @@
 }
 .header {
   position: relative;
-  padding-top: var(--space-5);
+  padding-block: 1.15rem 0.95rem;
 }
 .navBar {
   display: flex;
   align-items: center;
   gap: var(--space-5);
   min-height: 44px;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line-strong);
 }
 .wordmark {
   font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 26px;
+  font-size: 2rem;
   font-weight: 500;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.055em;
   line-height: 1.2;
   margin-right: auto;
 }
@@ -88,11 +90,11 @@
   gap: var(--space-6);
   margin-top: var(--space-8);
   padding-block: var(--space-7) var(--space-8);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--line-strong);
 }
 .footerIntro h2 {
   font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 36px;
+  font-size: clamp(2.1rem, 1.5rem + 2vw, 3.25rem);
   font-weight: 500;
   line-height: 1.1;
   margin: 0 0 var(--space-3);
@@ -142,7 +144,7 @@
     gap: var(--space-3);
   }
   .wordmark {
-    font-size: 24px;
+    font-size: 1.85rem;
   }
   .desktopNav {
     display: none;

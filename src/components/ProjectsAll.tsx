@@ -10,94 +10,74 @@ import { projectVisual } from "@/lib/project-visuals";
 import chrome from "./Chrome.module.css";
 import styles from "./ProjectsAll.module.css";
 
+const alphabeticalProjects = [...supportingProjects].sort((a, b) =>
+  a.title.localeCompare(b.title, "en", { sensitivity: "base", numeric: true })
+);
+
 export default function ProjectsAll() {
   return (
     <div className={chrome.container}>
       <header className={styles.intro}>
-        <h1>All projects</h1>
-        <p>
-          Client work, independent products, local tools, and technical courses.
-          Start with a case study or browse the shorter project notes.
-        </p>
-        <nav className={styles.sectionLinks} aria-label="Project sections">
-          <a href="#selected-heading">Selected work</a>
-          <a href="#supporting-heading">More work</a>
+        <h1>Project archive</h1>
+        <nav aria-label="Archive sections" className={styles.contents}>
+          <a href="#selected-heading">Case studies</a>
+          <a href="#supporting-heading">Project index</a>
         </nav>
       </header>
 
-      <section aria-labelledby="selected-heading" className={styles.section}>
-        <h2 id="selected-heading" className={styles.sectionTitle}>
-          Selected work
-        </h2>
-        <div className={styles.rows}>
-          {selectedProjects.map((project, index) => {
+      <section className={styles.section} aria-labelledby="selected-heading">
+        <h2 id="selected-heading">Case studies</h2>
+        <div className={styles.studies}>
+          {selectedProjects.map((project) => {
             const slug = projectSlug(project);
             const visual = projectVisual(project, slug);
             return (
-              <article key={slug} className={styles.row}>
+              <article key={slug} className={styles.study}>
                 {visual && (
-                  <Link
-                    href={"/projects/" + slug}
+                  <Image
                     className={styles.thumb}
-                    aria-hidden="true"
-                    tabIndex={-1}
-                  >
-                    <Image
-                      src={visual.src}
-                      alt=""
-                      width={1280}
-                      height={720}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 820px) 160px, 224px"
-                    />
-                  </Link>
+                    src={visual.src}
+                    alt={visual.alt}
+                    width={1280}
+                    height={720}
+                    sizes="(max-width: 42rem) calc(100vw - 40px), (max-width: 75rem) 30vw, 360px"
+                  />
                 )}
-                <div className={styles.rowCopy}>
-                  <h3>
-                    <Link href={"/projects/" + slug}>{project.title}</Link>
-                  </h3>
-                  <p className={styles.desc}>
-                    {project.homepageSummary ?? project.description}
-                  </p>
-                  <p className={styles.meta}>
-                    {project.datePublished} ·{" "}
-                    {project.tags.slice(0, 3).join(" · ")}
-                  </p>
-                  <ProjectLinks project={project} />
-                </div>
+                <h3>
+                  <Link href={"/projects/" + slug}>{project.title}</Link>
+                </h3>
+                <p>{project.homepageSummary ?? project.description}</p>
+                <ProjectLinks project={project} />
               </article>
             );
           })}
         </div>
       </section>
 
-      <section aria-labelledby="supporting-heading" className={styles.section}>
-        <h2 id="supporting-heading" className={styles.sectionTitle}>
-          More work
-        </h2>
-        <div className={styles.rows}>
-          {supportingProjects.map((project) => {
+      <section className={styles.section} aria-labelledby="supporting-heading">
+        <h2 id="supporting-heading">Project index</h2>
+        <ul className={styles.index}>
+          {alphabeticalProjects.map((project) => {
             const slug = projectSlug(project);
             return (
-              <article key={slug} className={styles.compactRow}>
-                <div className={styles.rowCopy}>
+              <li key={slug}>
+                <div>
                   <h3>
                     <Link href={"/projects/" + slug}>{project.title}</Link>
                   </h3>
-                  <p className={styles.desc}>{project.description}</p>
                   <p className={styles.meta}>
                     {project.datePublished}
-                    {!project.live && " · Local tool"} ·{" "}
-                    {project.tags.slice(0, 3).join(" · ")}
+                    {!project.live && " · Local tool"}
                   </p>
                 </div>
-                <div className={styles.compactLinks}>
-                  <ProjectLinks project={project} />
-                </div>
-              </article>
+                <p className={styles.description}>
+                  {project.homepageSummary ?? project.description}
+                </p>
+                <ProjectLinks project={project} showNotes={false} />
+              </li>
             );
           })}
-        </div>
+        </ul>
       </section>
     </div>
   );
