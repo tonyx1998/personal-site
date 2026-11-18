@@ -310,4 +310,4 @@ User approved publication of the two prepared SoloMock/Gasolytics case-study SEO
 
 The homepage opens with Gasolytics and presents the two other featured studies once. The archive retains all 17 public project pages. Study and article readers can jump to sections, see the engineering decisions up front, and open the original evidence images. The homepage and inner pages now use the same navigation, theme control, and contact footer.
 
-Google Chrome’s Modern Web Guidance v1.0.1 is available in `.agents/skills/modern-web-guidance`. The upstream revision and license accompany the skill. Follow the existing pull request and Git deployment workflow.
+Google Chrome’s Modern Web Guidance v1.0.1 is available in `.agents/skills/modern-web-guidance`. The upstream revision and license accompany the skill. The page fonts are bundled locally so production builds can run without contacting Google Fonts. The lead project also links directly to its data-failure write-up. Follow the existing pull request and Git deployment workflow.

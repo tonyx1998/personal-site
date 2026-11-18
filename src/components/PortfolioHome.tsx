@@ -5,6 +5,7 @@ import { ProjectLinks } from "./ProjectLinks";
 import { projectVisual } from "@/lib/project-visuals";
 import {
   type Project,
+  projectArticlePath,
   projectSlug,
   selectedProjects,
   shortTitle,
@@ -21,6 +22,7 @@ function ProjectStudy({
 }) {
   const slug = projectSlug(project);
   const visual = projectVisual(project, slug);
+  const articlePath = projectArticlePath(project);
   const Heading = lead ? "h2" : "h3";
   const figure = project.caseStudy?.sections.find(
     (section) => section.figure
@@ -50,6 +52,9 @@ function ProjectStudy({
             />
           </div>
           <figcaption>
+            {project.resume?.relationship === "Client project" && (
+              <>{project.resume.relationship} · </>
+            )}
             {project.exhibition?.caption ?? figure?.caption}
           </figcaption>
         </figure>
@@ -70,6 +75,11 @@ function ProjectStudy({
               project.contribution)}
         </p>
         <ProjectLinks project={project} />
+        {lead && articlePath && project.engineeringArticle && (
+          <Link className={styles.incidentLink} href={articlePath}>
+            {project.engineeringArticle.title}
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -91,9 +101,9 @@ export default function PortfolioHome() {
             <h1>To Yin Yu</h1>
             <p className={styles.role}>Software developer near Seattle.</p>
             <p className={styles.lede}>
-              I build maps from public data and voice tools that can follow a
-              conversation. I like figuring out what the person using them
-              should see when the data gets old or the connection drops.
+              I build fuel-price maps and voice tools for interview practice. I
+              care about what people can still do when a data feed falls behind
+              or a call drops.
             </p>
             <div className={styles.actions}>
               <a className={styles.resume} href="/resume.pdf">
@@ -129,9 +139,8 @@ export default function PortfolioHome() {
           <h2 id="about-heading">About me</h2>
           <div className={styles.bio}>
             <p>
-              I’m based in Lynnwood, Washington. I studied computer science at
-              the University of Maryland and have been building independent
-              software since 2024.
+              I’m based in Lynnwood, Washington, and have been building
+              independent software since 2024.
             </p>
             <p>
               I work across the interface and backend. My favorite part is
@@ -141,11 +150,15 @@ export default function PortfolioHome() {
             <dl className={styles.background}>
               <div>
                 <dt>Education</dt>
-                <dd>B.S. in Computer Science, 2022</dd>
+                <dd>B.S. in Computer Science, University of Maryland, 2022</dd>
               </div>
               <div>
                 <dt>Languages</dt>
                 <dd>English, Mandarin and Cantonese</dd>
+              </div>
+              <div>
+                <dt>Work authorization</dt>
+                <dd>U.S. citizen</dd>
               </div>
             </dl>
           </div>

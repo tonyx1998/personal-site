@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Public_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -7,19 +7,19 @@ import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const newsreader = localFont({
+  src: "./fonts/newsreader-latin-variable.woff2",
   variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: "variable",
+  weight: "200 800",
   style: "normal",
-  axes: ["opsz"],
   display: "swap",
 });
 
-const publicSans = Public_Sans({
+const publicSans = localFont({
+  src: "./fonts/public-sans-latin-variable.woff2",
   variable: "--font-public-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "800", "900"],
+  weight: "100 900",
+  style: "normal",
   display: "swap",
 });
 
