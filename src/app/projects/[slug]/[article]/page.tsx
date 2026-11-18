@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
 import chrome from "@/components/Chrome.module.css";
@@ -13,6 +12,7 @@ import {
 } from "@/lib/projects";
 import { jsonLdScriptProps } from "@/lib/structured-data";
 import { SITE_URL } from "@/lib/site";
+import SectionContents from "../SectionContents";
 import styles from "../ProjectDetail.module.css";
 import articleStyles from "./Article.module.css";
 
@@ -114,68 +114,75 @@ export default async function EngineeringArticlePage({ params }: Props) {
           tabIndex={-1}
           className={chrome.container + " " + styles.main}
         >
-          <article className={articleStyles.article}>
+          <article>
             <Link href={projectPath} className={styles.back}>
-              <ArrowLeft size={16} aria-hidden="true" /> {shortTitle(project)}{" "}
-              case study
+              {shortTitle(project)} case study
             </Link>
             <header className={styles.hero}>
-              <h1>{article.title}</h1>
-              <p className={styles.lead}>{article.introduction}</p>
-              <dl className={styles.overview}>
-                {project.caseStudy && (
+              <div>
+                <h1>{article.title}</h1>
+                <p className={styles.lead}>{article.introduction}</p>
+              </div>
+              <div className={styles.facts}>
+                <dl className={styles.overview}>
+                  {project.caseStudy && (
+                    <div>
+                      <dt>My role</dt>
+                      <dd>{project.caseStudy.role}</dd>
+                    </div>
+                  )}
                   <div>
-                    <dt>My role</dt>
-                    <dd>{project.caseStudy.role}</dd>
+                    <dt>Focus</dt>
+                    <dd>{article.focus}</dd>
                   </div>
-                )}
-                <div>
-                  <dt>Focus</dt>
-                  <dd>{article.focus}</dd>
-                </div>
-              </dl>
-              <p className={articleStyles.scope}>
-                Recovery verified{" "}
-                <time dateTime={article.verifiedOn}>{verifiedDate}</time>
-                {" · "}revision <code>{article.verifiedRevision}</code>
-              </p>
+                  <div>
+                    <dt>Recovery verified</dt>
+                    <dd>
+                      <time dateTime={article.verifiedOn}>{verifiedDate}</time>{" "}
+                      · revision <code>{article.verifiedRevision}</code>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </header>
-            {article.sections.map((section, index) => (
-              <section
-                key={section.title}
-                className={styles.prose + " " + articleStyles.section}
-                aria-labelledby={"article-section-" + index}
-              >
-                <h2 id={"article-section-" + index}>{section.title}</h2>
-                {section.blocks.map((block, blockIndex) =>
-                  block.type === "paragraph" ? (
-                    <p key={blockIndex}>{block.text}</p>
-                  ) : (
-                    <ul key={blockIndex} className={articleStyles.list}>
-                      {block.items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  )
-                )}
-              </section>
-            ))}
-            <p className={styles.evidenceNote}>{article.evidenceNote}</p>
-            <nav
-              className={articleStyles.links}
-              aria-label="Continue exploring Gasolytics"
-            >
-              <Link href={projectPath}>
-                <ArrowLeft size={16} aria-hidden="true" /> Back to the case
-                study
-              </Link>
-              {project.live && (
-                <a href={project.live}>
-                  Explore {shortTitle(project)}{" "}
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              )}
-            </nav>
+            <div className={styles.reading}>
+              <SectionContents
+                sections={article.sections}
+                prefix="article-section"
+              />
+              <div className={styles.body}>
+                {article.sections.map((section, index) => (
+                  <section
+                    key={section.title}
+                    className={styles.prose + " " + styles.studySection}
+                    aria-labelledby={"article-section-" + index}
+                  >
+                    <h2 id={"article-section-" + index}>{section.title}</h2>
+                    {section.blocks.map((block, blockIndex) =>
+                      block.type === "paragraph" ? (
+                        <p key={blockIndex}>{block.text}</p>
+                      ) : (
+                        <ul key={blockIndex} className={articleStyles.list}>
+                          {block.items.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      )
+                    )}
+                  </section>
+                ))}
+                <p className={styles.evidenceNote}>{article.evidenceNote}</p>
+                <nav
+                  className={articleStyles.links}
+                  aria-label={`Continue exploring ${shortTitle(project)}`}
+                >
+                  <Link href={projectPath}>Back to the case study</Link>
+                  {project.live && (
+                    <a href={project.live}>Explore {shortTitle(project)}</a>
+                  )}
+                </nav>
+              </div>
+            </div>
           </article>
         </main>
         <PortfolioFooter />

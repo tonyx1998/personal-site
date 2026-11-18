@@ -26,6 +26,7 @@ Portfolio site for To Yin Yu — Next.js 16, React 19, Tailwind v4 + CSS Modules
 - The homepage and archive are generated from the JSON. `featured` puts a project on the homepage at full size (it needs a 1280×720 screenshot in `public/projects/` and an entry in `src/lib/project-visuals.ts`); `hidden` removes it everywhere.
 - Colors and type come from the tokens in `globals.css`. Do not add a font outside Newsreader and Public Sans, and do not reintroduce numbered section markers or eyebrow labels.
 - Content must be visible without JavaScript. Animate from a visible resting state; never ship an element at `opacity: 0` waiting on a scroll observer.
+- For web UI changes, consult the repository’s [Modern Web Guidance](.agents/skills/modern-web-guidance/SKILL.md).
 - Respect `prefers-reduced-motion` for animations.
 - No environment variables are required. Do not add server routes that call paid APIs unless a page actually uses them.
 - Update `HANDOVER.md` in the same PR as any source change (CI checks this).

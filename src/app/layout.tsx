@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu · Software Developer",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Explore To Yin Yu’s fuel-price map, realtime interview workspace, and client booking system. See the products and the engineering decisions behind them.",
     siteName: "To Yin Yu",
     locale: "en_US",
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "To Yin Yu · Software Developer",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Explore To Yin Yu’s fuel-price map, realtime interview workspace, and client booking system. See the products and the engineering decisions behind them.",
   },
   robots: {
     index: true,

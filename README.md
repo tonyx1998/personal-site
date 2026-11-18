@@ -7,7 +7,7 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 plus CSS Modules.
 ## How the site is put together
 
 - `src/lib/projects.data.json` is the single source of truth for every project. The homepage, the archive at `/projects`, each `/projects/<slug>` page, the sitemap, the JSON-LD, and the résumé PDF all read from it. Edit the JSON, then regenerate the résumé.
-- `src/components/PortfolioHome.tsx` renders three `featured` projects as image-and-text rows and four `homepageCompact` projects as smaller entries. The archive still includes every visible record. `homepageSummary` and `contribution` keep the homepage concise; `caseStudy` contains the longer explanation and evidence.
+- `src/components/PortfolioHome.tsx` leads with the Gasolytics map and presents the other featured case studies below it. The project archive includes every visible record. Each study draws its technical decisions and screenshot captions from the shared data.
 - `src/components/ProjectsAll.tsx` renders the archive: featured projects with thumbnails, the rest as compact rows. A project with `"hidden": true` is left out of the homepage, the archive, the sitemap, and the routes.
 - `src/app/layout.tsx` ships the light theme and a small pre-hydration script that applies a saved choice from `localStorage.theme`, or else the system preference, before first paint. Every route is statically rendered.
 - `scripts/build-resume.py` generates the one-page `public/resume.pdf` from explicit project profiles and the shared `resume` fields. It validates the staged document before replacing the previous PDF. See [resume tailoring](docs/resume-tailoring.md).

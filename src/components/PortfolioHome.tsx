@@ -1,203 +1,157 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Plus } from "lucide-react";
-import Exhibition from "./Exhibition";
-import { PortfolioFooter } from "./PortfolioChrome";
+import { PortfolioFooter, PortfolioHeader } from "./PortfolioChrome";
+import { ProjectLinks } from "./ProjectLinks";
+import { projectVisual } from "@/lib/project-visuals";
 import {
-  selectedProjects,
-  projects as publicProjects,
-  shortTitle,
-  homepageSupportingProjects,
+  type Project,
   projectSlug,
+  selectedProjects,
+  shortTitle,
 } from "@/lib/projects";
-import styles from "./Exhibition.module.css";
+import chrome from "./Chrome.module.css";
+import styles from "./PortfolioHome.module.css";
+
+function ProjectStudy({
+  project,
+  lead = false,
+}: {
+  project: Project;
+  lead?: boolean;
+}) {
+  const slug = projectSlug(project);
+  const visual = projectVisual(project, slug);
+  const Heading = lead ? "h2" : "h3";
+  const figure = project.caseStudy?.sections.find(
+    (section) => section.figure
+  )?.figure;
+
+  return (
+    <article
+      id={lead ? "work" : undefined}
+      aria-labelledby={`title-${slug}`}
+      className={lead ? styles.leadProject : styles.study}
+    >
+      {visual && (
+        <figure className={styles.figure}>
+          <div className={styles.screen}>
+            <Image
+              src={visual.src}
+              alt={visual.alt}
+              width={figure?.width ?? 1280}
+              height={figure?.height ?? 720}
+              loading={lead ? "eager" : "lazy"}
+              fetchPriority={lead ? "high" : undefined}
+              sizes={
+                lead
+                  ? "(max-width: 800px) 94vw, (max-width: 1180px) 54vw, 620px"
+                  : "(max-width: 680px) 94vw, (max-width: 1180px) 45vw, 542px"
+              }
+            />
+          </div>
+          <figcaption>
+            {project.exhibition?.caption ?? figure?.caption}
+          </figcaption>
+        </figure>
+      )}
+      <div className={styles.studyCopy}>
+        <Heading id={`title-${slug}`} className={styles.projectTitle}>
+          <Link href={`/projects/${slug}`}>{shortTitle(project)}</Link>
+        </Heading>
+        <p className={styles.description}>
+          {project.exhibition?.summary ??
+            project.homepageSummary ??
+            project.description}
+        </p>
+        <p className={styles.decision}>
+          {lead
+            ? project.contribution
+            : (project.caseStudy?.takeaways.verifiedBehavior ??
+              project.contribution)}
+        </p>
+        <ProjectLinks project={project} />
+      </div>
+    </article>
+  );
+}
 
 export default function PortfolioHome() {
-  const projects = ["SoloMock", "Gasolytics", "Amex Roofing"].map(
-    (title) =>
-      selectedProjects.find((project) => shortTitle(project) === title)!
-  );
-  const exhibitionProjects = [
-    "SoloMock",
-    "Gasolytics",
-    "Amex Roofing",
-    "How's My Job Fit?",
-    "SoloYap",
-    "Throughline",
-    "Reachspan",
-  ].map(
-    (title) => publicProjects.find((project) => shortTitle(project) === title)!
-  );
+  const lead =
+    selectedProjects.find(
+      (project) => projectSlug(project) === "gasolytics-us-gas-price-map"
+    ) ?? selectedProjects[0];
+  const otherStudies = selectedProjects.filter((project) => project !== lead);
+
   return (
-    <div className={styles.page}>
-      <main>
-        <Exhibition projects={exhibitionProjects} />
-        <div aria-label="Background">
-          <section
-            className={styles.backgroundWork}
-            aria-labelledby="background-work-heading"
-          >
-            <div className={styles.editorialHeader}>
-              <h2 id="background-work-heading" className={styles.scopeWords}>
-                <span>Interface.</span>
-                <span>Backend.</span>
-                <span>After launch.</span>
-              </h2>
-              <div className={styles.editorialIntro}>
-                <p className={styles.noteLabel}>
-                  Software developer building useful web products.
-                </p>
-                <p>
-                  I build full-stack apps, realtime voice tools, and booking
-                  systems for service businesses. My work covers the interface,
-                  backend, deployment, and the behavior users see when something
-                  goes wrong.
-                </p>
-                <div className={styles.availabilityLedger}>
-                  <p>Open to software engineering roles</p>
-                  <p>Seattle area · Open to relocation</p>
-                  <p>
-                    B.S. Computer Science, University of Maryland · US citizen
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.notesHeading}>
-              <h2>Engineering notes</h2>
-              <p>The decisions behind the previews.</p>
-            </div>
-            <div className={styles.notes}>
-              {projects.map((project, index) => (
-                <details
-                  key={projectSlug(project)}
-                  open={index === 0}
-                  className={styles.note}
-                >
-                  <summary>
-                    <h3>{shortTitle(project)}</h3>
-                    <span>
-                      {project.contribution ?? project.highlights?.[0]}
-                    </span>
-                    <Plus
-                      className={styles.disclosureIcon}
-                      size={26}
-                      aria-hidden="true"
-                    />
-                  </summary>
-                  <div className={styles.noteBody}>
-                    <p>{project.homepageSummary ?? project.description}</p>
-                    <p className={styles.noteLabel}>
-                      {project.tags.slice(0, 3).join(" · ")}
-                    </p>
-                    <p className={styles.noteCaption}>
-                      {
-                        project.caseStudy?.sections.find(
-                          (section) => section.figure
-                        )?.figure?.caption
-                      }
-                    </p>
-                    <Link href={"/projects/" + projectSlug(project)}>
-                      Read the case study{" "}
-                      <ArrowUpRight size={17} aria-hidden="true" />
-                    </Link>
-                  </div>
-                </details>
-              ))}
-            </div>
-            <div className={styles.notesHeading}>
-              <h2 id="more">More work</h2>
-              <p>Other products I build and maintain.</p>
-            </div>
-            <div className={styles.notes}>
-              {homepageSupportingProjects.map((project) => (
-                <details key={projectSlug(project)} className={styles.note}>
-                  <summary>
-                    <h3>{shortTitle(project)}</h3>
-                    <span>
-                      {project.homepageSummary ?? project.description}
-                    </span>
-                    <Plus
-                      className={styles.disclosureIcon}
-                      size={26}
-                      aria-hidden="true"
-                    />
-                  </summary>
-                  <div className={styles.noteBody}>
-                    <p>{project.contribution ?? project.highlights?.[0]}</p>
-                    <Link href={"/projects/" + projectSlug(project)}>
-                      Project notes{" "}
-                      <ArrowUpRight size={17} aria-hidden="true" />
-                    </Link>
-                  </div>
-                </details>
-              ))}
-            </div>
-            <p className={styles.allWork}>
-              <Link href="/projects">
-                All projects <ArrowUpRight size={20} aria-hidden="true" />
-              </Link>
+    <div className={chrome.page} id="top">
+      <PortfolioHeader />
+      <main className={chrome.container} id="main-content" tabIndex={-1}>
+        <div className={styles.opening}>
+          <header className={styles.intro}>
+            <h1>To Yin Yu</h1>
+            <p className={styles.role}>Software developer near Seattle.</p>
+            <p className={styles.lede}>
+              I build maps from public data and voice tools that can follow a
+              conversation. I like figuring out what the person using them
+              should see when the data gets old or the connection drops.
             </p>
-          </section>
-          <section
-            className={styles.about}
-            id="about"
-            aria-labelledby="about-heading"
-          >
-            <div>
-              <h2 id="about-heading">About</h2>
-              <p className={styles.noteLabel}>
-                To Yin Yu · Lynnwood, Washington
-              </p>
-              <p>
-                I’m To Yin Yu, a software developer in Lynnwood, Washington. I
-                finished my computer science degree at the University of
-                Maryland in December 2022 and have been building and shipping my
-                own products since 2024.
-              </p>
-              <p>
-                I work across the frontend, backend, and deployment. The part
-                after launch matters to me, too: tracing a failed request,
-                making an error understandable, and deciding what a system
-                should do when a dependency is unavailable.
-              </p>
-              <p>
-                The case studies here explain those decisions, including the
-                limits of what I have tested. I’m looking for a software
-                engineering role where I can contribute that experience and
-                learn from a team.
-              </p>
+            <div className={styles.actions}>
+              <a className={styles.resume} href="/resume.pdf">
+                View résumé <span>(PDF)</span>
+              </a>
+              <a className={styles.contactLink} href="#contact">
+                Get in touch
+              </a>
             </div>
+          </header>
+          {lead && <ProjectStudy project={lead} lead />}
+        </div>
+
+        <section className={styles.moreWork} aria-labelledby="more">
+          <div className={styles.sectionHeading}>
+            <h2 id="more">More case studies</h2>
+            <Link href="/projects" className={styles.archiveLink}>
+              All projects
+            </Link>
+          </div>
+          <div className={styles.pair}>
+            {otherStudies.map((project) => (
+              <ProjectStudy key={projectSlug(project)} project={project} />
+            ))}
+          </div>
+        </section>
+
+        <section
+          className={styles.about}
+          id="about"
+          aria-labelledby="about-heading"
+        >
+          <h2 id="about-heading">About me</h2>
+          <div className={styles.bio}>
+            <p>
+              I’m based in Lynnwood, Washington. I studied computer science at
+              the University of Maryland and have been building independent
+              software since 2024.
+            </p>
+            <p>
+              I work across the interface and backend. My favorite part is
+              tracing a problem from what someone sees on screen back to the
+              request or piece of data that caused it.
+            </p>
             <dl className={styles.background}>
               <div>
-                <dt>Experience</dt>
-                <dd>Independent software developer, 2024–present</dd>
-              </div>
-              <div>
                 <dt>Education</dt>
-                <dd>
-                  B.S. Computer Science
-                  <br />
-                  University of Maryland, 2022
-                </dd>
-              </div>
-              <div>
-                <dt>Based in</dt>
-                <dd>
-                  Lynnwood, WA, near Seattle
-                  <br />
-                  US citizen · Open to relocation
-                </dd>
+                <dd>B.S. in Computer Science, 2022</dd>
               </div>
               <div>
                 <dt>Languages</dt>
-                <dd>English, Mandarin, Cantonese</dd>
+                <dd>English, Mandarin and Cantonese</dd>
               </div>
             </dl>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
-      <div className={styles.contact}>
-        <PortfolioFooter />
-      </div>
+      <PortfolioFooter />
     </div>
   );
 }

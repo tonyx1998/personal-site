@@ -1,19 +1,18 @@
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2) var(--space-5);
-  font-size: 15px;
+  gap: 0 1.125rem;
+  font-size: 0.9375rem;
   font-weight: 500;
 }
 
 .links a {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  min-height: 44px;
+  min-height: 2.75rem;
   color: var(--accent);
   text-decoration: underline;
-  text-underline-offset: 4px;
+  text-underline-offset: 0.25em;
   text-decoration-thickness: 1px;
 }
 
