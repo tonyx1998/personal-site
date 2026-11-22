@@ -4,11 +4,11 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Framework and rendering
 
-**Next.js 16.3.8, React 19.2.8, Node.js 24.** Every route is a Server Component except the small client pieces that need state: the theme store in `src/app/providers.tsx` and the header with its mobile menu and theme toggle.
+**Next.js 16.3.8, React 19.2.8, Node.js 24.** Every route is a Server Component except the small client pieces that need state: the home carousel and the header with its mobile menu.
 
 **Static rendering.** Nothing on the site reads request data, so every page can be prerendered at build time and served from the Vercel CDN. The project pages use `generateStaticParams` over the JSON roster. Do not add `cookies()` or `headers()` to the root layout; that would turn every route dynamic again.
 
-**Theme without a flash.** Light is the default. A `beforeInteractive` script in `layout.tsx` applies a saved choice from `localStorage.theme`, or else `prefers-color-scheme`, before first paint. `providers.tsx` exposes the same value to React through `useSyncExternalStore` and listens for system changes.
+**Light-only.** The site has one set of color tokens in `globals.css`. There is no dark theme, no theme switch and no pre-hydration script.
 
 ## Data
 
@@ -18,7 +18,7 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Styling and motion
 
-**Tailwind CSS v4** for the few body utilities, with CSS Modules (`Chrome.module.css`, `PortfolioHome.module.css`, `ProjectsAll.module.css`, `ProjectDetail.module.css`, `not-found.module.css`) for the layouts. Design tokens (ground, frame, ink, line, accent) live in `globals.css` with a `.dark` override set.
+**Tailwind CSS v4** for the few body utilities, with CSS Modules (`Chrome.module.css`, `PortfolioHome.module.css`, `ProjectsAll.module.css`, `ProjectDetail.module.css`, `not-found.module.css`) for the layouts. Design tokens (ground, frame, ink, line, accent) live in `globals.css` as a single light set.
 
 **No animation library.** The only motion is a hover reveal on screenshot links. Everything is visible at rest, so the page reads the same with JavaScript off. `globals.css` zeroes transitions under `prefers-reduced-motion: reduce`.
 

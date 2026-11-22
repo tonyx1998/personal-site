@@ -44,7 +44,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
     if (requestedControl.current) {
       stage.current
         ?.querySelector<HTMLButtonElement>(
-          `article:not([hidden]) [data-direction="${requestedControl.current}"]`
+          `[role="tabpanel"]:not([hidden]) [data-direction="${requestedControl.current}"]`
         )
         ?.focus({ preventScroll: true });
       requestedControl.current = null;
@@ -224,7 +224,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
           {projects.map((project, index) => {
             const slug = projectSlug(project);
             return (
-              <article
+              <section
                 key={slug}
                 id={"panel-" + slug}
                 role={hydrated ? "tabpanel" : undefined}
@@ -305,7 +305,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
                     </a>
                   )}
                 </div>
-              </article>
+              </section>
             );
           })}
           {hydrated && (

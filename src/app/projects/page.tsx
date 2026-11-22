@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PortfolioFooter, PortfolioHeader } from "@/components/PortfolioChrome";
 import ProjectsAll from "@/components/ProjectsAll";
 import chrome from "@/components/Chrome.module.css";
+import { DEFAULT_SHARE_IMAGE } from "@/lib/site";
 import {
   projectsCollectionJsonLd,
   jsonLdScriptProps,
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
       "Web projects and client work, with case studies and project notes.",
     url: "/projects",
     type: "website",
+    images: [DEFAULT_SHARE_IMAGE],
   },
 };
 

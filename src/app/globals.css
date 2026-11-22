@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark, .dark *));
-
-/* Light is the default. The dark set is applied by the .dark class, which the
-   bootstrap script in layout.tsx sets from the saved preference or the system
-   preference before first paint. */
+/* The site is light-only: one set of tokens, no dark theme. */
 :root {
   --ground: #f3f4f2;
   --frame: #ffffff;
@@ -32,19 +28,6 @@
   --foreground: var(--ink);
 }
 
-.dark {
-  --ground: #131716;
-  --frame: #1b2120;
-  --ink: #e9edeb;
-  --ink-2: #b5bebb;
-  --ink-3: #83908c;
-  --line: #2d3533;
-  --line-strong: #414b48;
-  --accent: #7fcfae;
-  --accent-soft: #1d312a;
-  --focus: #7fcfae;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -54,10 +37,6 @@
 
 html {
   color-scheme: light;
-}
-
-html.dark {
-  color-scheme: dark;
 }
 
 body {

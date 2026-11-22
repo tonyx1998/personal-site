@@ -344,3 +344,14 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `fc1ee40`. The user asked 
 - Résumé: the `frontend` profile selects Gasolytics, SoloMock and Amex Roofing, and drops the content-systems skills row, because Throughline is hidden. The default profile and `public/resume.pdf` are unchanged.
 
 Not done, by decision: the home page and the inner pages still use different visual styles, the home page ignores the dark theme, and some phone tap targets are small. These were judged not worth another redesign now.
+
+## Interface fixes — November 22
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `25f1162`. The user asked for the recommended interface fixes and accepted a light-only site.
+
+- Light-only: the dark tokens, the theme switch, the pre-hydration script and `providers.tsx` are removed. The home page already ignored the dark theme, so every page now looks the same in either device setting. `AGENTS.md`, `README.md` and `docs/STACK.md` describe the new rule.
+- Phone targets and labels on the home page: the wordmark and the "All projects" and "Say hello" links have a 12 px padded tap area without moving the layout, and the relationship label, figure caption and links row are at least 12 px.
+- The carousel panels are `section` elements, which may carry `role="tabpanel"`; `article` may not. The arrow buttons find the visible panel with `[role="tabpanel"]:not([hidden])`, because the carousel itself sits inside a `section` and a plain `section:not([hidden])` selector would match that outer element.
+- Every page now has a share image. Pages without their own image use the generated card through `DEFAULT_SHARE_IMAGE` in `src/lib/site.ts`.
+
+Not done, by decision: the home page and the inner pages still use different visual styles and navigation.
