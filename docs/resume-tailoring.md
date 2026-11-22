@@ -136,4 +136,8 @@ successful default render proves every variation. Use the existing website's
 
 ## ViralSignal master entry
 
-ViralSignal is a `resumeOnly` project record, not an employment entry or a new public portfolio route. The default full-stack preset selects it before Amex Roofing and Gasolytics. The product preset retains Amex, Gasolytics and SoloMock. Existing other presets are unchanged. The record uses the user-approved full-stack/auth/billing/test bullets and labels the relationship Reachspan product. No project date was supplied, so this resume-only entry has no invented date; the generator omits that metadata segment. Existing independent-development role and all unrelated contact/education facts are unchanged. GPT/Claude assistance does not create a claim of designing the ViralSignal landing page.
+ViralSignal is a `resumeOnly` project record, not an employment entry or a new public portfolio route. The default full-stack preset selects it before Amex Roofing and Gasolytics. The product preset retains Amex, Gasolytics and SoloMock. The record labels the relationship Reachspan product and is dated 2026. Its bullets describe the actual contribution: from September 2026, directing AI coding agents to audit and rework an app that already existed. Do not describe the application as built from scratch, and do not call its credit system billing. The wording makes no claim about the landing-page design, users, or revenue.
+
+## AI assistance
+
+Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it, and every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile.

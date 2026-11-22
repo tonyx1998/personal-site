@@ -22,11 +22,12 @@ ROOT = Path(__file__).resolve().parent.parent
 PROJECTS_JSON = ROOT / "src" / "lib" / "projects.data.json"
 LETTER = (612, 792)
 SUMMARY = (
-    "Software developer building full-stack web products, realtime voice tools, "
-    "and client booking systems with TypeScript, React, Next.js, and Python. "
-    "B.S. in Computer Science, University of Maryland; based near Seattle and "
-    "open to relocation."
+    "Builds and runs web products with heavy use of AI coding agents, from the "
+    "interface to deployment. B.S. in Computer Science, University of Maryland; "
+    "based near Seattle and open to relocation."
 )
+# Every project on the resume is AI-assisted, so every profile says how it was built.
+AI_TOOLS = ("AI coding tools", "Claude Code, Codex, Cursor")
 CONTACT_LINKS = (
     ("mailto:tonyx1998@gmail.com", "tonyx1998@gmail.com"),
     ("https://toyinyu.com", "toyinyu.com"),
@@ -43,7 +44,7 @@ PROFILES = {
         "skills": (
             ("Languages", "TypeScript, JavaScript, Python, SQL"),
             ("Frontend", "React, Next.js, HTML/CSS, Tailwind CSS"),
-            ("Backend and APIs", "PostgreSQL, REST APIs, OAuth, WebRTC"),
+            ("Backend and APIs", "PostgreSQL, REST APIs, OAuth"),
             ("Tools", "Git, Vercel"),
         ),
     },
@@ -192,7 +193,7 @@ h2, h3, h4, .meta {{ break-after: avoid; }}
              + "</p>"]
     parts += ["<section><h2>SUMMARY</h2>", f"<p>{markup(SUMMARY)}</p></section>",
               "<section><h2>TECHNICAL SKILLS</h2>"]
-    for label, items in PROFILES[profile]["skills"]:
+    for label, items in (AI_TOOLS, *PROFILES[profile]["skills"]):
         parts.append(f"<p><strong>{markup(label)}:</strong> {markup(items)}</p>")
     parts += ["</section><section><h2>EXPERIENCE</h2>",
               "<h3>Independent Software Developer &nbsp;|&nbsp; 2024 - Present</h3>"]

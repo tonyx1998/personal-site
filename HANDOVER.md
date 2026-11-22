@@ -305,3 +305,15 @@ Regenerated one Letter page with 283 extracted words, embedded fonts, semantic h
 ## SEO publication authorized — October 13
 
 User approved publication of the two prepared SoloMock/Gasolytics case-study SEO changes after review. Integrated current master ec5c718 and retained its default ViralSignal/Amex Roofing/Gasolytics tagged résumé byte for byte. No social posts, GitHub profile edits, tracking implementation, new content batch or other repository changes authorized. Earlier local-only notes describe checkpoint history; current release scope is these two pages and their supporting local documentation. Await fresh independent review and exact-head checks before normal master Git deployment.
+
+## Résumé wording revision — November 22, pending review
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. Not merged, no PR; production is unchanged. The résumé now states how the work was done, and the stale default summary is corrected.
+
+- Summary now reads "Builds and runs web products with heavy use of AI coding agents, from the interface to deployment." The previous text named realtime voice tools and Python, which the default profile has not shown since Amex Roofing replaced SoloMock.
+- Every profile's skills start with `AI coding tools: Claude Code, Codex, Cursor` (`AI_TOOLS` in the generator). WebRTC leaves the default profile's backend row because no project in that profile uses it.
+- ViralSignal is titled "ViralSignal - Threads Marketing App" and dated 2026. Its bullets describe directing AI coding agents, from September 2026, to audit and rework an existing app; they no longer say the application was built, and "billing" is now "credits".
+
+Proposed wording: the user should confirm the two ViralSignal bullets before merge. Left unchanged for the user to decide: the "Software Developer" title, the "Independent Software Developer | 2024 - Present" heading, the Amex "Client project" label, spoken languages, and any traffic figure. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change.
+
+Regenerated `public/resume.pdf` on Ubuntu with WeasyPrint 70.0, pypdf 6.10.0 and `libharfbuzz-subset0`: one Letter page, 298 extracted words, 7 tagged links. Six résumé regression tests pass and three consecutive builds are byte-identical. As the tailoring guide notes, bytes differ from the earlier Mac build. veraPDF was not run.

@@ -793,11 +793,12 @@
       "id": "viralsignal",
       "order": 0,
       "relationship": "Reachspan product",
-      "title": "ViralSignal | Reachspan product | Full-stack development",
+      "title": "ViralSignal - Threads Marketing App",
+      "date": "2026",
       "stack": "TypeScript, React, Next.js, PostgreSQL, OAuth",
       "bullets": [
-        "Built the full-stack application for Reachspan’s ViralSignal, integrating Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
-        "Implemented OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for authentication, billing, and failure recovery."
+        "Since September 2026, directed AI coding agents to audit and rework an existing Threads marketing app with search, AI-assisted relevance assessment, reply and post drafting, and saved drafts.",
+        "The work covered OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for sign-in, credits, and failure recovery."
       ]
     }
   }
