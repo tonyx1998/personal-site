@@ -242,7 +242,7 @@
       "date": "2026",
       "bullets": [
         "Rendered an interactive U.S. gas-price map as server-generated SVG with d3-geo; added metro pins, zoom, pan, and state detail panels.",
-        "Built trip-cost and EV-versus-gas comparison tools using AAA price snapshots; served price data through an in-process cache for state and metro views."
+        "Added trip-cost and EV-versus-gas tools on AAA price snapshots; the site drew about 10,000 visitors a month in September and October 2026, mostly from search engines."
       ],
       "id": "gasolytics",
       "relationship": "Independent product"

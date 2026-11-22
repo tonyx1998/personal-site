@@ -28,6 +28,12 @@ SUMMARY = (
 )
 # Every project on the resume is AI-assisted, so every profile says how it was built.
 AI_TOOLS = ("AI coding tools", "Claude Code, Codex, Cursor")
+SPOKEN_LANGUAGES = ("Spoken languages", "Mandarin and Cantonese (native), English")
+# Reachspan AI LLC is a registered company; its product and client work sit under
+# that unpaid role. Everything else is self-directed project work.
+REACHSPAN_HEADING = "Reachspan AI LLC - Co-founder (unpaid) | 2026 - Present"
+INDEPENDENT_HEADING = "Independent projects | 2024 - Present"
+REACHSPAN_RELATIONSHIPS = ("Reachspan product", "Client project")
 CONTACT_LINKS = (
     ("mailto:tonyx1998@gmail.com", "tonyx1998@gmail.com"),
     ("https://toyinyu.com", "toyinyu.com"),
@@ -107,6 +113,21 @@ def link(url: str, label: str | None = None) -> str:
     return f'<a href="{escape(url, quote=True)}">{markup(label)}</a>'
 
 
+def role_groups(projects):
+    """Group projects under their role heading, in order of first appearance."""
+    groups = []
+    for project in projects:
+        heading = (REACHSPAN_HEADING if project["relationship"] in REACHSPAN_RELATIONSHIPS
+                   else INDEPENDENT_HEADING)
+        for existing, members in groups:
+            if existing == heading:
+                members.append(project)
+                break
+        else:
+            groups.append((heading, [project]))
+    return groups
+
+
 def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JSON):
     records = {}
     for project in json.loads(data_path.read_text(encoding="utf-8")):
@@ -149,7 +170,7 @@ def load_resume_projects(profile: str = "default", data_path: Path = PROJECTS_JS
             "url": url,
             "bullets": [plain(b) for b in bullets],
         })
-    return result
+    return [project for _, members in role_groups(result) for project in members]
 
 
 def build_html(projects, profile: str = "default"):
@@ -193,18 +214,19 @@ h2, h3, h4, .meta {{ break-after: avoid; }}
              + "</p>"]
     parts += ["<section><h2>SUMMARY</h2>", f"<p>{markup(SUMMARY)}</p></section>",
               "<section><h2>TECHNICAL SKILLS</h2>"]
-    for label, items in (AI_TOOLS, *PROFILES[profile]["skills"]):
+    for label, items in (AI_TOOLS, *PROFILES[profile]["skills"], SPOKEN_LANGUAGES):
         parts.append(f"<p><strong>{markup(label)}:</strong> {markup(items)}</p>")
-    parts += ["</section><section><h2>EXPERIENCE</h2>",
-              "<h3>Independent Software Developer &nbsp;|&nbsp; 2024 - Present</h3>"]
-    for project in projects:
-        parts += [f'<div class="project"><h4>{markup(project["title"])}</h4>',
-                  f'<p class="meta">{markup(project["relationship"])}'
-                  + (f' &nbsp;|&nbsp; {markup(project["date"])}' if project["date"] else "")
-                  + f' &nbsp;|&nbsp; {link(project["url"])}</p>',
-                  f'<p class="meta">{markup(project["stack"])}</p><ul>']
-        parts += [f"<li>{markup(bullet)}</li>" for bullet in project["bullets"]]
-        parts.append("</ul></div>")
+    parts.append("</section><section><h2>EXPERIENCE</h2>")
+    for heading, members in role_groups(projects):
+        parts.append("<h3>" + markup(heading).replace(" | ", " &nbsp;|&nbsp; ") + "</h3>")
+        for project in members:
+            parts += [f'<div class="project"><h4>{markup(project["title"])}</h4>',
+                      f'<p class="meta">{markup(project["relationship"])}'
+                      + (f' &nbsp;|&nbsp; {markup(project["date"])}' if project["date"] else "")
+                      + f' &nbsp;|&nbsp; {link(project["url"])}</p>',
+                      f'<p class="meta">{markup(project["stack"])}</p><ul>']
+            parts += [f"<li>{markup(bullet)}</li>" for bullet in project["bullets"]]
+            parts.append("</ul></div>")
     parts += ["</section><section><h2>EDUCATION</h2>",
               "<p><strong>University of Maryland, College Park</strong></p>",
               "<p>Bachelor of Science, Computer Science &nbsp;|&nbsp; December 2022</p>",
@@ -212,7 +234,7 @@ h2, h3, h4, .meta {{ break-after: avoid; }}
     return "\n".join(parts)
 
 
-def validate_structure(reader):
+def validate_structure(reader, role_headings=1):
     """Check actual tagged content and annotation ownership, not just metadata.
 
     This intentionally targets our single-page text-only resume, not arbitrary
@@ -308,7 +330,8 @@ def validate_structure(reader):
     walk(tree["/K"])
     if len(referenced) != len(set(referenced)) or set(referenced) != content_ids:
         raise RuntimeError("Structure must cover all content exactly once")
-    if tags["/H1"] != 1 or tags["/H2"] != 4 or tags["/H3"] != 1 or tags["/H4"] != 3:
+    if (tags["/H1"] != 1 or tags["/H2"] != 4 or tags["/H3"] != role_headings
+            or tags["/H4"] != 3):
         raise RuntimeError("Resume heading hierarchy is incomplete")
     if tags["/L"] != 3 or tags["/LI"] != 6 or tags["/LBody"] != 6:
         raise RuntimeError("Resume project bullets must be tagged lists")
@@ -345,7 +368,9 @@ def validate_pdf(path: Path, projects):
         if position == -1:
             raise RuntimeError(f"Missing or out-of-order resume text: {phrase}")
         cursor = position + len(phrase)
-    for phrase in ["(206) 712-5144", "Independent Software Developer", "2024 - Present"] + [
+    groups = role_groups(projects)
+    heading_parts = [part for heading, _ in groups for part in heading.split(" | ")]
+    for phrase in ["(206) 712-5144"] + heading_parts + [
         b for p in projects for b in p["bullets"]
     ]:
         if " ".join(phrase.split()) not in text:
@@ -358,13 +383,14 @@ def validate_pdf(path: Path, projects):
     expected_links = {url for url, _ in CONTACT_LINKS} | {p["url"] for p in projects}
     if set(links) != expected_links:
         raise RuntimeError("Resume link targets do not match the selected source records")
-    structure = validate_structure(reader)
+    structure = validate_structure(reader, len(groups))
     if {url for url, _ in structure["tagged_links"]} != expected_links:
         raise RuntimeError("Tagged links must match the source destinations")
     expected_headings = [("/H1", "TO YIN YU"), ("/H2", "SUMMARY"),
-                         ("/H2", "TECHNICAL SKILLS"), ("/H2", "EXPERIENCE"),
-                         ("/H3", "Independent Software Developer | 2024 - Present")]
-    expected_headings += [("/H4", p["title"]) for p in projects]
+                         ("/H2", "TECHNICAL SKILLS"), ("/H2", "EXPERIENCE")]
+    for heading, members in groups:
+        expected_headings.append(("/H3", heading))
+        expected_headings += [("/H4", p["title"]) for p in members]
     expected_headings += [("/H2", "EDUCATION")]
     if structure["headings"] != expected_headings:
         raise RuntimeError("Semantic headings do not match resume reading order")

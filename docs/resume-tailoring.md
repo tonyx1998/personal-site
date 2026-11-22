@@ -57,7 +57,10 @@ structure rather than demanding byte equality with the committed Mac build.
 | `frontend` | Gasolytics → SoloMock → Throughline | Interactive UI and shared frontend systems        |
 | `product`  | Amex → Gasolytics → SoloMock        | Useful flows and product delivery                 |
 | `ai`       | SoloMock → Gasolytics → Amex        | Realtime AI interaction plus web engineering      |
-| `backend`  | all-in-one-URL → Amex → SoloMock    | Data services, auth, APIs, integrations           |
+| `backend`  | all-in-one-URL → SoloMock → Amex    | Data services, auth, APIs, integrations           |
+
+Projects are grouped under role headings in order of first appearance, so a
+profile's Reachspan work stays together even when its IDs are listed apart.
 
 The AI profile leads with SoloMock's OpenAI Realtime API work. It does not imply
 that every selected project uses AI, claim Claude API experience, or describe
@@ -74,6 +77,9 @@ Edit project facts only in `src/lib/projects.data.json`. Selected records use:
 - `resume.id`: a unique, stable selector such as `amex-roofing`; it does not change
   the project's public URL.
 - `resume.relationship`: `Client project`, `Independent product`, or `Reachspan product`.
+  `Reachspan product` and `Client project` records are listed under the Reachspan AI LLC
+  heading and `Independent product` records under Independent projects. A client project
+  that is not Reachspan's would need its own relationship value.
 - `resume.title`, `resume.date`, `resume.stack`, and exactly two `resume.bullets`.
   Existing HTML entities are accepted as text; formatting markup is not needed.
 - The parent project's `live` link, falling back to `github`. The displayed link
@@ -85,9 +91,10 @@ Existing master entries can remain unselected. `resume.order` is legacy master
 metadata; the explicit profile order controls the PDF. Hidden, missing, or
 incomplete selected records cause the build to fail.
 
-Keep the independent role accurate. Amex appears as a client project under
-independent development; no employment relationship, paid contract, or new title
-at Amex is inferred. Keep existing year dates until exact dates are supported.
+Keep the roles accurate. Reachspan AI LLC is a registered company and the role is
+an unpaid co-founder role, not employment. Amex appears as its client project; no
+paid contract or title at Amex is inferred. Independent projects are self-directed
+work, not a job title. Keep existing year dates until exact dates are supported.
 Do not add problem counts from a different SoloMock version, hard global cost-cap
 claims, Amex Solar/AI-chat claims, blanket Job Fit “stores nothing” language, or
 unmeasured business results.
@@ -140,4 +147,8 @@ ViralSignal is a `resumeOnly` project record, not an employment entry or a new p
 
 ## AI assistance
 
-Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it, and every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile.
+Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it, and every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile. Every profile's skills also end with the shared `Spoken languages` row.
+
+## Gasolytics traffic figure
+
+The Gasolytics bullet cites about 10,000 visitors a month in September and October 2026. The source is Vercel Web Analytics (10,748 and 9,808 visitors). The figure is dated on purpose: traffic has been lower since, so do not present it as current.

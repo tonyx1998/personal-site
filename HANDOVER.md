@@ -308,12 +308,14 @@ User approved publication of the two prepared SoloMock/Gasolytics case-study SEO
 
 ## Résumé wording revision — November 22, pending review
 
-Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. Not merged, no PR; production is unchanged. The résumé now states how the work was done, and the stale default summary is corrected.
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. Not merged, no PR; production is unchanged. The résumé now states how the work was done and under which role, based on facts the user supplied on November 22.
 
 - Summary now reads "Builds and runs web products with heavy use of AI coding agents, from the interface to deployment." The previous text named realtime voice tools and Python, which the default profile has not shown since Amex Roofing replaced SoloMock.
-- Every profile's skills start with `AI coding tools: Claude Code, Codex, Cursor` (`AI_TOOLS` in the generator). WebRTC leaves the default profile's backend row because no project in that profile uses it.
+- Skills: every profile starts with `AI coding tools: Claude Code, Codex, Cursor` and ends with `Spoken languages: Mandarin and Cantonese (native), English`. WebRTC leaves the default profile's backend row because no project in that profile uses it.
+- Role headings replace "Independent Software Developer | 2024 - Present". Reachspan work (the Reachspan product and the client project) sits under "Reachspan AI LLC - Co-founder (unpaid) | 2026 - Present"; the user confirmed the company is registered. Other projects sit under "Independent projects | 2024 - Present". The generator groups projects by `relationship`, so the backend profile now reads all-in-one-URL, SoloMock, Amex.
 - ViralSignal is titled "ViralSignal - Threads Marketing App" and dated 2026. Its bullets describe directing AI coding agents, from September 2026, to audit and rework an existing app; they no longer say the application was built, and "billing" is now "credits".
+- Gasolytics: the second bullet carries a dated traffic figure, about 10,000 visitors a month in September and October 2026 (Vercel Web Analytics: 10,748 and 9,808). Traffic has been lower since; keep the dates.
 
-Proposed wording: the user should confirm the two ViralSignal bullets before merge. Left unchanged for the user to decide: the "Software Developer" title, the "Independent Software Developer | 2024 - Present" heading, the Amex "Client project" label, spoken languages, and any traffic figure. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change.
+Proposed wording: the user should confirm the ViralSignal and Gasolytics bullets and the Reachspan heading before merge. Left unchanged for the user to decide: the "Software Developer" title and the project order. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change.
 
-Regenerated `public/resume.pdf` on Ubuntu with WeasyPrint 70.0, pypdf 6.10.0 and `libharfbuzz-subset0`: one Letter page, 298 extracted words, 7 tagged links. Six résumé regression tests pass and three consecutive builds are byte-identical. As the tailoring guide notes, bytes differ from the earlier Mac build. veraPDF was not run.
+Regenerated `public/resume.pdf` on Ubuntu with WeasyPrint 70.0, pypdf 6.10.0 and `libharfbuzz-subset0`: one Letter page, 318 extracted words, 7 tagged links. Six résumé regression tests and four site tests pass, and consecutive builds are byte-identical. All five profiles fit one page, four of them with about 10 pt to spare. As the tailoring guide notes, bytes differ from the earlier Mac build. veraPDF was not run.
