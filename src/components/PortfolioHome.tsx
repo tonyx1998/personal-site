@@ -22,7 +22,6 @@ export default function PortfolioHome() {
     "Amex Roofing",
     "How's My Job Fit?",
     "SoloYap",
-    "Throughline",
     "Reachspan",
   ].map(
     (title) => publicProjects.find((project) => shortTitle(project) === title)!

@@ -16,8 +16,8 @@ export default function ProjectsAll() {
       <header className={styles.intro}>
         <h1>All projects</h1>
         <p>
-          Client work, independent products, and local tools. Start with a case
-          study or browse the shorter project notes.
+          Client work and independent products. Start with a case study or
+          browse the shorter project notes.
         </p>
         <nav className={styles.sectionLinks} aria-label="Project sections">
           <a href="#selected-heading">Selected work</a>

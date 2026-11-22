@@ -24,8 +24,14 @@ const nextConfig: NextConfig = {
         destination: "/projects",
         permanent: false,
       },
-      // The course projects are hidden from the portfolio. Their old pages
-      // send visitors to the archive instead of a 404.
+      // The roofing case study moved to a shorter address.
+      {
+        source: "/projects/amex-roofing-site-ai-booking-agent",
+        destination: "/projects/amex-roofing",
+        permanent: true,
+      },
+      // The course and learning-tool projects are hidden from the portfolio.
+      // Their old pages send visitors to the archive instead of a 404.
       ...[
         "programming-basics",
         "modern-web-dev-guide",
@@ -34,6 +40,9 @@ const nextConfig: NextConfig = {
         "modern-cloud-engineer-guide",
         "modern-data-engineering-guide",
         "swe-interview-guide",
+        "throughline-technical-learning-ecosystem",
+        "shipyard",
+        "2026-skills-roadmap",
       ].map((slug) => ({
         source: `/projects/${slug}`,
         destination: "/projects",

@@ -31,7 +31,7 @@
       "id": "amex-roofing",
       "relationship": "Client project"
     },
-    "slug": "amex-roofing-site-ai-booking-agent",
+    "slug": "amex-roofing",
     "homepageSummary": "An English and Chinese website that turns a homeowner’s inspection request into a scheduling workflow for a Bay Area roofing contractor.",
     "contribution": "A bilingual interface and Calendar integration, with validation and visible recovery when a time is taken.",
     "caseStudy": {
@@ -87,16 +87,9 @@
             "height": 960,
             "originalSrc": "/projects/evidence/originals/amex-detail.png"
           }
-        },
-        {
-          "title": "Delivered scope and remaining limits",
-          "paragraphs": [
-            "The delivered site joins service information, bilingual content, and an inspection-request flow in one customer-facing experience. The important boundary is between receiving a request and completing the crew’s scheduling process. The public receipt reflects that distinction, while the integration handles validation and delivery behind it.",
-            "The next engineering step is to exercise the complete scheduling lifecycle in a controlled environment, including duplicate requests, delayed provider responses, and notification retries. Those checks would extend the existing contracts from individual boundaries to the whole workflow."
-          ]
         }
       ],
-      "evidenceNote": "Screenshots use the deployed UI with fictional inputs and simulated API responses. Local contract checks used mocked dependencies; no bookings were sent. Captured September 5, 2026."
+      "evidenceNote": "Screenshots use the live site with sample inputs and simulated responses. No bookings were sent. Captured September 5, 2026."
     },
     "exhibition": {
       "summary": "A bilingual website and inspection-booking workflow for a Bay Area contractor.",
@@ -176,7 +169,7 @@
           "title": "Temporary credentials and session lifecycle limits",
           "paragraphs": [
             "The browser requests microphone access before asking the server for a temporary credential. The long-lived provider key remains on the server. Once connected, the client manages the audio tracks, data channel, countdown, and transcript. Explicit stop, timeout, and lost connection all lead into cleanup instead of leaving an apparently active interview behind.",
-            "There are important limits to these safeguards. The duration timer runs in the client. Rate limiting uses a shared Redis service when configured, but falls back to per-instance memory when that service is unavailable. These controls reduce exposure; they do not establish an unbypassable session boundary or a hard total spending cap."
+            "These safeguards have limits. The duration timer runs in the browser, and rate limiting falls back to per-instance memory when the shared Redis service is unavailable, so they do not set a hard spending cap."
           ]
         },
         {
@@ -193,16 +186,9 @@
             "height": 720,
             "originalSrc": "/projects/evidence/originals/solomock-detail.png"
           }
-        },
-        {
-          "title": "What the checks establish",
-          "paragraphs": [
-            "Local tests cover the problem-brief structure, rate-limiter behavior, and session-route response. The browser demonstration also exercised editor snapshot delivery and cleanup through substituted dependencies. These checks concentrate on the boundaries that connect the interface, transport, and server.",
-            "The next evaluation should focus on the interviewer itself: a declared set of practice sessions, consistent assessment criteria, and observed response behavior. Application correctness and useful coaching are different questions. The session and feedback structure gives that evaluation a repeatable starting point."
-          ]
         }
       ],
-      "evidenceNote": "Screenshots use the deployed UI with sample code, transcripts, and simulated media and provider responses. Connection cleanup was checked with mocks; no paid session was started. Captured September 5, 2026."
+      "evidenceNote": "Screenshots use the live site with sample code, transcripts, and simulated responses. No paid session was started. Captured September 5, 2026."
     },
     "exhibition": {
       "summary": "A realtime voice interview workspace, with code and conversation in one place.",
@@ -304,16 +290,9 @@
             "height": 720,
             "originalSrc": "/projects/evidence/originals/gasolytics-detail.png"
           }
-        },
-        {
-          "title": "What this demonstrates and what comes next",
-          "paragraphs": [
-            "The work connects a published data artifact to an interactive comparison: read and shape the data, render stable geometry, expose useful detail, and explain the estimate. The local checks establish the tested cache and failure behaviors, while the public interface makes the underlying date and calculation inputs visible.",
-            "The next improvement to validate is how clearly readers distinguish fresh, cached, and unavailable data across every view. The same status should mean the same thing on the map, detail pages, and calculators, with the actual source date available wherever it affects a decision."
-          ]
         }
       ],
-      "evidenceNote": "Public map and calculator captured read-only on September 5, 2026. Cache and failure checks used isolated local fixtures with network access disabled."
+      "evidenceNote": "Map and calculator captured from the public site on September 5, 2026. Cache and failure checks used local test data."
     },
     "exhibition": {
       "summary": "A U.S. fuel-price map that turns dated snapshots into useful comparisons.",
@@ -577,7 +556,8 @@
       "topics": "Learning tools · Astro · Shared interface",
       "caption": "Learning hub preview",
       "relationship": "Personal project"
-    }
+    },
+    "hidden": true
   },
   {
     "title": "all-in-one-URL",
@@ -729,7 +709,8 @@
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026",
-    "dateModified": "2026-09-03"
+    "dateModified": "2026-09-03",
+    "hidden": true
   },
   {
     "title": "SWE Interview Guide",
@@ -762,7 +743,8 @@
     "featured": false,
     "className": "lg:col-span-1",
     "datePublished": "2026",
-    "dateModified": "2026-09-02"
+    "dateModified": "2026-09-02",
+    "hidden": true
   },
   {
     "title": "Plugrade",

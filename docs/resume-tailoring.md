@@ -51,13 +51,13 @@ structure rather than demanding byte equality with the committed Mac build.
 
 ## Profiles
 
-| Profile    | Project order                       | Emphasis                                          |
-| ---------- | ----------------------------------- | ------------------------------------------------- |
-| `default`  | ViralSignal → Amex → Gasolytics     | Full-stack product, client delivery, data systems |
-| `frontend` | Gasolytics → SoloMock → Throughline | Interactive UI and shared frontend systems        |
-| `product`  | Amex → Gasolytics → SoloMock        | Useful flows and product delivery                 |
-| `ai`       | SoloMock → Gasolytics → Amex        | Realtime AI interaction plus web engineering      |
-| `backend`  | all-in-one-URL → Amex → SoloMock    | Data services, auth, APIs, integrations           |
+| Profile    | Project order                    | Emphasis                                          |
+| ---------- | -------------------------------- | ------------------------------------------------- |
+| `default`  | ViralSignal → Amex → Gasolytics  | Full-stack product, client delivery, data systems |
+| `frontend` | Gasolytics → SoloMock → Amex     | Interactive UI and client-facing pages            |
+| `product`  | Amex → Gasolytics → SoloMock     | Useful flows and product delivery                 |
+| `ai`       | SoloMock → Gasolytics → Amex     | Realtime AI interaction plus web engineering      |
+| `backend`  | all-in-one-URL → Amex → SoloMock | Data services, auth, APIs, integrations           |
 
 The AI profile leads with SoloMock's OpenAI Realtime API work. It does not imply
 that every selected project uses AI, claim Claude API experience, or describe

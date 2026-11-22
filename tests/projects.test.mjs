@@ -17,15 +17,13 @@ const publishedSlugs = [
   "solomock",
   "gasolytics-us-gas-price-map",
   "soloyap",
-  "amex-roofing-site-ai-booking-agent",
+  "amex-roofing",
   "reachspan",
-  "throughline-technical-learning-ecosystem",
   "all-in-one-url",
-  "shipyard",
-  "2026-skills-roadmap",
 ];
 
-// Hidden on purpose: Plugrade until it launches, and the course projects.
+// Hidden on purpose: Plugrade until it launches, the course projects, and the
+// learning tools that belong with them.
 const hiddenSlugs = [
   "plugrade",
   "programming-basics",
@@ -35,6 +33,9 @@ const hiddenSlugs = [
   "modern-cloud-engineer-guide",
   "modern-data-engineering-guide",
   "swe-interview-guide",
+  "throughline-technical-learning-ecosystem",
+  "shipyard",
+  "2026-skills-roadmap",
 ];
 
 test("curation preserves the published route set and hidden launch state", () => {
@@ -48,7 +49,7 @@ test("curation preserves the published route set and hidden launch state", () =>
 
 test("primary and compact homepage selections do not change the archive", () => {
   assert.deepEqual(selectedProjects.map(projectSlug), [
-    "amex-roofing-site-ai-booking-agent",
+    "amex-roofing",
     "solomock",
     "gasolytics-us-gas-price-map",
   ]);
@@ -56,9 +57,8 @@ test("primary and compact homepage selections do not change the archive", () => 
     "hows-my-job-fit",
     "soloyap",
     "reachspan",
-    "throughline-technical-learning-ecosystem",
   ]);
-  assert.equal(supportingProjects.length, 7);
+  assert.equal(supportingProjects.length, 4);
   assert.ok(
     homepageSupportingProjects.every((project) =>
       supportingProjects.includes(project)
@@ -134,11 +134,10 @@ test("selected studies have complete content and correctly sized evidence assets
   }
 });
 
-test("every published destination has a safe URL and local tools stay local", () => {
+test("every published destination has a safe URL", () => {
   for (const project of projects) {
     for (const url of [project.live, project.github].filter(Boolean)) {
       assert.equal(new URL(url).protocol, "https:", project.title);
     }
   }
-  assert.equal(projectBySlug("shipyard").live, null);
 });
