@@ -44,16 +44,15 @@ export default function PortfolioHome() {
               </h2>
               <div className={styles.editorialIntro}>
                 <p className={styles.noteLabel}>
-                  Software developer building useful web products.
+                  Web products built with AI coding tools.
                 </p>
                 <p>
-                  I build full-stack apps, realtime voice tools, and booking
-                  systems for service businesses. My work covers the interface,
-                  backend, deployment, and the behavior users see when something
-                  goes wrong.
+                  These are web products I build and run with heavy use of AI
+                  coding agents: full-stack apps, realtime voice tools, and
+                  booking systems for service businesses. I choose what to
+                  build, direct the tools, and keep the products online.
                 </p>
                 <div className={styles.availabilityLedger}>
-                  <p>Open to software engineering roles</p>
                   <p>Seattle area · Open to relocation</p>
                   <p>
                     B.S. Computer Science, University of Maryland · US citizen
@@ -148,28 +147,25 @@ export default function PortfolioHome() {
                 To Yin Yu · Lynnwood, Washington
               </p>
               <p>
-                I’m To Yin Yu, a software developer in Lynnwood, Washington. I
-                finished my computer science degree at the University of
-                Maryland in December 2022 and have been building and shipping my
-                own products since 2024.
+                I’m To Yin Yu, and I live in Lynnwood, Washington. I finished my
+                computer science degree at the University of Maryland in
+                December 2022 and have been building my own web products since
+                2024.
               </p>
               <p>
-                I work across the frontend, backend, and deployment. The part
-                after launch matters to me, too: tracing a failed request,
-                making an error understandable, and deciding what a system
-                should do when a dependency is unavailable.
+                I build them with heavy use of AI coding agents. I choose what
+                to build, direct the tools, and keep the products running after
+                launch.
               </p>
               <p>
-                The case studies here explain those decisions, including the
-                limits of what I have tested. I’m looking for a software
-                engineering role where I can contribute that experience and
-                learn from a team.
+                The case studies here explain how each product works and what
+                was tested.
               </p>
             </div>
             <dl className={styles.background}>
               <div>
                 <dt>Experience</dt>
-                <dd>Independent software developer, 2024–present</dd>
+                <dd>Independent projects, 2024–present</dd>
               </div>
               <div>
                 <dt>Education</dt>

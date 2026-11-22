@@ -11,9 +11,8 @@ export const personJsonLd = {
   name: "To Yin Yu",
   alternateName: "tonyx1998",
   url: SITE_URL,
-  jobTitle: "Software Developer",
   description:
-    "Software developer near Seattle building web products, with experience across interfaces, backend systems, and deployment.",
+    "Builds and runs web products near Seattle with heavy use of AI coding agents.",
   homeLocation: {
     "@type": "Place",
     address: {
@@ -29,24 +28,6 @@ export const personJsonLd = {
     "@type": "CollegeOrUniversity",
     name: "University of Maryland, College Park",
   },
-  knowsAbout: [
-    "TypeScript",
-    "Python",
-    "Next.js",
-    "React",
-    "FastAPI",
-    "PostgreSQL",
-    "Redis",
-    "Docker",
-    "WebRTC",
-    "OpenAI Realtime API",
-    "Claude API",
-    "Large Language Models",
-    "LLM Evaluation",
-    "Realtime Voice Agents",
-    "Playwright",
-    "GitHub Actions",
-  ],
   sameAs: [
     "https://github.com/tonyx1998",
     "https://www.linkedin.com/in/to-yin-yu/",
@@ -58,9 +39,9 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": WEBSITE_ID,
   url: SITE_URL,
-  name: "To Yin Yu · Software Developer",
+  name: "To Yin Yu",
   description:
-    "Portfolio of To Yin Yu, a software developer near Seattle. Software projects, client work, local tools, and technical courses.",
+    "Portfolio of To Yin Yu near Seattle. Web products built with heavy use of AI coding agents, client work, and local tools.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },
@@ -73,7 +54,7 @@ export const projectsCollectionJsonLd = {
   url: `${SITE_URL}/projects`,
   name: "Projects · To Yin Yu",
   description:
-    "Every project To Yin Yu has shipped — full-stack apps, AI voice agents, data tools, and learning resources.",
+    "Projects by To Yin Yu: full-stack apps, voice tools, data tools, and client work, built with heavy use of AI coding agents.",
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": PERSON_ID },
   mainEntity: {

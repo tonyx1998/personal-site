@@ -41,7 +41,7 @@ résumé dependencies installed.
 
 Pushes to `master` deploy to production through the Vercel Git integration. Do not run `vercel --prod` by hand; it does not move the production alias.
 
-Before a source PR, update `HANDOVER.md`, run `make verify` and `make build`, regenerate the resume when shared facts change, and inspect desktop/phone layouts and the PDF. Keep all seventeen existing public project slugs and the hidden Plugrade redirect intact.
+Before a source PR, update `HANDOVER.md`, run `make verify` and `make build`, regenerate the resume when shared facts change, and inspect desktop/phone layouts and the PDF. Keep the ten public project slugs intact. Plugrade and the seven course projects are hidden, and their old pages redirect to `/projects`.
 
 ## Layout
 

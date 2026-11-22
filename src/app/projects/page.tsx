@@ -10,14 +10,14 @@ import {
 export const metadata: Metadata = {
   title: "All projects",
   description:
-    "Explore To Yin Yu's software projects, client work, local tools, and technical courses, with case studies and project notes.",
+    "Explore To Yin Yu's web projects, client work, and local tools, with case studies and project notes.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
     title: "All projects · To Yin Yu",
     description:
-      "Software projects, client work, local tools, and technical courses, with case studies and project notes.",
+      "Web projects, client work, and local tools, with case studies and project notes.",
     url: "/projects",
     type: "website",
   },

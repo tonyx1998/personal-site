@@ -105,7 +105,7 @@ export const projects: Project[] = (projectsData as Project[]).filter(
 /** The products shown at full size on the homepage and the top of the archive. */
 export const selectedProjects: Project[] = projects.filter((p) => p.featured);
 
-/** Everything else: client work, tools, and the technical guides. */
+/** Everything else: client work and tools. */
 export const supportingProjects: Project[] = projects.filter(
   (p) => !p.featured
 );

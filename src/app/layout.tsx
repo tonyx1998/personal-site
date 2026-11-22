@@ -26,20 +26,19 @@ const publicSans = Public_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "To Yin Yu · Software Developer",
+    default: "To Yin Yu · Web products built with AI coding tools",
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu, software developer near Seattle. Selected work in client booking, realtime voice, and data tools, with case studies explaining the engineering. Open to software engineering roles.",
+    "To Yin Yu builds and runs web products with heavy use of AI coding agents. Selected work in client booking, realtime voice, and data tools, with case studies.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
-    "Software Developer",
-    "Software Engineer",
     "Seattle",
+    "Web products",
+    "AI coding agents",
     "Next.js",
     "TypeScript",
-    "Python",
     "OpenAI Realtime API",
     "Portfolio",
   ],
@@ -51,17 +50,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "To Yin Yu · Software Developer",
+    title: "To Yin Yu · Web products built with AI coding tools",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Web products built and run with heavy use of AI coding agents. Explore selected work, case studies, and a one-page resume.",
     siteName: "To Yin Yu",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "To Yin Yu · Software Developer",
+    title: "To Yin Yu · Web products built with AI coding tools",
     description:
-      "Software developer building useful web products. Explore selected work, engineering case studies, and a one-page resume.",
+      "Web products built and run with heavy use of AI coding agents. Explore selected work, case studies, and a one-page resume.",
   },
   robots: {
     index: true,

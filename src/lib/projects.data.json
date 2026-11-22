@@ -33,11 +33,11 @@
     },
     "slug": "amex-roofing-site-ai-booking-agent",
     "homepageSummary": "An English and Chinese website that turns a homeowner’s inspection request into a scheduling workflow for a Bay Area roofing contractor.",
-    "contribution": "I built the bilingual interface and Calendar integration, with validation and visible recovery when a time is taken.",
+    "contribution": "A bilingual interface and Calendar integration, with validation and visible recovery when a time is taken.",
     "caseStudy": {
-      "role": "Independent developer",
+      "role": "Directed the build with AI coding agents",
       "context": "Client project · English and Chinese · 2026",
-      "summary": "I built a bilingual website and inspection-request workflow for a Bay Area roofing contractor.",
+      "summary": "A bilingual website and inspection-request workflow for a Bay Area roofing contractor, built with heavy use of AI coding agents.",
       "takeaways": {
         "problem": "Homeowners need a clear next step: call the contractor or request an inspection.",
         "decision": "Share the English and Chinese booking workflow, and confirm the request without promising a completed appointment.",
@@ -48,7 +48,7 @@
           "title": "Make the next step clear",
           "paragraphs": [
             "A homeowner arrives with a roof problem and needs a practical next step: call the contractor or request an inspection. The site puts those choices beside the service explanation. The booking flow collects a property address, contact details, preferred date, and one-hour arrival window. Its receipt says “Inspection requested” and explains that the crew will call to confirm. That distinction keeps a successful form submission from promising a completed appointment.",
-            "My work covers the public interface, the bilingual page structure, and the serverless booking integration. This is client delivery, separate from the independent products elsewhere in my portfolio."
+            "The work covers the public interface, the bilingual page structure, and the serverless booking integration. It is client delivery, separate from the independent products elsewhere in this portfolio."
           ],
           "figure": {
             "src": "/projects/evidence/amex-result.png",
@@ -138,11 +138,11 @@
       "relationship": "Independent product"
     },
     "homepageSummary": "A voice interview workspace where the interviewer can follow both a candidate’s spoken reasoning and the code in their editor.",
-    "contribution": "I connected WebRTC voice and debounced editor updates, then added temporary credentials and explicit session cleanup.",
+    "contribution": "It connects WebRTC voice with debounced editor updates, and adds temporary credentials and explicit session cleanup.",
     "caseStudy": {
-      "role": "Independent developer",
+      "role": "Directed the build with AI coding agents",
       "context": "Independent product · Realtime voice and code · 2025–present",
-      "summary": "I built SoloMock with Next.js, WebRTC and Monaco to put spoken reasoning and changing code in one interview context. This case study explains snapshot delivery, temporary credentials, and cleanup after a failed connection.",
+      "summary": "SoloMock uses Next.js, WebRTC and Monaco to put spoken reasoning and changing code in one interview context. It was built with heavy use of AI coding agents. This case study explains snapshot delivery, temporary credentials, and cleanup after a failed connection.",
       "takeaways": {
         "problem": "Interview practice needs the candidate’s spoken explanation and changing code in the same context.",
         "decision": "Send editor snapshots after a 2.5-second pause, skip unchanged code, and clean up session resources when an interview ends.",
@@ -211,7 +211,7 @@
     },
     "seo": {
       "title": "SoloMock: WebRTC voice and code interview case study",
-      "description": "How I connected WebRTC voice and Monaco code snapshots in SoloMock, with temporary credentials, session cleanup, and mocked failure checks."
+      "description": "How SoloMock connects WebRTC voice and Monaco code snapshots, with temporary credentials, session cleanup, and mocked failure checks."
     }
   },
   {
@@ -249,11 +249,11 @@
     },
     "slug": "gasolytics-us-gas-price-map",
     "homepageSummary": "A U.S. fuel-price map and comparison toolkit that connects dated price snapshots to state details, trip estimates, and EV calculations.",
-    "contribution": "I projected map geometry on the server and separated snapshot delivery, caching, and interactive comparisons.",
+    "contribution": "Map geometry is projected on the server, and snapshot delivery, caching, and interactive comparisons are kept separate.",
     "caseStudy": {
-      "role": "Independent developer",
+      "role": "Directed the build with AI coding agents",
       "context": "Independent product · Maps and data delivery · 2026",
-      "summary": "I built Gasolytics with Next.js and d3-geo to connect dated AAA snapshots to a U.S. gas-price map, state details, and trip estimates. This case study separates map rendering, snapshot freshness, and unavailable-data behavior.",
+      "summary": "Gasolytics uses Next.js and d3-geo to connect dated AAA snapshots to a U.S. gas-price map, state details, and trip estimates. It was built with heavy use of AI coding agents. This case study separates map rendering, snapshot freshness, and unavailable-data behavior.",
       "takeaways": {
         "problem": "Visitors need to move from a national price map to state details or a trip estimate.",
         "decision": "Project map geometry on the server and keep source data dates distinct from read times.",
@@ -294,7 +294,7 @@
           "title": "Trip-cost assumptions and unavailable data",
           "paragraphs": [
             "The trip calculator exposes the assumptions behind its result: distance, fuel economy, selected fuel grade, and the state averages used for price. Visitors can enter their own distance instead of relying on the approximate city-to-city distance. The result is a planning estimate, with the method beside it, rather than an unexplained dollar amount.",
-            "Unavailable data needs a separate response. I tested the data reader against local synthetic snapshots with network access disabled. A successful read populated the cache; an expired cache followed by an unreadable input returned the previous result marked stale. A fresh process without usable data raised an explicit error instead of returning an invented price."
+            "Unavailable data needs a separate response. The data reader was tested against local synthetic snapshots with network access disabled. A successful read populated the cache; an expired cache followed by an unreadable input returned the previous result marked stale. A fresh process without usable data raised an explicit error instead of returning an invented price."
           ],
           "figure": {
             "src": "/projects/evidence/gasolytics-detail.png",
@@ -309,7 +309,7 @@
           "title": "What this demonstrates and what comes next",
           "paragraphs": [
             "The work connects a published data artifact to an interactive comparison: read and shape the data, render stable geometry, expose useful detail, and explain the estimate. The local checks establish the tested cache and failure behaviors, while the public interface makes the underlying date and calculation inputs visible.",
-            "The next improvement I would validate is how clearly readers distinguish fresh, cached, and unavailable data across every view. The same status should mean the same thing on the map, detail pages, and calculators, with the actual source date available wherever it affects a decision."
+            "The next improvement to validate is how clearly readers distinguish fresh, cached, and unavailable data across every view. The same status should mean the same thing on the map, detail pages, and calculators, with the actual source date available wherever it affects a decision."
           ]
         }
       ],
@@ -328,7 +328,7 @@
       "verifiedOn": "2026-10-05",
       "verifiedRevision": "9786a435",
       "dateModified": "2026-10-06",
-      "introduction": "I built Gasolytics to help people compare U.S. fuel prices and explore trip and EV costs. The interface depends on dated datasets: a page can load successfully while the information behind one of its sections is unavailable. An October release exposed that distinction. The recovery focused on two things: reusing the same published snapshot safely, and preventing a successful build from hiding reported data failures.",
+      "introduction": "Gasolytics helps people compare U.S. fuel prices and explore trip and EV costs. It was built with heavy use of AI coding agents. The interface depends on dated datasets: a page can load successfully while the information behind one of its sections is unavailable. An October release exposed that distinction. The recovery focused on two things: reusing the same published snapshot safely, and preventing a successful build from hiding reported data failures.",
       "sections": [
         {
           "title": "The failure that a green build missed",
@@ -441,7 +441,7 @@
     },
     "seo": {
       "title": "Gasolytics: Next.js gas-price map and data case study",
-      "description": "How I built a Next.js gas-price map with server-rendered SVG, dated AAA snapshots, trip estimates, and explicit cache and data-failure behavior."
+      "description": "A Next.js gas-price map with server-rendered SVG, dated AAA snapshots, trip estimates, and explicit cache and data-failure behavior."
     }
   },
   {
@@ -531,7 +531,7 @@
     "datePublished": "2026",
     "dateModified": "2026-09-05",
     "homepageSummary": "A marketing website for local-business services, with consultation availability and booking through Cal.com.",
-    "contribution": "I built the landing page and serverless scheduling integration.",
+    "contribution": "A landing page with a serverless scheduling integration.",
     "homepageCompact": true,
     "exhibition": {
       "summary": "A marketing website for local businesses, with consultation booking in one flow.",
@@ -570,7 +570,7 @@
     },
     "slug": "throughline-technical-learning-ecosystem",
     "homepageSummary": "A learning hub connecting programming guides, project building, and interview practice.",
-    "contribution": "I built the Astro hub and a shared interface for the technical guides.",
+    "contribution": "An Astro hub and a shared interface for the technical guides.",
     "homepageCompact": true,
     "exhibition": {
       "summary": "A learning hub connecting technical guides, project building, and interview practice.",
@@ -617,6 +617,7 @@
   },
   {
     "title": "Programming Basics",
+    "hidden": true,
     "description": "An introduction to programming for people who have never written code. The on-ramp the other Throughline guides point to.",
     "highlights": [
       "Written for readers with no experience, top to bottom, as the shared entry point to the specialty guides",
@@ -632,6 +633,7 @@
   },
   {
     "title": "Modern Web Dev Guide",
+    "hidden": true,
     "description": "A web development course in 17 chapters plus a capstone, with about 700 quiz questions, checkpoints you must pass, and chapters that unlock in order.",
     "highlights": [
       "Sampled-quiz engine drawing from a bank of roughly 700 questions, shuffled per session, with progress kept in localStorage",
@@ -648,6 +650,7 @@
   },
   {
     "title": "Modern AI Guide",
+    "hidden": true,
     "description": "An AI engineering course in 18 chapters, from how language models work to shipping and evaluating production systems, with runnable Python challenges in the browser.",
     "highlights": [
       "18 chapters: model foundations, the project lifecycle, the AI stack, solo, startup, and enterprise workflows, decision frameworks, production patterns, and career paths",
@@ -664,6 +667,7 @@
   },
   {
     "title": "Modern Security Engineer Guide",
+    "hidden": true,
     "description": "Fourteen chapters of offensive and defensive security, from the attacker's point of view to the job of a security engineer, with quizzes and hands-on code challenges.",
     "highlights": [
       "Covers cryptography, application security and the OWASP Top 10, secure SDLC, offensive testing, detection and response, forensics, cloud and identity, governance, and the AI attack surface, including prompt injection and the LLM Top 10",
@@ -680,6 +684,7 @@
   },
   {
     "title": "Modern Cloud Engineer Guide",
+    "hidden": true,
     "description": "Cloud engineering from first principles in 11 chapters: core services, infrastructure as code, Kubernetes, CI/CD, SRE, and platform engineering.",
     "highlights": [
       "11 chapters: foundations, core services, infrastructure as code, Kubernetes, CI/CD and GitOps, observability and SRE, platform engineering, cloud security, FinOps, MLOps and LLMOps, and career",
@@ -695,6 +700,7 @@
   },
   {
     "title": "Modern Data Engineering Guide",
+    "hidden": true,
     "description": "How data gets from a raw source to trusted, query-ready tables, in 12 chapters: storage and file formats, SQL engines, modeling, Spark, ingestion and CDC, dbt, orchestration, streaming, and the lakehouse.",
     "highlights": [
       "12 chapters from foundations through storage and formats, SQL and query engines, modeling and warehousing, Spark, ingestion and CDC, dbt, orchestration, Kafka streaming, the lakehouse, data quality and governance, and career",
@@ -727,6 +733,7 @@
   },
   {
     "title": "SWE Interview Guide",
+    "hidden": true,
     "description": "Interview prep from zero in 108 lessons over 17 phases, including the newer rounds: AI-assisted coding, problem decomposition, RAG, and agent and eval design. Built alongside SoloMock.",
     "highlights": [
       "108 lessons over 17 phases: foundations through dynamic programming, system design, the AI-era rounds, AI product engineering, frontend, and behavioral",

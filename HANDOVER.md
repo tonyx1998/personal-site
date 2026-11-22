@@ -319,3 +319,16 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. The résumé no
 Left unchanged for the user to decide: the "Software Developer" title and the project order. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change; the About ledger still says "Independent software developer, 2024–present". After deployment, confirm that `/resume.pdf` on the live site matches the committed file.
 
 Regenerated `public/resume.pdf` on Ubuntu with WeasyPrint 70.0, pypdf 6.10.0 and `libharfbuzz-subset0`: one Letter page, 7 tagged links. Six résumé regression tests and four site tests pass, and consecutive builds are byte-identical. As the tailoring guide notes, bytes differ from the earlier Mac build. veraPDF was not run.
+
+## Site wording and course pages — November 22
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `867c412` at the user's request, with approval to merge and publish once checks pass.
+
+- The site now says how the work is done. The home introduction, About, the three case studies and the Gasolytics article state that the products are built with heavy use of AI coding agents. First-person engineering claims in the project data and on the home page are reworded as statements about the product. The case-study role reads "Directed the build with AI coding agents".
+- The title "Software developer" is gone from the hero, page titles, share image and JSON-LD. The job-seeking lines are removed from the home page, About, footer, metadata and share image. About now lists "Independent projects, 2024–present". JSON-LD no longer carries `jobTitle` or `knowsAbout`.
+- Seven course projects are hidden: Programming Basics, the five Modern guides and the SWE Interview Guide. Their old pages redirect to `/projects` (temporary redirects in `next.config.ts`), and they leave the archive, sitemap and JSON-LD. Ten project pages remain public. Throughline, Shipyard and the Skills Roadmap stay.
+- Résumé title lines now read "AI-Assisted Web Development | …" in every profile, and `public/resume.pdf` is regenerated.
+
+Verification: `make verify`, six résumé tests and the production build pass (10 project pages, 13 sitemap entries). Checked against the local production build: the hidden pages return 307, no page overflows from 320 to 1440 px, and desktop and phone screenshots of the home page, About, a case study and the share image were inspected.
+
+A read-only audit of the live site before this change found Lighthouse mobile scores of 95 to 100, no axe violations beyond one minor ARIA role on the home carousel panel, working keyboard and no-JavaScript paths, and no broken links. Not addressed here: the home page and the inner pages use different visual styles and navigation; the home page ignores the dark theme; several phone tap targets and labels are small; some pages have no share image; the case studies still read like verification reports; and the Amex slug still contains "ai-booking-agent".

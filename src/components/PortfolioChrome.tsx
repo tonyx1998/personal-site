@@ -123,9 +123,7 @@ export function PortfolioFooter() {
     <footer className={styles.container + " " + styles.footer} id="contact">
       <div className={styles.footerIntro}>
         <h2>Let’s talk.</h2>
-        <p>
-          Open to software engineering roles, near Seattle or further afield.
-        </p>
+        <p>Email is the best way to reach me.</p>
       </div>
       <div className={styles.contact}>
         <a className={styles.email} href="mailto:tonyx1998@gmail.com">
