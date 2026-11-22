@@ -306,16 +306,16 @@ Regenerated one Letter page with 283 extracted words, embedded fonts, semantic h
 
 User approved publication of the two prepared SoloMock/Gasolytics case-study SEO changes after review. Integrated current master ec5c718 and retained its default ViralSignal/Amex Roofing/Gasolytics tagged résumé byte for byte. No social posts, GitHub profile edits, tracking implementation, new content batch or other repository changes authorized. Earlier local-only notes describe checkpoint history; current release scope is these two pages and their supporting local documentation. Await fresh independent review and exact-head checks before normal master Git deployment.
 
-## Résumé wording revision — November 22, pending review
+## Résumé wording revision — November 22
 
-Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. Not merged, no PR; production is unchanged. The résumé now states how the work was done, based on facts the user supplied on November 22.
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `be3efb2`. The résumé now states how the work was done, based on facts the user supplied on November 22. The user saw the rendered page and asked for it to be merged once checks pass; release follows the normal PR and master Git deployment.
 
 - Summary now reads "Builds and runs web products with heavy use of AI coding agents, from the interface to deployment." The previous text named realtime voice tools and Python, which the default profile has not shown since Amex Roofing replaced SoloMock.
 - Skills: every profile starts with `AI coding tools: Claude Code, Codex, Cursor` and ends with `Spoken languages: Mandarin and Cantonese (native), English`. WebRTC leaves the default profile's backend row because no project in that profile uses it.
-- The role heading is now "Independent projects | 2024 - Present" (`ROLE_HEADING` in the generator) instead of "Independent Software Developer | 2024 - Present". A separate Reachspan co-founder heading was tried on this branch and removed at the user's request; the résumé lists no role there.
+- The role heading is now "Independent projects | 2024 - Present" (`ROLE_HEADING` in the generator) instead of "Independent Software Developer | 2024 - Present". All selected work sits under it; the résumé lists no role at Reachspan.
 - ViralSignal is titled "ViralSignal - Threads Marketing App" and dated 2026. Its bullets describe directing AI coding agents, from September 2026, to audit and rework an existing app; they no longer say the application was built, and "billing" is now "credits".
 - Gasolytics: the second bullet carries a dated traffic figure, about 10,000 visitors a month in September and October 2026 (Vercel Web Analytics: 10,748 and 9,808). Traffic has been lower since; keep the dates.
 
-Proposed wording: the user should confirm the ViralSignal and Gasolytics bullets before merge. Left unchanged for the user to decide: the "Software Developer" title and the project order. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change.
+Left unchanged for the user to decide: the "Software Developer" title and the project order. Site copy (homepage introduction, About, JSON-LD) keeps its earlier framing and is not part of this change; the About ledger still says "Independent software developer, 2024–present". After deployment, confirm that `/resume.pdf` on the live site matches the committed file.
 
 Regenerated `public/resume.pdf` on Ubuntu with WeasyPrint 70.0, pypdf 6.10.0 and `libharfbuzz-subset0`: one Letter page, 7 tagged links. Six résumé regression tests and four site tests pass, and consecutive builds are byte-identical. As the tailoring guide notes, bytes differ from the earlier Mac build. veraPDF was not run.
