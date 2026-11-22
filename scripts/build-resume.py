@@ -42,7 +42,7 @@ CONTACT_LINKS = (
 # The complete set of resume records remains the editable master.
 PROFILES = {
     "default": {
-        "title": "Software Developer | Full-Stack Web Applications",
+        "title": "AI-Assisted Web Development | Full-Stack Web Applications",
         "projects": ("viralsignal", "amex-roofing", "gasolytics"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, Python, SQL"),
@@ -52,7 +52,7 @@ PROFILES = {
         ),
     },
     "frontend": {
-        "title": "Software Developer | Frontend Applications",
+        "title": "AI-Assisted Web Development | Frontend Applications",
         "projects": ("gasolytics", "solomock", "throughline"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, HTML/CSS"),
@@ -62,7 +62,7 @@ PROFILES = {
         ),
     },
     "product": {
-        "title": "Software Developer | Product Engineering",
+        "title": "AI-Assisted Web Development | Product Engineering",
         "projects": ("amex-roofing", "gasolytics", "solomock"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, HTML/CSS"),
@@ -72,7 +72,7 @@ PROFILES = {
         ),
     },
     "ai": {
-        "title": "Software Developer | Realtime Web Applications",
+        "title": "AI-Assisted Web Development | Realtime Web Applications",
         "projects": ("solomock", "gasolytics", "amex-roofing"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, HTML/CSS"),
@@ -82,7 +82,7 @@ PROFILES = {
         ),
     },
     "backend": {
-        "title": "Software Developer | Backend and Integrations",
+        "title": "AI-Assisted Web Development | Backend and Integrations",
         "projects": ("all-in-one-url", "amex-roofing", "solomock"),
         "skills": (
             ("Languages", "Python, TypeScript, JavaScript, SQL"),

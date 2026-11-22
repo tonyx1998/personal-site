@@ -195,9 +195,9 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
       <div className={styles.hero}>
         <h1>To Yin Yu</h1>
         <p>
-          <span className={styles.roleIntro}>Software developer.</span>I build
-          web products, realtime voice tools,
-          <br className={styles.desktopBreak} /> and booking systems.
+          <span className={styles.roleIntro}>Web products.</span>I build and run
+          them with heavy use
+          <br className={styles.desktopBreak} /> of AI coding tools.
         </p>
       </div>
       <div id="main-content" className={styles.gallery} tabIndex={-1}>

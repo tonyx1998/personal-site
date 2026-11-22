@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "To Yin Yu, software developer";
+export const alt = "To Yin Yu, web products built with AI coding tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -56,7 +56,7 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          Software developer
+          Web products built with AI coding tools
         </div>
         <div
           style={{
@@ -67,8 +67,7 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          Useful web products, from the interface to the backend. Selected work
-          and the engineering decisions behind it.
+          Selected work, case studies, and a one-page resume.
         </div>
       </div>
 
@@ -79,7 +78,7 @@ export default async function Image() {
           color: "#62706a",
         }}
       >
-        Seattle area · US citizen · open to software engineering roles
+        Seattle area · US citizen
       </div>
     </div>,
     {

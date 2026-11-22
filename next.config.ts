@@ -24,6 +24,21 @@ const nextConfig: NextConfig = {
         destination: "/projects",
         permanent: false,
       },
+      // The course projects are hidden from the portfolio. Their old pages
+      // send visitors to the archive instead of a 404.
+      ...[
+        "programming-basics",
+        "modern-web-dev-guide",
+        "modern-ai-guide",
+        "modern-security-engineer-guide",
+        "modern-cloud-engineer-guide",
+        "modern-data-engineering-guide",
+        "swe-interview-guide",
+      ].map((slug) => ({
+        source: `/projects/${slug}`,
+        destination: "/projects",
+        permanent: false,
+      })),
       {
         source: "/:path*",
         has: [{ type: "host", value: "toyinyu.com" }],

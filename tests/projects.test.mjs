@@ -21,22 +21,27 @@ const publishedSlugs = [
   "reachspan",
   "throughline-technical-learning-ecosystem",
   "all-in-one-url",
+  "shipyard",
+  "2026-skills-roadmap",
+];
+
+// Hidden on purpose: Plugrade until it launches, and the course projects.
+const hiddenSlugs = [
+  "plugrade",
   "programming-basics",
   "modern-web-dev-guide",
   "modern-ai-guide",
   "modern-security-engineer-guide",
   "modern-cloud-engineer-guide",
   "modern-data-engineering-guide",
-  "shipyard",
   "swe-interview-guide",
-  "2026-skills-roadmap",
 ];
 
 test("curation preserves the published route set and hidden launch state", () => {
   const slugs = projects.map(projectSlug);
   assert.deepEqual([...slugs].sort(), [...publishedSlugs].sort());
   assert.equal(new Set(slugs).size, slugs.length);
-  assert.equal(projectBySlug("plugrade"), null);
+  for (const slug of hiddenSlugs) assert.equal(projectBySlug(slug), null, slug);
   assert.equal(projectBySlug("missing-project"), null);
   for (const slug of publishedSlugs) assert.ok(projectBySlug(slug), slug);
 });
@@ -53,7 +58,7 @@ test("primary and compact homepage selections do not change the archive", () => 
     "reachspan",
     "throughline-technical-learning-ecosystem",
   ]);
-  assert.equal(supportingProjects.length, 14);
+  assert.equal(supportingProjects.length, 7);
   assert.ok(
     homepageSupportingProjects.every((project) =>
       supportingProjects.includes(project)
