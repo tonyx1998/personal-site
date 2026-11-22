@@ -20,7 +20,7 @@ export const projectVisuals: Record<string, ProjectVisual> = {
     src: "/projects/soloyap.png",
     alt: "SoloYap realtime English speaking practice workspace",
   },
-  "amex-roofing-site-ai-booking-agent": {
+  "amex-roofing": {
     src: "/projects/amex-roofing.png",
     alt: "Amex Roofing home page with a roof photo and a free inspection call to action",
   },

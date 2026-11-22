@@ -41,7 +41,7 @@ export const websiteJsonLd = {
   url: SITE_URL,
   name: "To Yin Yu",
   description:
-    "Portfolio of To Yin Yu near Seattle. Web products built with heavy use of AI coding agents, client work, and local tools.",
+    "Portfolio of To Yin Yu near Seattle. Web products built with heavy use of AI coding agents, and client work.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },

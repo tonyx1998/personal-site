@@ -53,11 +53,10 @@ PROFILES = {
     },
     "frontend": {
         "title": "AI-Assisted Web Development | Frontend Applications",
-        "projects": ("gasolytics", "solomock", "throughline"),
+        "projects": ("gasolytics", "solomock", "amex-roofing"),
         "skills": (
             ("Languages", "TypeScript, JavaScript, HTML/CSS"),
             ("Frontend", "React, Next.js, Tailwind CSS, d3-geo, Monaco"),
-            ("Content systems", "Astro, Docusaurus, MDX"),
             ("Tools and APIs", "Git, Vercel, WebRTC"),
         ),
     },

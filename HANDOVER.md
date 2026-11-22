@@ -234,8 +234,8 @@ the `<name>.vercel.app` pattern.
 
 ## Open decisions
 
-2026-08-11: the LinkedIn contact link is still unresolved and only the user can
-supply it.
+2026-11-22: the user confirmed the LinkedIn contact link works. This closes the
+item opened on 2026-08-11.
 
 2026-09-02: the phone number stays on the public résumé PDF until the user says
 otherwise.
@@ -332,3 +332,15 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `867c412` at the user's re
 Verification: `make verify`, six résumé tests and the production build pass (10 project pages, 13 sitemap entries). Checked against the local production build: the hidden pages return 307, no page overflows from 320 to 1440 px, and desktop and phone screenshots of the home page, About, a case study and the share image were inspected.
 
 A read-only audit of the live site before this change found Lighthouse mobile scores of 95 to 100, no axe violations beyond one minor ARIA role on the home carousel panel, working keyboard and no-JavaScript paths, and no broken links. Not addressed here: the home page and the inner pages use different visual styles and navigation; the home page ignores the dark theme; several phone tap targets and labels are small; some pages have no share image; the case studies still read like verification reports; and the Amex slug still contains "ai-booking-agent".
+
+## Portfolio trimmed to seven products — November 22
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `fc1ee40`. The user asked for the remaining cleanup to follow the recommendation given in the session, and confirmed that the About sentence is accurate.
+
+- Throughline, Shipyard and the Skills Roadmap are hidden, joining the seven course projects. Seven project pages remain: Amex Roofing, SoloMock, Gasolytics, How's My Job Fit?, SoloYap, Reachspan and all-in-one-URL. The home carousel shows six of them. Old pages redirect to `/projects` with temporary redirects.
+- The roofing case study moved from `/projects/amex-roofing-site-ai-booking-agent` to `/projects/amex-roofing`, with a permanent redirect. The old address named a feature the page does not describe.
+- Each case study loses its closing section about what the checks establish and what comes next, and the evidence notes are shorter. Figures, takeaways and the Gasolytics article are unchanged.
+- The archive and metadata no longer mention local tools.
+- Résumé: the `frontend` profile selects Gasolytics, SoloMock and Amex Roofing, and drops the content-systems skills row, because Throughline is hidden. The default profile and `public/resume.pdf` are unchanged.
+
+Not done, by decision: the home page and the inner pages still use different visual styles, the home page ignores the dark theme, and some phone tap targets are small. These were judged not worth another redesign now.
