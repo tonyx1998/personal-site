@@ -29,6 +29,9 @@
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  /* Taller tap target without moving the layout. */
+  padding-block: 12px;
+  margin-block: -12px;
 }
 .desktopNav {
   display: flex;
@@ -335,6 +338,9 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
+  /* Taller tap target without moving the layout. */
+  padding-block: 12px;
+  margin-block: -12px;
 }
 .strip a:hover {
   color: var(--ink);
@@ -585,8 +591,8 @@
     padding: 0;
   }
   .relationship {
-    font-size: 10px;
-    letter-spacing: 0.17em;
+    font-size: 12px;
+    letter-spacing: 0.14em;
     margin: 0 0 10px;
   }
   .intro h2 {
@@ -602,7 +608,7 @@
   }
   .figure figcaption {
     margin-top: 7px;
-    font-size: 11px;
+    font-size: 12px;
   }
   .dragHint {
     display: none;
@@ -654,7 +660,7 @@
   }
   .strip {
     margin: 35px 7% 0;
-    font-size: 12px;
+    font-size: 14px;
     padding-bottom: 20px;
   }
   .about {

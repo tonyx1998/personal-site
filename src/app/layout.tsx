@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Public_Sans } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -75,17 +73,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f4f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#131716" },
-  ],
+  themeColor: "#f3f4f2",
   width: "device-width",
   initialScale: 1,
 };
-
-// Runs before first paint. A saved choice wins; otherwise the system
-// preference decides. Keep in sync with readResolvedTheme() in providers.tsx.
-const THEME_SCRIPT = `(function(){try{var p=localStorage.getItem('theme');var d=p==='dark'||(p!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -93,21 +84,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   // The layout reads no request data, so every route can be prerendered. The
-  // server sends the light theme; the inline script corrects the class before
-  // anything paints.
+  // site is light-only: there is no dark theme and no theme switch.
   return (
-    <html
-      lang="en"
-      className={`${newsreader.variable} ${publicSans.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${newsreader.variable} ${publicSans.variable}`}>
       <body className="min-h-screen antialiased bg-background text-foreground">
-        <Script
-          id="theme-bootstrap"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
-        />
-        <Providers>{children}</Providers>
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>

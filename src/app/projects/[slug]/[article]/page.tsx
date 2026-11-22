@@ -12,7 +12,7 @@ import {
   shortTitle,
 } from "@/lib/projects";
 import { jsonLdScriptProps } from "@/lib/structured-data";
-import { SITE_URL } from "@/lib/site";
+import { DEFAULT_SHARE_IMAGE, SITE_URL } from "@/lib/site";
 import styles from "../ProjectDetail.module.css";
 import articleStyles from "./Article.module.css";
 
@@ -53,11 +53,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: path,
       type: "article",
       modifiedTime: article.dateModified,
+      images: [DEFAULT_SHARE_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.description,
+      images: [DEFAULT_SHARE_IMAGE],
     },
   };
 }

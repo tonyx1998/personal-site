@@ -15,7 +15,7 @@ import {
 } from "@/lib/projects";
 import { projectVisual } from "@/lib/project-visuals";
 import { jsonLdScriptProps } from "@/lib/structured-data";
-import { SITE_URL } from "@/lib/site";
+import { DEFAULT_SHARE_IMAGE, SITE_URL } from "@/lib/site";
 import styles from "./ProjectDetail.module.css";
 
 export function generateStaticParams() {
@@ -66,13 +66,13 @@ export async function generateMetadata({
       description,
       url,
       type: "article",
-      ...(shareImage ? { images: [shareImage] } : {}),
+      images: [shareImage ?? DEFAULT_SHARE_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      ...(shareImage ? { images: [shareImage] } : {}),
+      images: [shareImage ?? DEFAULT_SHARE_IMAGE],
     },
   };
 }

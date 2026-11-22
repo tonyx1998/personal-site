@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
-import { useTheme } from "@/app/providers";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import styles from "./Chrome.module.css";
 
 const navItems = [
@@ -13,36 +12,6 @@ const navItems = [
   { label: "About", href: "/#about" },
   { label: "Resume (PDF)", href: "/resume.pdf" },
 ];
-const subscribeToHydration = () => () => {};
-
-function ThemeButton() {
-  const { theme, toggle } = useTheme();
-  const hydrated = useSyncExternalStore(
-    subscribeToHydration,
-    () => true,
-    () => false
-  );
-  // Reserve space without presenting a dead control when scripts are off.
-  if (!hydrated)
-    return <span className={styles.themeSpace} aria-hidden="true" />;
-  const label = "Switch to " + (theme === "dark" ? "light" : "dark") + " theme";
-  return (
-    <button
-      type="button"
-      className={styles.themeButton}
-      onClick={toggle}
-      aria-label={label}
-      title={label}
-    >
-      {theme === "dark" ? (
-        <Sun size={18} aria-hidden="true" />
-      ) : (
-        <Moon size={18} aria-hidden="true" />
-      )}
-    </button>
-  );
-}
-
 export function PortfolioHeader() {
   const menu = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
@@ -77,7 +46,6 @@ export function PortfolioHeader() {
               );
             })}
           </div>
-          <ThemeButton />
         </div>
         <details
           ref={menu}
