@@ -85,9 +85,11 @@ Existing master entries can remain unselected. `resume.order` is legacy master
 metadata; the explicit profile order controls the PDF. Hidden, missing, or
 incomplete selected records cause the build to fail.
 
-Keep the independent role accurate. Amex appears as a client project under
-independent development; no employment relationship, paid contract, or new title
-at Amex is inferred. Keep existing year dates until exact dates are supported.
+Keep the heading accurate. All selected work sits under "Independent projects",
+which describes self-directed work and is not a job title. The resume lists no role
+at Reachspan; it appears only as the relationship label on its product. Amex appears
+as a client project, and no paid contract or title at Amex is inferred. Keep existing
+year dates until exact dates are supported.
 Do not add problem counts from a different SoloMock version, hard global cost-cap
 claims, Amex Solar/AI-chat claims, blanket Job Fit “stores nothing” language, or
 unmeasured business results.
@@ -136,4 +138,12 @@ successful default render proves every variation. Use the existing website's
 
 ## ViralSignal master entry
 
-ViralSignal is a `resumeOnly` project record, not an employment entry or a new public portfolio route. The default full-stack preset selects it before Amex Roofing and Gasolytics. The product preset retains Amex, Gasolytics and SoloMock. Existing other presets are unchanged. The record uses the user-approved full-stack/auth/billing/test bullets and labels the relationship Reachspan product. No project date was supplied, so this resume-only entry has no invented date; the generator omits that metadata segment. Existing independent-development role and all unrelated contact/education facts are unchanged. GPT/Claude assistance does not create a claim of designing the ViralSignal landing page.
+ViralSignal is a `resumeOnly` project record, not an employment entry or a new public portfolio route. The default full-stack preset selects it before Amex Roofing and Gasolytics. The product preset retains Amex, Gasolytics and SoloMock. The record labels the relationship Reachspan product and is dated 2026. Its bullets describe the actual contribution: from September 2026, directing AI coding agents to audit and rework an app that already existed. Do not describe the application as built from scratch, and do not call its credit system billing. The wording makes no claim about the landing-page design, users, or revenue.
+
+## AI assistance
+
+Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it, and every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile. Every profile's skills also end with the shared `Spoken languages` row.
+
+## Gasolytics traffic figure
+
+The Gasolytics bullet cites about 10,000 visitors a month in September and October 2026. The source is Vercel Web Analytics (10,748 and 9,808 visitors). The figure is dated on purpose: traffic has been lower since, so do not present it as current.

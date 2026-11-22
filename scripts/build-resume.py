@@ -22,11 +22,15 @@ ROOT = Path(__file__).resolve().parent.parent
 PROJECTS_JSON = ROOT / "src" / "lib" / "projects.data.json"
 LETTER = (612, 792)
 SUMMARY = (
-    "Software developer building full-stack web products, realtime voice tools, "
-    "and client booking systems with TypeScript, React, Next.js, and Python. "
-    "B.S. in Computer Science, University of Maryland; based near Seattle and "
-    "open to relocation."
+    "Builds and runs web products with heavy use of AI coding agents, from the "
+    "interface to deployment. B.S. in Computer Science, University of Maryland; "
+    "based near Seattle and open to relocation."
 )
+# Every project on the resume is AI-assisted, so every profile says how it was built.
+AI_TOOLS = ("AI coding tools", "Claude Code, Codex, Cursor")
+SPOKEN_LANGUAGES = ("Spoken languages", "Mandarin and Cantonese (native), English")
+# One heading for all selected work: these are self-directed projects, not a job title.
+ROLE_HEADING = "Independent projects | 2024 - Present"
 CONTACT_LINKS = (
     ("mailto:tonyx1998@gmail.com", "tonyx1998@gmail.com"),
     ("https://toyinyu.com", "toyinyu.com"),
@@ -43,7 +47,7 @@ PROFILES = {
         "skills": (
             ("Languages", "TypeScript, JavaScript, Python, SQL"),
             ("Frontend", "React, Next.js, HTML/CSS, Tailwind CSS"),
-            ("Backend and APIs", "PostgreSQL, REST APIs, OAuth, WebRTC"),
+            ("Backend and APIs", "PostgreSQL, REST APIs, OAuth"),
             ("Tools", "Git, Vercel"),
         ),
     },
@@ -192,10 +196,10 @@ h2, h3, h4, .meta {{ break-after: avoid; }}
              + "</p>"]
     parts += ["<section><h2>SUMMARY</h2>", f"<p>{markup(SUMMARY)}</p></section>",
               "<section><h2>TECHNICAL SKILLS</h2>"]
-    for label, items in PROFILES[profile]["skills"]:
+    for label, items in (AI_TOOLS, *PROFILES[profile]["skills"], SPOKEN_LANGUAGES):
         parts.append(f"<p><strong>{markup(label)}:</strong> {markup(items)}</p>")
     parts += ["</section><section><h2>EXPERIENCE</h2>",
-              "<h3>Independent Software Developer &nbsp;|&nbsp; 2024 - Present</h3>"]
+              "<h3>" + markup(ROLE_HEADING).replace(" | ", " &nbsp;|&nbsp; ") + "</h3>"]
     for project in projects:
         parts += [f'<div class="project"><h4>{markup(project["title"])}</h4>',
                   f'<p class="meta">{markup(project["relationship"])}'
@@ -344,7 +348,7 @@ def validate_pdf(path: Path, projects):
         if position == -1:
             raise RuntimeError(f"Missing or out-of-order resume text: {phrase}")
         cursor = position + len(phrase)
-    for phrase in ["(206) 712-5144", "Independent Software Developer", "2024 - Present"] + [
+    for phrase in ["(206) 712-5144", *ROLE_HEADING.split(" | ")] + [
         b for p in projects for b in p["bullets"]
     ]:
         if " ".join(phrase.split()) not in text:
@@ -362,7 +366,7 @@ def validate_pdf(path: Path, projects):
         raise RuntimeError("Tagged links must match the source destinations")
     expected_headings = [("/H1", "TO YIN YU"), ("/H2", "SUMMARY"),
                          ("/H2", "TECHNICAL SKILLS"), ("/H2", "EXPERIENCE"),
-                         ("/H3", "Independent Software Developer | 2024 - Present")]
+                         ("/H3", ROLE_HEADING)]
     expected_headings += [("/H4", p["title"]) for p in projects]
     expected_headings += [("/H2", "EDUCATION")]
     if structure["headings"] != expected_headings:

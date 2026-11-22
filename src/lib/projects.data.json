@@ -242,7 +242,7 @@
       "date": "2026",
       "bullets": [
         "Rendered an interactive U.S. gas-price map as server-generated SVG with d3-geo; added metro pins, zoom, pan, and state detail panels.",
-        "Built trip-cost and EV-versus-gas comparison tools using AAA price snapshots; served price data through an in-process cache for state and metro views."
+        "Added trip-cost and EV-versus-gas tools on AAA price snapshots; the site drew about 10,000 visitors a month in September and October 2026, mostly from search engines."
       ],
       "id": "gasolytics",
       "relationship": "Independent product"
@@ -793,11 +793,12 @@
       "id": "viralsignal",
       "order": 0,
       "relationship": "Reachspan product",
-      "title": "ViralSignal | Reachspan product | Full-stack development",
+      "title": "ViralSignal - Threads Marketing App",
+      "date": "2026",
       "stack": "TypeScript, React, Next.js, PostgreSQL, OAuth",
       "bullets": [
-        "Built the full-stack application for Reachspan’s ViralSignal, integrating Threads search, AI-assisted relevance assessment, reply/post generation, and persistent draft workflows.",
-        "Implemented OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for authentication, billing, and failure recovery."
+        "Since September 2026, directed AI coding agents to audit and rework an existing Threads marketing app with search, AI-assisted relevance assessment, reply and post drafting, and saved drafts.",
+        "The work covered OAuth account linking, PostgreSQL row-level security, and idempotent credit grants, with automated tests for sign-in, credits, and failure recovery."
       ]
     }
   }
