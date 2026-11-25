@@ -355,3 +355,16 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `25f1162`. The user asked 
 - Every page now has a share image. Pages without their own image use the generated card through `DEFAULT_SHARE_IMAGE` in `src/lib/site.ts`.
 
 Not done, by decision: the home page and the inner pages still use different visual styles and navigation.
+
+## Audit fixes — November 25
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `f799639`. A read-only audit of the live site found no broken page and no accessibility violation (Lighthouse on a simulated phone: performance 90 to 97, accessibility, best practices and search 100). The user asked for its five fixes and for the recommended answer to the résumé question.
+
+- Next.js and `eslint-config-next` move from 16.3.8 to 16.4.6. `npm audit` listed a group of advisories rated critical for 16.0.0 to 16.4.4. The site uses no server actions, no `use cache` and no middleware, so most of them do not apply, but the image-optimizer ones could not be ruled out. `npm audit fix` also cleared the development-only `minimatch` and `zod` advisories. `npm audit` now reports nothing.
+- Reachspan: the "Live site" link goes to the English page, `https://www.reachspan.ai/en.html`. The bare domain opens in Chinese, while the portfolio shows the English screenshot. The description, the home summary and the carousel summary now say the site is for Hong Kong businesses and is in Chinese and English.
+- Reachspan project notes gain one line about ViralSignal: since September 2026, AI coding agents were directed to audit and rework that app, and the résumé describes the work. The résumé leads with ViralSignal and the site did not mention it, so a reader going from one to the other found nothing. ViralSignal still has no page of its own and stays `resumeOnly`; the line repeats the résumé's wording and claims nothing more.
+- Case-study figures: "View full-size image" is a block link with 12 px of padding above and below, about 45 px high. As inline text it was 16 px high, under the 24 px minimum for a pointer target.
+- Four security headers are sent with every response (see `docs/STACK.md`). HSTS already came from the host.
+- Removed leftovers: `CHECKPOINT.md`, `design-qa.md`, `docs/traffic/SEO-CHECKPOINT.md`, the `qa/` folder and the unused duplicate `public/projects/reachspan.png`. `LINKS_CHECKED_ON` is gone from `src/lib/site.ts`: no page had shown the date since the redesign, and it still read 2026-09-03. `npm run check-links` now only checks and reports; it changes no file.
+
+Not done: the other files in `docs/traffic/` (distribution drafts, the measurement proposal and two JSON baselines) are working notes of the same kind but were not part of the request. Two page descriptions are still cut mid-sentence (Amex Roofing, How's My Job Fit?), three case-study titles are over 60 characters, and the sitemap dates of unchanged pages are old. The site gets few visitors and almost none from search, so these were left.

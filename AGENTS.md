@@ -17,7 +17,7 @@ Portfolio site for To Yin Yu — Next.js 16, React 19, Tailwind v4 + CSS Modules
 - `make build` — production build
 - `make verify` — eslint + prettier check (run before opening a PR)
 - `make resume` — regenerate `public/resume.pdf` from `src/lib/projects.data.json`
-- `npm run check-links` — verify every project URL; updates the "Live, checked" date only when all pass
+- `npm run check-links` — verify every project URL; exits 1 when one fails and changes no file
 
 ## Rules
 

@@ -495,25 +495,26 @@
   },
   {
     "title": "Reachspan",
-    "description": "A marketing website for a service supporting local businesses, with a consultation-booking interface connected to Cal.com.",
+    "description": "A Chinese and English marketing website for a Hong Kong service that supports local businesses, with consultation booking connected to Cal.com.",
     "highlights": [
       "Built an HTML and Tailwind marketing page with responsive layouts and motion that respects reduced-motion preferences.",
       "Connected consultation availability and booking to Cal.com through Vercel serverless routes.",
-      "Kept demonstration examples labeled as demos."
+      "Kept demonstration examples labeled as demos.",
+      "Also for Reachspan: since September 2026, directed AI coding agents to audit and rework ViralSignal, a Threads marketing app. The resume describes that work."
     ],
     "tags": ["HTML", "Tailwind CSS", "Vercel Serverless", "Cal.com API"],
     "github": null,
-    "live": "https://reachspan.ai",
+    "live": "https://www.reachspan.ai/en.html",
     "featured": false,
     "hidden": false,
     "className": "lg:col-span-2 lg:row-span-2",
     "datePublished": "2026",
-    "dateModified": "2026-09-05",
-    "homepageSummary": "A marketing website for local-business services, with consultation availability and booking through Cal.com.",
+    "dateModified": "2026-11-25",
+    "homepageSummary": "A marketing website for a Hong Kong local-business service, in Chinese and English, with consultation booking through Cal.com.",
     "contribution": "A landing page with a serverless scheduling integration.",
     "homepageCompact": true,
     "exhibition": {
-      "summary": "A marketing website for local businesses, with consultation booking in one flow.",
+      "summary": "A marketing website for Hong Kong businesses, in Chinese and English, with consultation booking in one flow.",
       "topics": "Marketing website · Scheduling · Integration",
       "caption": "Current English homepage · October 2026",
       "relationship": "Website & integration"

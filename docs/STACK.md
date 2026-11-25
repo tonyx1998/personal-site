@@ -4,7 +4,7 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 ## Framework and rendering
 
-**Next.js 16.3.8, React 19.2.8, Node.js 24.** Every route is a Server Component except the small client pieces that need state: the home carousel and the header with its mobile menu.
+**Next.js 16.4.6, React 19.2.8, Node.js 24.** Every route is a Server Component except the small client pieces that need state: the home carousel and the header with its mobile menu.
 
 **Static rendering.** Nothing on the site reads request data, so every page can be prerendered at build time and served from the Vercel CDN. The project pages use `generateStaticParams` over the JSON roster. Do not add `cookies()` or `headers()` to the root layout; that would turn every route dynamic again.
 
@@ -34,6 +34,14 @@ ESLint (`eslint-config-next`), Prettier, TypeScript strict, React Compiler enabl
 
 The Verify workflow checks the site and résumé on pull requests and master pushes.
 The October 2026 compatible dependency refresh removes an obsolete PostCSS
-override so Next.js can use its patched release. The remaining npm advisory is
-the unpatched, development-only `braces` chain in Next's ESLint plugin; forcing
-an older lint configuration is not an appropriate fix.
+override so Next.js can use its patched release. The November 25 update moves
+Next.js to 16.4.6, the release that closes the advisories reported for 16.0.0
+to 16.4.4, and `npm audit` reports no advisory for production or development
+dependencies.
+
+`next.config.ts` sends four security headers with every response:
+`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`,
+`Referrer-Policy: strict-origin-when-cross-origin` and a `Permissions-Policy`
+that switches off the camera, microphone, geolocation and topics APIs. There
+is no Content-Security-Policy: the framework's inline scripts would need a
+nonce on every request, which a statically rendered site cannot supply.

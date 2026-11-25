@@ -107,7 +107,12 @@
   line-height: 1.5;
   color: var(--ink-3);
 }
+/* The link sits on its own line with a tap area about 45px high. As inline text it
+   was 16px tall, below the 24px minimum for a pointer target. */
 .figure figcaption a {
+  display: block;
+  width: fit-content;
+  padding-block: 12px;
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;

@@ -1,18 +1,16 @@
-// Checks every live and GitHub URL in src/lib/projects.data.json. When all of
-// them answer 2xx or 3xx, stamps today's date into LINKS_CHECKED_ON in
-// src/lib/site.ts so the "Live, checked <date>" line on the site stays true.
+// Checks every live and GitHub URL in src/lib/projects.data.json and reports
+// the ones that do not answer 2xx or 3xx. It changes no file.
 //
 //   npm run check-links
 //
-// Exits 1 (and leaves the date alone) if any link fails.
+// Exits 1 if any link fails.
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dataPath = path.join(root, "src/lib/projects.data.json");
-const sitePath = path.join(root, "src/lib/site.ts");
 
 const projects = JSON.parse(readFileSync(dataPath, "utf8"));
 const urls = projects
@@ -39,15 +37,8 @@ for (const url of urls) {
 }
 
 if (failed > 0) {
-  console.error(`\n${failed} link(s) failed. LINKS_CHECKED_ON not updated.`);
+  console.error(`\n${failed} link(s) failed.`);
   process.exit(1);
 }
 
-const today = new Date().toISOString().slice(0, 10);
-const site = readFileSync(sitePath, "utf8");
-const updated = site.replace(
-  /LINKS_CHECKED_ON = "\d{4}-\d{2}-\d{2}"/,
-  `LINKS_CHECKED_ON = "${today}"`
-);
-writeFileSync(sitePath, updated);
-console.log(`\nAll ${urls.length} links ok. LINKS_CHECKED_ON = ${today}`);
+console.log(`\nAll ${urls.length} links ok.`);

@@ -1,9 +1,26 @@
 import type { NextConfig } from "next";
 
+// Sent with every response. The site is static, embeds nothing from other
+// origins and is never meant to be framed, so these only close doors it does
+// not use. HTTPS enforcement (HSTS) is already added by the host.
+const securityHeaders = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+  },
+];
+
 const nextConfig: NextConfig = {
   reactCompiler: true,
   async headers() {
     return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
       {
         source: "/resume.pdf",
         headers: [
