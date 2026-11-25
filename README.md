@@ -11,7 +11,7 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 plus CSS Modules.
 - `src/components/ProjectsAll.tsx` renders the archive: featured projects with thumbnails, the rest as compact rows. A project with `"hidden": true` is left out of the homepage, the archive, the sitemap, and the routes.
 - `src/app/layout.tsx` is the root layout. The site is light-only: there is no dark theme and no theme switch. Every route is statically rendered.
 - `scripts/build-resume.py` generates the one-page `public/resume.pdf` from explicit project profiles and the shared `resume` fields. It validates the staged document before replacing the previous PDF. See [resume tailoring](docs/resume-tailoring.md).
-- `scripts/check-links.mjs` fetches every project URL and, when all pass, stamps the maintenance date into `LINKS_CHECKED_ON` in `src/lib/site.ts`. The interface uses direct product links instead of repeating that historical check date.
+- `scripts/check-links.mjs` fetches every project URL and reports the ones that fail. It changes no file.
 - `public/projects/evidence/` contains six labeled product demonstrations and public captures. The 1280-pixel images serve as covers; the 2× originals are used for case-study figures. Source revisions, simulation details, and claim limits are recorded in [project evidence](docs/project-evidence.md).
 
 ## Working on it
@@ -27,7 +27,7 @@ npm test             # routes, curation, study schema, and evidence assets
 npm run typecheck    # generate route types and run TypeScript
 npm run format:check # prettier
 npm run resume       # rebuild and validate the tagged public/resume.pdf
-npm run check-links  # verify every project URL and update the checked date
+npm run check-links  # verify every project URL
 ```
 
 No environment variables are required.
@@ -69,7 +69,7 @@ src/
 public/projects/                product screenshots (1280×720)
 public/resume.pdf               generated résumé
 scripts/build-resume.py         résumé generator
-scripts/check-links.mjs         link check that stamps LINKS_CHECKED_ON
+scripts/check-links.mjs         link check for every project URL
 ```
 
 ## License
