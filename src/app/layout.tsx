@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · To Yin Yu",
   },
   description:
-    "To Yin Yu builds and runs web products with heavy use of AI coding agents. Selected work in client booking, realtime voice, and data tools, with case studies.",
+    "To Yin Yu builds and operates web products by directing AI coding agents. Selected work in client booking, realtime voice, and data tools, with case studies.",
   applicationName: "To Yin Yu",
   keywords: [
     "To Yin Yu",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "To Yin Yu · Web products built with AI coding tools",
     description:
-      "Web products built and run with heavy use of AI coding agents. Explore selected work, case studies, and a one-page resume.",
+      "Web products built and operated by directing AI coding agents. Explore selected work, case studies, and a one-page resume.",
     siteName: "To Yin Yu",
     locale: "en_US",
   },
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "To Yin Yu · Web products built with AI coding tools",
     description:
-      "Web products built and run with heavy use of AI coding agents. Explore selected work, case studies, and a one-page resume.",
+      "Web products built and operated by directing AI coding agents. Explore selected work, case studies, and a one-page resume.",
   },
   robots: {
     index: true,
