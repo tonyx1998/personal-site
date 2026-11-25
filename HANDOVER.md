@@ -367,4 +367,13 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `f799639`. A read-only aud
 - Four security headers are sent with every response (see `docs/STACK.md`). HSTS already came from the host.
 - Removed leftovers: `CHECKPOINT.md`, `design-qa.md`, `docs/traffic/SEO-CHECKPOINT.md`, the `qa/` folder and the unused duplicate `public/projects/reachspan.png`. `LINKS_CHECKED_ON` is gone from `src/lib/site.ts`: no page had shown the date since the redesign, and it still read 2026-09-03. `npm run check-links` now only checks and reports; it changes no file.
 
-Not done: the other files in `docs/traffic/` (distribution drafts, the measurement proposal and two JSON baselines) are working notes of the same kind but were not part of the request. Two page descriptions are still cut mid-sentence (Amex Roofing, How's My Job Fit?), three case-study titles are over 60 characters, and the sitemap dates of unchanged pages are old. The site gets few visitors and almost none from search, so these were left.
+Not done: two page descriptions are still cut mid-sentence (Amex Roofing, How's My Job Fit?), three case-study titles are over 60 characters, and the sitemap dates of unchanged pages are old. The site gets few visitors and almost none from search, so these were left.
+
+## Remaining working notes removed — November 25
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `929a418`, at the user's request after the audit fixes.
+
+- `docs/traffic/` is removed: the distribution drafts, the measurement proposal and the two JSON baselines from the October 13 search checkpoint. They were working notes, and nothing in the site, the scripts or the tests read them.
+- The LinkedIn and GitHub-profile drafts in that folder predate the November rewording of the site. They use the "software developer" title and first-person engineering claims that the site no longer makes, so they should not be posted as written. New drafts should follow the current wording: web products built and run with heavy use of AI coding agents.
+- The measurement proposal was never approved or implemented. The site still has Vercel Web Analytics and Speed Insights only, with no custom events.
+- The October entries above that mention files in `docs/traffic/` are history. The files remain in the git history before this change.
