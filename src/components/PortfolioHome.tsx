@@ -46,10 +46,10 @@ export default function PortfolioHome() {
                   Web products built with AI coding tools.
                 </p>
                 <p>
-                  These are web products I build and run with heavy use of AI
+                  These are web products I build and operate by directing AI
                   coding agents: full-stack apps, realtime voice tools, and
                   booking systems for service businesses. I choose what to
-                  build, direct the tools, and keep the products online.
+                  build, test the result, and keep the products online.
                 </p>
                 <div className={styles.availabilityLedger}>
                   <p>Seattle area · Open to relocation</p>
@@ -152,9 +152,9 @@ export default function PortfolioHome() {
                 2024.
               </p>
               <p>
-                I build them with heavy use of AI coding agents. I choose what
-                to build, direct the tools, and keep the products running after
-                launch.
+                I build them by directing AI coding agents. I choose what to
+                build, test the result, deploy it, and keep the products running
+                after launch.
               </p>
               <p>
                 The case studies here explain how each product works and what

@@ -12,7 +12,7 @@ export const personJsonLd = {
   alternateName: "tonyx1998",
   url: SITE_URL,
   description:
-    "Builds and runs web products near Seattle with heavy use of AI coding agents.",
+    "Builds and operates web products near Seattle by directing AI coding agents.",
   homeLocation: {
     "@type": "Place",
     address: {
@@ -41,7 +41,7 @@ export const websiteJsonLd = {
   url: SITE_URL,
   name: "To Yin Yu",
   description:
-    "Portfolio of To Yin Yu near Seattle. Web products built with heavy use of AI coding agents, and client work.",
+    "Portfolio of To Yin Yu near Seattle. Web products built by directing AI coding agents, and client work.",
   inLanguage: "en",
   author: { "@id": PERSON_ID },
   publisher: { "@id": PERSON_ID },
@@ -54,7 +54,7 @@ export const projectsCollectionJsonLd = {
   url: `${SITE_URL}/projects`,
   name: "Projects · To Yin Yu",
   description:
-    "Projects by To Yin Yu: full-stack apps, voice tools, data tools, and client work, built with heavy use of AI coding agents.",
+    "Projects by To Yin Yu: full-stack apps, voice tools, data tools, and client work, built by directing AI coding agents.",
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": PERSON_ID },
   mainEntity: {

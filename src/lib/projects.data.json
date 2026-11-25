@@ -37,7 +37,7 @@
     "caseStudy": {
       "role": "Directed the build with AI coding agents",
       "context": "Client project · English and Chinese · 2026",
-      "summary": "A bilingual website and inspection-request workflow for a Bay Area roofing contractor, built with heavy use of AI coding agents.",
+      "summary": "A bilingual website and inspection-request workflow for a Bay Area roofing contractor. I built it by directing AI coding agents.",
       "takeaways": {
         "problem": "Homeowners need a clear next step: call the contractor or request an inspection.",
         "decision": "Share the English and Chinese booking workflow, and confirm the request without promising a completed appointment.",
@@ -135,7 +135,7 @@
     "caseStudy": {
       "role": "Directed the build with AI coding agents",
       "context": "Independent product · Realtime voice and code · 2025–present",
-      "summary": "SoloMock uses Next.js, WebRTC and Monaco to put spoken reasoning and changing code in one interview context. It was built with heavy use of AI coding agents. This case study explains snapshot delivery, temporary credentials, and cleanup after a failed connection.",
+      "summary": "SoloMock uses Next.js, WebRTC and Monaco to put spoken reasoning and changing code in one interview context. I built it by directing AI coding agents. This case study explains snapshot delivery, temporary credentials, and cleanup after a failed connection.",
       "takeaways": {
         "problem": "Interview practice needs the candidate’s spoken explanation and changing code in the same context.",
         "decision": "Send editor snapshots after a 2.5-second pause, skip unchanged code, and clean up session resources when an interview ends.",
@@ -239,7 +239,7 @@
     "caseStudy": {
       "role": "Directed the build with AI coding agents",
       "context": "Independent product · Maps and data delivery · 2026",
-      "summary": "Gasolytics uses Next.js and d3-geo to connect dated AAA snapshots to a U.S. gas-price map, state details, and trip estimates. It was built with heavy use of AI coding agents. This case study separates map rendering, snapshot freshness, and unavailable-data behavior.",
+      "summary": "Gasolytics uses Next.js and d3-geo to connect dated AAA snapshots to a U.S. gas-price map, state details, and trip estimates. I built it by directing AI coding agents. This case study separates map rendering, snapshot freshness, and unavailable-data behavior.",
       "takeaways": {
         "problem": "Visitors need to move from a national price map to state details or a trip estimate.",
         "decision": "Project map geometry on the server and keep source data dates distinct from read times.",
@@ -307,7 +307,7 @@
       "verifiedOn": "2026-10-05",
       "verifiedRevision": "9786a435",
       "dateModified": "2026-10-06",
-      "introduction": "Gasolytics helps people compare U.S. fuel prices and explore trip and EV costs. It was built with heavy use of AI coding agents. The interface depends on dated datasets: a page can load successfully while the information behind one of its sections is unavailable. An October release exposed that distinction. The recovery focused on two things: reusing the same published snapshot safely, and preventing a successful build from hiding reported data failures.",
+      "introduction": "Gasolytics helps people compare U.S. fuel prices and explore trip and EV costs. I built it by directing AI coding agents. The interface depends on dated datasets: a page can load successfully while the information behind one of its sections is unavailable. An October release exposed that distinction. The recovery focused on two things: reusing the same published snapshot safely, and preventing a successful build from hiding reported data failures.",
       "sections": [
         {
           "title": "The failure that a green build missed",

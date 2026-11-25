@@ -142,7 +142,7 @@ ViralSignal is a `resumeOnly` project record, not an employment entry or a new p
 
 ## AI assistance
 
-Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it, and every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile. Every profile's skills also end with the shared `Spoken languages` row.
+Every project on the resume is heavily AI-assisted, and the resume says so. The shared summary states it as the method ("by directing AI coding agents") and names the candidate's own part: choosing what to build, testing the result, deploying it and keeping it running. Keep that list as it is when tailoring. Every profile's skills begin with the same `AI coding tools` row (`AI_TOOLS` in the generator). Keep both when tailoring a profile. Every profile's skills also end with the shared `Spoken languages` row.
 
 ## Gasolytics traffic figure
 

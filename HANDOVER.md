@@ -377,3 +377,13 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `929a418`, at the user's r
 - The LinkedIn and GitHub-profile drafts in that folder predate the November rewording of the site. They use the "software developer" title and first-person engineering claims that the site no longer makes, so they should not be posted as written. New drafts should follow the current wording: web products built and run with heavy use of AI coding agents.
 - The measurement proposal was never approved or implemented. The site still has Vercel Web Analytics and Speed Insights only, with no custom events.
 - The October entries above that mention files in `docs/traffic/` are history. The files remain in the git history before this change.
+
+## Wording: "by directing AI coding agents" — November 25
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `9f0cc51`. The user asked whether "with heavy use of AI coding agents" was the best wording, and approved a replacement for the résumé and the site.
+
+- Why: "heavy use" read as a caveat, and the sentence named the tool instead of the work. The new wording states the method and the author's own part.
+- Résumé: the shared `SUMMARY` in the generator now begins "Builds and operates web products by directing AI coding agents: chooses what to build, tests the result, deploys it and keeps it running." The education and location sentence is unchanged. The summary takes three lines and the page still fits (315 words). `public/resume.pdf` is regenerated.
+- Site: the home hero, the home introduction, About, the three case-study summaries, the Gasolytics article introduction, the page descriptions (meta, Open Graph and Twitter) and the three JSON-LD descriptions use "by directing AI coding agents". "Run" becomes "operate". In the home introduction and About, "direct the tools" becomes "test the result" (About also adds "deploy it").
+- Unchanged: the site title and the share image still read "Web products built with AI coding tools", the résumé title lines still read "AI-Assisted Web Development", and each case study's role line still reads "Directed the build with AI coding agents".
+- `docs/resume-tailoring.md` describes the new summary. No rendered page contains the old phrase.

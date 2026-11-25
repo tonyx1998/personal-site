@@ -22,9 +22,10 @@ ROOT = Path(__file__).resolve().parent.parent
 PROJECTS_JSON = ROOT / "src" / "lib" / "projects.data.json"
 LETTER = (612, 792)
 SUMMARY = (
-    "Builds and runs web products with heavy use of AI coding agents, from the "
-    "interface to deployment. B.S. in Computer Science, University of Maryland; "
-    "based near Seattle and open to relocation."
+    "Builds and operates web products by directing AI coding agents: chooses "
+    "what to build, tests the result, deploys it and keeps it running. B.S. in "
+    "Computer Science, University of Maryland; based near Seattle and open to "
+    "relocation."
 )
 # Every project on the resume is AI-assisted, so every profile says how it was built.
 AI_TOOLS = ("AI coding tools", "Claude Code, Codex, Cursor")
