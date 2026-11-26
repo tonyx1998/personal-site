@@ -76,7 +76,7 @@ const UNIT = 100;
 const THICK = 0.045;
 const CAMERA = 9;
 /** How high a held print is carried above the table. */
-const CARRY = 0.3;
+const CARRY = 0.34;
 const GRAVITY = -30;
 /** How quickly a held print catches up with the pointer, per second. */
 const FOLLOW = 22;
@@ -102,7 +102,7 @@ const SUN = (Math.PI * SUN_SHARE) / SUN_FROM.clone().normalize().y;
 // box-shadow (offsets and blur in CSS pixels). A print that lies flat has the
 // tight one, which must stay in step with the box-shadow of .paper in
 // ProjectTable.module.css. As a print rises, that fades into the wide one,
-// which also slides away from the print: about 16 pixels right and 20 down at
+// which also slides away from the print: about 18 pixels right and 23 down at
 // carrying height. Both darken the mat and other prints alike.
 const CONTACT = {
   pad: 24,
@@ -115,7 +115,7 @@ const CONTACT = {
 const DROP = {
   pad: 56,
   scale: 0.5,
-  layers: [{ x: 0, y: 0, blur: 34, alpha: 0.17 }],
+  layers: [{ x: 0, y: 0, blur: 34, alpha: 0.2 }],
 };
 /** The height at which the wide shadow has fully replaced the tight one. */
 const DROP_FULL = 0.2;

@@ -126,12 +126,12 @@
     ),
     linear-gradient(
       to right,
-      color-mix(in srgb, var(--frame) 42%, transparent) 1px,
+      color-mix(in srgb, var(--frame) 50%, transparent) 1px,
       transparent 1px
     ),
     linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--frame) 42%, transparent) 1px,
+      color-mix(in srgb, var(--frame) 50%, transparent) 1px,
       transparent 1px
     );
   background-size:
@@ -154,9 +154,9 @@
   }
 }
 
-/* The prints are placed by hand, as shares of the mat: one large print, most
-   of them square to the grid, two turned, one resting on the corner of
-   another. The 3D prints read their places from these same boxes. */
+/* The prints are placed by hand, as shares of the mat: one large print, the
+   others square to the grid, and one turned print resting on the corner of
+   the large one. The 3D prints read their places from these same boxes. */
 .prints {
   list-style: none;
   margin: 0;
@@ -186,15 +186,15 @@
   --w: 19.5%;
 }
 .print:nth-child(3) {
-  --x: 31%;
-  --y: 47%;
+  --x: 28.2%;
+  --y: 49%;
   --w: 19.5%;
   --turn: -3.5deg;
   --layer: 1;
 }
 .print:nth-child(4) {
   --x: 75.5%;
-  --y: 12.5%;
+  --y: 14.9%;
   --w: 19.5%;
 }
 .print:nth-child(5) {
@@ -204,9 +204,8 @@
 }
 .print:nth-child(6) {
   --x: 75.5%;
-  --y: 53%;
+  --y: 55.4%;
   --w: 19.5%;
-  --turn: 2deg;
 }
 .paper {
   position: relative;
@@ -289,7 +288,7 @@
   }
   .mat {
     order: 2;
-    aspect-ratio: 350 / 524;
+    aspect-ratio: 350 / 478;
   }
   .mat::before {
     inset: 12px;
@@ -312,27 +311,27 @@
   }
   .print:nth-child(2) {
     --x: 6.3%;
-    --y: 47.7%;
+    --y: 36.4%;
     --w: 40%;
   }
   .print:nth-child(3) {
-    --x: 53.7%;
-    --y: 22.9%;
+    --x: 50%;
+    --y: 23.4%;
     --w: 40%;
   }
   .print:nth-child(4) {
-    --x: 53.1%;
-    --y: 50%;
+    --x: 53.7%;
+    --y: 48.5%;
     --w: 40%;
   }
   .print:nth-child(5) {
     --x: 6.3%;
-    --y: 73.3%;
+    --y: 61.1%;
     --w: 40%;
   }
   .print:nth-child(6) {
-    --x: 53.1%;
-    --y: 75.6%;
+    --x: 53.7%;
+    --y: 73.6%;
     --w: 40%;
   }
   @supports (width: round(down, 100px, 40px)) {
