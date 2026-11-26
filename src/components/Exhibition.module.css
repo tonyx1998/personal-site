@@ -824,7 +824,10 @@
   text-underline-offset: 6px;
 }
 .allWork {
-  text-align: right;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0 28px;
   margin-top: 20px;
   font-size: 18px;
 }
@@ -939,7 +942,7 @@
     font-size: 15px;
   }
   .allWork {
-    text-align: left;
+    justify-content: flex-start;
   }
   .about {
     padding-top: 38px;

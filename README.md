@@ -9,6 +9,7 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 plus CSS Modules.
 - `src/lib/projects.data.json` is the single source of truth for every project. The homepage, the archive at `/projects`, each `/projects/<slug>` page, the sitemap, the JSON-LD, and the résumé PDF all read from it. Edit the JSON, then regenerate the résumé.
 - `src/components/PortfolioHome.tsx` renders three `featured` projects as image-and-text rows and four `homepageCompact` projects as smaller entries. The archive still includes every visible record. `homepageSummary` and `contribution` keep the homepage concise; `caseStudy` contains the longer explanation and evidence.
 - `src/components/ProjectsAll.tsx` renders the archive: featured projects with thumbnails, the rest as compact rows. A project with `"hidden": true` is left out of the homepage, the archive, the sitemap, and the routes.
+- `src/components/ProjectTable.tsx` renders `/table`, the work table: six projects as paper prints on a mat, placed by hand in its stylesheet. The page is complete as plain HTML. When the browser has a graphics card and the visitor has not asked for reduced motion, it then loads `ProjectTableScene.tsx`, which swaps the flat prints for 3D ones that can be picked up, thrown and stacked. See [the stack notes](docs/STACK.md).
 - `src/app/layout.tsx` is the root layout. The site is light-only: there is no dark theme and no theme switch. Every route is statically rendered.
 - `scripts/build-resume.py` generates the one-page `public/resume.pdf` from explicit project profiles and the shared `resume` fields. It validates the staged document before replacing the previous PDF. See [resume tailoring](docs/resume-tailoring.md).
 - `scripts/check-links.mjs` fetches every project URL and reports the ones that fail. It changes no file.
@@ -52,6 +53,7 @@ src/
 │   ├── page.tsx                homepage
 │   ├── projects/page.tsx       archive
 │   ├── projects/[slug]/        one page per project
+│   ├── table/page.tsx          work table (prints you can move)
 │   ├── not-found.tsx           404
 │   ├── sitemap.ts, robots.ts
 │   └── icon, apple-icon, opengraph-image, twitter-image
@@ -59,7 +61,9 @@ src/
 │   ├── Chrome.module.css       page shell, header, footer
 │   ├── PortfolioChrome.tsx     header and footer
 │   ├── PortfolioHome.tsx       homepage
-│   └── ProjectsAll.tsx         archive
+│   ├── ProjectsAll.tsx         archive
+│   ├── ProjectTable.tsx        work table: flat prints, loads the 3D scene
+│   └── ProjectTableScene.tsx   the 3D scene (three.js and Rapier), /table only
 └── lib/
     ├── projects.data.json      project roster (source of truth)
     ├── projects.ts             types, slug helper, hidden filter

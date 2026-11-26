@@ -27,6 +27,7 @@ Portfolio site for To Yin Yu — Next.js 16, React 19, Tailwind v4 + CSS Modules
 - Colors and type come from the tokens in `globals.css`. Do not add a font outside Newsreader and Public Sans, and do not reintroduce numbered section markers or eyebrow labels.
 - Content must be visible without JavaScript. Animate from a visible resting state; never ship an element at `opacity: 0` waiting on a scroll observer.
 - Respect `prefers-reduced-motion` for animations.
+- The 3D scene (`ProjectTableScene.tsx`, three.js, Rapier) belongs to `/table` only and loads after the page is idle. Never import it from the homepage, the layout or another route. `/table` must stay complete without it: the flat prints and the text links are the page.
 - No environment variables are required. Do not add server routes that call paid APIs unless a page actually uses them.
 - Update `HANDOVER.md` in the same PR as any source change (CI checks this).
 - Do not run `vercel --prod`; pushes to `master` deploy through the Git integration.

@@ -387,3 +387,16 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `9f0cc51`. The user asked 
 - Site: the home hero, the home introduction, About, the three case-study summaries, the Gasolytics article introduction, the page descriptions (meta, Open Graph and Twitter) and the three JSON-LD descriptions use "by directing AI coding agents". "Run" becomes "operate". In the home introduction and About, "direct the tools" becomes "test the result" (About also adds "deploy it").
 - Unchanged: the site title and the share image still read "Web products built with AI coding tools", the résumé title lines still read "AI-Assisted Web Development", and each case study's role line still reads "Directed the build with AI coding agents".
 - `docs/resume-tailoring.md` describes the new summary. No rendered page contains the old phrase.
+
+## Work table page (`/table`) — November 26, preview only
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `3e98d98`. The user asked for a 3D interactive portfolio plan, chose to see a first version, and has not yet decided whether to publish it. **Nothing here is merged.** The branch is pushed so that Vercel builds a preview.
+
+- New route `/table`: six projects as paper prints on a cutting mat. `ProjectTable.tsx` is the page (flat HTML prints, the row of names, the controls); `ProjectTableScene.tsx` is the 3D scene, loaded only there. `docs/STACK.md` explains how the two fit together and why.
+- New dependencies: `three` (pinned to 0.182.0), `@react-three/fiber`, `@react-three/rapier`, and `@types/three` for development. They add about 0.8 MB of script to `/table` only. The home page's scripts are unchanged (162 KB with gzip, measured before and after).
+- Data: each of the six projects has a new `exhibition.label`, a few words on what the product is. Each was cut from that project's existing `exhibition.summary`; the user has not reviewed the wording yet.
+- The home page has one new link, "Work table", beside "All projects". The sitemap lists `/table`. `AGENTS.md` has a rule that keeps the 3D scene on `/table`.
+- Checked in a headless browser: the flat page without JavaScript, the 3D page, a window resize, reduced motion, and a phone (tap opens, press and hold moves, a swipe scrolls). axe reports no violations in those states. Lighthouse on the flat page: performance 97, accessibility 100.
+- Not checked, because this needs a real device: how smooth it is and how the drag feels. The build machine has no graphics card, so the scene only ran there in software, started by the button.
+- Two independent reviews of screenshots shaped the second version (hand-placed arrangement, drawn shadows, press and hold on touch, names above the mat). One finding is left for the user: the SoloMock and SoloYap pictures are nearly empty at print size and would read better as screenshots of the products in use.
+- To drop the page: remove `src/app/table/`, the two `ProjectTable*` components and their stylesheet, the link in `PortfolioHome.tsx`, the sitemap entry, the three dependencies and the `AGENTS.md` rule. The `label` fields are harmless without it.

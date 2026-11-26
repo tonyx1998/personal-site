@@ -64,6 +64,8 @@ export type Project = {
   seo?: { title: string; description: string };
   exhibition?: {
     summary: string;
+    /** What the product is, in a few words. Printed under its name on /table. */
+    label?: string;
     topics: string;
     caption: string;
     relationship?: string;
