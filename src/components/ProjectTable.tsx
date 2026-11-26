@@ -254,6 +254,9 @@ export default function ProjectTable({ prints }: { prints: TablePrint[] }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/projects">All projects</Link>
+              </li>
             </ul>
           </nav>
           <div className={styles.controls}>
