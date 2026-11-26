@@ -51,6 +51,7 @@
   display: none;
 }
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: 54% 46%;
   align-items: center;
@@ -62,6 +63,20 @@
   letter-spacing: -0.065em;
   line-height: 1.1;
   margin: 0;
+}
+/* HeroInk draws the name on this canvas, exactly over the text. Once it has
+   drawn, the text itself goes clear; it is still the page's real heading. */
+.ink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hero h1[data-ink="on"] {
+  color: transparent;
 }
 .hero p {
   font-size: clamp(20px, 1.9vw, 32px);

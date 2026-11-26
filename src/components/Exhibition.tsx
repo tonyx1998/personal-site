@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { type Project, projectSlug, shortTitle } from "@/lib/projects";
 import { projectVisual } from "@/lib/project-visuals";
+import HeroInk from "./HeroInk";
 import styles from "./Exhibition.module.css";
 
 const subscribe = () => () => {};
@@ -28,6 +29,7 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
     () => false
   );
   const menu = useRef<HTMLDetailsElement>(null);
+  const heading = useRef<HTMLHeadingElement>(null);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const requestedControl = useRef<"previous" | "next" | null>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -193,7 +195,8 @@ export default function Exhibition({ projects }: { projects: Project[] }) {
         </details>
       </header>
       <div className={styles.hero}>
-        <h1>To Yin Yu</h1>
+        <h1 ref={heading}>To Yin Yu</h1>
+        <HeroInk heading={heading} />
         <p>
           <span className={styles.roleIntro}>Web products.</span>I build and
           operate them

@@ -387,3 +387,14 @@ Prepared on `claude/lucid-ritchie-t6aqp0` from master `9f0cc51`. The user asked 
 - Site: the home hero, the home introduction, About, the three case-study summaries, the Gasolytics article introduction, the page descriptions (meta, Open Graph and Twitter) and the three JSON-LD descriptions use "by directing AI coding agents". "Run" becomes "operate". In the home introduction and About, "direct the tools" becomes "test the result" (About also adds "deploy it").
 - Unchanged: the site title and the share image still read "Web products built with AI coding tools", the résumé title lines still read "AI-Assisted Web Development", and each case study's role line still reads "Directed the build with AI coding agents".
 - `docs/resume-tailoring.md` describes the new summary. No rendered page contains the old phrase.
+
+## Home heading drawn as ink — November 26, preview only
+
+Prepared on `claude/lucid-ritchie-t6aqp0` from master `3e98d98`. **Nothing here is merged.** The branch is pushed so that Vercel builds a preview for the user to try.
+
+- Background: the user asked for a plan for a 3D interactive portfolio. A 3D "work table" page (three.js and a physics engine) was built on this branch and then withdrawn at the user's request. It is reverted in `1785b7a` and `b46b700`; the code remains in the history from `97e1b59` and `f9b07d7`. The user then chose a different direction: no 3D scene, but WebGL effects on the existing pages.
+- This change is the first of those effects. `src/components/HeroInk.tsx` draws the home page name on a canvas over the `h1`. At rest it matches the text (115 of 639,200 pixels differ noticeably in a screenshot comparison). Moving the pointer across it, or scrolling on a phone, carries the letters like wet ink, shows the home page's yellow under them, and lets them flow back. One light stroke runs across the name when the page has loaded.
+- It uses WebGL 2 directly: no new dependency, about 4 KB of script. `docs/STACK.md` describes how it works and when it stays off (software rendering, reduced motion, no WebGL 2, no JavaScript).
+- Checked in a headless browser with a simulated graphics card: it starts on desktop and phone sizes, logs nothing to the console, causes no horizontal overflow, and returns to the exact resting picture. It stays off on software rendering and with reduced motion. Lighthouse on the home page is unchanged (performance 91, accessibility 100, no layout shift).
+- Not checked, because it needs a real device: how the movement feels and how smooth it is. That is the user's call from the preview.
+- Possible next effects in the same direction, not started: transitions between the project pictures in the home carousel, and short recordings of the products in place of still screenshots (the recordings would have to come from the user).

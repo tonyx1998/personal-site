@@ -22,6 +22,8 @@ What the site is built with and why each piece is there. Kept short on purpose; 
 
 **No animation library.** The only motion is a hover reveal on screenshot links. Everything is visible at rest, so the page reads the same with JavaScript off. `globals.css` zeroes transitions under `prefers-reduced-motion: reduce`.
 
+**The ink heading.** On the home page, `HeroInk.tsx` draws the name on a canvas exactly over the heading text. At rest the two are the same picture. When the pointer crosses the name, or the page scrolls on a phone, the letters are carried along like wet ink, a second layer in the home page's yellow shows from under them, and both flow back. It is a small fluid simulation written directly against WebGL 2: no library, about 4 KB of script, a grid of a few thousand cells. It starts only once the page is idle and only where a graphics card draws WebGL. With software rendering, reduced motion, no WebGL 2 or no JavaScript, the heading is simply the text, which stays the real `h1` in every case. The simulation runs for three seconds after the last movement and then stops, so an idle page draws nothing.
+
 **Newsreader** (headings, variable weight with optical sizing) and **Public Sans** (text) are loaded through `next/font`. Only normal styles are requested; the site does not use Newsreader italic.
 
 ## SEO
