@@ -93,7 +93,6 @@
     },
     "exhibition": {
       "summary": "A bilingual website and inspection-booking workflow for a Bay Area contractor.",
-      "label": "Roofing website with inspection booking",
       "topics": "Bilingual interface · Booking · Integration",
       "caption": "Simulated inspection preview"
     }
@@ -193,7 +192,6 @@
     },
     "exhibition": {
       "summary": "A realtime voice interview workspace, with code and conversation in one place.",
-      "label": "Voice interview workspace",
       "topics": "Interface · Realtime voice · Backend",
       "caption": "Simulated interview preview"
     },
@@ -298,7 +296,6 @@
     },
     "exhibition": {
       "summary": "A U.S. fuel-price map that turns dated snapshots into useful comparisons.",
-      "label": "U.S. fuel-price map",
       "topics": "Data systems · Maps · Calculators",
       "caption": "Historical price snapshot · September 2026"
     },
@@ -458,7 +455,6 @@
     "homepageCompact": true,
     "exhibition": {
       "summary": "A document workbench that compares candidate evidence with job requirements.",
-      "label": "Document workbench for job fit",
       "topics": "Document parsing · Evidence · Scoring",
       "caption": "Product interface preview",
       "relationship": "Personal project"
@@ -492,7 +488,6 @@
     "homepageCompact": true,
     "exhibition": {
       "summary": "Spoken English practice, with realtime conversation and corrections after each turn.",
-      "label": "Spoken English practice",
       "topics": "Realtime voice · Language learning · PWA",
       "caption": "Speaking workspace preview",
       "relationship": "Personal project"
@@ -520,7 +515,6 @@
     "homepageCompact": true,
     "exhibition": {
       "summary": "A marketing website for Hong Kong businesses, in Chinese and English, with consultation booking in one flow.",
-      "label": "Marketing website with booking",
       "topics": "Marketing website · Scheduling · Integration",
       "caption": "Current English homepage · October 2026",
       "relationship": "Website & integration"

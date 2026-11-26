@@ -130,9 +130,6 @@ export default function PortfolioHome() {
               ))}
             </div>
             <p className={styles.allWork}>
-              <Link href="/table">
-                Work table <ArrowUpRight size={20} aria-hidden="true" />
-              </Link>
               <Link href="/projects">
                 All projects <ArrowUpRight size={20} aria-hidden="true" />
               </Link>
